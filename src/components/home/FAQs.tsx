@@ -1,9 +1,8 @@
 "use client";
-import React from "react";
-import { Accordion, AccordionItem, Button } from "@nextui-org/react";
-import { FaChevronDown, FaChevronRight } from "react-icons/fa";
 import chat from "@/assets/chat.png";
+import { Accordion, AccordionItem, Button } from "@nextui-org/react";
 import Image from "next/image";
+import { FaChevronDown } from "react-icons/fa";
 
 const FAQs = () => {
   const defaultContent =
@@ -16,7 +15,11 @@ const FAQs = () => {
           FAQs
         </h4>
 
-        <Accordion defaultExpandedKeys={["How does the points system work on Booksy.buzz?"]}>
+        <Accordion
+          defaultExpandedKeys={[
+            "How does the points system work on Booksy.buzz?",
+          ]}
+        >
           <AccordionItem
             key="How does the points system work on Booksy.buzz?"
             indicator={<FaChevronDown size={14} className="text-primary" />}
