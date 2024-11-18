@@ -50,7 +50,7 @@ const WhatOurCustomerThinks = () => {
         </Marquee>
 
         {/* Button for 'See more' */}
-        <div className="flex items-center justify-center absolute bottom-16 z-10 w-full">
+        <div className="flex items-center justify-center absolute bottom-20 z-10 w-full">
           <Button radius="sm" className="bg-primary text-white">
             See more
           </Button>
