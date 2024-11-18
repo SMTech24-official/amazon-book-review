@@ -3,16 +3,9 @@
 import TopBar from '@/components/Dashboard/components/navigationBar/TopBar';
 import React, { useEffect, useRef, useState } from 'react';
 import SideBar from './components/navigationBar/SiderBar';
+import { user } from '@/lib/fakeData/user';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-
-
-    const user = {
-        name: "Tahsin Zaman",
-        role: "Book Artist",
-        image: ""
-    }
-
 
     const [isOpen, setIsOpen] = useState(false)
 

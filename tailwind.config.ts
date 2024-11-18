@@ -76,7 +76,7 @@ export default {
           // For small screens (sm)
           "@screen sm": {
             maxWidth: "100%", // Full width
-            padding: "4rem", // Adjust padding for small screens
+            padding: "2rem", // Adjust padding for small screens
           },
 
           // For medium screens (md)
