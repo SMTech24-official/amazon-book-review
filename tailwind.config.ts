@@ -1,7 +1,8 @@
 import type { Config } from "tailwindcss";
-import {nextui} from "@nextui-org/react"
+import { nextui } from "@nextui-org/react";
+import tailwindClipPath from "tailwind-clip-path"; // Import the plugin correctly
 
-export default {
+const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -36,21 +37,27 @@ export default {
         xs: "540px", // min-width
       },
       animation: {
-        marquee: 'marquee var(--duration) linear infinite',
-        'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
+        marquee: "marquee var(--duration) linear infinite",
+        "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
       },
       keyframes: {
         marquee: {
-          from: { transform: 'translateX(0)' },
-          to: { transform: 'translateX(calc(-100% - var(--gap)))' },
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(-100% - var(--gap)))" },
         },
-        'marquee-vertical': {
-          from: { transform: 'translateY(0)' },
-          to: { transform: 'translateY(calc(-100% - var(--gap)))' },
+        "marquee-vertical": {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(calc(-100% - var(--gap)))" },
         },
+      },
+      clipPath: {
+        desktop: "polygon(0 10%, 100% 0, 100% 100%, 0 90%)",
+        mobile: "polygon(0 0%, 100% 0, 100% 100%, 0 100%)",
       },
     },
   },
   darkMode: "class",
-  plugins: [nextui()],
-} satisfies Config;
+  plugins: [nextui(), tailwindClipPath], // Use imported plugin
+};
+
+export default config;

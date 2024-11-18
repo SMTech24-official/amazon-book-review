@@ -37,13 +37,13 @@ const GettingStarted = () => {
   return (
     <div className="relative mb-10 xs:mb-20">
       {/* Background Image */}
-      <div className="absolute top-0 left-0 z-0">
+      <div className="absolute top-36 md:top-0 xs:left-0 z-0">
         <Image src={bg} height={250} width={250} alt="background image" />
       </div>
 
       {/* Top area content */}
       <div className="relative z-10">
-        <h3 className="text-center text-2xl sm:text-3xl font-medium pt-20 pb-10">
+        <h3 className="text-center text-2xl sm:text-3xl font-medium pt-0 md:pt-20 pb-5 md:pb-10">
           Getting started on Booksy.buzz
         </h3>
         <div className="max-w-3xl mx-auto flex flex-col gap-3 md:gap-7 w-full px-2">

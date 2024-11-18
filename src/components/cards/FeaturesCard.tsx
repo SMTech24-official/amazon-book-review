@@ -17,7 +17,7 @@ const FeaturesCard: React.FC<FeatureProps> = ({ title, description, icon, classN
       <div className="mb-6">
         <Image src={icon} height={50} width={50} alt={`${title} icon`} />
       </div>
-      <h3 className="text-[#F3C623] text-xl font-medium mb-3">{title}</h3>
+      <h3 className="text-[#F3C623] text-xl font-medium mb-3 text-center">{title}</h3>
       <p className="text-[#FFFFFD] text-center">{description}</p>
     </div>
   );
