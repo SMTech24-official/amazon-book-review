@@ -12,7 +12,7 @@ import { NavLink, User } from '@/lib/types/type'
 export default function MainNavLink({ user, navLink, additionalRoutes }: { user: User, navLink: NavLink[], additionalRoutes: NavLink[] }) {
     const pathname = usePathname()
     return (
-        <div className="flex flex-col h-full bg-white">
+        <div className="flex flex-col min-h-screen bg-white">
             <div className="p-4">
                 <div className="flex items-center gap-2">
                     <Image

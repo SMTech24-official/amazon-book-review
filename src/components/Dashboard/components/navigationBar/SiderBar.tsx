@@ -20,21 +20,23 @@ export default function SideBar({ user, navRef, isOpen }: { user: User, navRef: 
         { name: 'Knowledge hub', href: '/dashboard/knowledgeHub', icon: SiBookstack },
     ];
     const additionalRoutes = [
-        { name: 'Settings', href: '/dashboard/myBooks', icon: IoSettingsSharp },
-        { name: ' Help', href: '/dashboard/Books', icon: RiCustomerServiceFill },
+        { name: 'Settings', href: '/dashboard/settings', icon: IoSettingsSharp },
+        { name: ' Help', href: '/dashboard/help', icon: RiCustomerServiceFill },
     ];
 
     return (
-        <div ref={navRef && navRef} className="min-h-screen flex">
-            {/* Sidebar for large screens */}
-            <div
-                className={cn(
-                    "fixed inset-y-0 left-0 z-40 w-64 border-r md:w-56 lg:w-72 h-full transform transition-transform duration-300 ease-in-ou",
-                    isOpen ? "translate-x-0" : "-translate-x-full"
-                )}
-            >
-                <MainNavLink additionalRoutes={additionalRoutes} navLink={navLink} user={user} />
+        <div ref={navRef && navRef} className="min-h-screen h-full flex">
+            <div>
+                <div
+                    className={cn(
+                        "fixed inset-y-0 left-0 z-40 w-64 border-r md:w-56 lg:w-72 shadow-2xl h-full transform transition-transform duration-300 ease-in-ou",
+                        isOpen ? "translate-x-0" : "-translate-x-full"
+                    )}
+                >
+                    <MainNavLink additionalRoutes={additionalRoutes} navLink={navLink} user={user} />
+                </div>
             </div>
+            {/* Sidebar for large screens */}
             <div
                 className="hidden lg:block lg:w-72 h-full border-r"
             >

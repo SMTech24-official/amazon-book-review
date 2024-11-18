@@ -6,7 +6,7 @@ import SideBar from './components/navigationBar/SiderBar';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
-    
+
     const user = {
         name: "Tahsin Zaman",
         role: "Book Artist",
@@ -33,13 +33,15 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
 
     return (
-        <div>
-            <div className='flex'>
+        <div className='flex'>
+            <div className='max-h-screen h-full sticky top-0 z-50'>
                 <SideBar isOpen={isOpen} user={user} navRef={navRef} />
-                <div className='w-full'>
+            </div>
+            <div className='w-full'>
+                <div className='sticky top-0 z-40'>
                     <TopBar setIsOpen={setIsOpen} isOpen={isOpen} user={user} />
-                    {children}
                 </div>
+                {children}
             </div>
         </div>
     );
