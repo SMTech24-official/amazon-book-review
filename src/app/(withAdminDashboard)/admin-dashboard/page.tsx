@@ -10,14 +10,14 @@ const page = () => {
 
     const tabs = [
         {
-            label: "General",
-            value: "general",
+            label: "New Books",
+            value: "New Books",
             icon: <FaUserCog className="min-w-6 min-h-6 mr-2" />,
             component: <General user={user} />
         },
         {
-            label: "Manage Plans",
-            value: "manage-plans",
+            label: "New Reviews",
+            value: "New Reviews",
             icon: <FaClipboardList className="min-w-6 min-h-6 mr-2" />,
             component: <ManagePlans subscriptionsPlan={SubscriptionsPlan} plans={user.plans} />
         }
@@ -26,7 +26,7 @@ const page = () => {
     // demo link for breadcrumb 
     // http://localhost:3000/admin-dashboard/settings?tab=general/subtab1/subtab2
 
-    
+
     return (
         <TabPage defaultTab="general" tabs={tabs} />
     )
