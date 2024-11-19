@@ -1,16 +1,14 @@
 "use client";
-import React from "react";
-import TestimonialCard from "../cards/TestimonialCard";
-import Marquee from "../ui/marquee";
 import { Button } from "@nextui-org/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation, Autoplay } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import TestimonialCard from "../cards/TestimonialCard";
+import ItemSwiper from "../ui/ItemSwiper/ItemSwiper";
+import Marquee from "../ui/marquee";
 
 const WhatOurCustomerThinks = () => {
   return (
-    <div className="container">
+    <div className="container mb-5">
       <div className="flex flex-col xs:flex-row gap-2 xs:items-center justify-between">
         <h5 className="text-3xl font-medium">What our customer thinks of us</h5>
         <div>
@@ -57,24 +55,9 @@ const WhatOurCustomerThinks = () => {
         </div>
       </div>
 
-    
-      <div className=" block sm:hidden">
-        <Swiper
-          navigation={true}
-          modules={[Navigation, Autoplay]}
-          className="mySwiper"
-          spaceBetween={10}
-          loop={true}
-          autoplay={true}
-          slidesPerView={1}
-        >
-          {Array.from({ length: 9 }, (_, index) => (
-            <SwiperSlide key={index}>
-              <TestimonialCard />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+      {/* Swiper for mobile start */}
+      <ItemSwiper />
+      {/* Swiper for mobile end */}
     </div>
   );
 };

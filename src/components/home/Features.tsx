@@ -64,19 +64,17 @@ const features: Feature[] = [
 const Features = () => {
   return (
     <div
-      style={{
-        clipPath: "polygon(0 10%, 100% 0, 100% 100%, 0 90%)",
-      }}
-      className="bg-primary py-48"
+     
+      className="bg-primary mb-10 xl:mb-0 py-10 xl:py-48 xl:clip-path-desktop clip-path-mobile"
     >
-      <div className="container grid grid-cols-3 gap-10">
+      <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5 xl:gap-10">
         {features.map((feature, index) => (
           <FeaturesCard
             key={index}
             {...feature}
             className={
               index === features.length - 1
-                ? "col-start-2 justify-self-center" // Center the last card
+                ? "lg:col-start-2 lg:justify-self-center" // Center the last card
                 : ""
             }
            />

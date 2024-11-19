@@ -37,20 +37,20 @@ const GettingStarted = () => {
   return (
     <div className="relative mb-10 xs:mb-20">
       {/* Background Image */}
-      <div className="absolute top-0 left-0 z-0">
+      <div className="hidden lg:block absolute top-0 left-0 z-0">
         <Image src={bg} height={250} width={250} alt="background image" />
       </div>
 
       {/* Top area content */}
       <div className="relative z-10">
-        <h3 className="text-center text-2xl sm:text-3xl font-medium pt-20 pb-10">
+        <h3 className="text-center text-2xl sm:text-3xl font-medium pt-0 md:pt-20 pb-5 md:pb-10">
           Getting started on Booksy.buzz
         </h3>
-        <div className="max-w-3xl mx-auto flex flex-col gap-3 md:gap-7 w-full px-2">
+        <div className="max-w-3xl mx-auto flex flex-col gap-3 md:gap-7 w-full px-5">
           {cardDetails.map((card, index) => (
             <div
               key={index}
-              className="max-w-2xl mx-auto w-full bg-primary-light p-2 md:p-6 rounded-xl"
+              className="max-w-2xl mx-auto w-full bg-primary-light p-4 md:p-6 rounded-xl"
             >
               <div className="flex flex-col xs:flex-row items-center gap-y-2 gap-x-6">
                 {/* Icon */}

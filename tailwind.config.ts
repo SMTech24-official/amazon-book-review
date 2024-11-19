@@ -1,8 +1,9 @@
 import type { Config } from "tailwindcss";
 import { nextui } from "@nextui-org/react";
+import tailwindClipPath from "tailwind-clip-path"; // Import the plugin correctly
 import { PluginAPI } from "tailwindcss/types/config";
 
-export default {
+const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -42,62 +43,60 @@ export default {
       },
       keyframes: {
         marquee: {
-          from: {
-            transform: "translateX(0)",
-          },
-          to: {
-            transform: "translateX(calc(-100% - var(--gap)))",
-          },
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(-100% - var(--gap)))" },
         },
         "marquee-vertical": {
-          from: {
-            transform: "translateY(0)",
-          },
-          to: {
-            transform: "translateY(calc(-100% - var(--gap)))",
-          },
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(calc(-100% - var(--gap)))" },
         },
+      },
+      clipPath: {
+        desktop: "polygon(0 10%, 100% 0, 100% 100%, 0 90%)",
+        mobile: "polygon(0 0%, 100% 0, 100% 100%, 0 100%)",
       },
     },
   },
-  darkMode: ["class", "class"],
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  plugins: [nextui(), require("tailwindcss-animate"),
-    function ({ addComponents }: PluginAPI) {
-      addComponents({
-        ".dashboard-containers": {
-          maxWidth: "100%", // Default for all screen sizes
-          paddingTop: "2rem", // Default padding for all screen sizes
-          paddingBottom: "2rem", // Default padding for all screen sizes
-          paddingRight: "1rem", // Default padding for all screen sizes
-          paddingLeft: "1rem", // Default padding for all screen sizes
-          margin: "0 auto", // Center the container
+  darkMode: "class",
+ // eslint-disable-next-line @typescript-eslint/no-require-imports
+ plugins: [nextui(),tailwindClipPath, require("tailwindcss-animate"),
+  function ({ addComponents }: PluginAPI) {
+    addComponents({
+      ".dashboard-containers": {
+        maxWidth: "100%", // Default for all screen sizes
+        paddingTop: "2rem", // Default padding for all screen sizes
+        paddingBottom: "2rem", // Default padding for all screen sizes
+        paddingRight: "1rem", // Default padding for all screen sizes
+        paddingLeft: "1rem", // Default padding for all screen sizes
+        margin: "0 auto", // Center the container
 
-          // For small screens (sm)
-          "@screen sm": {
-            maxWidth: "100%", // Full width
-            padding: "2rem", // Adjust padding for small screens
-          },
-
-          // For medium screens (md)
-          "@screen md": {
-            maxWidth: "100%", // Medium screen container width
-            padding: "2rem", // Adjust padding for medium screens
-          },
-
-          // For large screens (lg)
-          "@screen lg": {
-            maxWidth: "100%", // Larger screen container width
-            padding: "2rem",
-          },
-
-          // For extra-large screens (xl)
-          "@screen xl": {
-            maxWidth: "100%", // Maximum width for the container on extra-large screens
-            padding: "2rem",
-          },
+        // For small screens (sm)
+        "@screen sm": {
+          maxWidth: "100%", // Full width
+          padding: "2rem", // Adjust padding for small screens
         },
-      });
-    },
-  ],
-} satisfies Config;
+
+        // For medium screens (md)
+        "@screen md": {
+          maxWidth: "100%", // Medium screen container width
+          padding: "2rem", // Adjust padding for medium screens
+        },
+
+        // For large screens (lg)
+        "@screen lg": {
+          maxWidth: "100%", // Larger screen container width
+          padding: "2rem",
+        },
+
+        // For extra-large screens (xl)
+        "@screen xl": {
+          maxWidth: "100%", // Maximum width for the container on extra-large screens
+          padding: "2rem",
+        },
+      },
+    });
+  },
+],
+};
+
+export default config;
