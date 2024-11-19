@@ -11,7 +11,7 @@ const FAQs = () => {
   return (
     <div className="mb-10">
       <div className="container mb-10">
-        <h4 className="text-primary text-4xl font-medium text-center mb-5">
+        <h4 className="text-primary text-4xl font-medium text-center lg:mb-5">
           FAQs
         </h4>
 

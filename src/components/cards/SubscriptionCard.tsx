@@ -18,7 +18,7 @@ const SubscriptionCard: React.FC = () => {
   ];
 
   return (
-    <div className="rounded-2xl p-0 xs:p-7 bg-primary bg-opacity-[0.06] backdrop-blur-sm  overflow-hidden">
+    <div className="rounded-2xl p-4 xs:p-7 bg-primary bg-opacity-[0.06] backdrop-blur-sm  overflow-hidden">
       <div className="px-4 py-5 rounded-2xl flex flex-col sm:flex-row gap-y-5 items-center  bg-primary-light">
         <div className="w-full flex flex-col justify-center items-center">
           <Image

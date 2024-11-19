@@ -16,8 +16,18 @@ const ForMobile = () => {
     setOpen(false);
   };
   return (
-    <div className="grid grid-cols-3 items-center md:hidden">
-      <>
+    <div className="flex justify-between items-center px-3 md:hidden">
+    
+      <div className="-mb-3">
+        <Image
+          src={logo}
+          height={180}
+          width={180}
+          alt="logo"
+          className="object-cover"
+        />
+      </div>
+      <div>
         <button onClick={showDrawer} className="mt-3 ml-3 p-1">
           <IoMenu size={25} />
         </button>
@@ -38,15 +48,6 @@ const ForMobile = () => {
         >
           <NavMenu className="flex-col" />
         </Drawer>
-      </>
-      <div className="-mb-3">
-        <Image
-          src={logo}
-          height={180}
-          width={180}
-          alt="logo"
-          className="object-cover"
-        />
       </div>
     </div>
   );

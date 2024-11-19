@@ -45,30 +45,31 @@ const handleSubmit = (data: any) => {
 const LoginComponent = () => {
   return (
     <div className="flex ">
-      <div></div>
+      <div className="w-5/12"></div>
 
-      <MyFormWrapper
-        className={"flex flex-col gap-5 w-full "}
-        onSubmit={handleSubmit}
-        resolver={zodResolver(validationSchema)}
-      >
-        <div className="w-full">
-          <MyFormInput
-            label="User name"
-            name={"user_name"}
-            placeHolder="User name"
-          />
-        </div>
-        <div className="w-full">
-          <MyFormInput
-            label="Password"
-            name={"password"}
-            isPassword={true}
-            placeHolder="Password"
-          />
-        </div>
-        <div className="w-full">
-          {/* <MyFormSelect
+      <div className="w-7/12">
+        <MyFormWrapper
+          className={"flex flex-col gap-5 w-full "}
+          onSubmit={handleSubmit}
+          resolver={zodResolver(validationSchema)}
+        >
+          <div className="w-full">
+            <MyFormInput
+              label="User name"
+              name={"user_name"}
+              placeHolder="User name"
+            />
+          </div>
+          <div className="w-full">
+            <MyFormInput
+              label="Password"
+              name={"password"}
+              isPassword={true}
+              placeHolder="Password"
+            />
+          </div>
+          <div className="w-full">
+            {/* <MyFormSelect
             label="select"
             name={"select"}
             placeHolder="select"
@@ -78,25 +79,26 @@ const LoginComponent = () => {
               { label: "Option 3", value: "option3" },
             ]}
           /> */}
-        </div>
-        <div className="w-full">
-          <MyFormOTP
-            name="otp"
-            label="Enter OTP"
-            // rules={{
-            //   required: 'OTP is required', // Example validation rule
-            //   minLength: { value: 6, message: 'OTP must be 6 characters' },
-            // }}
-          />
-        </div>
+          </div>
+          <div className="w-full">
+            <MyFormOTP
+              name="otp"
+              label="Enter OTP"
+              // rules={{
+              //   required: 'OTP is required', // Example validation rule
+              //   minLength: { value: 6, message: 'OTP must be 6 characters' },
+              // }}
+            />
+          </div>
 
-        <Button
-          className=" w-full py-3 rounded-lg bg-primary text-white text-base font-normal leading-6"
-          type="submit"
-        >
-          Submit
-        </Button>
-      </MyFormWrapper>
+          <Button
+            className=" w-full py-3 rounded-lg bg-primary text-white text-base font-normal leading-6"
+            type="submit"
+          >
+            Submit
+          </Button>
+        </MyFormWrapper>
+      </div>
     </div>
   );
 };
