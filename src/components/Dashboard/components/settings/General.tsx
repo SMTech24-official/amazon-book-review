@@ -36,7 +36,7 @@ const General = ({ user }: { user: User }) => {
                 <h2 className="text-lg font-semibold mb-6 border-b pb-2">Personal info</h2>
                 <div className="space-y-6">
                     <div className='flex xl:flex-row flex-col items-center lg:items-end gap-10'>
-                        <DnDInput />
+                        <DnDInput image={user.image} />
 
                         <div className="grid xl:grid-cols-2 gap-6 w-full">
                             <div className="space-y-2 xl:col-span-2">

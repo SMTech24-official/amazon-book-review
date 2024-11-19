@@ -7,14 +7,20 @@ import { user } from "@/lib/fakeData/user";
 import MangePlans from "../../components/settings/MangePlans";
 import { SubscriptionsPlan } from "@/lib/fakeData/subscriptionPlans";
 import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 
 export default function Settings() {
 
-    const [tab, setTab] = useState<string>("general") 
-
-
-
+    const router = useRouter()
+    const searchParams = useSearchParams()
+    const [tab, setTab] = useState<string>(searchParams.get("tab") ?? "general")
+    const handleTab = (category: string) => {
+        setTab(category);
+        const params = new URLSearchParams(searchParams?.toString())
+        params.set("tab", category);
+        router.push(`?${params.toString()}`);
+    };
 
     return (
         <div className="min-h-screen bg-gray-50/50 dashboard-containers">
@@ -33,15 +39,15 @@ export default function Settings() {
                 <Tabs defaultValue={tab} className="grid sm:grid-cols-6 xl:grid-cols-5 min-h-screen">
                     <div className='pt-4 col-span-2 xl:col-span-1 sm:border-r  w-full h-full sticky sm:block top-[49px]'>
                         <TabsList className="sm:flex sm:flex-col items-start justify-center sm:justify-start sm:pr-4 sm:sticky sm:top-20 top-16 bg-white xl:block min-h-14">
-                            <TabsTrigger onClick={() => setTab("general")} className='sm:text-base w-full' value="general">
+                            <TabsTrigger onClick={() => handleTab("general")} className='sm:text-base w-full' value="general">
                                 <FaUserCog className='min-w-6 min-h-6 mr-2' />
                                 General
                             </TabsTrigger>
-                            <TabsTrigger onClick={() => setTab("manage-plans")} className='  sm:text-base w-full' value="manage-plans">
+                            <TabsTrigger onClick={() => handleTab("manage-plans")} className='  sm:text-base w-full' value="manage-plans">
                                 <FaClipboardList className='min-w-6 min-h-6 mr-2' />
                                 Manage Plans
                             </TabsTrigger>
-                            <TabsTrigger onClick={() => setTab("verification")} className='  sm:text-base w-full' value="verification">
+                            <TabsTrigger onClick={() => handleTab("verification")} className='  sm:text-base w-full' value="verification">
                                 <MdVerified className='min-w-6 min-h-6 mr-2' />
                                 Verification
                             </TabsTrigger>
