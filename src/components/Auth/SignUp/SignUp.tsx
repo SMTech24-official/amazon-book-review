@@ -11,6 +11,7 @@ import { z } from "zod";
 import Link from "next/link";
 import MyFormSelect from "@/components/ui/MyForm/MyFormSelect/MyFormSelect";
 import { FaChevronRight } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 const validationSchema = z.object({
   full_name: z
@@ -23,7 +24,7 @@ const validationSchema = z.object({
       /^[A-Za-z\s\-,'.]+$/,
       "Name can only contain letters, spaces, hyphens, commas, apostrophes, and dots"
     ),
-    amazon_reviewer_name: z
+  amazon_reviewer_name: z
     .string({
       required_error: "User name is required",
     })
@@ -33,7 +34,7 @@ const validationSchema = z.object({
       /^[A-Za-z\s\-,'.]+$/,
       "Name can only contain letters, spaces, hyphens, commas, apostrophes, and dots"
     ),
-    country: z
+  country: z
     .string({
       required_error: "User name is required",
     })
@@ -65,19 +66,25 @@ const validationSchema = z.object({
 });
 
 const SignUp = () => {
+  const router = useRouter();
   const handleSubmit = (data: any) => {
     console.log(data);
+    router.push("/otp");
   };
 
   return (
     <div>
       <AuthLayout backLink="/login">
         <div className=" w-full max-w-3xl px-5 mt-24 ">
-            <div className="flex items-center gap-2 mb-2 md:mb-10 justify-center">
-                <div className="bg-primary text-white px-[10px] py-1 text-sm rounded-full h-min w-min">1</div>
-                <div className="bg-[#E0E0E0]  px-[10px] py-1 text-sm rounded-full h-min min-w-40"></div>
-                <div className="text-primary border border-primary px-[10px] py-1 text-sm rounded-full h-min w-min">2</div>
+          <div className="flex items-center gap-2 mb-2 md:mb-10 justify-center">
+            <div className="bg-primary text-white px-[10px] py-1 text-sm rounded-full h-min w-min">
+              1
             </div>
+            <div className="bg-[#E0E0E0]  px-[10px] py-1 text-sm rounded-full h-min min-w-40"></div>
+            <div className="text-primary border border-primary px-[10px] py-1 text-sm rounded-full h-min w-min">
+              2
+            </div>
+          </div>
           <h5 className="text-xl md:text-3xl font-semibold mb-5 md:mb-10">
             Join <span className="text-primary">Booksy.buzz</span> and Boost{" "}
             <br />
@@ -111,9 +118,7 @@ const SignUp = () => {
                   labelClassName="mb-0 text-xs font-medium"
                   name={"country"}
                   placeHolder="Amazon.com"
-                  options={[
-                    { label: "Amazon.com", value: "Amazon" }
-                  ]}
+                  options={[{ label: "Amazon.com", value: "Amazon" }]}
                 />
               </div>
             </div>
@@ -134,15 +139,17 @@ const SignUp = () => {
                 placeHolder="Password"
               />
             </div>
-        
+
             <Button
               className="w-fit mx-auto py-3 rounded-lg bg-primary text-white text-base font-normal leading-6 md:mb-5"
               type="submit"
             >
-              <div className="flex items-center gap-2">
-                <p>Next</p>
-                <FaChevronRight />
-              </div>
+              <Link href={"/otp-verify"}>
+                <div className="flex items-center gap-2">
+                  <p>Next</p>
+                  <FaChevronRight />
+                </div>
+              </Link>
             </Button>
             <div className="flex items-center justify-center gap-2 text-xs font-medium mb-5">
               <p className="text-[#5F7992]">Already have an account?</p>
