@@ -4,11 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nextui-org/react";
 import { z } from "zod";
 import MyFormInput from "../ui/MyForm/MyFormInput/MyFormInput";
-import MyFormWrapper from "../ui/MyForm/MyFormWrapper/MyFormWrapper";
-import MyFormSelect from "../ui/MyForm/MyFormSelect/MyFormSelect";
 import MyFormOTP from "../ui/MyForm/MyFormOTP/MyFormOTP";
-import Image from "next/image";
-import leftImage from "@/assets/Left Side.png"
+import MyFormWrapper from "../ui/MyForm/MyFormWrapper/MyFormWrapper";
 
 const validationSchema = z.object({
   user_name: z
@@ -34,12 +31,12 @@ const validationSchema = z.object({
       /[!@#$%^&*]/,
       "Password must contain at least one special character"
     ),
-    select: z .string({
-      required_error: "select is required",
-    }),
-    otp: z .string({
-      required_error: "select is required",
-    }),
+  select: z.string({
+    required_error: "select is required",
+  }),
+  otp: z.string({
+    required_error: "select is required",
+  }),
 });
 
 const handleSubmit = (data: any) => {
@@ -48,9 +45,7 @@ const handleSubmit = (data: any) => {
 const LoginComponent = () => {
   return (
     <div className="flex ">
-     <div>
-      
-     </div>
+      <div></div>
 
       <MyFormWrapper
         className={"flex flex-col gap-5 w-full "}
@@ -85,14 +80,14 @@ const LoginComponent = () => {
           /> */}
         </div>
         <div className="w-full">
-        <MyFormOTP
-          name="otp"
-          label="Enter OTP"
-          // rules={{
-          //   required: 'OTP is required', // Example validation rule
-          //   minLength: { value: 6, message: 'OTP must be 6 characters' },
-          // }}
-        />
+          <MyFormOTP
+            name="otp"
+            label="Enter OTP"
+            // rules={{
+            //   required: 'OTP is required', // Example validation rule
+            //   minLength: { value: 6, message: 'OTP must be 6 characters' },
+            // }}
+          />
         </div>
 
         <Button
