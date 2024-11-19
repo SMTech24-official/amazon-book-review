@@ -16,7 +16,7 @@ export default function ManagePlans({ plans, subscriptionsPlan }: { plans: strin
                             className={`border rounded-lg p-6 space-y-6 flex flex-col items-center ${plans == plan.type ? "border border-primary" : ""}`}
                         >
                             <div className="flex items-center gap-4 flex-col">
-                                <div className={`${plan.imageBg} p-2 rounded-lg`}>
+                                <div className={` p-2 rounded-lg`}>
                                     <Image
                                         src={plan.image}
                                         alt={`${plan.type} Icon`}

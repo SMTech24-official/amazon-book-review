@@ -24,7 +24,6 @@ export const SubscriptionsPlan : SubscriptionPlan[] = [
         style: "justify-between text-[#8B4C84] border-[#8B4C84]",
       },
       image: monthlyPlans.src,
-      imageBg: "bg-blue-100",
     },
     {
       type: "yearly",
@@ -47,7 +46,6 @@ export const SubscriptionsPlan : SubscriptionPlan[] = [
         style: "justify-between bg-[#8B4C84] hover:bg-[#8B4C84]/90",
       },
       image: yearlyPlans.src,
-      imageBg: "bg-yellow-100",
     },
   ];
   
