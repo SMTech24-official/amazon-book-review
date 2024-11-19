@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
             <li>
               <Link href={"/careers"}>
                 <span className="hover:text-primary">Support</span>
-              </Link>
+              </Link> 
             </li>
           </ul>
         </div>
