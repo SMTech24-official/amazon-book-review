@@ -7,6 +7,8 @@ import MyFormInput from "../ui/MyForm/MyFormInput/MyFormInput";
 import MyFormWrapper from "../ui/MyForm/MyFormWrapper/MyFormWrapper";
 import MyFormSelect from "../ui/MyForm/MyFormSelect/MyFormSelect";
 import MyFormOTP from "../ui/MyForm/MyFormOTP/MyFormOTP";
+import Image from "next/image";
+import leftImage from "@/assets/Left Side.png"
 
 const validationSchema = z.object({
   user_name: z
@@ -45,8 +47,11 @@ const handleSubmit = (data: any) => {
 };
 const LoginComponent = () => {
   return (
-    <div>
-      LoginComponent
+    <div className="flex ">
+     <div>
+      
+     </div>
+
       <MyFormWrapper
         className={"flex flex-col gap-5 w-full "}
         onSubmit={handleSubmit}
@@ -68,7 +73,7 @@ const LoginComponent = () => {
           />
         </div>
         <div className="w-full">
-          <MyFormSelect
+          {/* <MyFormSelect
             label="select"
             name={"select"}
             placeHolder="select"
@@ -77,7 +82,7 @@ const LoginComponent = () => {
               { label: "Option 2", value: "option2" },
               { label: "Option 3", value: "option3" },
             ]}
-          />
+          /> */}
         </div>
         <div className="w-full">
         <MyFormOTP
