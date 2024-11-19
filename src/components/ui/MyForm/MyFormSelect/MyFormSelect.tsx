@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 
 interface MyFormSelectProps {
   label: string;
+  labelClassName?: string;
   name: string;
   options?: SelectProps["options"];
   disabled?: boolean;
@@ -16,6 +17,7 @@ interface MyFormSelectProps {
 
 const MyFormSelect = ({
   label,
+  labelClassName,
   name,
   options,
   disabled,
@@ -29,7 +31,9 @@ const MyFormSelect = ({
       render={({ field, fieldState: { error } }) => (
         <div className="flex flex-col justify-center gap-1">
           {/* Label */}
-          <p className="ps-1">{label}</p>
+          <p className={cn("ps-1 mb-2 text-[#101828] text-base font-normal leading-6", labelClassName)}>
+                {label}
+              </p>
 
           {/* Ant Design Select */}
           <Form.Item style={{ marginBottom: "0px" }}>

@@ -46,8 +46,8 @@ const MyFormWrapper = ({
       theme={{
         components: {
           Select: {
-            hoverBorderColor: "#7F56D9",
-            activeBorderColor: "#7F56D9",
+            hoverBorderColor: "#9B5983",
+            activeBorderColor: "#9B5983",
           },
         //   Select: {
         //     colorBgElevated: isDark ? ' #191E3A' : '#F5F5F5',
@@ -57,8 +57,8 @@ const MyFormWrapper = ({
         //     optionSelectedBg: isDark ? '#3697d8' : '#e6f4ff',
         // },
           Input: {
-            hoverBorderColor: "#7F56D9",
-            activeBorderColor: "#7F56D9",
+            hoverBorderColor: "#9B5983",
+            activeBorderColor: "#9B5983",
           },
           Checkbox: {
             colorBorder: "#7F56D9",

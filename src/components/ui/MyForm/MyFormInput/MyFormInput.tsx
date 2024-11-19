@@ -9,6 +9,7 @@ const MyFormInput = ({
   type = "text",
   name,
   label,
+  labelClassName,
   inputClassName,
   placeHolder,
   value,
@@ -17,6 +18,7 @@ const MyFormInput = ({
   type?: string;
   name: string;
   label?: string;
+  labelClassName?: string;
   inputClassName?: string;
   placeHolder?: string;
   value?: any;
@@ -39,7 +41,7 @@ const MyFormInput = ({
         render={({ field, fieldState: { error } }) => (
           <div className="flex flex-col justify-center w-full">
             {label && (
-              <p className="ps-1 mb-2 text-[#101828] text-base font-normal leading-6">
+              <p className={cn("ps-1 mb-2 text-[#101828] text-base font-normal leading-6", labelClassName)}>
                 {label}
               </p>
             )}
