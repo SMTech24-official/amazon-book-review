@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React from "react";
-import AuthLayout from "../AuthLayout";
-import MyFormWrapper from "@/components/ui/MyForm/MyFormWrapper/MyFormWrapper";
 import MyFormInput from "@/components/ui/MyForm/MyFormInput/MyFormInput";
-import MyFormOTP from "@/components/ui/MyForm/MyFormOTP/MyFormOTP";
-import { Button } from "@nextui-org/react";
+import MyFormWrapper from "@/components/ui/MyForm/MyFormWrapper/MyFormWrapper";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { Button } from "@nextui-org/react";
 import Link from "next/link";
+import { z } from "zod";
+import AuthLayout from "../AuthLayout";
 
 const validationSchema = z.object({
   user_name: z
