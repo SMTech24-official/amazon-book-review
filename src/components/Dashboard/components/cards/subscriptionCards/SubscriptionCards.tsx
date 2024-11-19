@@ -29,7 +29,6 @@ const SubscriptionCards = ({ plans, plan }: { plans: string, plan: SubscriptionP
             </button>
             <div className="space-y-4">
                 <div className="font-bold">Plan Includes</div>
-                <div className="text-sm">{plan.price}</div>
                 <ul className=" grid lg:grid-cols-1 grid-cols-1 md:grid-cols-2 gap-2">
                     {plan.features.map((feature, i) => (
                         <li key={i} className="flex items-start gap-2">
