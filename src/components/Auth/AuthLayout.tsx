@@ -37,7 +37,7 @@ const AuthLayout = ({
         <div className="flex justify-center items-center h-full w-full ">
           {children}
         </div>
-
+ 
         {/* {children} */}
       </div>
     </div>
