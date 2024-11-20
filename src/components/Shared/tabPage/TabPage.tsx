@@ -48,8 +48,8 @@ export default function TabPage({ tabs, defaultTab }: TabPageProps) {
 
             <div className="border-t ">
                 <Tabs defaultValue={tab} className="grid sm:grid-cols-6 xl:grid-cols-5 min-h-screen">
-                    <div className="pt-4 col-span-2 xl:col-span-1 sm:border-r w-full h-full sticky sm:block top-[49px]">
-                        <TabsList className="sm:flex sm:flex-col items-start justify-center sm:justify-start sm:pr-4 sm:sticky sm:top-20 top-16 bg-white xl:block min-h-14">
+                    <div className="pt-4 col-span-2 xl:col-span-1 sm:border-r sm:w-full  h-full sticky left-0 right-0 z-30 sm:block top-[49px]">
+                        <TabsList className="sm:flex sm:flex-col  items-start justify-center sm:justify-start sm:pr-4 sm:sticky sm:top-20 top-16 bg-white xl:block min-h-14 z-30">
                             {tabs.map((tabItem) => (
                                 <TabsTrigger
                                     key={tabItem.value}
@@ -63,7 +63,7 @@ export default function TabPage({ tabs, defaultTab }: TabPageProps) {
                             ))}
                         </TabsList>
                     </div>
-                    <div className="col-span-4 pt-4">
+                    <div className="col-span-4 pt-4 z-20">
                         {tabs.map((tabItem) => (
                             <TabsContent key={tabItem.value} value={tabItem.value}>
                                 {tabItem.component}
