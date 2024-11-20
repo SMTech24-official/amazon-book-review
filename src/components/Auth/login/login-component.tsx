@@ -82,7 +82,7 @@ const LoginComponent = () => {
   //   }
   // };
   
-  const handleLogin = async (formData: any) => {
+  const handleSubmit = async (formData: any) => {
     const res = await handleAsyncWithToast(
       async () => {
         return login(formData); // Replace with your actual login function
@@ -90,8 +90,8 @@ const LoginComponent = () => {
       "Logging in...",
       "Login successful!",
       "Login failed. Please try again.",
-      true, // Set user after login
-      dispatch // Pass dispatch function to the toast handler
+      true,
+      dispatch 
     );
 
     if (res?.data?.success) {
@@ -102,15 +102,15 @@ router.push("/")
   
   return (
     <div>
-      <AuthLayout backLink="/login">
+      <AuthLayout backLink="/">
         <div className=" w-full max-w-3xl px-5 mt-24 md:mt-0">
           <p className="text-base font-normal mb-2">We missed you</p>
           <h5 className=" text-3xl font-semibold mb-10">
             <span className="text-primary">Welcome</span> back!
           </h5>
           <MyFormWrapper
-            className={"flex flex-col gap-6 w-full "}
-            onSubmit={handleLogin}
+            className={"flex flex-col gap-6 w-full"}
+            onSubmit={handleSubmit}
             resolver={zodResolver(validationSchema)}
      
           >
@@ -130,7 +130,7 @@ router.push("/")
                 name={"password"}
                 isPassword={true}
                 placeHolder="Password"
-                value={"123456"}
+                // value={"123456"}
               />
             </div>
             <div className="flex items-center justify-end gap-2 text-xs font-medium">

@@ -26,7 +26,16 @@ const authApi = baseApi.injectEndpoints({
         register: builder.mutation({
             query: (userInfo) => {
                 return {
-                    url: "user/create-trainee",
+                    url: "users/register",
+                    method: "POST",
+                    body: userInfo,
+                }
+            },
+        }),
+        otp: builder.mutation({
+            query: (userInfo) => {
+                return {
+                    url: "users/verify-otp",
                     method: "POST",
                     body: userInfo,
                 }
@@ -42,4 +51,4 @@ const authApi = baseApi.injectEndpoints({
     }),
 });
 
-export const {useLoginMutation, useRegisterMutation, useUpdateUserMutation, useUserDataQuery} = authApi;
+export const {useLoginMutation, useRegisterMutation, useUpdateUserMutation, useOtpMutation, useUserDataQuery} = authApi;

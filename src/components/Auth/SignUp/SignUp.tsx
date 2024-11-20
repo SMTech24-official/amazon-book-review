@@ -10,9 +10,11 @@ import { useRouter } from "next/navigation";
 import { FaChevronRight } from "react-icons/fa";
 import { z } from "zod";
 import AuthLayout from "../AuthLayout";
+import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
+import { useRegisterMutation } from "@/redux/features/auth/authApi";
 
 const validationSchema = z.object({
-  full_name: z
+  fullName: z
     .string({
       required_error: "User name is required",
     })
@@ -22,9 +24,9 @@ const validationSchema = z.object({
       /^[A-Za-z\s\-,'.]+$/,
       "Name can only contain letters, spaces, hyphens, commas, apostrophes, and dots"
     ),
-  amazon_reviewer_name: z
+  reviewerName: z
     .string({
-      required_error: "User name is required",
+      required_error: "Amazon reviewer name is required",
     })
     .min(2, "Name must be at least 2 characters long")
     .max(50, "Name cannot exceed 50 characters")
@@ -32,42 +34,50 @@ const validationSchema = z.object({
       /^[A-Za-z\s\-,'.]+$/,
       "Name can only contain letters, spaces, hyphens, commas, apostrophes, and dots"
     ),
-  country: z
-    .string({
-      required_error: "User name is required",
-    })
-    .min(2, "Name must be at least 2 characters long")
-    .max(50, "Name cannot exceed 50 characters")
-    .regex(
-      /^[A-Za-z\s\-,'.]+$/,
-      "Name can only contain letters, spaces, hyphens, commas, apostrophes, and dots"
-    ),
-  password: z
-    .string({
-      required_error: "Password is required",
-    })
-    .min(8, "Password must be at least 8 characters long")
-    .max(30, "Password cannot exceed 30 characters")
-    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
-    .regex(/\d/, "Password must contain at least one digit")
-    .regex(
-      /[!@#$%^&*]/,
-      "Password must contain at least one special character"
-    ),
-  select: z.string({
-    required_error: "select is required",
+  amazonCountry: z.string({
+    required_error: "Amazon country site is required",
   }),
-  otp: z.string({
-    required_error: "select is required",
+
+  email: z
+    .string({
+      required_error: "Email is required",
+    })
+    .email("Invalid email address"),
+
+  password: z.string({
+    required_error: "Password is required",
   }),
+  // .min(8, "Password must be at least 8 characters long")
+  // .max(30, "Password cannot exceed 30 characters")
+  // .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+  // .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+  // .regex(/\d/, "Password must contain at least one digit")
+  // .regex(
+  //   /[!@#$%^&*]/,
+  //   "Password must contain at least one special character"
+  // ),
 });
 
 const SignUp = () => {
   const router = useRouter();
-  const handleSubmit = (data: any) => {
-    console.log(data);
-    router.push("/otp");
+
+  const [register, { isError: isRegistrationError, error: registrationError }] = useRegisterMutation();
+  const handleSubmit = async (formData: any) => {
+    const res = await handleAsyncWithToast(
+      async () => {
+        return register(formData); // Replace with your actual login function
+      },
+      "Signing in...",
+      "",
+      "Login failed. Please try again."
+      // true,
+      // dispatch
+    );
+    console.log({ res });
+    if (res?.data?.success) {
+      localStorage.setItem("verifyEmailByOTP", formData?.email);
+      router.push("/otp-verify");
+    }
   };
 
   return (
@@ -97,16 +107,16 @@ const SignUp = () => {
               <MyFormInput
                 label="Full Name"
                 labelClassName="mb-1 text-xs font-medium"
-                name={"full_name"}
+                name={"fullName"}
                 placeHolder="Full name"
               />
             </div>
-            <div className="flex flex-col md:flex-row items-center gap-5">
+            <div className="flex flex-col md:flex-row items-start gap-5">
               <div className="w-full md:w-4/12">
                 <MyFormInput
                   label="Amazon reviewer name"
                   labelClassName="mb-1 text-xs font-medium"
-                  name={"amazon_reviewer_name"}
+                  name={"reviewerName"}
                   placeHolder="Amazon reviewer name"
                 />
               </div>
@@ -114,7 +124,7 @@ const SignUp = () => {
                 <MyFormSelect
                   label="On which Amazon country site will your reviews be posted?"
                   labelClassName="mb-0 text-xs font-medium"
-                  name={"country"}
+                  name={"amazonCountry"}
                   placeHolder="Amazon.com"
                   options={[{ label: "Amazon.com", value: "Amazon" }]}
                 />
@@ -142,12 +152,10 @@ const SignUp = () => {
               className="w-fit mx-auto py-3 rounded-lg bg-primary text-white text-base font-normal leading-6 md:mb-5"
               type="submit"
             >
-              <Link href={"/otp-verify"}>
-                <div className="flex items-center gap-2">
-                  <p>Next</p>
-                  <FaChevronRight />
-                </div>
-              </Link>
+              <div className="flex items-center gap-2">
+                <p>Next</p>
+                <FaChevronRight />
+              </div>
             </Button>
             <div className="flex items-center justify-center gap-2 text-xs font-medium mb-5">
               <p className="text-[#5F7992]">Already have an account?</p>

@@ -9,6 +9,8 @@ import { FaChevronRight } from "react-icons/fa";
 import { z } from "zod";
 import AuthLayout from "../AuthLayout";
 import { useRouter } from "next/navigation";
+import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
+import { useOtpMutation } from "@/redux/features/auth/authApi";
 
 const validationSchema = z.object({
     // OTP field validation
@@ -22,12 +24,28 @@ const validationSchema = z.object({
   
 
 const OTPVerify = () => {
-
+  const [OTP] = useOtpMutation();
     const router = useRouter()
-  const handleSubmit = (data: any) => {
-    console.log(data);
-    router.push('/plans')
-  };
+    const handleSubmit = async (formData: any) => {
+      formData.otp = parseFloat(formData.otp)
+      formData.email = localStorage.getItem("verifyEmailByOTP");
+      console.log(formData);
+      const res = await handleAsyncWithToast(
+        async () => {
+          return OTP(formData); // Replace with your actual login function
+        },
+        "Checking OTP...",
+        "",
+        "Login failed. Please try again."
+        // true,
+        // dispatch
+      );
+      console.log({ res });
+      if (res?.data?.success) {
+        localStorage.setItem("verifyEmailByOTP", formData?.email);
+        router.push("/plans");
+      }
+    };
 
   return (
     <div>
