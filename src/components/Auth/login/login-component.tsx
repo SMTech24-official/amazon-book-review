@@ -130,7 +130,7 @@ router.push("/")
                 name={"password"}
                 isPassword={true}
                 placeHolder="Password"
-                // value={"123456"}
+                value={"123456"}
               />
             </div>
             <div className="flex items-center justify-end gap-2 text-xs font-medium">

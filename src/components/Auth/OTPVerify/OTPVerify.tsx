@@ -36,13 +36,11 @@ const OTPVerify = () => {
         },
         "Checking OTP...",
         "",
-        "Login failed. Please try again."
-        // true,
-        // dispatch
+        ""
       );
       console.log({ res });
       if (res?.data?.success) {
-        localStorage.setItem("verifyEmailByOTP", formData?.email);
+        localStorage.removeItem("verifyEmailByOTP");
         router.push("/plans");
       }
     };

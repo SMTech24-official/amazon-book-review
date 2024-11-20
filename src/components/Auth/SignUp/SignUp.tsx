@@ -60,8 +60,7 @@ const validationSchema = z.object({
 
 const SignUp = () => {
   const router = useRouter();
-
-  const [register, { isError: isRegistrationError, error: registrationError }] = useRegisterMutation();
+  const [register] = useRegisterMutation();
   const handleSubmit = async (formData: any) => {
     const res = await handleAsyncWithToast(
       async () => {
@@ -69,9 +68,7 @@ const SignUp = () => {
       },
       "Signing in...",
       "",
-      "Login failed. Please try again."
-      // true,
-      // dispatch
+      ""
     );
     console.log({ res });
     if (res?.data?.success) {
