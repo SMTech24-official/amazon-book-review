@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import { Button } from '@nextui-org/react';
 import { Book } from '@/interface/globalType';
+import { Button } from '@nextui-org/react';
+import Image from 'next/image';
 
 interface BookTableProps {
     books: Book[]; // books prop should be an array of Book
@@ -23,7 +23,7 @@ const BookTable = ({ books }: BookTableProps) => {
 
           {/* Table Body */}
           <tbody>
-            {books.map((book, index) => (
+            {books.map((book) => (
               <tr
                 key={book.id}
                 className={` hover:bg-gray-100`}

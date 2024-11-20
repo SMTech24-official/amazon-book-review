@@ -4,6 +4,7 @@ import "./globals.css";
 import { NextUiProvider } from "@/lib/providers/NextUIProvider";
 import MyContextProvider from "@/lib/providers/MyContextProvider";
 import ReduxStoreProvider from "@/redux/ReduxStoreProvider";
+import { Toaster } from "sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,6 +36,7 @@ export default function RootLayout({
         <MyContextProvider>
           <ReduxStoreProvider>
             <NextUiProvider>
+            <Toaster />
               <div className="text-[#02060A]">{children}</div>
             </NextUiProvider>
           </ReduxStoreProvider>

@@ -3,7 +3,7 @@ import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://gym-star-server-with-ts-and-mongoose.vercel.app/api/v1/",
+  baseUrl: "https://traceylongfield.vercel.app/api/",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
@@ -25,7 +25,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<string | FetchArgs, unknown, FetchB
   
     if (result.error?.status === 401) {
       try {
-        const res = await fetch("https://gym-star-server-with-ts-and-mongoose.vercel.app/api/v1/auth/refresh-token", {
+        const res = await fetch("https://traceylongfield.vercel.app/api/auth/refresh-token", {
           method: "POST",
           credentials: "include", // Sends cookies with the request
           headers: {

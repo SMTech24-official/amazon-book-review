@@ -1,13 +1,11 @@
 'use client'
+import newBook from "@/assets/newBook.png";
 import BooksComponent from '@/components/AdminDashboard/BooksComponent/BooksComponent';
-import ManagePlans from '@/components/Dashboard/components/settings/MangePlans';
-import TabPage from '@/components/shared/tabPage/TabPage';
+import TabPage from "@/components/Shared/tabPage/TabPage";
+
 import { Book } from '@/interface/globalType';
-import { SubscriptionsPlan } from '@/lib/fakeData/subscriptionPlans';
-import { user } from '@/lib/fakeData/user';
 import { useEffect } from 'react';
 import { FaClipboardList, FaUserCog } from 'react-icons/fa';
-import newBook from "@/assets/newBook.png";
 
 const books: Book[] = [
     {
