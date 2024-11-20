@@ -53,7 +53,7 @@ const ProfileDropdownMenu = () => {
 
   return (
     <div>
-      <Dropdown placement="bottom-end">
+      <Dropdown placement="bottom-end" aria-hidden>
         <DropdownTrigger>
           <Avatar
             isBordered
