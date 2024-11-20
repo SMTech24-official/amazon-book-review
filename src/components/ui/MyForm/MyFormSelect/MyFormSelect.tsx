@@ -31,19 +31,21 @@ const MyFormSelect = ({
       render={({ field, fieldState: { error } }) => (
         <div className="flex flex-col justify-center gap-1">
           {/* Label */}
-          <p className={cn("ps-1 mb-2 text-[#101828] text-base font-normal leading-6", labelClassName)}>
-                {label}
-              </p>
+          <p
+            className={cn(
+              "ps-1 mb-2 text-[#101828] text-base font-normal leading-6",
+              labelClassName
+            )}
+          >
+            {label}
+          </p>
 
           {/* Ant Design Select */}
           <Form.Item style={{ marginBottom: "0px" }}>
             <Select
               mode={mode}
               style={{ width: "100%" }}
-              className={cn(
-                "focus:!border-[#7F56D9] hover:!border-[#7F56D9]",
-                className
-              )}
+              className={cn(className)}
               {...field} // Spread react-hook-form's field props
               ref={null} // React 19 requires explicit handling of refs; set to null here
               value={field.value} // Pass the value explicitly

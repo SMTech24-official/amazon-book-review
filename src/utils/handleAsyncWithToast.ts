@@ -16,19 +16,20 @@ export const handleAsyncWithToast = async (
   const toastInit = toast.loading(loadingMessage);
 
   try {
-    const res = await asyncCallback()
+    const res = await asyncCallback();
     console.log(res?.data);
-    
+
     if (res?.data?.success) {
-      toast.success(successMessage || res.data.message, {
+      toast.success(res.data.message || successMessage, {
         id: toastInit,
       });
 
-      
       // If isSetUserToRedux is true, dispatch the setUser action
       if (isSetUserToRedux && dispatch && res?.data?.data?.accessToken) {
         const user = await verifyToken(res?.data?.data?.accessToken);
-        await dispatch(setUser({ user: user, token: res?.data?.data?.accessToken }));
+        await dispatch(
+          setUser({ user: user, token: res?.data?.data?.accessToken })
+        );
         // dispatch(setUser({ user: res.data.user, token: res.data.accessToken }));
       }
     }
@@ -40,7 +41,7 @@ export const handleAsyncWithToast = async (
     }
 
     if (!res?.data?.success) {
-      toast.error(res?.error?.data?.message, {
+      toast.error(res?.error?.data?.errorSources?.[0]?.message, {
         id: toastInit,
       });
     }
@@ -48,7 +49,7 @@ export const handleAsyncWithToast = async (
     return res; // Return response if needed
   } catch (error) {
     toast.error(
-      errorMessage || (error as any)?.message || "Something went wrong",
+      (error as any)?.errorSources?.[0]?.message || errorMessage || "Something went wrong",
       {
         id: toastInit,
       }
@@ -58,6 +59,6 @@ export const handleAsyncWithToast = async (
     // Delay for 2 seconds before dismissing the toast
     setTimeout(() => {
       toast.dismiss(toastInit);
-    }, 2000);
+    }, 3500);
   }
 };
