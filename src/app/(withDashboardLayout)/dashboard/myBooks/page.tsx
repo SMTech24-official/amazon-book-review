@@ -1,10 +1,10 @@
-import UnderCOnstruction from '@/components/underConstruction/UnderConstruction';
+import MyBooks from '@/components/Dashboard/pages/myBooks/MyBooks';
 import React from 'react';
 
 const page = () => {
     return (
-        <div>
-           <UnderCOnstruction pageName='My Books'/>
+        <div className='dashboard-containers'>
+           <MyBooks/>
         </div>
     );
 };

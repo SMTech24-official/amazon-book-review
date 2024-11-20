@@ -25,7 +25,7 @@ export default function BooksCards({
 }) {
   return (
     <div className="flex flex-col md:flex-row gap-6 p-4 xl:h-[225px] sm:w-full w-[250px] h-full border rounded-lg">
-      <div className="w-[129px] h-[190px] border">
+      <div className="w-[129px] h-[190px]">
         <Image
           src={imageSrc}
           alt={`${bookTitle} cover`}
