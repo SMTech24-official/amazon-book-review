@@ -2,49 +2,104 @@
 "use client";
 import MyFormInput from "@/components/ui/MyForm/MyFormInput/MyFormInput";
 import MyFormWrapper from "@/components/ui/MyForm/MyFormWrapper/MyFormWrapper";
+import { useLoginMutation } from "@/redux/features/auth/authApi";
+import { useAppDispatch } from "@/redux/hooks";
+import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { z } from "zod";
 import AuthLayout from "../AuthLayout";
 
 const validationSchema = z.object({
-  user_name: z
+  email: z
     .string({
-      required_error: "User name is required",
+      required_error: "Email is required",
     })
-    .min(2, "Name must be at least 2 characters long")
-    .max(50, "Name cannot exceed 50 characters")
-    .regex(
-      /^[A-Za-z\s\-,'.]+$/,
-      "Name can only contain letters, spaces, hyphens, commas, apostrophes, and dots"
-    ),
+    .email("Invalid email address"),
   password: z
     .string({
       required_error: "Password is required",
     })
-    .min(8, "Password must be at least 8 characters long")
-    .max(30, "Password cannot exceed 30 characters")
-    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
-    .regex(/\d/, "Password must contain at least one digit")
-    .regex(
-      /[!@#$%^&*]/,
-      "Password must contain at least one special character"
-    ),
-  select: z.string({
-    required_error: "select is required",
-  }),
-  otp: z.string({
-    required_error: "select is required",
-  }),
+    // .min(8, "Password must be at least 8 characters long")
+    // .max(30, "Password cannot exceed 30 characters")
+    // .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    // .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+    // .regex(/\d/, "Password must contain at least one digit")
+    // .regex(
+    //   /[!@#$%^&*(),.?":{}|<>]/,
+    //   "Password must contain at least one special character"
+    // ),
 });
 
 const LoginComponent = () => {
-  const handleSubmit = (data: any) => {
-    console.log(data);
+  const dispatch = useAppDispatch();
+  const [login] = useLoginMutation();
+  const router = useRouter();
+  // const handleSubmit = async (formData: FieldValues) => {
+  //   try {
+  //     const res = await login(formData).unwrap();
+  //     if (res.success) {
+  //       console.log("Login Successful:", res.data);
+
+  //       const user = await verifyToken(res?.data?.accessToken);
+
+  //       await dispatch(setUser({ user: user, token: res?.data?.accessToken }));
+
+  //       // Show success message
+  //       Swal.fire({
+  //         position: "top-end",
+  //         icon: "success",
+  //         title: "Login Successful",
+  //         showConfirmButton: false,
+  //         timer: 2500,
+  //       });
+  //       router.push("/");
+  //     } else {
+  //       console.log("Login Failed:", res.error);
+  //       Swal.fire({
+  //         position: "top-end",
+  //         icon: "error",
+  //         title: "Login Failed",
+  //         text:
+  //           (error as any)?.data?.success === false &&
+  //           (error as any)?.data?.errorSources[0]?.message,
+  //         showConfirmButton: true,
+  //         // timer: 1500,
+  //       });
+  //     }
+  //   } catch (error) {
+  //     Swal.fire({
+  //       position: "top-end",
+  //       icon: "error",
+  //       title: "Failed",
+  //       text:
+  //         (error as any)?.data?.success === false &&
+  //         (error as any)?.data?.errorSources[0]?.message,
+  //       showConfirmButton: true,
+  //     });
+  //   }
+  // };
+  
+  const handleLogin = async (formData: any) => {
+    const res = await handleAsyncWithToast(
+      async () => {
+        return login(formData); // Replace with your actual login function
+      },
+      "Logging in...",
+      "Login successful!",
+      "Login failed. Please try again.",
+      true, // Set user after login
+      dispatch // Pass dispatch function to the toast handler
+    );
+
+    if (res?.data?.success) {
+router.push("/")
+    }
   };
 
+  
   return (
     <div>
       <AuthLayout backLink="/login">
@@ -55,15 +110,17 @@ const LoginComponent = () => {
           </h5>
           <MyFormWrapper
             className={"flex flex-col gap-6 w-full "}
-            onSubmit={handleSubmit}
+            onSubmit={handleLogin}
             resolver={zodResolver(validationSchema)}
+     
           >
             <div className="w-full">
               <MyFormInput
-                label="User name"
+                label="Email"
                 labelClassName="mb-1 text-xs font-medium"
-                name={"user_name"}
-                placeHolder="User name"
+                name={"email"}
+                placeHolder="Email"
+                value={"akonhasan6801@gmail.com"}
               />
             </div>
             <div className="w-full">
@@ -73,6 +130,7 @@ const LoginComponent = () => {
                 name={"password"}
                 isPassword={true}
                 placeHolder="Password"
+                value={"123456"}
               />
             </div>
             <div className="flex items-center justify-end gap-2 text-xs font-medium">
@@ -87,9 +145,9 @@ const LoginComponent = () => {
             </Button>
             <div className="flex items-center justify-center gap-2 text-xs font-medium mb-5">
               <p className="text-[#5F7992]">Don’t have an account?</p>
-             <Link href={"/signup"}>
-             <p className="text-primary">Signup now</p>
-             </Link>
+              <Link href={"/signup"}>
+                <p className="text-primary">Signup now</p>
+              </Link>
             </div>
           </MyFormWrapper>
         </div>

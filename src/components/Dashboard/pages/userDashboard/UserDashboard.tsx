@@ -1,4 +1,4 @@
-import TabPage from '@/components/shared/tabPage/TabPage';
+import TabPage from '@/components/Shared/tabPage/TabPage';
 import Activity from '../../components/userDashBoard/Activity';
 import ReviewHistory from '../../components/userDashBoard/ReviewHistory';
 import UDBookReview from '../../components/userDashBoard/UDBookReview';

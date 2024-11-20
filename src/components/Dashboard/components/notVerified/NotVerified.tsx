@@ -1,5 +1,5 @@
 import notVerifiedIcon from '@/assets/notVerified.png'
-import GradCircleWrapper from '@/components/shared/grad-circleWrapper/GradCircleWrapper'
+import GradCircleWrapper from '@/components/Shared/grad-circleWrapper/GradCircleWrapper'
 import Image from "next/image"
 import Link from "next/link"
 

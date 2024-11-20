@@ -63,7 +63,7 @@ export default function TabPage({ tabs, defaultTab }: TabPageProps) {
                             ))}
                         </TabsList>
                     </div>
-                    <div className="col-span-4 pt-4">
+                    <div className="col-span-4 pt-4 z-20">
                         {tabs.map((tabItem) => (
                             <TabsContent key={tabItem.value} value={tabItem.value}>
                                 {tabItem.component}
