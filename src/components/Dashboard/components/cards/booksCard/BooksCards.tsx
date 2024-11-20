@@ -24,8 +24,8 @@ export default function BooksCards({
   imageSrc: string;
 }) {
   return (
-    <div className="flex flex-col sm:flex-row gap-6 p-4 lg:h-[225px] max-w-2xl border rounded-lg">
-      <div className="relative w-[129px] h-[190px] border">
+    <div className="flex flex-col md:flex-row gap-6 p-4 xl:h-[225px] sm:w-full w-[250px] h-full border rounded-lg">
+      <div className="w-[129px] h-[190px] border">
         <Image
           src={imageSrc}
           alt={`${bookTitle} cover`}
@@ -38,8 +38,8 @@ export default function BooksCards({
       <div className="flex flex-col  flex-1 gap-2">
 
 
-        <div className="flex flex-col gap-3 sm:gap-0 sm:flex-row flex-1 items-start  justify-between">
-          <div className="sm:space-y-2 sm:w-[150px]">
+        <div className="flex flex-col gap-3 xl:gap-0 xl:flex-row flex-1 items-start  justify-between">
+          <div className="xl:space-y-2 ">
             <h2 className="text-xl font-semibold">{bookTitle}</h2>
             <div className="flex items-center gap-2 ">
               <span className="bg-yellow-200 text-orange-600 text-sm px-2 py-[5px] rounded-md font-semibold">
@@ -63,9 +63,9 @@ export default function BooksCards({
 
 
 
-        <div className="flex gap-3 sm:gap-0 flex-col sm:flex-row items-start sm:items-center justify-between ">
-          <div className="flex items-center gap-6 ">
-            <div className="flex items-center gap-2">
+        <div className="flex gap-3 xl:gap-0 flex-col xl:flex-row items-start xl:items-center justify-between ">
+          <div className="flex items-center gap-6">
+            <div className="flex flex-col xl:flex-row items-start xl:items-center gap-2 xl:gap-6">
               <div className="flex items-center gap-1">
                 <Image src={reviewIcon} alt="icon of coins earned by reding" className="max-w-6 max-h-6" />
                 <span className="text-sm text-muted-foreground">
@@ -80,7 +80,7 @@ export default function BooksCards({
               </div>
             </div>
           </div>
-          <div className="flex justify-end mt-4">
+          <div className="flex justify-end xl:mt-4">
             <Button className="bg-black text-white hover:bg-black/90">
               In for Review
             </Button>

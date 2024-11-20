@@ -2,7 +2,7 @@ import UserDashboard from '@/components/Dashboard/pages/userDashboard/UserDashbo
 
 const page = () => {
     return (
-        <div className='dashboard-containers '>
+        <div className='dashboard-containers'>
             <UserDashboard />
         </div>
     );
