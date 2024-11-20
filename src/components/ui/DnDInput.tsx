@@ -8,8 +8,8 @@ import Image from "next/image"
 
 
 
-const DnDInput = () => {
-    const [profileImage, setProfileImage] = useState<string | null>(null)
+const DnDInput = ({image}: {image? : string | null}) => {
+    const [profileImage, setProfileImage] = useState<string | null>(image ?? null)
 
     // Handle drag and drop
     const handleDragOver = (e: React.DragEvent) => {

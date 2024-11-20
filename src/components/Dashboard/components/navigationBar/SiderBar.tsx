@@ -1,28 +1,8 @@
-import { RiCustomerServiceFill, RiDashboardFill } from 'react-icons/ri'
-import { FaBookBookmark } from 'react-icons/fa6'
-import { IoLibrarySharp, IoSettingsSharp } from 'react-icons/io5'
-import { BiSolidBookAdd } from 'react-icons/bi'
-import { GiOpenBook } from 'react-icons/gi'
-import { SiBookstack } from 'react-icons/si'
-import { User } from '@/lib/types/type'
+import { NavLink, User } from '@/lib/types/type'
 import { cn } from '@/lib/utils'
 import MainNavLink from './Navlink'
 
-export default function SideBar({ user, navRef, isOpen }: { user: User, navRef: React.RefObject<HTMLDivElement>, isOpen: boolean }) {
-
-
-    const navLink = [
-        { name: 'Dashboard', href: '/dashboard', icon: RiDashboardFill },
-        { name: 'My Books', href: '/dashboard/myBooks', icon: FaBookBookmark },
-        { name: 'Add Books', href: '/dashboard/addBooks', icon: BiSolidBookAdd },
-        { name: 'Library', href: '/dashboard/library', icon: IoLibrarySharp },
-        { name: 'Reading', href: '/dashboard/reading', icon: GiOpenBook },
-        { name: 'Knowledge hub', href: '/dashboard/knowledgeHub', icon: SiBookstack },
-    ];
-    const additionalRoutes = [
-        { name: 'Settings', href: '/dashboard/settings', icon: IoSettingsSharp },
-        { name: ' Help', href: '/dashboard/help', icon: RiCustomerServiceFill },
-    ];
+export default function SideBar({ user, navRef, isOpen, additionalRoutes, navLink }: { user: User, navRef: React.RefObject<HTMLDivElement>, isOpen: boolean, navLink: NavLink[], additionalRoutes: NavLink[] }) {
 
     return (
         <div ref={navRef && navRef} className="min-h-screen h-full flex">

@@ -7,13 +7,13 @@ import { BiSolidBookAdd } from 'react-icons/bi';
 import { FaBookBookmark } from 'react-icons/fa6';
 import { GiOpenBook } from 'react-icons/gi';
 import { IoLibrarySharp, IoSettingsSharp } from 'react-icons/io5';
-import { RiCustomerServiceFill, RiDashboardFill } from 'react-icons/ri';
+import { RiDashboardFill } from 'react-icons/ri';
 import { SiBookstack } from 'react-icons/si';
 import SideBar from './components/navigationBar/SiderBar';
 
 
 
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -33,16 +33,15 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     }, [navRef])
 
     const navLink = [
-        { name: 'Dashboard', href: '/dashboard', icon: RiDashboardFill },
-        { name: 'My Books', href: '/dashboard/myBooks', icon: FaBookBookmark },
-        { name: 'Add Books', href: '/dashboard/addBooks', icon: BiSolidBookAdd },
-        { name: 'Library', href: '/dashboard/library', icon: IoLibrarySharp },
-        { name: 'Reading', href: '/dashboard/reading', icon: GiOpenBook },
-        { name: 'Knowledge hub', href: '/dashboard/knowledgeHub', icon: SiBookstack },
+        { name: 'Verification', href: '/admin-dashboard', icon: RiDashboardFill },
+        { name: 'Members details', href: '/admin-dashboard/members-details', icon: FaBookBookmark },
+        { name: 'Knowledge hub', href: '/admin-dashboard/knowledge-hub', icon: BiSolidBookAdd },
+        { name: 'BuzzPoints', href: '/admin-dashboard/buzzPoints', icon: IoLibrarySharp },
+        { name: 'Reading', href: '/admin-dashboard/reading', icon: GiOpenBook },
+        { name: 'Support', href: '/admin-dashboard/support', icon: SiBookstack },
     ];
     const additionalRoutes = [
-        { name: 'Settings', href: '/dashboard/settings', icon: IoSettingsSharp },
-        { name: ' Help', href: '/dashboard/help', icon: RiCustomerServiceFill },
+        { name: 'Settings', href: '/admin-dashboard/settings', icon: IoSettingsSharp },
     ];
 
 
@@ -61,4 +60,4 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     );
 };
 
-export default DashboardLayout;
+export default AdminLayout;

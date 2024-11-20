@@ -35,7 +35,7 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       screens: {
-        xs: "540px", // min-width
+        xs: "540px",
       },
       animation: {
         marquee: "marquee var(--duration) linear infinite",

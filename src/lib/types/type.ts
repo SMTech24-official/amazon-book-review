@@ -33,5 +33,4 @@ export type SubscriptionPlan = {
   features: string[];
   button: PlanFeature;
   image: string; // Path to the image
-  imageBg: string;
 };
