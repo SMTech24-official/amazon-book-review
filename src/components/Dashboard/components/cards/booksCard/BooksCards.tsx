@@ -1,60 +1,92 @@
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
-import { Star, Coins } from 'lucide-react'
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { TrendingUp } from "lucide-react";
+import coins from "@/assets/coins.png"
+import reviewIcon from "@/assets/ReviewIcon.png"
 
-export default function BooksCards() {
+export default function BooksCards({
+  bookTitle,
+  status,
+  readers,
+  publishedDate,
+  coinsPerReview,
+  reviewCount,
+  avgRating,
+  imageSrc,
+}: {
+  bookTitle: string;
+  status: string;
+  readers: number;
+  publishedDate: Date;
+  coinsPerReview: number;
+  reviewCount: number;
+  avgRating: number;
+  imageSrc: string;
+}) {
   return (
-    <div className="flex gap-6 p-4 max-w-2xl">
-      <div className="relative w-[120px] h-[180px]">
+    <div className="flex flex-col md:flex-row gap-6 p-4 xl:h-[225px] sm:w-full w-[250px] h-full border rounded-lg">
+      <div className="w-[129px] h-[190px]">
         <Image
-          src="/placeholder.svg?height=180&width=120"
-          alt="Dune movie poster"
+          src={imageSrc}
+          alt={`${bookTitle} cover`}
           className="rounded-md object-cover"
           width={120}
           height={180}
           priority
         />
       </div>
-      
-      <div className="flex flex-col flex-1 gap-2">
-        <div className="flex items-center justify-between">
-          <div className="space-y-1">
-            <h2 className="text-2xl font-semibold">Dune</h2>
-            <div className="flex items-center gap-2">
-              <span className="bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5 rounded-full font-medium">
-                Live
+      <div className="flex flex-col  flex-1 gap-2">
+
+
+        <div className="flex flex-col gap-3 xl:gap-0 xl:flex-row flex-1 items-start  justify-between">
+          <div className="xl:space-y-2 ">
+            <h2 className="text-xl font-semibold">{bookTitle}</h2>
+            <div className="flex items-center gap-2 ">
+              <span className="bg-yellow-200 text-orange-600 text-sm px-2 py-[5px] rounded-md font-semibold">
+                {status}
               </span>
-              <span className="text-xs text-muted-foreground">
-                2 reader are reading
+              <span className="text-xs text-gray-600 text-muted-foreground">
+                {readers} reader{readers > 1 ? "s" : ""} are reading
               </span>
             </div>
           </div>
-          <div className="text-sm text-muted-foreground">
-            Published: 14 -8-2024
-          </div>
-        </div>
-
-        <div className="flex items-center gap-6 mt-auto">
-          <div className="flex items-center gap-2">
-            <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-            <div className="text-sm">
-              <span className="font-medium">12</span> Reviews
-              <span className="mx-2">·</span>
-              <span className="font-medium text-green-600">5.4</span> Avg rating
+          <div className="text-sm text-muted-foreground space-y-2 text-gray-600">
+            <p>Published: {new Date(publishedDate).toLocaleDateString("en-CA")}</p>
+            <div className="flex items-center gap-1 ">
+              <Image src={coins} alt="icon of coins earned by reding" className="max-w-6 max-h-6" />
+              <span className="text-sm text-muted-foreground">
+                {coinsPerReview} per review
+              </span>
             </div>
           </div>
-          <div className="flex items-center gap-1">
-            <Coins className="w-4 h-4 text-yellow-600" />
-            <span className="text-sm text-muted-foreground">10 per review</span>
-          </div>
         </div>
 
-        <div className="flex justify-end mt-4">
-          <Button className="bg-black text-white hover:bg-black/90">
-            In for Review
-          </Button>
+
+
+        <div className="flex gap-3 xl:gap-0 flex-col xl:flex-row items-start xl:items-center justify-between ">
+          <div className="flex items-center gap-6">
+            <div className="flex flex-col xl:flex-row items-start xl:items-center gap-2 xl:gap-6">
+              <div className="flex items-center gap-1">
+                <Image src={reviewIcon} alt="icon of coins earned by reding" className="max-w-6 max-h-6" />
+                <span className="text-sm text-muted-foreground">
+                  {reviewCount} Reviews
+                </span>
+              </div>
+              <div className="flex items-center gap-1 text-green-500">
+                <TrendingUp className="max-w-6 max-h-6" />
+                <span className="text-sm text-muted-foreground">
+                  {avgRating} Avg rating
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-end xl:mt-4">
+            <Button className="bg-black text-white hover:bg-black/90">
+              In for Review
+            </Button>
+          </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

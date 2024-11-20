@@ -1,10 +1,9 @@
-import NotVerified from '@/components/Dashboard/components/notVerified/NotVerified';
-import React from 'react';
+import UserDashboard from '@/components/Dashboard/pages/userDashboard/UserDashboard';
 
 const page = () => {
     return (
-        <div className='dashboard-containers '>
-            <NotVerified />
+        <div className='dashboard-containers'>
+            <UserDashboard />
         </div>
     );
 };
