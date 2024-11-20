@@ -11,35 +11,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { useState } from 'react'
 
 export default function AddBooksO() {
-    const [formData, setFormData] = useState({
-        title: '',
-        author: '',
-        amazonLink: '',
-        readingLocation: 'pdf',
-        bookCover: null,
-        bookPDF: null,
-        genre: '',
-        bookType: '',
-        wordCount: ''
-    })
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: value
-        }))
-    }
-
-    const handleSelectChange = (name, value) => {
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: value
-        }))
-    }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -56,24 +29,24 @@ export default function AddBooksO() {
                 <div className="grid gap-6 sm:grid-cols-2">
                     <div className="space-y-2">
                         <Label htmlFor="title">Book title</Label>
-                        <Input id="title" name="title" value={formData.title} onChange={handleInputChange} placeholder="Game of thrones" />
+                        <Input id="title" name="title"   placeholder="Game of thrones" />
                     </div>
 
                     <div className="space-y-2">
                         <Label htmlFor="author">Author name</Label>
-                        <Input id="author" name="author" value={formData.author} onChange={handleInputChange} placeholder="John" />
+                        <Input id="author" name="author"   placeholder="John" />
                     </div>
                 </div>
 
                 <div className="grid gap-6 sm:grid-cols-2">
                     <div className="space-y-2">
                         <Label htmlFor="amazonLink">Your book link of amazon books</Label>
-                        <Input id="amazonLink" name="amazonLink" value={formData.amazonLink} onChange={handleInputChange} placeholder="URL" />
+                        <Input id="amazonLink" name="amazonLink"   placeholder="URL" />
                     </div>
 
                     <div className="space-y-2">
                         <Label>Where will the reader read the book?</Label>
-                        <Select value={formData.readingLocation} onValueChange={(value) => handleSelectChange('readingLocation', value)}>
+                        <Select name="readingPlatform" >
                             <SelectTrigger>
                                 <SelectValue placeholder="Select reading location" />
                             </SelectTrigger>
@@ -92,7 +65,7 @@ export default function AddBooksO() {
                             initialFile={null}
                             id="bookCover"
                             label="Upload Book cover"
-                            acceptedTypes="image/*"
+                            acceptedTypes="image"
                         />
                     </div>
 
@@ -101,7 +74,7 @@ export default function AddBooksO() {
                             initialFile={null}
                             id="bookPdf"
                             label="Upload Book PDF"
-                            acceptedTypes=".pdf"
+                            acceptedTypes="pdf"
                         />
                     </div>
                 </div>
@@ -111,7 +84,7 @@ export default function AddBooksO() {
                     <div className="grid gap-6 sm:grid-cols-2">
                         <div className="space-y-2">
                             <Label>Genre</Label>
-                            <Select value={formData.genre} onValueChange={(value) => handleSelectChange('genre', value)}>
+                            <Select name="genre">
                                 <SelectTrigger>
                                     <SelectValue placeholder="Select genre" />
                                 </SelectTrigger>
@@ -126,7 +99,7 @@ export default function AddBooksO() {
 
                         <div className="space-y-2">
                             <Label>Book type</Label>
-                            <Select value={formData.bookType} onValueChange={(value) => handleSelectChange('bookType', value)}>
+                            <Select name="bookType">
                                 <SelectTrigger>
                                     <SelectValue placeholder="Select a type" />
                                 </SelectTrigger>
@@ -142,7 +115,7 @@ export default function AddBooksO() {
 
                 <div className="space-y-2">
                     <Label>Word count</Label>
-                    <Select value={formData.wordCount} onValueChange={(value) => handleSelectChange('wordCount', value)}>
+                    <Select name="wordRange">
                         <SelectTrigger>
                             <SelectValue placeholder="Select word count range" />
                         </SelectTrigger>

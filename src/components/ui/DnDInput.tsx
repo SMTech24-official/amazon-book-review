@@ -10,7 +10,7 @@ import Image from "next/image"
 
 const DnDInput = ({ id, acceptedTypes, initialFile, label }: {  label: string, initialFile: string | null, id: string, acceptedTypes: string }) => {
     const [file, setFile] = useState<string | null>(initialFile)
-    const [newFileType, setNewFileType] = useState<'image' | 'pdf' | null>(null)
+    // const [newFileType, setNewFileType] = useState<'image' | 'pdf' | null>(null)
 
     const handleDragOver = (e: React.DragEvent) => {
         e.preventDefault()
@@ -34,11 +34,13 @@ const DnDInput = ({ id, acceptedTypes, initialFile, label }: {  label: string, i
             const reader = new FileReader()
             reader.onload = (e) => {
                 setFile(e.target?.result as string)
-                setNewFileType(file.type.startsWith('image/') ? 'image' : 'pdf')
+                // setNewFileType(file.type.startsWith('image/') ? 'image' : 'pdf')
             }
             reader.readAsDataURL(file)
         }
     }
+
+
 
     return (
         <div>
@@ -51,7 +53,7 @@ const DnDInput = ({ id, acceptedTypes, initialFile, label }: {  label: string, i
                 {file ? (
                     <div className="flex flex-col items-center w-full">
                         <div className="w-36 h-36 md:w-44 md:h-44 mb-4">
-                            {newFileType === 'image' ? (
+                            {acceptedTypes === 'image' ? (
                                 <Image
                                     src={file}
                                     alt="Uploaded file"
@@ -75,7 +77,7 @@ const DnDInput = ({ id, acceptedTypes, initialFile, label }: {  label: string, i
                                     type="file"
                                     className="hidden"
                                     onChange={handleFileSelect}
-                                    accept={acceptedTypes}
+                                    accept={acceptedTypes === 'image'? "image/*" : ".pdf"}
                                 />
                             </label>
                         </div>
@@ -89,7 +91,7 @@ const DnDInput = ({ id, acceptedTypes, initialFile, label }: {  label: string, i
                         <p className="text-sm text-center text-gray-500 mb-2">Or</p>
                         <label className="bg-[#8B4C84] text-white px-4 py-2 rounded-md cursor-pointer">
                             Select
-                            <input name={id} type="file" className="hidden" onChange={handleFileSelect} accept={acceptedTypes} />
+                            <input name={id} type="file" className="hidden" onChange={handleFileSelect} accept={acceptedTypes === 'image'? "image/*" : ".pdf"} />
                         </label>
                     </>
                 )}
