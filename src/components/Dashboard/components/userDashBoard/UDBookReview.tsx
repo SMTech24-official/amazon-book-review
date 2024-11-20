@@ -1,30 +1,24 @@
 import React from 'react';
 import BooksCards from '../cards/booksCard/BooksCards';
+import { booksReview } from '@/lib/fakeData/BooksReview';
 
 const UDBookReview = () => {
-    const bookData = {
-        bookTitle: "Dune",
-        status: "Live",
-        readers: 2,
-        publishedDate: "14-08-2024",
-        coinsPerReview: 10,
-        reviewCount: 12,
-        avgRating: 5.4,
-        imageSrc: "/placeholder.svg?height=180&width=120",
-    };
-
     return (
-        <div>
-            <BooksCards
-                bookTitle={bookData.bookTitle}
-                status={bookData.status}
-                readers={bookData.readers}
-                publishedDate={bookData.publishedDate}
-                coinsPerReview={bookData.coinsPerReview}
-                reviewCount={bookData.reviewCount}
-                avgRating={bookData.avgRating}
-                imageSrc={bookData.imageSrc}
-            />
+        <div className='grid sm:grid-cols-1 grid-cols-2 xl:gap-5 lg;gap-4 md:gap-3 gap-2'>
+            {
+                booksReview?.map(data => <BooksCards
+                    key={data.id}
+                    bookTitle={data.bookTitle}
+                    status={data.status}
+                    readers={data.readers}
+                    publishedDate={new Date(data.publishedDate)}
+                    coinsPerReview={data.coinsPerReview}
+                    reviewCount={data.reviewCount}
+                    avgRating={data.avgRating}
+                    imageSrc={data.imageSrc}
+                />)
+            }
+
         </div>
     );
 };

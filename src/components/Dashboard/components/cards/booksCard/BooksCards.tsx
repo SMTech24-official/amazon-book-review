@@ -17,14 +17,14 @@ export default function BooksCards({
   bookTitle: string;
   status: string;
   readers: number;
-  publishedDate: string;
+  publishedDate: Date;
   coinsPerReview: number;
   reviewCount: number;
   avgRating: number;
   imageSrc: string;
 }) {
   return (
-    <div className="flex gap-6 p-4 lg:h-[225px] max-w-2xl border rounded-lg">
+    <div className="flex flex-col sm:flex-row gap-6 p-4 lg:h-[225px] max-w-2xl border rounded-lg">
       <div className="relative w-[129px] h-[190px] border">
         <Image
           src={imageSrc}
@@ -35,11 +35,13 @@ export default function BooksCards({
           priority
         />
       </div>
-      <div className="flex flex-col flex-1 gap-2">
-        <div className="flex flex-1 items-start justify-between">
-          <div className="space-y-2">
-            <h2 className="text-2xl font-semibold">{bookTitle}</h2>
-            <div className="flex items-center gap-2 w-[150px]">
+      <div className="flex flex-col  flex-1 gap-2">
+
+
+        <div className="flex flex-col gap-3 sm:gap-0 sm:flex-row flex-1 items-start  justify-between">
+          <div className="sm:space-y-2 sm:w-[150px]">
+            <h2 className="text-xl font-semibold">{bookTitle}</h2>
+            <div className="flex items-center gap-2 ">
               <span className="bg-yellow-200 text-orange-600 text-sm px-2 py-[5px] rounded-md font-semibold">
                 {status}
               </span>
@@ -49,8 +51,8 @@ export default function BooksCards({
             </div>
           </div>
           <div className="text-sm text-muted-foreground space-y-2 text-gray-600">
-            <p>Published: {publishedDate}</p>
-            <div className="flex items-center gap-1">
+            <p>Published: {new Date(publishedDate).toLocaleDateString("en-CA")}</p>
+            <div className="flex items-center gap-1 ">
               <Image src={coins} alt="icon of coins earned by reding" className="max-w-6 max-h-6" />
               <span className="text-sm text-muted-foreground">
                 {coinsPerReview} per review
@@ -59,8 +61,10 @@ export default function BooksCards({
           </div>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-6 mt-auto">
+
+
+        <div className="flex gap-3 sm:gap-0 flex-col sm:flex-row items-start sm:items-center justify-between ">
+          <div className="flex items-center gap-6 ">
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1">
                 <Image src={reviewIcon} alt="icon of coins earned by reding" className="max-w-6 max-h-6" />
