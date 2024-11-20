@@ -1,60 +1,88 @@
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
-import { Star, Coins } from 'lucide-react'
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { TrendingUp } from "lucide-react";
+import coins from "@/assets/coins.png"
+import reviewIcon from "@/assets/ReviewIcon.png"
 
-export default function BooksCards() {
+export default function BooksCards({
+  bookTitle,
+  status,
+  readers,
+  publishedDate,
+  coinsPerReview,
+  reviewCount,
+  avgRating,
+  imageSrc,
+}: {
+  bookTitle: string;
+  status: string;
+  readers: number;
+  publishedDate: string;
+  coinsPerReview: number;
+  reviewCount: number;
+  avgRating: number;
+  imageSrc: string;
+}) {
   return (
-    <div className="flex gap-6 p-4 max-w-2xl">
-      <div className="relative w-[120px] h-[180px]">
+    <div className="flex gap-6 p-4 lg:h-[225px] max-w-2xl border rounded-lg">
+      <div className="relative w-[129px] h-[190px] border">
         <Image
-          src="/placeholder.svg?height=180&width=120"
-          alt="Dune movie poster"
+          src={imageSrc}
+          alt={`${bookTitle} cover`}
           className="rounded-md object-cover"
           width={120}
           height={180}
           priority
         />
       </div>
-      
       <div className="flex flex-col flex-1 gap-2">
+        <div className="flex flex-1 items-start justify-between">
+          <div className="space-y-2">
+            <h2 className="text-2xl font-semibold">{bookTitle}</h2>
+            <div className="flex items-center gap-2 w-[150px]">
+              <span className="bg-yellow-200 text-orange-600 text-sm px-2 py-[5px] rounded-md font-semibold">
+                {status}
+              </span>
+              <span className="text-xs text-gray-600 text-muted-foreground">
+                {readers} reader{readers > 1 ? "s" : ""} are reading
+              </span>
+            </div>
+          </div>
+          <div className="text-sm text-muted-foreground space-y-2 text-gray-600">
+            <p>Published: {publishedDate}</p>
+            <div className="flex items-center gap-1">
+              <Image src={coins} alt="icon of coins earned by reding" className="max-w-6 max-h-6" />
+              <span className="text-sm text-muted-foreground">
+                {coinsPerReview} per review
+              </span>
+            </div>
+          </div>
+        </div>
+
         <div className="flex items-center justify-between">
-          <div className="space-y-1">
-            <h2 className="text-2xl font-semibold">Dune</h2>
+          <div className="flex items-center gap-6 mt-auto">
             <div className="flex items-center gap-2">
-              <span className="bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5 rounded-full font-medium">
-                Live
-              </span>
-              <span className="text-xs text-muted-foreground">
-                2 reader are reading
-              </span>
+              <div className="flex items-center gap-1">
+                <Image src={reviewIcon} alt="icon of coins earned by reding" className="max-w-6 max-h-6" />
+                <span className="text-sm text-muted-foreground">
+                  {reviewCount} Reviews
+                </span>
+              </div>
+              <div className="flex items-center gap-1 text-green-500">
+                <TrendingUp className="max-w-6 max-h-6" />
+                <span className="text-sm text-muted-foreground">
+                  {avgRating} Avg rating
+                </span>
+              </div>
             </div>
           </div>
-          <div className="text-sm text-muted-foreground">
-            Published: 14 -8-2024
+          <div className="flex justify-end mt-4">
+            <Button className="bg-black text-white hover:bg-black/90">
+              In for Review
+            </Button>
           </div>
-        </div>
-
-        <div className="flex items-center gap-6 mt-auto">
-          <div className="flex items-center gap-2">
-            <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-            <div className="text-sm">
-              <span className="font-medium">12</span> Reviews
-              <span className="mx-2">·</span>
-              <span className="font-medium text-green-600">5.4</span> Avg rating
-            </div>
-          </div>
-          <div className="flex items-center gap-1">
-            <Coins className="w-4 h-4 text-yellow-600" />
-            <span className="text-sm text-muted-foreground">10 per review</span>
-          </div>
-        </div>
-
-        <div className="flex justify-end mt-4">
-          <Button className="bg-black text-white hover:bg-black/90">
-            In for Review
-          </Button>
         </div>
       </div>
     </div>
-  )
+  );
 }
