@@ -28,7 +28,7 @@ const page = () => {
 
 
     return (
-        <TabPage defaultTab="general" tabs={tabs} />
+        <TabPage defaultTab="New Books" tabs={tabs} />
     )
 };
 
