@@ -1,76 +1,81 @@
 "use client"
 
 import React from 'react';
-import { Plus } from 'lucide-react'
+import { FileText, Plus } from 'lucide-react'
 import { Label } from "@/components/ui/label"
 import { useState } from "react"
 import Image from "next/image"
 
 
 
-const DnDInput = ({image}: {image? : string | null}) => {
-    const [profileImage, setProfileImage] = useState<string | null>(image ?? null)
+const DnDInput = ({ id, acceptedTypes, initialFile, label }: {  label: string, initialFile: string | null, id: string, acceptedTypes: string }) => {
+    const [file, setFile] = useState<string | null>(initialFile)
+    const [newFileType, setNewFileType] = useState<'image' | 'pdf' | null>(null)
 
-    // Handle drag and drop
     const handleDragOver = (e: React.DragEvent) => {
         e.preventDefault()
     }
 
     const handleDrop = (e: React.DragEvent) => {
         e.preventDefault()
-        const file = e.dataTransfer.files[0]
-        if (file && file.type.startsWith('image/')) {
-            const reader = new FileReader()
-            reader.onload = (e) => {
-                setProfileImage(e.target?.result as string)
-            }
-            reader.readAsDataURL(file)
+        const droppedFile = e.dataTransfer.files[0]
+        handleFile(droppedFile)
+    }
+
+    const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedFile = e.target.files?.[0]
+        if (selectedFile) {
+            handleFile(selectedFile)
         }
     }
 
-    // Handle file selection
-    const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0]
+    const handleFile = (file: File) => {
         if (file) {
             const reader = new FileReader()
             reader.onload = (e) => {
-                setProfileImage(e.target?.result as string)
+                setFile(e.target?.result as string)
+                setNewFileType(file.type.startsWith('image/') ? 'image' : 'pdf')
             }
             reader.readAsDataURL(file)
         }
     }
 
-
-
     return (
         <div>
-            <Label className="text-gray-500 mb-4 block">Profile photo (optional)</Label>
+            <Label className="text-gray-500 mb-4 block">{label}</Label>
             <div
                 className="border-2 border-dashed rounded-lg p-6 w-[256px] h-[322px] flex flex-col items-center justify-center cursor-pointer"
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
             >
-                {profileImage ? (
-                    <div className="flex flex-col items-center md:items-start w-full">
-                        <div className="w-36 h-36 md:w-44 md:h-44">
-                            <Image
-                                src={profileImage}
-                                alt="Profile"
-                                width={180}
-                                height={180}
-                                className="w-full h-full object-cover rounded-lg"
-                            />
+                {file ? (
+                    <div className="flex flex-col items-center w-full">
+                        <div className="w-36 h-36 md:w-44 md:h-44 mb-4">
+                            {newFileType === 'image' ? (
+                                <Image
+                                    src={file}
+                                    alt="Uploaded file"
+                                    width={180}
+                                    height={180}
+                                    className="w-full h-full object-cover rounded-lg"
+                                />
+                            ) : (
+                                <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-lg">
+                                    <FileText className="w-16 h-16 text-gray-400" />
+                                </div>
+                            )}
                         </div>
-                        <div className=' w-full flex flex-col items-center justify-center gap-2'>
-                            <p className="text-sm text-center md:text-left text-gray-500">Drag and drop</p>
-                            <p className="text-sm text-center md:text-left text-gray-500">Or</p>
+                        <div className='w-full flex flex-col items-center justify-center gap-2'>
+                            <p className="text-sm text-center text-gray-500">Drag and drop</p>
+                            <p className="text-sm text-center text-gray-500">Or</p>
                             <label className="bg-[#8B4C84] text-white px-4 py-2 rounded-md cursor-pointer">
                                 Select
                                 <input
+                                    name={id}
                                     type="file"
                                     className="hidden"
                                     onChange={handleFileSelect}
-                                    accept="image/*"
+                                    accept={acceptedTypes}
                                 />
                             </label>
                         </div>
@@ -84,7 +89,7 @@ const DnDInput = ({image}: {image? : string | null}) => {
                         <p className="text-sm text-center text-gray-500 mb-2">Or</p>
                         <label className="bg-[#8B4C84] text-white px-4 py-2 rounded-md cursor-pointer">
                             Select
-                            <input type="file" className="hidden" onChange={handleFileSelect} accept="image/*" />
+                            <input name={id} type="file" className="hidden" onChange={handleFileSelect} accept={acceptedTypes} />
                         </label>
                     </>
                 )}

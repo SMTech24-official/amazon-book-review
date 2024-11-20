@@ -5,14 +5,15 @@ import { Eye, EyeOff } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import DnDInput from '@/components/ui/DnDInput';
 import { User } from '@/lib/types/type';
+import DnDInput from '@/components/ui/DnDInput';
+
 
 
 const General = ({ user }: { user: User }) => {
     const [showOldPassword, setShowOldPassword] = useState(false)
     const [showNewPassword, setShowNewPassword] = useState(false)
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false) 
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
     const handlePersonalInfoSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -36,8 +37,13 @@ const General = ({ user }: { user: User }) => {
                 <h2 className="text-lg font-semibold mb-6 border-b pb-2">Personal info</h2>
                 <div className="space-y-6">
                     <div className='flex xl:flex-row flex-col items-center lg:items-end gap-10'>
-                        <DnDInput image={user.image} />
-
+                        <DnDInput
+        
+                            initialFile={user.image}
+                            id="profilePic"
+                            label="profile Picture (Optional)"
+                            acceptedTypes="image/*"
+                        />
                         <div className="grid xl:grid-cols-2 gap-6 w-full">
                             <div className="space-y-2 xl:col-span-2">
                                 <Label htmlFor="name">Name</Label>
@@ -45,11 +51,11 @@ const General = ({ user }: { user: User }) => {
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="author-link">Amazon Author page link</Label>
-                                <Input defaultValue={user.amazonAuthorPage} className='w-full' id="authorLlink" name="authorLlink"  placeholder="URL" />
+                                <Input defaultValue={user.amazonAuthorPage} className='w-full' id="authorLlink" name="authorLlink" placeholder="URL" />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="email">Email</Label>
-                                <Input defaultValue={user.email} className='w-full' id="email" name="email"  type="email" placeholder="Example@email.com" />
+                                <Input defaultValue={user.email} className='w-full' id="email" name="email" type="email" placeholder="Example@email.com" />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="reviewer-name">Amazon reviewer name</Label>
@@ -57,7 +63,7 @@ const General = ({ user }: { user: User }) => {
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="country">Review Country</Label>
-                                <Input defaultValue={user.reviewCountry ?? ""} className='w-full' id="country" name="country"  placeholder="America" />
+                                <Input defaultValue={user.reviewCountry ?? ""} className='w-full' id="country" name="country" placeholder="America" />
                             </div>
                         </div>
                     </div>
