@@ -3,11 +3,11 @@ import newBook from "@/assets/newBook.png";
 import BooksComponent from '@/components/AdminDashboard/BooksComponent/BooksComponent';
 import TabPage from "@/components/Shared/tabPage/TabPage";
 
-import { Book } from '@/interface/globalType';
+import { TBooksAndMembers } from '@/interface/globalType';
 import { useEffect } from 'react';
 import { FaClipboardList, FaUserCog } from 'react-icons/fa';
 
-const books: Book[] = [
+const books: TBooksAndMembers[] = [
     {
       id: 1,
       name: "Harry Potter and the Philosopher's Stone",

@@ -1,15 +1,14 @@
-import Image from 'next/image';
-import { Button } from '@nextui-org/react';
-import { Book } from '@/interface/globalType';
-
+import Image from "next/image";
+import { Button } from "@nextui-org/react";
+import { TBooksAndMembers } from "@/interface/globalType";
 
 interface BookTableProps {
-    books: Book[]; // books prop should be an array of Book
-  }
+  books: TBooksAndMembers[]; // books prop should be an array of Book
+}
 
 const BookCards = ({ books }: BookTableProps) => {
   return (
-    <div className="  grid grid-cols-1 gap-3 xl:hidden">
+    <div className="  grid grid-cols-1 gap-3 xl:hidden p-4">
       {books.map((book) => (
         <div
           key={book.id}
@@ -29,7 +28,11 @@ const BookCards = ({ books }: BookTableProps) => {
           {/* Book Info */}
           <div className="p-4 flex flex-col justify-between flex-grow">
             <h3 className="text-lg font-semibold text-center">{book.name}</h3>
-            <p className="text-sm text-center text-gray-600">{book.writer}</p>
+            {book?.writer && (
+              <p className="text-sm text-center text-gray-600">
+                {book?.writer}
+              </p>
+            )}
             <p className="text-sm text-center text-gray-500">{book.date}</p>
 
             {/* View Button */}

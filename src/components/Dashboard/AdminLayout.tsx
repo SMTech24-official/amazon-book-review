@@ -40,7 +40,6 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         { name: 'Members details', href: '/admin-dashboard/members-details', icon: FaBookBookmark },
         { name: 'Knowledge hub', href: '/admin-dashboard/knowledge-hub', icon: BiSolidBookAdd },
         { name: 'BuzzPoints', href: '/admin-dashboard/buzzPoints', icon: IoLibrarySharp },
-        { name: 'Reading', href: '/admin-dashboard/reading', icon: GiOpenBook },
         { name: 'Support', href: '/admin-dashboard/support', icon: SiBookstack },
     ];
     const additionalRoutes = [

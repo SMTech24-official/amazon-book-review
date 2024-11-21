@@ -6,7 +6,7 @@ interface BookTableProps {
     books: TBooksAndMembers[]; // books prop should be an array of Book
   }
 
-const BookTable = ({ books }: BookTableProps) => {
+const MemberTable = ({ books }: BookTableProps) => {
   return (
    
       <div className="hidden xl:block">
@@ -14,9 +14,8 @@ const BookTable = ({ books }: BookTableProps) => {
           {/* Table Header */}
           <thead>
             <tr className="text-base font-normal border-b-1">
-              <th className="py-4 text-base font-normal">Book Name</th>
-              <th className="py-4 text-base font-normal">Writer Name</th>
-              <th className="py-4 text-base font-normal">Date</th>
+              <th className="py-4 text-base font-normal">Member name</th>
+              <th className="py-4 text-base font-normal">Joined at</th>
               <th className="py-4 text-base font-normal">Details</th>
             </tr>
           </thead>
@@ -40,7 +39,6 @@ const BookTable = ({ books }: BookTableProps) => {
                     <p className="mt-2 text-base font-normal">{book.name}</p>
                   </div>
                 </td>
-                <td className="px-4 py-4 text-center text-base font-normal">{book.writer}</td>
                 <td className="px-4 py-4 text-center text-base font-normal">{book.date}</td>
                 <td className="px-4 py-4 text-center">
                   <Button radius='sm' className='bg-primary text-white' >
@@ -57,4 +55,4 @@ const BookTable = ({ books }: BookTableProps) => {
   );
 };
 
-export default BookTable;
+export default MemberTable;
