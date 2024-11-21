@@ -32,24 +32,24 @@ const NavMenu = ({className} : {className?:string}) => {
   };
   return (
     <div className={cn("flex md:items-center gap-6 text-lg font-normal ps-3", className)}>
-      <button
+      <div
             onClick={() => handleFeatures("features")}
             className="cursor-pointer hover:text-primary transition duration-200"
           >
             Features
-          </button>
-          <button
+          </div>
+          <div
             onClick={() => handleFAQ("faqs")}
             className="cursor-pointer hover:text-primary transition duration-200"
           >
             FAQs
-          </button>
-          <button
+          </div>
+          <div
             onClick={() => handlePricing("pricing")}
             className="cursor-pointer hover:text-primary transition duration-200"
           >
             Pricing
-          </button>
+          </div>
     </div>
   );
 };

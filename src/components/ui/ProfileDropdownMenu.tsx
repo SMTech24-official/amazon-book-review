@@ -51,10 +51,10 @@ const ProfileDropdownMenu = () => {
   //   }
   // };
 
-
   const handleLogout = async () => {
     await logoutHandler(dispatch, router);
   };
+
   return (
     <div>
       <Dropdown placement="bottom-end" aria-hidden>
@@ -73,9 +73,16 @@ const ProfileDropdownMenu = () => {
           </DropdownItem>
 
           <DropdownItem key="settings">
-            <Link href={"/dashboard"}>
-              <p> Dashboard</p>
+            {user?.role === "admin" ? (
+              <Link href={"/admin-dashboard"}>
+                <p>Dashboard</p>
+              </Link>
+            ) : (
+              <Link href={"/dashboard"}>
+              <p>Dashboard</p>
             </Link>
+            )}
+           
           </DropdownItem>
 
           <DropdownItem key="logout" color="danger" onClick={handleLogout}>

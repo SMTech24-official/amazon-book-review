@@ -1,12 +1,8 @@
-import { Menu, Search, X } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import Image from "next/image"
-import refer from "@/assets/refer.png"
-import coins from "@/assets/coins.png"
-import { HiMiniBellAlert } from 'react-icons/hi2'
-import { Dispatch, SetStateAction } from 'react'
 import { TUser } from '@/redux/features/auth/authSlice'
+import { Menu, X } from 'lucide-react'
+import { Dispatch, SetStateAction } from 'react'
+import { HiMiniBellAlert } from 'react-icons/hi2'
 
 export default function TopBar({ user, isOpen, setIsOpen }: { user: null | TUser, isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }) {
     return (
@@ -21,13 +17,13 @@ export default function TopBar({ user, isOpen, setIsOpen }: { user: null | TUser
                 </button>
 
                 {/* Left Section */}
-                <div className="lg:flex items-center gap-2 hidden">
+                {/* <div className="lg:flex items-center gap-2 hidden">
                     <span className="hidden sm:inline text-[15px]">Welcome Back, {user?.name}!</span>
                     <span className="text-xl">👋</span>
-                </div>
+                </div> */}
 
                 {/* Center Section */}
-                <div className="flex-1 max-w-[600px] mx-4 hidden sm:block">
+                {/* <div className="flex-1 max-w-[600px] mx-4 hidden sm:block">
                     <div className="relative">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                         <Input
@@ -35,11 +31,12 @@ export default function TopBar({ user, isOpen, setIsOpen }: { user: null | TUser
                             className="w-full pl-10 h-9 text-sm border-gray-200"
                         />
                     </div>
-                </div>
+                </div> */}
+                <div></div>
 
                 {/* Right Section */}
                 <div className="flex items-center gap-4">
-                    <button
+                    {/* <button
                         className="border-primary sm:text-lg text-primary font-bold border-2 flex gap-2 sm:px-4 px-3 py-1 sm:py-2 rounded-full"
                     >
                         <Image
@@ -61,7 +58,7 @@ export default function TopBar({ user, isOpen, setIsOpen }: { user: null | TUser
                             className="rounded sm:w-7 sm:h-7 w-5 h-5"
                         />
                         <span>100</span>
-                    </div>
+                    </div> */}
 
                     <Button
                         variant="ghost"
