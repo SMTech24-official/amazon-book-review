@@ -117,7 +117,7 @@ const LoginComponent = () => {
                 labelClassName="mb-1 text-xs font-medium"
                 name={"email"}
                 placeHolder="Email"
-                value={"sadikahmed2258@gmail.com"}
+                value={"akonhasan6802@gmail.com"}
               />
             </div>
             <div className="w-full">

@@ -5,6 +5,7 @@ import bg_Pricing from "@/assets/bg_Pricing.png";
 const Pricing = () => {
   return (
     <div
+    id="pricing"
       className="bg-cover bg-top min-h-screen flex justify-center items-center pb-5"
       style={{
         backgroundImage: `url(${bg_Pricing.src})`, // Use `.src` if you're using Next.js Image Optimization

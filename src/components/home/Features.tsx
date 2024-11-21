@@ -64,7 +64,7 @@ const features: Feature[] = [
 const Features = () => {
   return (
     <div
-     
+     id="features"
       className="bg-primary mb-10 xl:mb-0 py-10 xl:py-48 xl:clip-path-desktop clip-path-mobile"
     >
       <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5 xl:gap-10">

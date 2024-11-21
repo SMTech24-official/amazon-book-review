@@ -9,7 +9,7 @@ const FAQs = () => {
     "Answer: Booksy.buzz uses BuzzPoints as a way for authors to earn and request reviews. You earn BuzzPoints by reviewing books from other authors or by inviting friends to join the platform. Once you've accumulated BuzzPoints, you can use them to request reviews for your own books. Different book types and formats require varying amounts of BuzzPoints, ensuring a fair exchange based on the effort required.";
 
   return (
-    <div className="mb-10">
+    <div className="mb-10" id="faqs">
       <div className="container mb-10">
         <h4 className="text-primary text-4xl font-medium text-center lg:mb-5">
           FAQs

@@ -2,7 +2,6 @@
 
 import { TBooksAndMembers } from "@/interface/globalType";
 import BookCards from "../BookCards";
-import BookTable from "../BookTable";
 import MemberTable from "../MemberTable";
 
 interface BookTableProps {
@@ -23,7 +22,7 @@ const TotalMembers = ({ books, title }: BookTableProps) => {
         </div>
         <div className=" ">
           <MemberTable books={books} />
-          <BookCards books={books} />
+          <BookCards books={books}  className="grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4"/>
         </div>
       </div>
     </div>

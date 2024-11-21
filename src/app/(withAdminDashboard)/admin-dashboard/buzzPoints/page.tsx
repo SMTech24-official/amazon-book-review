@@ -1,5 +1,6 @@
+import Image from "next/image";
 import React from "react";
-
+import coins from "@/assets/coins.png"
 
 type BuzzPoint = {
     type: string;
@@ -48,7 +49,8 @@ const page = () => {
                   <td className=" px-4 py-3 text-center  font-medium text-gray-700">
                     <div className="max-w-28 flex items-center justify-between mx-auto px-4 py-[6px] border border-gray-300 rounded-md">
                       {item.points}
-                      <span className=" text-yellow-500 text-lg">🪙</span>
+                      {/* <span className=" text-yellow-500 text-lg">🪙</span> */}
+                      <Image src={coins} alt="icon of coins earned by reding" className="max-w-6 max-h-6" />
                     </div>
                   </td>
                 </tr>

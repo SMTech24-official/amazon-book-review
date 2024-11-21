@@ -4,6 +4,9 @@ import { FaCheck } from "react-icons/fa";
 import pricingCardImage from "@/assets/pricingCardImage.png";
 import Image from "next/image";
 import { Button } from "@nextui-org/react";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useAppSelector } from "@/redux/hooks";
+import Link from "next/link";
 
 const SubscriptionCard: React.FC = () => {
   const features: string[] = [
@@ -17,6 +20,8 @@ const SubscriptionCard: React.FC = () => {
     "Exclusive Resources for Authors",
   ];
 
+  const user = useAppSelector(selectCurrentUser);
+
   return (
     <div className="rounded-2xl p-4 xs:p-7 bg-primary bg-opacity-[0.06] backdrop-blur-sm  overflow-hidden">
       <div className="px-4 py-5 rounded-2xl flex flex-col sm:flex-row gap-y-5 items-center  bg-primary-light">
@@ -28,7 +33,13 @@ const SubscriptionCard: React.FC = () => {
             alt="image"
             className="mb-10"
           />
-          <Button className="bg-primary text-white">SUBSCRIBE</Button>
+          {user?.email ? (
+            <></>
+          ) : (
+            <Link href={"/login"}>
+              <Button className="bg-primary text-white">SUBSCRIBE</Button>
+            </Link>
+          )}
         </div>
         <div className="w-full">
           <h4 className="text-2xl font-bold mb-4">

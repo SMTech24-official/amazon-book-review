@@ -1,21 +1,23 @@
 import Image from "next/image";
 import { Button } from "@nextui-org/react";
 import { TBooksAndMembers } from "@/interface/globalType";
+import { cn } from "@/lib/utils";
 
 interface BookTableProps {
   books: TBooksAndMembers[]; // books prop should be an array of Book
+  className?: string;
 }
 
-const BookCards = ({ books }: BookTableProps) => {
+const BookCards = ({ books, className }: BookTableProps) => {
   return (
-    <div className="  grid grid-cols-1 gap-3 xl:hidden p-4">
+    <div className={cn("  grid  gap-3 xl:hidden p-4", className)}>
       {books.map((book) => (
         <div
           key={book.id}
           className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col"
         >
           {/* Book Image */}
-          <div className="w-full h-48">
+          <div className="w-full h-">
             <Image
               src={book.image}
               alt={book.name}

@@ -19,7 +19,7 @@ const validationSchema = z.object({
         required_error: "OTP is required",
       })
       .length(4, "OTP must be exactly 4 digits")
-    //   .regex(/^\d{4}$/, "OTP must be a 4-digit number"), // Ensure it's exactly 4 digits
+      .regex(/^\d{4}$/, "OTP must be a 4-digit number"), // Ensure it's exactly 4 digits
   });
   
 

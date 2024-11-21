@@ -5,8 +5,24 @@ import HeroImage from "@/assets/HeroImage.png";
 import heroConnector from "@/assets/heroConnector.png";
 import { Button } from "@nextui-org/react";
 import Image from "next/image";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useAppSelector } from "@/redux/hooks";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const HeroSection: React.FC = () => {
+  const user = useAppSelector(selectCurrentUser);
+  const router = useRouter()
+
+  const handleGetReviewed = () => {
+   
+    if (user?.email) {
+    router.push("/dashboard")
+    } else {
+      toast.info("Please login first to get reviewed")
+      router.push("/login");
+    }
+  }
   return (
     <div
       style={{
@@ -27,7 +43,7 @@ const HeroSection: React.FC = () => {
             Earn real reviews from engaged readers and watch <br /> as your
             books reputation takes off
           </p>
-          <Button radius="sm" className="bg-primary text-white">
+          <Button onClick={handleGetReviewed} radius="sm" className="bg-primary text-white">
             Get Reviewed!
           </Button>
         </div>
