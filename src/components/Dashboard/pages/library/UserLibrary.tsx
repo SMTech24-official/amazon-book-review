@@ -2,15 +2,15 @@
 
 import { booksReview } from '@/lib/fakeData/BooksReview';
 import { useState } from 'react';
-import BooksCards from '../../components/cards/booksCard/BooksCards';
 import FilterDropdown from '../../components/filterButton/FilterButton';
+import LibraryBookCard from '../../components/cards/libraryBookCard/LibraryBooksCard';
 
 const UserLibrary = () => {
     const [filter, setFilter] = useState('All'); // State to manage filter
 
     // Filter books based on the selected filter
     const filteredBooks = booksReview.filter(book =>
-        filter === 'All' || book.status === filter
+        filter === 'All' || book.genre == filter.toLocaleLowerCase()  || book.bookFromet == filter.toLocaleLowerCase()
     );
 
     const genres = [
@@ -24,7 +24,6 @@ const UserLibrary = () => {
         "Thriller"
     ]
 
-
     return (
         <div>
             {/* heading */}
@@ -34,19 +33,20 @@ const UserLibrary = () => {
             </div>
 
             {/* Books Grid */}
-            <div className='sm:grid sm:grid-cols-2 flex flex-wrap items-center justify-center xl:gap-5 lg:gap-4 md:gap-3 gap-2'>
+            <div className='flex flex-wrap md:grid md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 gap-3 items-center justify-center'>
                 {filteredBooks.map(data => (
-                    <BooksCards
+                    <LibraryBookCard
                         key={data.id}
-                        bookTitle={data.bookTitle}
-                        status={data.status}
-                        readers={data.readers}
+                        bookTitleOrTitle={data.bookTitle}
+                        author={data.author}
                         publishedDate={new Date(data.publishedDate)}
                         coinsPerReview={data.coinsPerReview}
-                        reviewCount={data.reviewCount}
-                        avgRating={data.avgRating}
                         imageSrc={data.imageSrc}
-                    />
+                    >
+                        <button  className="w-full bg-primary text-white py-2 rounded-lg">
+                            Start Reding
+                        </button>
+                    </LibraryBookCard>
                 ))}
             </div>
         </div>

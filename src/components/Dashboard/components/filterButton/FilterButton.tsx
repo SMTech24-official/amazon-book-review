@@ -73,7 +73,7 @@ export default function FilterDropdown({ filter, setFilter, genres }: { filter: 
                                 </div>
                                 <div className="space-y-2">
                                     <h4 className="text-sm font-medium">Review type</h4>
-                                    <Select defaultValue="pdf">
+                                    <Select defaultValue="pdf" onValueChange={e => setFilter(e)}>
                                         <SelectTrigger className="w-full">
                                             <SelectValue placeholder="Select type" />
                                         </SelectTrigger>
