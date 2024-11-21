@@ -26,7 +26,7 @@ export default function AddBooksO() {
         <div className="">
             <BreadCrumb />
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6 mt-4">
                 <div className="grid gap-6 sm:grid-cols-2">
                     <div className="space-y-2">
                         <Label htmlFor="title">Book title</Label>

@@ -18,7 +18,7 @@ const MyBooks = () => {
     return (
         <div>
             {/* heading */}
-            <div className='flex xl:flex-row gap-2 md:gap-3 flex-col items-start xl:items-center justify-between mb-4 py-1'>
+            <div className='flex xl:flex-row gap-2 md:gap-3 flex-col items-start  justify-between mb-4 '>
                 <BreadCrumb />
 
                 <div className='flex flex-wrap items-center justify-center gap-4'>

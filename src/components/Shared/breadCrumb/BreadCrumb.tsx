@@ -1,31 +1,41 @@
-"use client"
+"use client";
 
-import { ChevronRight } from 'lucide-react';
-import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { ChevronRight } from "lucide-react";
+import { usePathname, useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 const BreadCrumb = () => {
+    const pathname = usePathname();
     const searchParams = useSearchParams();
     const [breadcrumbs, setBreadcrumbs] = useState<string[]>([]);
-    console.log(breadcrumbs);
-    // Update breadcrumb dynamically based on tab
+
+    // Split the current path into an array, filtering out empty values
+    const pathnames = pathname.split("/").filter((x) => x);
+
+    // Dynamically update breadcrumbs based on "tab" search parameter
     useEffect(() => {
-        const path = searchParams.get("tab")?.split("/") || [];
-        setBreadcrumbs(path);
+        const tabPath = searchParams.get("tab")?.split("/") || [];
+        setBreadcrumbs(tabPath);
     }, [searchParams]);
 
-
+    console.log(breadcrumbs);
 
     return (
         <div className="">
-            <div className="flex items-center gap-2 font-semibold  lg:text-xl md:text-lg">
-                <span className="text-black">Settings</span>
-                <span className="text-black">{breadcrumbs.length > 0 ? <ChevronRight className='min-h-5 min-w-5'/> : ""}</span>
-                {/* Loop through breadcrumbs and display */}
-                {breadcrumbs.map((breadcrumb, index) => (
-                    <span key={index} className="text-black capitalize">
+            <div className="flex items-start gap-2 font-semibold lg:text-xl md:text-lg">
+                {/* Render path-based breadcrumbs */}
+                {pathnames.map((breadcrumb, index) => (
+                    <span key={`path-${index}`} className="text-black capitalize flex items-center gap-2">
                         {breadcrumb}
-                        {index < breadcrumbs.length - 1 && <span className="mx-2">{'>'}</span>}
+                        {index < pathnames.length - 1 && <ChevronRight className="min-h-5 min-w-5" />}
+                    </span>
+                ))}
+                {/* Render tab-based breadcrumbs */}
+                {breadcrumbs.map((breadcrumb, index) => (
+                    <span key={`tab-${index}`} className="text-black capitalize flex items-center">
+                        {index == 0 && <ChevronRight className="min-h-5 min-w-5" />}
+                        {breadcrumb}
+                        {index < breadcrumbs.length - 1 && <ChevronRight className="min-h-5 min-w-5" />}
                     </span>
                 ))}
             </div>

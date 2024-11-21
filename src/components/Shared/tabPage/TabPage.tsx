@@ -2,7 +2,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import BreadCrumb from "../breadCrumb/BreadCrumb";
 
 interface TabPageProps {
     tabs: { label: string; value: string; icon?: JSX.Element; component: React.ReactNode }[];
@@ -24,8 +23,6 @@ export default function TabPage({ tabs, defaultTab }: TabPageProps) {
 
     return (
         <div className="min-h-screen">
-            {/* Breadcrumb */}
-            <BreadCrumb />
             <div className="border-t ">
                 <Tabs defaultValue={tab} className="sm:grid sm:grid-cols-6 xl:grid-cols-5 min-h-screen">
                     <div className="pt-4 col-span-2 xl:col-span-1 sm:border-r w-full h-full sticky sm:block top-[49px]">

@@ -6,7 +6,7 @@ import BreadCrumb from '@/components/Shared/breadCrumb/BreadCrumb';
 const UDBookReview = () => {
     return (
         <div>
-            <div className='flex xl:flex-row gap-2 md:gap-3 flex-col items-start xl:items-center justify-between mb-4  py-1'>
+            <div className='flex xl:flex-row gap-2 md:gap-3 flex-col items-start xl:items-center justify-between mb-4 '>
                 <BreadCrumb />
 
                 <div className='flex items-center justify-center gap-4'>
