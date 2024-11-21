@@ -47,23 +47,23 @@ const General = ({ user }: { user: User }) => {
                         <div className="grid xl:grid-cols-2 gap-6 w-full">
                             <div className="space-y-2 xl:col-span-2">
                                 <Label htmlFor="name">Name</Label>
-                                <Input defaultValue={user.name} className='w-full' id="name" placeholder="John" />
+                                <Input defaultValue={user?.name} className='w-full' id="name" placeholder="John" />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="author-link">Amazon Author page link</Label>
-                                <Input defaultValue={user.amazonAuthorPage} className='w-full' id="authorLlink" name="authorLlink" placeholder="URL" />
+                                <Input defaultValue={user?.amazonAuthorPage} className='w-full' id="authorLlink" name="authorLlink" placeholder="URL" />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="email">Email</Label>
-                                <Input defaultValue={user.email} className='w-full' id="email" name="email" type="email" placeholder="Example@email.com" />
+                                <Input defaultValue={user?.email} className='w-full' id="email" name="email" type="email" placeholder="Example@email.com" />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="reviewer-name">Amazon reviewer name</Label>
-                                <Input defaultValue={user.amazonReviewerName} className='w-full' id="reviewerName" name="reviewerName" placeholder="Jhon max" />
+                                <Input defaultValue={user?.amazonReviewerName} className='w-full' id="reviewerName" name="reviewerName" placeholder="Jhon max" />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="country">Review Country</Label>
-                                <Input defaultValue={user.reviewCountry ?? ""} className='w-full' id="country" name="country" placeholder="America" />
+                                <Input defaultValue={user?.reviewCountry ?? ""} className='w-full' id="country" name="country" placeholder="America" />
                             </div>
                         </div>
                     </div>

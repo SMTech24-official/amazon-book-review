@@ -4,7 +4,7 @@ import React from "react";
 
 const NavMenu = ({className} : {className?:string}) => {
   return (
-    <div className={cn("flex md:items-center gap-6 text-lg font-normal", className)}>
+    <div className={cn("flex md:items-center gap-6 text-lg font-normal ps-3", className)}>
       <Link href={"/features"}>
         <span className="hover:text-primary ">Features</span>
       </Link>

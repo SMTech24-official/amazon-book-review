@@ -1,7 +1,7 @@
 "use client"
 
 import TopBar from '@/components/Dashboard/components/navigationBar/TopBar';
-import { user } from '@/lib/fakeData/user';
+// import { user } from '@/lib/fakeData/user';
 import React, { useEffect, useRef, useState } from 'react';
 import { BiSolidBookAdd } from 'react-icons/bi';
 import { FaBookBookmark } from 'react-icons/fa6';
@@ -10,11 +10,13 @@ import { IoLibrarySharp, IoSettingsSharp } from 'react-icons/io5';
 import { RiCustomerServiceFill, RiDashboardFill } from 'react-icons/ri';
 import { SiBookstack } from 'react-icons/si';
 import SideBar from './components/navigationBar/SiderBar';
+import { selectCurrentUser } from '@/redux/features/auth/authSlice';
+import { useAppSelector } from '@/redux/hooks';
 
 
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-
+    const user = useAppSelector(selectCurrentUser);
     const [isOpen, setIsOpen] = useState(false)
 
     const navRef = useRef<HTMLDivElement>(null)

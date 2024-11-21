@@ -28,7 +28,7 @@ export default function TabPage({ tabs, defaultTab }: TabPageProps) {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50/50 ">
+        <div className="min-h-screen bg-gray-50/50 dashboard-containers">
             {/* Breadcrumb */}
             <div className="bg-white border-b">
                 <div className="py-2">

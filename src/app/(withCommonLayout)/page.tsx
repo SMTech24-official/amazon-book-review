@@ -6,19 +6,20 @@ import Pricing from "@/components/home/Pricing";
 import WhatOurCustomerThinks from "@/components/home/WhatOurCustomerThinks";
 import Footer from "@/components/Shared/Footer/Footer";
 import Navbar from "@/components/Shared/Navbar/Navbar";
+import PageTransition from "@/components/ui/PageTransition";
 
 const HomePage = () => {
   return (
-    <div className="">
-      <Navbar/>
+    <PageTransition>
+      <Navbar />
       <HeroSection />
       <GettingStarted />
       <WhatOurCustomerThinks />
       <Features />
       <FAQs />
       <Pricing />
-      <Footer/>
-    </div>
+      <Footer />
+    </PageTransition>
   );
 };
 

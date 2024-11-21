@@ -18,19 +18,18 @@ const validationSchema = z.object({
       required_error: "Email is required",
     })
     .email("Invalid email address"),
-  password: z
-    .string({
-      required_error: "Password is required",
-    })
-    // .min(8, "Password must be at least 8 characters long")
-    // .max(30, "Password cannot exceed 30 characters")
-    // .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-    // .regex(/[a-z]/, "Password must contain at least one lowercase letter")
-    // .regex(/\d/, "Password must contain at least one digit")
-    // .regex(
-    //   /[!@#$%^&*(),.?":{}|<>]/,
-    //   "Password must contain at least one special character"
-    // ),
+  password: z.string({
+    required_error: "Password is required",
+  }),
+  // .min(8, "Password must be at least 8 characters long")
+  // .max(30, "Password cannot exceed 30 characters")
+  // .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+  // .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+  // .regex(/\d/, "Password must contain at least one digit")
+  // .regex(
+  //   /[!@#$%^&*(),.?":{}|<>]/,
+  //   "Password must contain at least one special character"
+  // ),
 });
 
 const LoginComponent = () => {
@@ -81,7 +80,7 @@ const LoginComponent = () => {
   //     });
   //   }
   // };
-  
+
   const handleSubmit = async (formData: any) => {
     const res = await handleAsyncWithToast(
       async () => {
@@ -91,15 +90,14 @@ const LoginComponent = () => {
       "Login successful!",
       "Login failed. Please try again.",
       true,
-      dispatch 
+      dispatch
     );
 
     if (res?.data?.success) {
-router.push("/")
+      router.push("/");
     }
   };
 
-  
   return (
     <div>
       <AuthLayout backLink="/">
@@ -112,7 +110,6 @@ router.push("/")
             className={"flex flex-col gap-6 w-full"}
             onSubmit={handleSubmit}
             resolver={zodResolver(validationSchema)}
-     
           >
             <div className="w-full">
               <MyFormInput
@@ -120,7 +117,7 @@ router.push("/")
                 labelClassName="mb-1 text-xs font-medium"
                 name={"email"}
                 placeHolder="Email"
-                value={"akonhasan6801@gmail.com"}
+                value={"sadikahmed2258@gmail.com"}
               />
             </div>
             <div className="w-full">

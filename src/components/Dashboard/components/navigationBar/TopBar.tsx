@@ -5,10 +5,10 @@ import Image from "next/image"
 import refer from "@/assets/refer.png"
 import coins from "@/assets/coins.png"
 import { HiMiniBellAlert } from 'react-icons/hi2'
-import { User } from '@/lib/types/type'
 import { Dispatch, SetStateAction } from 'react'
+import { TUser } from '@/redux/features/auth/authSlice'
 
-export default function TopBar({ user, isOpen, setIsOpen }: { user: User, isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }) {
+export default function TopBar({ user, isOpen, setIsOpen }: { user: null | TUser, isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }) {
     return (
         <header className="border-b bg-white">
             <div className="flex items-center justify-between px-6 py-3 w-full">
@@ -22,7 +22,7 @@ export default function TopBar({ user, isOpen, setIsOpen }: { user: User, isOpen
 
                 {/* Left Section */}
                 <div className="lg:flex items-center gap-2 hidden">
-                    <span className="hidden sm:inline text-[15px]">Welcome Back, {user.name}!</span>
+                    <span className="hidden sm:inline text-[15px]">Welcome Back, {user?.name}!</span>
                     <span className="text-xl">👋</span>
                 </div>
 

@@ -4,9 +4,10 @@ import { RootState } from '../../store';
 export type TUser = {
   name?: string;
   email: string;
+  image: string | null;
   role: string;
-  iat?: number;
-  exp?: number;
+  iat: number;
+  exp: number;
 };
 
 type TAuthState = {

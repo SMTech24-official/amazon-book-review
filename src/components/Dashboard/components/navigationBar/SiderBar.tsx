@@ -1,8 +1,9 @@
-import { NavLink, User } from '@/lib/types/type'
+import { NavLink } from '@/lib/types/type'
 import { cn } from '@/lib/utils'
 import MainNavLink from './Navlink'
+import { TUser } from '@/redux/features/auth/authSlice'
 
-export default function SideBar({ user, navRef, isOpen, additionalRoutes, navLink }: { user: User, navRef: React.RefObject<HTMLDivElement>, isOpen: boolean, navLink: NavLink[], additionalRoutes: NavLink[] }) {
+export default function SideBar({ user, navRef, isOpen, additionalRoutes, navLink }: { user: null | TUser, navRef: React.RefObject<HTMLDivElement>, isOpen: boolean, navLink: NavLink[], additionalRoutes: NavLink[] }) {
 
     return (
         <div ref={navRef && navRef} className="min-h-screen h-full flex">

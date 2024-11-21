@@ -5,12 +5,21 @@ import Link from "next/link"
 import logo from "@/assets/logo/dashLogo.png"
 import profile from "@/assets/profile placehoilder.png"
 import { IoLogOut } from 'react-icons/io5'
-import { usePathname } from 'next/navigation'
-import { NavLink, User } from '@/lib/types/type'
+import { usePathname, useRouter } from 'next/navigation'
+import { NavLink } from '@/lib/types/type'
+import { useAppDispatch } from '@/redux/hooks'
+import { logoutHandler } from '@/utils/handleLogout'
+import { TUser } from '@/redux/features/auth/authSlice'
 
 
-export default function MainNavLink({ user, navLink, additionalRoutes }: { user: User, navLink: NavLink[], additionalRoutes: NavLink[] }) {
+export default function MainNavLink({ user, navLink, additionalRoutes }: { user: null | TUser, navLink: NavLink[], additionalRoutes: NavLink[] }) {
     const pathname = usePathname()
+    const dispatch = useAppDispatch()
+    const router = useRouter()
+
+    const handleLogout = async () => {
+        await logoutHandler(dispatch, router);
+      };
     return (
         <div className="flex flex-col min-h-screen bg-white">
             <div className="p-4">
@@ -63,13 +72,13 @@ export default function MainNavLink({ user, navLink, additionalRoutes }: { user:
                         {link.name}
                     </Link>)
                 }
-                <Link
-                    href="#"
-                    className={`flex items-center gap-3 px-3 py-3 rounded-md `}
+                <div
+                  onClick={handleLogout}
+                    className={`flex items-center gap-3 px-3 py-3 rounded-md cursor-pointer`}
                 >
                     <IoLogOut className="min-w-6 min-h-6" />
                     Log Out
-                </Link>
+                </div>
                 <div className="flex items-center gap-3 px-3 py-3 mt-4">
                     <Image
                         src={user?.image || profile}
@@ -79,7 +88,7 @@ export default function MainNavLink({ user, navLink, additionalRoutes }: { user:
                         className="rounded-full"
                     />
                     <div className="flex-1">
-                        <div className="font-medium">{user.name}</div>
+                        <div className="font-medium">{user?.name}</div>
                         <div className="text-xs text-gray-500">{user?.role}</div>
                     </div>
                 </div>
