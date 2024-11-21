@@ -1,10 +1,10 @@
-import UnderCOnstruction from '@/components/underConstruction/UnderConstruction';
+import UserLibrary from '@/components/Dashboard/pages/library/UserLibrary';
 import React from 'react';
 
 const page = () => {
     return (
-        <div>
-            <UnderCOnstruction pageName='Library'/>
+        <div className='dashboard-containers'>
+            <UserLibrary/>
         </div>
     );
 };

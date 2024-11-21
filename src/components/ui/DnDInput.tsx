@@ -8,7 +8,7 @@ import Image from "next/image"
 
 
 
-const DnDInput = ({ id, acceptedTypes, initialFile, label }: {  label: string, initialFile: string | null, id: string, acceptedTypes: string }) => {
+const DnDInput = ({ id, acceptedTypes, initialFile, label, width }: {  label: string, initialFile: string | null, id: string, acceptedTypes: string, width: string }) => {
     const [file, setFile] = useState<string | null>(initialFile)
     // const [newFileType, setNewFileType] = useState<'image' | 'pdf' | null>(null)
 
@@ -46,7 +46,7 @@ const DnDInput = ({ id, acceptedTypes, initialFile, label }: {  label: string, i
         <div>
             <Label className="text-gray-500 mb-4 block">{label}</Label>
             <div
-                className="border-2 border-dashed rounded-lg p-6 w-[256px] h-[322px] flex flex-col items-center justify-center cursor-pointer"
+                className={`border-2 border-dashed rounded-lg p-6 ${width} h-[322px] flex flex-col items-center justify-center cursor-pointer`}
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
             >

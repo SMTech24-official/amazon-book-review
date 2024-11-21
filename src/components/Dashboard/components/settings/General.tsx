@@ -38,7 +38,7 @@ const General = ({ user }: { user: User }) => {
                 <div className="space-y-6">
                     <div className='flex xl:flex-row flex-col items-center lg:items-end gap-10'>
                         <DnDInput
-        
+                            width='w-[256px]'
                             initialFile={user.image}
                             id="profilePic"
                             label="profile Picture (Optional)"
