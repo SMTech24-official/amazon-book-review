@@ -13,6 +13,7 @@ export type User = {
   role: UserRole; // Role of the user
   plans: string;
 };
+
 export type NavLink = {
   name: string;
   href: string;
