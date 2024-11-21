@@ -28,10 +28,10 @@ const ItemSwiper: React.FC = () => {
           </SwiperSlide>
         ))}
         {/* Custom Navigation Buttons */}
-        <div className="swiper-button-prev-custom absolute top-1/2 left-2 transform -translate-y-1/2 bg-primary text-white p-2 rounded-full shadow-lg hover:bg-primary-dark z-10">
+        <div className="custom-swiper-button-prev absolute top-1/2 left-2 transform -translate-y-1/2 bg-primary text-white p-2 rounded-full shadow-lg hover:bg-primary-dark z-10">
           <FaAngleLeft />
         </div>
-        <div className="swiper-button-next-custom absolute top-1/2 right-2 transform -translate-y-1/2 bg-primary text-white p-2 rounded-full shadow-lg hover:bg-primary-dark z-10">
+        <div className="custom-swiper-button-next absolute top-1/2 right-2 transform -translate-y-1/2 bg-primary text-white p-2 rounded-full shadow-lg hover:bg-primary-dark z-10">
           <FaAngleRight />
         </div>
       </Swiper>

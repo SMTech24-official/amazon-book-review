@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logoutHandler } from "@/utils/handleLogout";
 import {
@@ -12,8 +12,6 @@ import {
 } from "@nextui-org/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
-import Swal from "sweetalert2";
 
 const ProfileDropdownMenu = () => {
   const dispatch = useAppDispatch();
