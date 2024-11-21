@@ -5,12 +5,13 @@ import BooksCards from '../../components/cards/booksCard/BooksCards';
 import { booksReview } from '@/lib/fakeData/BooksReview';
 import { RiStickyNoteAddFill } from 'react-icons/ri';
 import Link from 'next/link';
+import BreadCrumb from '@/components/Shared/breadCrumb/BreadCrumb';
 
 const MyBooks = () => {
     const [filter, setFilter] = useState('All'); // State to manage filter
 
     // Filter books based on the selected filter
-    const filteredBooks = booksReview.filter(book => 
+    const filteredBooks = booksReview.filter(book =>
         filter === 'All' || book.status === filter
     );
 
@@ -18,29 +19,26 @@ const MyBooks = () => {
         <div>
             {/* heading */}
             <div className='flex xl:flex-row gap-2 md:gap-3 flex-col items-start xl:items-center justify-between mb-4 py-1'>
-                <p className='font-bold text-2xl'>My Books</p>
+                <BreadCrumb />
 
                 <div className='flex flex-wrap items-center justify-center gap-4'>
-                    <button 
-                        className={`hover:bg-primary border rounded-full px-4 py-2 hover:text-white text-gray-500 text-sm font-semibold ${
-                            filter === 'All' ? 'bg-primary text-white' : ''
-                        }`}
+                    <button
+                        className={`hover:bg-primary border rounded-full px-4 py-2 hover:text-white text-gray-500 text-sm font-semibold ${filter === 'All' ? 'bg-primary text-white' : ''
+                            }`}
                         onClick={() => setFilter('All')}
                     >
                         All
                     </button>
-                    <button 
-                        className={`hover:bg-primary border rounded-full px-4 py-2 hover:text-white text-gray-500 text-sm font-semibold ${
-                            filter === 'Live' ? 'bg-primary text-white' : ''
-                        }`}
+                    <button
+                        className={`hover:bg-primary border rounded-full px-4 py-2 hover:text-white text-gray-500 text-sm font-semibold ${filter === 'Live' ? 'bg-primary text-white' : ''
+                            }`}
                         onClick={() => setFilter('Live')}
                     >
                         Live
                     </button>
-                    <button 
-                        className={`hover:bg-primary border rounded-full px-4 py-2 hover:text-white text-gray-500 text-sm font-semibold ${
-                            filter === 'Pending' ? 'bg-primary text-white' : ''
-                        }`}
+                    <button
+                        className={`hover:bg-primary border rounded-full px-4 py-2 hover:text-white text-gray-500 text-sm font-semibold ${filter === 'Pending' ? 'bg-primary text-white' : ''
+                            }`}
                         onClick={() => setFilter('Pending')}
                     >
                         Pending

@@ -1,5 +1,6 @@
 'use client'
 
+import BreadCrumb from "@/components/Shared/breadCrumb/BreadCrumb"
 import { Button } from "@/components/ui/button"
 import DnDInput from "@/components/ui/DnDInput"
 import { Input } from "@/components/ui/input"
@@ -23,25 +24,25 @@ export default function AddBooksO() {
 
     return (
         <div className="">
-            <h1 className="text-xl font-semibold mb-6">Add new book</h1>
+            <BreadCrumb />
 
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid gap-6 sm:grid-cols-2">
                     <div className="space-y-2">
                         <Label htmlFor="title">Book title</Label>
-                        <Input id="title" name="title"   placeholder="Game of thrones" />
+                        <Input id="title" name="title" placeholder="Game of thrones" />
                     </div>
 
                     <div className="space-y-2">
                         <Label htmlFor="author">Author name</Label>
-                        <Input id="author" name="author"   placeholder="John" />
+                        <Input id="author" name="author" placeholder="John" />
                     </div>
                 </div>
 
                 <div className="grid gap-6 sm:grid-cols-2">
                     <div className="space-y-2">
                         <Label htmlFor="amazonLink">Your book link of amazon books</Label>
-                        <Input id="amazonLink" name="amazonLink"   placeholder="URL" />
+                        <Input id="amazonLink" name="amazonLink" placeholder="URL" />
                     </div>
 
                     <div className="space-y-2">
@@ -62,6 +63,7 @@ export default function AddBooksO() {
                 <div className="grid gap-6 sm:grid-cols-2">
                     <div className="space-y-2">
                         <DnDInput
+                            width="w-full"
                             initialFile={null}
                             id="bookCover"
                             label="Upload Book cover"
@@ -71,6 +73,7 @@ export default function AddBooksO() {
 
                     <div className="space-y-2">
                         <DnDInput
+                            width="w-full"
                             initialFile={null}
                             id="bookPdf"
                             label="Upload Book PDF"

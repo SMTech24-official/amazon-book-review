@@ -4,13 +4,14 @@ import { booksReview } from '@/lib/fakeData/BooksReview';
 import { useState } from 'react';
 import FilterDropdown from '../../components/filterButton/FilterButton';
 import LibraryBookCard from '../../components/cards/libraryBookCard/LibraryBooksCard';
+import BreadCrumb from '@/components/Shared/breadCrumb/BreadCrumb';
 
 const UserLibrary = () => {
     const [filter, setFilter] = useState('All'); // State to manage filter
 
     // Filter books based on the selected filter
     const filteredBooks = booksReview.filter(book =>
-        filter === 'All' || book.genre == filter.toLocaleLowerCase()  || book.bookFromet == filter.toLocaleLowerCase()
+        filter === 'All' || book.genre == filter.toLocaleLowerCase() || book.bookFromet == filter.toLocaleLowerCase()
     );
 
     const genres = [
@@ -28,7 +29,7 @@ const UserLibrary = () => {
         <div>
             {/* heading */}
             <div className='flex xl:flex-row gap-2 md:gap-3 flex-col items-start xl:items-center justify-between mb-4 py-1'>
-                <p className='font-bold text-2xl'>My Books</p>
+                <BreadCrumb />
                 <FilterDropdown filter={filter} setFilter={setFilter} genres={genres} />
             </div>
 
@@ -43,7 +44,7 @@ const UserLibrary = () => {
                         coinsPerReview={data.coinsPerReview}
                         imageSrc={data.imageSrc}
                     >
-                        <button  className="w-full bg-primary text-white py-2 rounded-lg">
+                        <button className="w-full bg-primary text-white py-2 rounded-lg">
                             Start Reding
                         </button>
                     </LibraryBookCard>
