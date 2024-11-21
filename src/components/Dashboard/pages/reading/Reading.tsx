@@ -3,9 +3,11 @@
 import { booksReview } from "@/lib/fakeData/BooksReview";
 import LibraryBookCard from "../../components/cards/libraryBookCard/LibraryBooksCard";
 import BreadCrumb from "@/components/Shared/breadCrumb/BreadCrumb";
+import { useRouter } from "next/navigation";
+
 
 const Reading = () => {
-
+    const router = useRouter()
     return (
         <div>
             {/* heading */}
@@ -28,7 +30,7 @@ const Reading = () => {
                             coinsPerReview={data.coinsPerReview}
                             imageSrc={data.imageSrc}
                         >
-                            <button className="w-full bg-primary text-white py-2 rounded-lg">
+                            <button onClick={() => router.push(`/dashboard/reading/${data.id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
                                 Book Details
                             </button>
                         </LibraryBookCard>
@@ -49,7 +51,7 @@ const Reading = () => {
                             coinsPerReview={data.coinsPerReview}
                             imageSrc={data.imageSrc}
                         >
-                            <button className="w-full bg-primary text-white py-2 rounded-lg">
+                            <button onClick={() => router.push(`/dashboard/reading/${data.id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
                                 Book Details
                             </button>
                         </LibraryBookCard>
@@ -70,7 +72,7 @@ const Reading = () => {
                             coinsPerReview={data.coinsPerReview}
                             imageSrc={data.imageSrc}
                         >
-                            <button className="w-full bg-primary text-white py-2 rounded-lg">
+                            <button onClick={() => router.push(`/dashboard/reading/${data.id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
                                 Book Details
                             </button>
                         </LibraryBookCard>
