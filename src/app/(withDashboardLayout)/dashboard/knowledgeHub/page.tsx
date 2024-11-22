@@ -1,10 +1,9 @@
-import UnderCOnstruction from '@/components/underConstruction/UnderConstruction';
-import React from 'react';
+import KnowledgeHub from '@/components/KnowledgeHub/KnowledgeHub';
 
 const page = () => {
     return (
         <div>
-            <UnderCOnstruction  pageName='Knowledge Hub'/>
+          <KnowledgeHub/>
         </div>
     );
 };

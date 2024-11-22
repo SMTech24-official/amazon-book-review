@@ -1,12 +1,12 @@
-import UnderCOnstruction from '@/components/underConstruction/UnderConstruction';
-import React from 'react';
+import KnowledgeHub from '@/components/KnowledgeHub/KnowledgeHub';
 
-const page = () => {
+const KnowledgeHubPage = () => {
     return (
         <div>
-            <UnderCOnstruction pageName='KnowLedge Hub'/>
+            {/* <UnderCOnstruction pageName='KnowLedge Hub'/> */}
+            <KnowledgeHub/>
         </div>
     );
 };
 
-export default page;
+export default KnowledgeHubPage;
