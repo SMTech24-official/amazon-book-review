@@ -1,6 +1,7 @@
 import { TBooksAndMembers } from '@/interface/globalType';
 import { Button } from '@nextui-org/react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface BookTableProps {
     books: TBooksAndMembers[]; // books prop should be an array of Book
@@ -41,10 +42,12 @@ const MemberTable = ({ books }: BookTableProps) => {
                 </td>
                 <td className="px-4 py-4 text-center text-base font-normal">{book.date}</td>
                 <td className="px-4 py-4 text-center">
-                  <Button radius='sm' className='bg-primary text-white' >
+                 <Link href={`/admin-dashboard/members-details/${book?.id}`}>
+                 <Button radius='sm' className='bg-primary text-white' >
                    
-                    View
-                  </Button>
+                   View
+                 </Button>
+                 </Link>
                 </td>
               </tr>
             ))}
