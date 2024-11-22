@@ -11,8 +11,8 @@ export default function BookDetailsComponents(
         author,
         coinsPerReview,
         imageSrc,
-        amznLink,
-        bookLink
+        // amznLink,
+        // bookLink
     }: {
         bookTitle: string;
         author?: string;

@@ -26,7 +26,7 @@ const MemberDetailsComponent = ({
   console.log(memberId);
 
   return (
-    <div className="p-4 h-full max-h-[calc(100vh-70px)] flex flex-col">
+    <div className="p-4 h-full flex flex-col">
       <Breadcrumbs>
         {breadcrumbLinks?.map((crumb, index) => (
           <BreadcrumbItem key={index}>

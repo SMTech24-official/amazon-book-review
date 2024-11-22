@@ -1,6 +1,5 @@
 "use client";
 import BookDetailsComponent from "@/components/BookDetailsComponent/BookDetailsComponent";
-import { useParams } from "next/navigation";
 
 const BookDetailsPage = () => {
     const breadcrumbLinks = [
