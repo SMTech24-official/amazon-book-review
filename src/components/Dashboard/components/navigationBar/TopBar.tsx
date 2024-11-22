@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
 import { HiMiniBellAlert } from 'react-icons/hi2'
 
-export default function TopBar({ user, isOpen, setIsOpen }: { user: null | TUser, isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }) {
+export default function TopBar({  isOpen, setIsOpen }: { user: null | TUser, isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }) {
     return (
         <header className="border-b bg-white">
             <div className="flex items-center justify-between px-6 py-3 w-full">
