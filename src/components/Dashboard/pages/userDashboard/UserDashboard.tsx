@@ -29,7 +29,6 @@ const UserDashboard = () => {
                 <div className='col-span-3 mr-10 '>
                     <UDBookReview />
                 </div>
-
                 <div className='grid grid-cols-1 col-span-2 '>
                     <ReviewHistory />
                     <Activity />

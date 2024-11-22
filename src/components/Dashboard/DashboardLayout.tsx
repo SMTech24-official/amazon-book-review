@@ -43,7 +43,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         { name: 'Knowledge hub', href: '/dashboard/knowledgeHub', icon: SiBookstack },
     ];
     const additionalRoutes = [
-        { name: 'Settings', href: '/dashboard/settings', icon: IoSettingsSharp },
+        { name: 'Settings', href: '/dashboard/settings?tab=general', icon: IoSettingsSharp },
         { name: ' Help', href: '/dashboard/help', icon: RiCustomerServiceFill },
     ];
 
