@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import BooksCards from "../Dashboard/components/cards/booksCard/BooksCards";
+import MyBreadcrumbs from "../ui/MyBreadcrumbs";
 
 interface BreadcrumbLink {
   name: string;
@@ -27,17 +28,7 @@ const MemberDetailsComponent = ({
 
   return (
     <div className="p-4 h-full flex flex-col">
-      <Breadcrumbs>
-        {breadcrumbLinks?.map((crumb, index) => (
-          <BreadcrumbItem key={index}>
-            {crumb.href ? (
-              <Link href={crumb.href}>{crumb.name}</Link>
-            ) : (
-              crumb.name
-            )}
-          </BreadcrumbItem>
-        ))}
-      </Breadcrumbs>
+    <MyBreadcrumbs breadcrumbLinks={breadcrumbLinks}/>
       <div className="  flex-grow flex flex-col">
         <Image
           src={memberImage}

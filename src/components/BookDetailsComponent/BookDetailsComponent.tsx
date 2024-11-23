@@ -9,6 +9,7 @@ import brokenLinkIcon from "@/assets/brokenLinkIcon.svg";
 import coins from "@/assets/coins.png";
 import { useParams } from "next/navigation";
 import { cn } from "@/lib/utils";
+import MyBreadcrumbs from "../ui/MyBreadcrumbs";
 
 
 
@@ -66,17 +67,7 @@ const BookDetailsComponent = ({ breadcrumbLinks, buttonLayoutClassName, buttons 
 
   return (
     <div className="p-4 h-full max-h-[calc(100vh-70px)] flex flex-col">
-      <Breadcrumbs>
-        {breadcrumbLinks?.map((crumb, index) => (
-          <BreadcrumbItem key={index}>
-            {crumb.href ? (
-              <Link href={crumb.href}>{crumb.name}</Link>
-            ) : (
-              crumb.name
-            )}
-          </BreadcrumbItem>
-        ))}
-      </Breadcrumbs>
+      <MyBreadcrumbs breadcrumbLinks={breadcrumbLinks}/>
       <div className="  flex-grow flex flex-col">
         <Image
           src={bookCoverImage}
