@@ -5,6 +5,7 @@ import { useState } from 'react';
 import FilterDropdown from '../../components/filterButton/FilterButton';
 import LibraryBookCard from '../../components/cards/libraryBookCard/LibraryBooksCard';
 import BreadCrumb from '@/components/Shared/breadCrumb/BreadCrumb';
+import { Button } from '@nextui-org/react';
 
 const UserLibrary = () => {
     const [filter, setFilter] = useState('All'); // State to manage filter
@@ -44,9 +45,9 @@ const UserLibrary = () => {
                         coinsPerReview={data.coinsPerReview}
                         imageSrc={data.imageSrc}
                     >
-                        <button className="w-full bg-primary text-white py-2 rounded-lg">
+                        <Button   radius="sm" className="w-full bg-primary text-white py-2 rounded-lg">
                             Start Reding
-                        </button>
+                        </Button>
                     </LibraryBookCard>
                 ))}
             </div>

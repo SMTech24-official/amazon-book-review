@@ -12,7 +12,7 @@ const MyBooks = () => {
 
     // Filter books based on the selected filter
     const filteredBooks = booksReview.filter(book =>
-        filter === 'All' || book.status === filter
+        filter === 'All' || book.status === filter.toLocaleLowerCase()
     );
 
     return (
@@ -61,7 +61,6 @@ const MyBooks = () => {
                         publishedDate={new Date(data.publishedDate)}
                         coinsPerReview={data.coinsPerReview}
                         reviewCount={data.reviewCount}
-                        avgRating={data.avgRating}
                         imageSrc={data.imageSrc}
                     />
                 ))}

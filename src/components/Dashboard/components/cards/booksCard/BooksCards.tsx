@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button";
+"use client"
 import Image from "next/image";
-import { TrendingUp } from "lucide-react";
 import coins from "@/assets/coins.png"
 import reviewIcon from "@/assets/ReviewIcon.png"
+import {  Button } from "@nextui-org/react";
+import { cn } from "@/lib/utils";
 
 export default function BooksCards({
   bookTitle,
@@ -11,7 +12,6 @@ export default function BooksCards({
   publishedDate,
   coinsPerReview,
   reviewCount,
-  avgRating,
   imageSrc,
 }: {
   bookTitle: string;
@@ -20,11 +20,10 @@ export default function BooksCards({
   publishedDate: Date;
   coinsPerReview: number;
   reviewCount: number;
-  avgRating: number;
   imageSrc: string;
 }) {
   return (
-    <div className="flex flex-col md:flex-row gap-6 p-4 xl:h-[225px] sm:w-full w-[250px] h-full border rounded-lg">
+    <div className="flex flex-col md:flex-row gap-6 p-4 xl:h-[225px] sm:w-full w-[250px] h-full border rounded-lg shadow-sm">
       <div className="w-[129px] h-[190px]">
         <Image
           src={imageSrc}
@@ -42,7 +41,7 @@ export default function BooksCards({
           <div className="xl:space-y-2 ">
             <h2 className="text-xl font-semibold">{bookTitle}</h2>
             <div className="flex items-center gap-2 ">
-              <span className="bg-yellow-200 text-orange-600 text-sm px-2 py-[5px] rounded-md font-semibold">
+              <span className="bg-yellow-200 text-orange-600 text-sm px-2 py-[5px] rounded-md font-semibold capitalize">
                 {status}
               </span>
               <span className="text-xs text-gray-600 text-muted-foreground">
@@ -72,16 +71,14 @@ export default function BooksCards({
                   {reviewCount} Reviews
                 </span>
               </div>
-              <div className="flex items-center gap-1 text-green-500">
-                <TrendingUp className="max-w-6 max-h-6" />
-                <span className="text-sm text-muted-foreground">
-                  {avgRating} Avg rating
-                </span>
-              </div>
             </div>
           </div>
           <div className="flex justify-end xl:mt-4">
-            <Button className="bg-black text-white hover:bg-black/90">
+            <Button
+              radius="sm"
+              className={cn(`w-full py-5 font-normal flex items-center justify-center gap-2 text-xs md:text-sm lg:text-base bg-black text-white hover:bg-black/90`)}
+              // onClick={() => handleButtonClick(button.text)}
+            >
               In for Review
             </Button>
           </div>

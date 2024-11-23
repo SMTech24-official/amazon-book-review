@@ -4,6 +4,7 @@ import { booksReview } from "@/lib/fakeData/BooksReview";
 import LibraryBookCard from "../../components/cards/libraryBookCard/LibraryBooksCard";
 import BreadCrumb from "@/components/Shared/breadCrumb/BreadCrumb";
 import { useRouter } from "next/navigation";
+import { Button } from "@nextui-org/react";
 
 
 const Reading = () => {
@@ -72,9 +73,9 @@ const Reading = () => {
                             coinsPerReview={data.coinsPerReview}
                             imageSrc={data.imageSrc}
                         >
-                            <button onClick={() => router.push(`/dashboard/reading/${data.id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
+                            <Button   radius="sm" onClick={() => router.push(`/dashboard/reading/${data.id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
                                 Book Details
-                            </button>
+                            </Button>
                         </LibraryBookCard>
                     ))}
                 </div>

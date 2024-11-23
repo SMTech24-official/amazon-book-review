@@ -19,7 +19,7 @@ export default function LibraryBookCard({
     imageSrc: string;
 }) {
     return (
-        <div className="border rounded-lg shadow-sm w-[260px] md:w-[235px] lg:w-full xl:w-full  h-[368px] p-2 xl:p-4 flex flex-col">
+        <div className="border rounded-lg shadow-sm w-[260px] md:w-[235px] lg:w-full xl:w-full  h-[368px] p-2 xl:p-4 flex flex-col ">
             <div className="w-[129px] h-[190px] mx-auto">
                 <Image
                     src={imageSrc}
