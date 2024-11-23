@@ -1,7 +1,6 @@
 "use client";
 import MyBreadcrumbs from "@/components/ui/MyBreadcrumbs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 

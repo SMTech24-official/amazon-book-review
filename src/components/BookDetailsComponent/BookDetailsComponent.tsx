@@ -1,14 +1,13 @@
 "use client";
-import { BreadcrumbItem, Breadcrumbs, Button } from "@nextui-org/react";
-import Image, { StaticImageData } from "next/image";
-import Link from "next/link";
-import React from "react";
 import bookCoverImage from "@/assets/Book Cover Image.png";
-import pdfIcon from "@/assets/pdfIcon.svg";
 import brokenLinkIcon from "@/assets/brokenLinkIcon.svg";
 import coins from "@/assets/coins.png";
-import { useParams } from "next/navigation";
+import pdfIcon from "@/assets/pdfIcon.svg";
 import { cn } from "@/lib/utils";
+import { Button } from "@nextui-org/react";
+import Image, { StaticImageData } from "next/image";
+import { useParams } from "next/navigation";
+import React from "react";
 import MyBreadcrumbs from "../ui/MyBreadcrumbs";
 
 
