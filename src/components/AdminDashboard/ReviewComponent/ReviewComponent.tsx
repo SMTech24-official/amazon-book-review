@@ -5,13 +5,13 @@ import { BookRecord } from "@/interface/globalType";
 import ReviewTable from "../ReviewTable";
 
 interface BookTableProps {
-    items: BookRecord[];
+  items: BookRecord[];
   title: string;
   isLoading?: boolean;
 }
 
 const ReviewComponent = ({ items, title, isLoading }: BookTableProps) => {
-    console.log(items);
+  console.log(items);
 
   if (isLoading) {
     return <MyLoading />;

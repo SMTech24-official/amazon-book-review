@@ -16,32 +16,32 @@ const reviewApi = baseApi.injectEndpoints({
     //   }),
     //   providesTags: ["Book"],
     // }),
-    // approveBook: builder.mutation({
-    //   query: (id) => {
-    //     return {
-    //       url: `admin/approve/${id}`,
-    //       method: "PUT",
-    //       // body: userInfo,
-    //     };
-    //   },
-    //   invalidatesTags: ["Book"],
-    // }),
-    // rejectBook: builder.mutation({
-    //   query: (id) => {
-    //     return {
-    //       url: `admin/reject/${id}`,
-    //       method: "PUT",
-    //       // body: userInfo,
-    //     };
-    //   },
-    //   invalidatesTags: ["Book"],
-    // }),
+    approveReview: builder.mutation({
+      query: (id) => {
+        return {
+          url: `admin/review/approve/${id}`,
+          method: "PUT",
+          // body: userInfo,
+        };
+      },
+      invalidatesTags: ["Book"],
+    }),
+    rejectReview: builder.mutation({
+      query: (id) => {
+        return {
+          url: `admin/review/rejected/${id}`,
+          method: "DELETE",
+          // body: userInfo,
+        };
+      },
+      invalidatesTags: ["Book"],
+    }),
   }),
 });
 
 export const {
   useGetAllPendingReviewsQuery,
 //   useSingleBookQuery,
-//   useApproveBookMutation,
-//   useRejectBookMutation,
+useApproveReviewMutation,
+useRejectReviewMutation
 } = reviewApi;

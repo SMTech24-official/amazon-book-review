@@ -11,11 +11,12 @@ import {
 import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
 import { Button } from "@nextui-org/react";
 import Image, { StaticImageData } from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import React from "react";
 import MyBreadcrumbs from "../ui/MyBreadcrumbs";
 import MyLoading from "../ui/MyLoading";
 import BreadCrumb from "../common/breadCrumb/BreadCrumb";
+import { useApproveReviewMutation, useRejectReviewMutation } from "@/redux/features/review/reviewApi";
 
 interface BreadcrumbLink {
   name: string;
@@ -45,9 +46,12 @@ const BookDetailsComponent = ({
   const bookId = params?.bookId;
 
   const { data, isLoading } = useSingleBookQuery(bookId);
+  const pathName = usePathname();
   const [approveBookMutation] = useApproveBookMutation();
+  const [approveReviewMutation] = useApproveReviewMutation();
   const [rejectBookMutation] = useRejectBookMutation();
-
+  const [rejectReviewMutation] = useRejectReviewMutation();
+  console.log(pathName);
   const handleButtonClick = async (buttonText: string) => {
     try {
       switch (buttonText) {
@@ -80,35 +84,62 @@ const BookDetailsComponent = ({
             console.error("Book ID is missing. Approval cannot proceed.");
             return;
           }
-          await handleAsyncWithToast(
-            async () => approveBookMutation(data.data._id),
-            "Approving...",
-            "Book approved successfully!",
-            "Approval failed. Please try again.",
-            false, // No Redux user update
-            null, // No dispatch needed
-            "/admin-dashboard?tab=New+Books",
-            router // Pass the router instance
-          );
+          if (pathName?.indexOf("review")) {
+            await handleAsyncWithToast(
+              async () => approveReviewMutation(data.data._id),
+              "Approving...",
+              "Review approved successfully!",
+              "Approval failed. Please try again.",
+              false, // No Redux user update
+              null, // No dispatch needed
+              "/admin-dashboard?tab=New+Reviews",
+              router // Pass the router instance
+            );
+          }else{
+            await handleAsyncWithToast(
+              async () => approveBookMutation(data.data._id),
+              "Approving...",
+              "Book approved successfully!",
+              "Approval failed. Please try again.",
+              false, // No Redux user update
+              null, // No dispatch needed
+              "/admin-dashboard?tab=New+Books",
+              router // Pass the router instance
+            );
+          }
 
           break;
 
         case "Deny":
-          console.log("The book has been denied.");
           if (!data?.data?._id) {
             console.error("Book ID is missing. Denial cannot proceed.");
             return;
           }
-          await handleAsyncWithToast(
-            async () => rejectBookMutation(data.data._id),
-            "Denying...",
-            "Book denied successfully!",
-            "Denial failed. Please try again.",
-            false, // No Redux user update
-            null, // No dispatch needed
-            "/admin-dashboard?tab=New+Books", // Redirect URL
-            router // Pass the router instance
-          );
+          if (pathName?.indexOf("review")) {
+            await handleAsyncWithToast(
+              async () => rejectReviewMutation(data.data._id),
+              "Denying...",
+              "Review denied successfully!",
+              "Denial failed. Please try again.",
+              false, // No Redux user update
+              null, // No dispatch needed
+              "/admin-dashboard?tab=New+Reviews", // Redirect URL
+              router // Pass the router instance
+            );
+          }else {
+            await handleAsyncWithToast(
+              async () => rejectBookMutation(data.data._id),
+              "Denying...",
+              "Book denied successfully!",
+              "Denial failed. Please try again.",
+              false, // No Redux user update
+              null, // No dispatch needed
+              "/admin-dashboard?tab=New+Books", // Redirect URL
+              router // Pass the router instance
+            );
+          }
+
+         
           break;
 
         case "Verify Review now on amazon":
@@ -151,7 +182,7 @@ const BookDetailsComponent = ({
   return (
     <div className="p-4 h-full max-h-[calc(100vh-70px)] flex flex-col">
       {/* <MyBreadcrumbs breadcrumbLinks={breadcrumbLinks} /> */}
-      <BreadCrumb/>
+      <BreadCrumb />
       <div className="  flex-grow flex flex-col">
         <Image
           src={data?.data?.bookCover}
