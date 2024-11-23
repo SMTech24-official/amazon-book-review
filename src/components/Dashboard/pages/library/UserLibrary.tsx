@@ -4,7 +4,7 @@ import { booksReview } from '@/lib/fakeData/BooksReview';
 import { useState } from 'react';
 import FilterDropdown from '../../components/filterButton/FilterButton';
 import LibraryBookCard from '../../components/cards/libraryBookCard/LibraryBooksCard';
-import BreadCrumb from '@/components/Shared/breadCrumb/BreadCrumb';
+import BreadCrumb from '@/components/shared/breadCrumb/BreadCrumb';
 
 const UserLibrary = () => {
     const [filter, setFilter] = useState('All'); // State to manage filter
