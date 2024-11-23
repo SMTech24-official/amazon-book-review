@@ -1,20 +1,20 @@
 'use client'
-import { useState } from "react";
-import { TBooksAndMembers } from "@/interface/globalType";
+import { BookRecord } from "@/interface/globalType";
 import { Button } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 interface BookTableProps {
-  books: TBooksAndMembers[]; // books prop should be an array of Book
+  Items: BookRecord[]; // books prop should be an array of Book
 }
 
-const BookTable = ({ books }: BookTableProps) => {
-  // Initialize state for image sources for all books
+const ReviewTable = ({ Items }: BookTableProps) => {
+  // Initialize state for image sources for all Items
   const [imgSrcs, setImgSrcs] = useState(
-    books?.map(
+    Items?.map(
       (book) =>
-        book?.bookCover ||
+        book?.bookId?.bookCover ||
         "https://img.freepik.com/free-photo/yellow-book-cover_1101-1118.jpg?ga=GA1.1.1655684950.1728801784&semt=ais_hybrid%20"
     )
   );
@@ -37,7 +37,7 @@ const BookTable = ({ books }: BookTableProps) => {
         <thead>
           <tr className="text-base font-normal border-b-1">
             <th className="py-4 text-base font-normal">Book Name</th>
-            <th className="py-4 text-base font-normal">Writer Name</th>
+            <th className="py-4 text-base font-normal">Reviewer</th>
             <th className="py-4 text-base font-normal">Date</th>
             <th className="py-4 text-base font-normal">Details</th>
           </tr>
@@ -45,29 +45,29 @@ const BookTable = ({ books }: BookTableProps) => {
 
         {/* Table Body */}
         <tbody>
-          {books?.length > 0 &&
-            books?.map((book, index) => (
+          {Items?.length > 0 &&
+            Items?.map((item, index) => (
               <tr key={index} className={`hover:bg-gray-100`}>
                 <td className="px-4 py-4 text-center lg:max-w-28">
                   <div className="flex gap-2 items-center">
                     <Image
                       src={imgSrcs[index]} // Use the current image source from state
-                      alt={book?.title || "Default Book Cover"}
+                      alt={item?.bookId?.title || "Default Book Cover"}
                       width={60}
                       height={90}
                       className="rounded"
                       onError={() => handleImageError(index)} // Handle errors
                     />
                     <p className="mt-2 text-base font-normal">
-                      {book?.title || "Unknown Title"}
+                      {item?.bookId?.title || "Unknown Title"}
                     </p>
                   </div>
                 </td>
                 <td className="px-4 py-4 text-center text-base font-normal">
-                  {book?.authorName || "Unknown Author"}
+                  {item?.userId?.fullName || "Unknown User"}
                 </td>
                 <td className="px-4 py-4 text-center text-base font-normal">
-                  {new Date(book?.createdAt || Date.now()).toLocaleDateString(
+                  {new Date(item?.createdAt || Date.now()).toLocaleDateString(
                     "en-US",
                     {
                       year: "numeric",
@@ -77,11 +77,11 @@ const BookTable = ({ books }: BookTableProps) => {
                   )}
                 </td>
                 <td className="px-4 py-4 text-center">
-                  <Link href={`/admin-dashboard/book-details/${book?._id}`}>
+                  <Link href={`/admin-dashboard/new-review/review-details/${item?.bookId?._id}`}>
                     <Button
                       radius="sm"
                       className="bg-primary text-white"
-                      aria-label={`View details for ${book?.title}`}
+                      // aria-label={`View details for ${item?.title}`}
                     >
                       View
                     </Button>
@@ -95,4 +95,4 @@ const BookTable = ({ books }: BookTableProps) => {
   );
 };
 
-export default BookTable;
+export default ReviewTable;

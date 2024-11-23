@@ -19,12 +19,15 @@ export default function MainNavLink({ user, navLink, additionalRoutes }: { user:
         // Remove query parameters from href for comparison
         const cleanHref = href.split('?')[0];
         const cleanPathname = pathname.split('?')[0];
-    
+
         // If href is exactly `/dashboard`, match it exactly
         if (cleanHref === '/dashboard') {
             return cleanPathname === '/dashboard';
         }
-    
+        if (cleanHref === '/admin-dashboard') {
+            return cleanPathname === '/admin-dashboard';
+        }
+
         // For other routes, match using startsWith
         return cleanPathname.startsWith(cleanHref);
     };
@@ -79,7 +82,7 @@ export default function MainNavLink({ user, navLink, additionalRoutes }: { user:
                     additionalRoutes?.map((link) => <Link
                         key={link.name}
                         href={link.href}
-                        className={`flex items-center gap-3 px-3 py-3 rounded-md ${isActive(link.href)  ? "bg-primary text-white" : "hover:bg-[#8B4C84]/10"}`}
+                        className={`flex items-center gap-3 px-3 py-3 rounded-md ${isActive(link.href) ? "bg-primary text-white" : "hover:bg-[#8B4C84]/10"}`}
                     >
                         <div className=" rounded">
                             <link.icon className='min-w-6 min-h-6' />
