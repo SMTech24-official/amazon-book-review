@@ -1,9 +1,7 @@
 "use client";
 import newBook from "@/assets/newBook.png";
 import BooksComponent from "@/components/AdminDashboard/BooksComponent/BooksComponent";
-import TabPage from "@/components/Shared/tabPage/TabPage";
-
-
+import TabPage from "@/components/shared/tabPage/TabPage";
 import { TBooksAndMembers } from "@/interface/globalType";
 import { useGetAllPendingBooksQuery } from "@/redux/features/book/bookApi";
 import { useEffect } from "react";
@@ -11,30 +9,30 @@ import { FaClipboardList, FaUserCog } from "react-icons/fa";
 
 const books: TBooksAndMembers[] = [
   {
-    id: 1,
-    name: "Harry Potter and the Philosopher's Stone",
-    writer: "J. K. Rowling",
-    date: "09-11-2024",
-    image: newBook, // Use your image path here
+    _id: 1,
+    title: "Harry Potter and the Philosopher's Stone",
+    authorName: "J. K. Rowling",
+    createdAt: "09-11-2024",
+    bookCover: newBook, // Use your image path here
   },
   {
-    id: 2,
-    name: "Harry Potter and the Philosopher's Stone",
-    writer: "J. K. Rowling",
-    date: "09-11-2024",
-    image: newBook,
+    _id: 2,
+    title: "Harry Potter and the Philosopher's Stone",
+    authorName: "J. K. Rowling",
+    createdAt: "09-11-2024",
+    bookCover: newBook,
   },
   {
-    id: 3,
-    name: "Harry Potter and the Philosopher's Stone",
-    writer: "J. K. Rowling",
-    date: "09-11-2024",
-    image: newBook,
+    _id: 3,
+    title: "Harry Potter and the Philosopher's Stone",
+    authorName: "J. K. Rowling",
+    createdAt: "09-11-2024",
+    bookCover: newBook,
   },
 ];
 
 const AdminDashboardPAge = () => {
-  const { data } = useGetAllPendingBooksQuery(undefined);
+  const { data, isLoading } = useGetAllPendingBooksQuery(undefined);
   console.log(data?.data);
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -51,7 +49,13 @@ const AdminDashboardPAge = () => {
       label: "New Books",
       value: "New Books",
       icon: <FaUserCog className="min-w-6 min-h-6 mr-2" />,
-      component: <BooksComponent books={books} title="New books pending" />,
+      component: (
+        <BooksComponent
+          books={data?.data}
+          isLoading={isLoading}
+          title="New books pending"
+        />
+      ),
     },
     {
       label: "New Reviews",

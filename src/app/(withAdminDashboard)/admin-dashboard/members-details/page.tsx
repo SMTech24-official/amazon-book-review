@@ -5,22 +5,22 @@ import memberImage from "@/assets/member.png";
 
 const books: TBooksAndMembers[] = [
     {
-      id: 1,
-      name: "George R. R. Martin",
-      date: "09-11-2024",
-      image: memberImage, // Use your image path here
+      _id: 1,
+      title: "George R. R. Martin",
+      createdAt: "09-11-2024",
+      bookCover: memberImage, // Use your image path here
     },
     {
-      id: 2,
-      name: "George R. R. Martin",
-      date: "09-11-2024",
-      image: memberImage,
+      _id: 2,
+      title: "George R. R. Martin",
+      createdAt: "09-11-2024",
+      bookCover: memberImage,
     },
     {
-      id: 3,
-      name: "George R. R. Martin",
-      date: "09-11-2024",
-      image: memberImage,
+      _id: 3,
+      title: "George R. R. Martin",
+      createdAt: "09-11-2024",
+      bookCover: memberImage,
     },
   ];
 

@@ -1,17 +1,16 @@
 "use client";
-import { BreadcrumbItem, Breadcrumbs, Button } from "@nextui-org/react";
-import Image, { StaticImageData } from "next/image";
-import Link from "next/link";
-import React, { useEffect } from "react";
 import bookCoverImage from "@/assets/Book Cover Image.png";
-import pdfIcon from "@/assets/pdfIcon.svg";
 import brokenLinkIcon from "@/assets/brokenLinkIcon.svg";
 import coins from "@/assets/coins.png";
-import { useParams, useRouter } from "next/navigation";
+import pdfIcon from "@/assets/pdfIcon.svg";
 import { cn } from "@/lib/utils";
+import { Button } from "@nextui-org/react";
+import Image, { StaticImageData } from "next/image";
+import { useParams } from "next/navigation";
+import React from "react";
 import MyBreadcrumbs from "../ui/MyBreadcrumbs";
-
-
+import { useSingleBookQuery } from "@/redux/features/book/bookApi";
+import MyLoading from "../ui/MyLoading";
 
 interface BreadcrumbLink {
   name: string;
@@ -31,13 +30,16 @@ interface BookDetailsComponentProps {
   buttonLayoutClassName?: string;
 }
 
-
-const BookDetailsComponent = ({ breadcrumbLinks, buttonLayoutClassName, buttons }: BookDetailsComponentProps) => {
+const BookDetailsComponent = ({
+  breadcrumbLinks,
+  buttonLayoutClassName,
+  buttons,
+}: BookDetailsComponentProps) => {
   const params = useParams();
   const bookId = params.bookId;
-  console.log(bookId);
 
-
+  const { data, isLoading } = useSingleBookQuery(bookId);
+  console.log(data);
 
   const handleButtonClick = (buttonText: string) => {
     switch (buttonText) {
@@ -67,6 +69,9 @@ const BookDetailsComponent = ({ breadcrumbLinks, buttonLayoutClassName, buttons 
     }
   };
 
+  if (isLoading) {
+    return <MyLoading />;
+  }
   return (
     <div className="p-4 h-full max-h-[calc(100vh-70px)] flex flex-col">
       <MyBreadcrumbs breadcrumbLinks={breadcrumbLinks} />
@@ -81,14 +86,14 @@ const BookDetailsComponent = ({ breadcrumbLinks, buttonLayoutClassName, buttons 
         <div className="w-full max-w-5xl mx-auto flex-grow flex flex-col justify-between  gap-2 ">
           <div className="w-full ">
             <div className="flex flex-col xs:flex-row gap-2 justify-between mb-3">
-              <p className="text-xl font-medium">Fire & Blood</p>
+              <p className="text-xl font-medium">{data?.data?.title}</p>
               <div className="border-2 border-gray-300 text-primary rounded-full flex items-center gap-2 px-4 py-1 w-fit">
                 <p>Download as PDF</p>
                 <Image src={pdfIcon} height={10} width={15} alt="image" />
               </div>
             </div>
             <div className="flex flex-col xs:flex-row gap-2 justify-between mb-3">
-              <p className="text-xs font-medium">By: George R. R. Martin</p>
+              <p className="text-xs font-medium">By: {data?.data?.authorName}</p>
               <div className="border border-gray-300 text-primary rounded-full flex items-center gap-2 px-4 py-1 w-fit">
                 <Image src={coins} height={10} width={20} alt="image" />
                 <p>500</p>
@@ -109,7 +114,12 @@ const BookDetailsComponent = ({ breadcrumbLinks, buttonLayoutClassName, buttons 
                 <p>Mystery</p>
               </div>
             </div>
-            <div className={cn("grid gap-2 md:gap-5 mb-3  ", buttonLayoutClassName || "xs:grid-cols-3")}>
+            <div
+              className={cn(
+                "grid gap-2 md:gap-5 mb-3  ",
+                buttonLayoutClassName || "xs:grid-cols-3"
+              )}
+            >
               {/* <div className="w-full">
                 <Button
                   radius="sm"
@@ -140,12 +150,24 @@ const BookDetailsComponent = ({ breadcrumbLinks, buttonLayoutClassName, buttons 
                 <Button
                   key={index}
                   radius="sm"
-                  className={cn(`w-full py-5 font-normal flex items-center justify-center gap-2 text-xs md:text-sm lg:text-base`, button.style)}
+                  className={cn(
+                    `w-full py-5 font-normal flex items-center justify-center gap-2 text-xs md:text-sm lg:text-base`,
+                    button.style
+                  )}
                   onClick={() => handleButtonClick(button.text)}
                 >
                   {button.text}
                   {button.icon && <span>{button.icon}</span>}
-                  {button.svg && <span><Image src={button.svg} height={20} width={22} alt="image" /></span>}
+                  {button.svg && (
+                    <span>
+                      <Image
+                        src={button.svg}
+                        height={20}
+                        width={22}
+                        alt="image"
+                      />
+                    </span>
+                  )}
                 </Button>
               ))}
             </div>

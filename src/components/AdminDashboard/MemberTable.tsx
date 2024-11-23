@@ -25,24 +25,24 @@ const MemberTable = ({ books }: BookTableProps) => {
           <tbody>
             {books.map((book) => (
               <tr
-                key={book.id}
+                key={book._id}
                 className={` hover:bg-gray-100`}
               >
                 <td className="px-4 py-4 text-center lg:max-w-28">
                   <div className="flex gap-2 items-center">
                     <Image
-                      src={book.image}
-                      alt={book.name}
+                      src={book.bookCover}
+                      alt={book.title}
                       width={60}
                       height={90}
                       className="rounded"
                     />
-                    <p className="mt-2 text-base font-normal">{book.name}</p>
+                    <p className="mt-2 text-base font-normal">{book.title}</p>
                   </div>
                 </td>
-                <td className="px-4 py-4 text-center text-base font-normal">{book.date}</td>
+                <td className="px-4 py-4 text-center text-base font-normal">{book.createdAt}</td>
                 <td className="px-4 py-4 text-center">
-                 <Link href={`/admin-dashboard/members-details/${book?.id}`}>
+                 <Link href={`/admin-dashboard/members-details/${book?._id}`}>
                  <Button radius='sm' className='bg-primary text-white' >
                    
                    View

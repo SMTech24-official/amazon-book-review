@@ -1,9 +1,9 @@
 import { StaticImageData } from "next/image";
 
 export interface TBooksAndMembers {
-    id: number;
-    name: string;
-    writer?: string;
-    date: string;
-    image: string | StaticImageData; 
+  _id: number;
+    title: string;
+    authorName?: string;
+    createdAt: string;
+    bookCover: string | StaticImageData; 
   }

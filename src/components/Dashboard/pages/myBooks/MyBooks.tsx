@@ -5,7 +5,7 @@ import BooksCards from '../../components/cards/booksCard/BooksCards';
 import { booksReview } from '@/lib/fakeData/BooksReview';
 import { RiStickyNoteAddFill } from 'react-icons/ri';
 import Link from 'next/link';
-import BreadCrumb from '@/components/Shared/breadCrumb/BreadCrumb';
+import BreadCrumb from '@/components/shared/breadCrumb/BreadCrumb';
 
 const MyBooks = () => {
     const [filter, setFilter] = useState('All'); // State to manage filter

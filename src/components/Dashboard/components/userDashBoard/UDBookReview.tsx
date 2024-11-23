@@ -1,7 +1,7 @@
 import React from 'react';
 import BooksCards from '../cards/booksCard/BooksCards';
 import { booksReview } from '@/lib/fakeData/BooksReview';
-import BreadCrumb from '@/components/Shared/breadCrumb/BreadCrumb';
+import BreadCrumb from '@/components/shared/breadCrumb/BreadCrumb';
 
 const UDBookReview = () => {
     return (

@@ -2,7 +2,7 @@
 
 import { booksReview } from "@/lib/fakeData/BooksReview";
 import LibraryBookCard from "../../components/cards/libraryBookCard/LibraryBooksCard";
-import BreadCrumb from "@/components/Shared/breadCrumb/BreadCrumb";
+import BreadCrumb from "@/components/shared/breadCrumb/BreadCrumb";
 import { useRouter } from "next/navigation";
 import { Button } from "@nextui-org/react";
 
