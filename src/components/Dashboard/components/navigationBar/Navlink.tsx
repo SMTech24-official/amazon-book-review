@@ -1,25 +1,39 @@
 "use client"
+import logo from "@/assets/logo/dashLogo.png"
+import profile from "@/assets/profile placehoilder.png"
+import { NavLink } from '@/lib/types/type'
+import { TUser } from '@/redux/features/auth/authSlice'
+import { useAppDispatch } from '@/redux/hooks'
+import { logoutHandler } from '@/utils/handleLogout'
 import { Facebook } from 'lucide-react'
 import Image from "next/image"
 import Link from "next/link"
-import logo from "@/assets/logo/dashLogo.png"
-import profile from "@/assets/profile placehoilder.png"
-import { IoLogOut } from 'react-icons/io5'
 import { usePathname, useRouter } from 'next/navigation'
-import { NavLink } from '@/lib/types/type'
-import { useAppDispatch } from '@/redux/hooks'
-import { logoutHandler } from '@/utils/handleLogout'
-import { TUser } from '@/redux/features/auth/authSlice'
+import { IoLogOut } from 'react-icons/io5'
 
 
 export default function MainNavLink({ user, navLink, additionalRoutes }: { user: null | TUser, navLink: NavLink[], additionalRoutes: NavLink[] }) {
     const pathname = usePathname()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const isActive = (href: any) => {
+        // Remove query parameters from href for comparison
+        const cleanHref = href.split('?')[0];
+        const cleanPathname = pathname.split('?')[0];
+    
+        // If href is exactly `/dashboard`, match it exactly
+        if (cleanHref === '/dashboard') {
+            return cleanPathname === '/dashboard';
+        }
+    
+        // For other routes, match using startsWith
+        return cleanPathname.startsWith(cleanHref);
+    };
     const dispatch = useAppDispatch()
     const router = useRouter()
 
     const handleLogout = async () => {
         await logoutHandler(dispatch, router);
-      };
+    };
     return (
         <div className="flex flex-col min-h-screen bg-white">
             <div className="p-4">
@@ -39,7 +53,7 @@ export default function MainNavLink({ user, navLink, additionalRoutes }: { user:
                         navLink?.map((link) => <Link
                             key={link.name}
                             href={link.href}
-                            className={`flex items-center gap-3 px-3 py-3 rounded-md ${pathname === link.href ? "bg-primary text-white" : "hover:bg-[#8B4C84]/10"}`}
+                            className={`flex items-center gap-3 px-3 py-3 rounded-md ${isActive(link.href) ? "bg-primary text-white" : "hover:bg-[#8B4C84]/10"}`}
                         >
                             <div className="rounded">
                                 <link.icon className='min-w-6 min-h-6' />
@@ -64,7 +78,7 @@ export default function MainNavLink({ user, navLink, additionalRoutes }: { user:
                     additionalRoutes?.map((link) => <Link
                         key={link.name}
                         href={link.href}
-                        className={`flex items-center gap-3 px-3 py-3 rounded-md ${pathname === link.href ? "bg-primary text-white" : "hover:bg-[#8B4C84]/10"}`}
+                        className={`flex items-center gap-3 px-3 py-3 rounded-md ${isActive(link.href)  ? "bg-primary text-white" : "hover:bg-[#8B4C84]/10"}`}
                     >
                         <div className=" rounded">
                             <link.icon className='min-w-6 min-h-6' />
@@ -73,7 +87,7 @@ export default function MainNavLink({ user, navLink, additionalRoutes }: { user:
                     </Link>)
                 }
                 <div
-                  onClick={handleLogout}
+                    onClick={handleLogout}
                     className={`flex items-center gap-3 px-3 py-3 rounded-md cursor-pointer`}
                 >
                     <IoLogOut className="min-w-6 min-h-6" />
