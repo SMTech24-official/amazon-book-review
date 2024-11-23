@@ -1,9 +1,7 @@
 "use client";
 import memberImage from "@/assets/member.png";
 import { booksReview } from "@/lib/fakeData/BooksReview";
-import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
 import Image from "next/image";
-import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import BooksCards from "../Dashboard/components/cards/booksCard/BooksCards";
@@ -23,7 +21,7 @@ const MemberDetailsComponent = ({
 }: BookDetailsComponentProps) => {
   const [activeButton, setActiveButton] = useState("all");
   const params = useParams();
-  const memberId = params.memberId;
+  const memberId = params?.memberId;
   console.log(memberId);
 
   return (

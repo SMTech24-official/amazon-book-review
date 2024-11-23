@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
 import Link from "next/link";
 
@@ -7,12 +8,13 @@ interface BreadcrumbLink {
 }
 
 interface BookDetailsComponentProps {
-  breadcrumbLinks?: BreadcrumbLink[];
+  breadcrumbLinks: BreadcrumbLink[] | undefined;
+  className?: string;
 }
-const MyBreadcrumbs = ({ breadcrumbLinks }: BookDetailsComponentProps) => {
+const MyBreadcrumbs = ({ breadcrumbLinks, className }: BookDetailsComponentProps) => {
   return (
     <>
-      <Breadcrumbs>
+      <Breadcrumbs className={cn(className)}>
         {breadcrumbLinks?.map((crumb, index) => (
           <BreadcrumbItem key={index}>
             {crumb.href ? (

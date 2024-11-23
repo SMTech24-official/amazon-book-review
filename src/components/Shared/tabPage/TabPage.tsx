@@ -1,4 +1,5 @@
 "use client";
+import MyBreadcrumbs from "@/components/ui/MyBreadcrumbs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -14,6 +15,11 @@ interface TabPageProps {
   defaultTab: string;
 }
 
+const breadcrumbLinks = [
+  { name: "Verification", href: null },
+  { name: "New books", href: null },
+];
+
 export default function TabPage({ tabs, defaultTab }: TabPageProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -28,10 +34,7 @@ export default function TabPage({ tabs, defaultTab }: TabPageProps) {
 
   return (
     <div className="min-h-screen p-4">
-      <Breadcrumbs className="mb-4">
-        <BreadcrumbItem>Verification</BreadcrumbItem>
-        <BreadcrumbItem>New books</BreadcrumbItem>
-      </Breadcrumbs>
+     <MyBreadcrumbs breadcrumbLinks={breadcrumbLinks} className="mb-4"/>
       <div className="border-t ">
         <Tabs
           defaultValue={tab}
