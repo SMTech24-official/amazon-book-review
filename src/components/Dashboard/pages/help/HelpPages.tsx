@@ -1,6 +1,6 @@
 "use client"
 
-import GradCircleWrapper from '@/components/Shared/grad-circleWrapper/GradCircleWrapper';
+import GradCircleWrapper from '@/components/common/grad-circleWrapper/GradCircleWrapper';
 import { Button } from '@nextui-org/react';
 import React from 'react';
 import { RiCustomerService2Line } from 'react-icons/ri';

@@ -1,5 +1,4 @@
 "use client"
-import GradCircleWrapper from '@/components/Shared/grad-circleWrapper/GradCircleWrapper';
 import { Button } from '@nextui-org/react';
 import Image from 'next/image';
 import React from 'react';
@@ -8,6 +7,7 @@ import refer from "@/assets/fi_1921935.png"
 import referIcon from "@/assets/refer.png"
 import handIcon from "@/assets/fi_18188459.png"
 import ProgressBar from '../../components/progressBar/ProgressBar';
+import GradCircleWrapper from '@/components/common/grad-circleWrapper/GradCircleWrapper';
 const Referral = () => {
     return (
         <div>

@@ -1,5 +1,5 @@
 import Settings from '@/components/Dashboard/pages/settings/Settings';
-import BreadCrumb from '@/components/shared/breadCrumb/BreadCrumb';
+import BreadCrumb from '@/components/common/breadCrumb/BreadCrumb';
 import React from 'react';
 
 const page = () => {
