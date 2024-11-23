@@ -1,4 +1,4 @@
-import TabPage from "@/components/shared/tabPage/TabPage";
+import TabPage from "@/components/common/tabPage/TabPage";
 import General from "../../components/settings/General";
 import { FaClipboardList, FaUserCog } from "react-icons/fa";
 import ManagePlans from "../../components/settings/MangePlans";

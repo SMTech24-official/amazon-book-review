@@ -1,6 +1,6 @@
 'use client'
 
-import BreadCrumb from "@/components/shared/breadCrumb/BreadCrumb"
+import BreadCrumb from "@/components/common/breadCrumb/BreadCrumb"
 import { Button } from "@/components/ui/button"
 import DnDInput from "@/components/ui/DnDInput"
 import { Input } from "@/components/ui/input"
