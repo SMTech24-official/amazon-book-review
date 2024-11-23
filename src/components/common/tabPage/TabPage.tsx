@@ -1,5 +1,4 @@
 "use client";
-import MyBreadcrumbs from "@/components/ui/MyBreadcrumbs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -14,10 +13,6 @@ interface TabPageProps {
   defaultTab: string;
 }
 
-const breadcrumbLinks = [
-  { name: "Verification", href: null },
-  { name: "New books", href: null },
-];
 
 export default function TabPage({ tabs, defaultTab }: TabPageProps) {
   const router = useRouter();

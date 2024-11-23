@@ -28,7 +28,6 @@ const UDBookReview = () => {
                         publishedDate={new Date(data.publishedDate)}
                         coinsPerReview={data.coinsPerReview}
                         reviewCount={data.reviewCount}
-                        avgRating={data.avgRating}
                         imageSrc={data.imageSrc}
                     />)
                 }
