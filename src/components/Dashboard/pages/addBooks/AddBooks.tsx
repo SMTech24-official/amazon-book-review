@@ -12,6 +12,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { genres } from "@/lib/fakeData/genre"
 
 export default function AddBooksO() {
 
@@ -92,10 +93,9 @@ export default function AddBooksO() {
                                     <SelectValue placeholder="Select genre" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="horror">Horror</SelectItem>
-                                    <SelectItem value="fantasy">Fantasy</SelectItem>
-                                    <SelectItem value="scifi">Science Fiction</SelectItem>
-                                    <SelectItem value="romance">Romance</SelectItem>
+                                    {
+                                        genres?.map((data, idx) => <SelectItem key={idx} value={data.toLocaleLowerCase()}>{data}</SelectItem> )
+                                    }
                                 </SelectContent>
                             </Select>
                         </div>

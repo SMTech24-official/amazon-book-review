@@ -1,6 +1,11 @@
 import ReviewedIcon from "@/assets/ReviewedIcon.svg";
 import BookDetailsComponent from '@/components/BookDetailsComponent/BookDetailsComponent';
+import { Metadata } from "next";
 import { AiOutlineAmazon } from "react-icons/ai";
+
+export const metadata: Metadata = {
+  title: 'Book Details  ',
+}
 
 
 const breadcrumbLinks = [

@@ -1,6 +1,11 @@
 import Settings from '@/components/Dashboard/pages/settings/Settings';
 import BreadCrumb from '@/components/common/breadCrumb/BreadCrumb';
+import { Metadata } from 'next';
 import React from 'react';
+
+export const metadata: Metadata = {
+    title: 'Settings  ',
+}
 
 const page = () => {
     return (

@@ -1,6 +1,13 @@
 import Image from "next/image";
 import React from "react";
 import coins from "@/assets/coins.png"
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Buzz Points',
+}
+
+
 
 type BuzzPoint = {
     type: string;

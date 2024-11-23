@@ -12,15 +12,17 @@ const ForPc = () => {
   const user = useAppSelector(selectCurrentUser);
   return (
     <div className="container hidden md:flex items-center justify-between py-2">
-      <div className="">
-        <Image
-          src={logo}
-          height={180}
-          width={180}
-          alt="logo"
-          className="object-cover"
-        />
-      </div>
+      <Link href={"/"} className="">
+        <div className="flex items-center gap-2">
+          <Image
+            src={logo}
+            alt="Booksy.buzz"
+            width={200}
+            height={200}
+            className="rounded"
+          />
+        </div>
+      </Link>
       <NavMenu />
       {user?.email ? (
         <ProfileDropdownMenu />

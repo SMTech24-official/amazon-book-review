@@ -1,8 +1,17 @@
+import BreadCrumb from '@/components/common/breadCrumb/BreadCrumb';
 import KnowledgeHub from '@/components/KnowledgeHub/KnowledgeHub';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Knowledge Hub  ',
+}
+
 
 const page = () => {
     return (
-        <div>
+        <div className='dashboard-containers'>
+          <BreadCrumb/>
           <KnowledgeHub/>
         </div>
     );

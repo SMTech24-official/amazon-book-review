@@ -31,15 +31,17 @@ const ForMobile = () => {
   };
   return (
     <div className="flex justify-between items-center px-3 md:hidden">
-      <div className="-mb-3">
-        <Image
-          src={logo}
-          height={180}
-          width={180}
-          alt="logo"
-          className="object-cover"
-        />
-      </div>
+            <Link href={"/"} className="-mb-3">
+                <div className="flex items-center gap-2">
+                    <Image
+                        src={logo}
+                        alt="Booksy.buzz"
+                        width={200}
+                        height={200}
+                        className="rounded"
+                    />
+                </div>
+            </Link>
       <div>
         <button onClick={showDrawer} className="mt-3 ml-3 p-1">
           <IoMenu size={25} />

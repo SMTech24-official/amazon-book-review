@@ -9,14 +9,18 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-[#412537] text-white pt-20 pb-16">
       <div className="grid grid-cols-2 md:grid-cols-4 items-center container">
-        <div className="flex flex-col items-center ">
-          <Image
-            src={footerLogo}
-            height={180}
-            width={180}
-            alt="logo"
-            className="object-cover mb-6"
-          />
+        <div className="flex flex-col md:items-center ">
+          <Link href={"/"} className="">
+            <div className="flex items-center gap-2">
+              <Image
+                src={footerLogo}
+                alt="Booksy.buzz"
+                width={200}
+                height={200}
+                className="rounded mb-6"
+              />
+            </div>
+          </Link>
           <NavMenu className="flex-col md:items-start gap-4 text-base font-normal" />
         </div>
 
@@ -30,15 +34,15 @@ const Footer: React.FC = () => {
             <li>
               <Link href={"/careers"}>
                 <span className="hover:text-primary">Support</span>
-              </Link> 
+              </Link>
             </li>
           </ul>
         </div>
         <div className=" flex justify-center items-center mt-2 text-base font-normal">
           <div className=" text-center ">
-          
-              <p>Copyright © 2024 Booksy.buzz</p>
-          
+
+            <p>Copyright © 2024 Booksy.buzz</p>
+
           </div>
         </div>
 
@@ -59,7 +63,7 @@ const Footer: React.FC = () => {
               </div>
             </Link>
 
-            
+
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -10,6 +10,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import MyFormInput from "../ui/MyForm/MyFormInput/MyFormInput";
 import { Button } from "@nextui-org/react";
 import KnowledgeHubStartReadingCard from "../cards/KnowledgeHubStartReadingCard";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { knowledge } from "@/lib/fakeData/knowledge";
 
 const validationSchema = z.object({
   url: z
@@ -20,6 +22,7 @@ const validationSchema = z.object({
 });
 
 const KnowledgeHub = () => {
+  const user = useAppSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const handleSubmit = async (formData: any) => {
@@ -41,30 +44,32 @@ const KnowledgeHub = () => {
   };
   return (
     <div>
-      <div className="pb-2 pt-5 ps-4 border-b w-full">
-        <p>Knowledge hub</p>
-      </div>
-      <div className="p-4">
-        <MyFormWrapper
-          className={"flex items-start gap-6 w-full"}
-          onSubmit={handleSubmit}
-          resolver={zodResolver(validationSchema)}
-        >
-          <div className="w-full">
-            <MyFormInput
-              label="Tips and guide video link"
-              labelClassName=" text-sm font-normal"
-              name={"url"}
-              placeHolder="URL..."
-            />
-          </div>
-          <Button
-            className="w-fit mx-auto mt-7 py-3 rounded-lg bg-primary text-white text-base font-normal leading-6"
-            type="submit"
-          >
-            Update
-          </Button>
-        </MyFormWrapper>
+      <div className="py-4">
+        <div className="border-b">
+          {
+            user?.role === "admin" ? <MyFormWrapper
+              className={"flex items-start gap-6 w-full"}
+              onSubmit={handleSubmit}
+              resolver={zodResolver(validationSchema)}
+            >
+              <div className="w-full">
+                <MyFormInput
+                  label="Tips and guide video link"
+                  labelClassName=" text-sm font-normal"
+                  name={"url"}
+                  placeHolder="URL..."
+                />
+              </div>
+              <Button
+                className="w-fit mx-auto mt-7 py-3 rounded-lg bg-primary text-white text-base font-normal leading-6"
+                type="submit"
+              >
+                Update
+              </Button>
+            </MyFormWrapper> : <span >Tips and guide video</span>
+          }
+        </div>
+
         <div className="mt-4 mb-12">
           <iframe
             className="w-full max-w-2xl h-96 border rounded mx-auto"
@@ -78,13 +83,16 @@ const KnowledgeHub = () => {
         <div>
           <div className="flex items-center justify-between border-b pb-2 w-full">
             <p>Resources & Booksy guides for author </p>
-            <Button radius="sm" className="bg-primary text-white">
-              Add New
-            </Button>
+            {
+              user?.role === "admin" && <Button radius="sm" className="bg-primary text-white">
+                Add New
+              </Button>
+            }
+
           </div>
-          <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4 py-4">
-            {[0, 1, 2, 3, 4, 5]?.map((item) => (
-              <KnowledgeHubStartReadingCard key={item} />
+          <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 xl:grid-cols-4 gap-4 py-4">
+            {knowledge?.map((item, idx) => (
+              <KnowledgeHubStartReadingCard image={item.image_url.src} author={item.author} title={item.title} key={idx} />
             ))}
           </div>
         </div>

@@ -1,4 +1,12 @@
 import KnowledgeHub from '@/components/KnowledgeHub/KnowledgeHub';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Knowledge Hub',
+  }
+  
+
+  
 
 const KnowledgeHubPage = () => {
     return (

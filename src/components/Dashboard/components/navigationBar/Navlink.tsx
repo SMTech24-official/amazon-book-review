@@ -28,6 +28,7 @@ export default function MainNavLink({ user, navLink, additionalRoutes }: { user:
         // For other routes, match using startsWith
         return cleanPathname.startsWith(cleanHref);
     };
+
     const dispatch = useAppDispatch()
     const router = useRouter()
 
@@ -36,7 +37,7 @@ export default function MainNavLink({ user, navLink, additionalRoutes }: { user:
     };
     return (
         <div className="flex flex-col min-h-screen bg-white">
-            <div className="p-4">
+            <Link href={"/"} className="p-4">
                 <div className="flex items-center gap-2">
                     <Image
                         src={logo}
@@ -46,7 +47,7 @@ export default function MainNavLink({ user, navLink, additionalRoutes }: { user:
                         className="rounded"
                     />
                 </div>
-            </div>
+            </Link>
             <nav className="flex-1 p-4">
                 <div className="space-y-1">
                     {

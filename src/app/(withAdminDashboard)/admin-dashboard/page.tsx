@@ -4,8 +4,14 @@ import BooksComponent from "@/components/AdminDashboard/BooksComponent/BooksComp
 import TabPage from "@/components/common/tabPage/TabPage";
 import { TBooksAndMembers } from "@/interface/globalType";
 import { useGetAllPendingBooksQuery } from "@/redux/features/book/bookApi";
+import { Metadata } from "next";
 import { useEffect } from "react";
 import { FaClipboardList, FaUserCog } from "react-icons/fa";
+
+export const metadata: Metadata = {
+  title: 'Admin Dashboard',
+}
+
 
 const books: TBooksAndMembers[] = [
   {

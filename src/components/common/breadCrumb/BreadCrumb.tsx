@@ -22,7 +22,7 @@ const BreadCrumb = () => {
 
     return (
         <div className="">
-            <div className="flex items-start gap-2 font-semibold lg:text-xl md:text-lg">
+            <div className="flex items-start gap-2 font-semibold  md:text-lg">
                 {/* Render path-based breadcrumbs */}
                 {pathnames.map((breadcrumb, index) => (
                     <span key={`path-${index}`} className="text-black capitalize flex items-center gap-2">

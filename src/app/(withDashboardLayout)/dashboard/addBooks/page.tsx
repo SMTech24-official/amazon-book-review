@@ -1,4 +1,10 @@
 import AddBooks from '@/components/Dashboard/pages/addBooks/AddBooks';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Add Books  ',
+}
+
 
 const page = () => {
     return (

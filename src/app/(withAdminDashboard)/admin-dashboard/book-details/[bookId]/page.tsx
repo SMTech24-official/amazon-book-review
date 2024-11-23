@@ -1,5 +1,12 @@
 "use client";
 import BookDetailsComponent from "@/components/BookDetailsComponent/BookDetailsComponent";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Book Details',
+}
+
+
 
 const BookDetailsPage = () => {
   const breadcrumbLinks = [

@@ -1,4 +1,10 @@
 import UserDashboard from '@/components/Dashboard/pages/userDashboard/UserDashboard';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Dashboard',
+}
+
 
 const page = () => {
     return (

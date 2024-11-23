@@ -5,6 +5,8 @@ import { useState } from 'react';
 import FilterDropdown from '../../components/filterButton/FilterButton';
 import LibraryBookCard from '../../components/cards/libraryBookCard/LibraryBooksCard';
 import BreadCrumb from '@/components/common/breadCrumb/BreadCrumb';
+import { Button } from '@nextui-org/react';
+import { genres } from '@/lib/fakeData/genre';
 
 const UserLibrary = () => {
     const [filter, setFilter] = useState('All'); // State to manage filter
@@ -14,16 +16,7 @@ const UserLibrary = () => {
         filter === 'All' || book.genre == filter.toLocaleLowerCase() || book.bookFromet == filter.toLocaleLowerCase()
     );
 
-    const genres = [
-        "All",
-        "Horror",
-        "Drama",
-        "Comedy",
-        "Romance",
-        "Science fiction",
-        "Mystery",
-        "Thriller"
-    ]
+
 
     return (
         <div>

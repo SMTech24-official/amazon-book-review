@@ -2,6 +2,13 @@ import TotalMembers from '@/components/AdminDashboard/TotalMembers/TotalMembers'
 import { TBooksAndMembers } from '@/interface/globalType';
 import React from 'react';
 import memberImage from "@/assets/member.png";
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Members Details',
+}
+
+
 
 const books: TBooksAndMembers[] = [
     {
