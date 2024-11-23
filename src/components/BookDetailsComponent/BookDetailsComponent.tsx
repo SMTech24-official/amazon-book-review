@@ -9,32 +9,37 @@ import Image, { StaticImageData } from "next/image";
 import { useParams } from "next/navigation";
 import React from "react";
 import MyBreadcrumbs from "../ui/MyBreadcrumbs";
-
-
+import { useSingleBookQuery } from "@/redux/features/book/bookApi";
+import MyLoading from "../ui/MyLoading";
 
 interface BreadcrumbLink {
-    name: string;
-    href?: string | null;
-  }
-  
-  interface ButtonConfig {
-    text: string;
-    style: string;
-    icon?: React.ReactNode;
-    svg?: string | null | StaticImageData;
-  }
-  
-  interface BookDetailsComponentProps {
-    breadcrumbLinks?: BreadcrumbLink[];
-    buttons?: ButtonConfig[];
-    buttonLayoutClassName?: string;
-  }
+  name: string;
+  href?: string | null;
+}
 
+interface ButtonConfig {
+  text: string;
+  style: string;
+  icon?: React.ReactNode;
+  svg?: string | null | StaticImageData;
+}
 
-const BookDetailsComponent = ({ breadcrumbLinks, buttonLayoutClassName, buttons }: BookDetailsComponentProps) => {
+interface BookDetailsComponentProps {
+  breadcrumbLinks?: BreadcrumbLink[];
+  buttons?: ButtonConfig[];
+  buttonLayoutClassName?: string;
+}
+
+const BookDetailsComponent = ({
+  breadcrumbLinks,
+  buttonLayoutClassName,
+  buttons,
+}: BookDetailsComponentProps) => {
   const params = useParams();
   const bookId = params.bookId;
-  console.log(bookId);
+
+  const { data, isLoading } = useSingleBookQuery(bookId);
+  console.log(data);
 
   const handleButtonClick = (buttonText: string) => {
     switch (buttonText) {
@@ -64,9 +69,12 @@ const BookDetailsComponent = ({ breadcrumbLinks, buttonLayoutClassName, buttons 
     }
   };
 
+  if (isLoading) {
+    return <MyLoading />;
+  }
   return (
     <div className="p-4 h-full max-h-[calc(100vh-70px)] flex flex-col">
-      <MyBreadcrumbs breadcrumbLinks={breadcrumbLinks}/>
+      <MyBreadcrumbs breadcrumbLinks={breadcrumbLinks} />
       <div className="  flex-grow flex flex-col">
         <Image
           src={bookCoverImage}
@@ -106,7 +114,12 @@ const BookDetailsComponent = ({ breadcrumbLinks, buttonLayoutClassName, buttons 
                 <p>Mystery</p>
               </div>
             </div>
-            <div className={cn("grid gap-2 md:gap-5 mb-3  ", buttonLayoutClassName || "xs:grid-cols-3")}>
+            <div
+              className={cn(
+                "grid gap-2 md:gap-5 mb-3  ",
+                buttonLayoutClassName || "xs:grid-cols-3"
+              )}
+            >
               {/* <div className="w-full">
                 <Button
                   radius="sm"
@@ -137,12 +150,24 @@ const BookDetailsComponent = ({ breadcrumbLinks, buttonLayoutClassName, buttons 
                 <Button
                   key={index}
                   radius="sm"
-                  className={cn(`w-full py-5 font-normal flex items-center justify-center gap-2 text-xs md:text-sm lg:text-base`, button.style)}
+                  className={cn(
+                    `w-full py-5 font-normal flex items-center justify-center gap-2 text-xs md:text-sm lg:text-base`,
+                    button.style
+                  )}
                   onClick={() => handleButtonClick(button.text)}
                 >
                   {button.text}
                   {button.icon && <span>{button.icon}</span>}
-                  {button.svg && <span><Image src={button.svg} height={20} width={22} alt="image"/></span>}
+                  {button.svg && (
+                    <span>
+                      <Image
+                        src={button.svg}
+                        height={20}
+                        width={22}
+                        alt="image"
+                      />
+                    </span>
+                  )}
                 </Button>
               ))}
             </div>

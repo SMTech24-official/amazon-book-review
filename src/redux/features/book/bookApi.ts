@@ -10,6 +10,13 @@ const authApi = baseApi.injectEndpoints({
             }),
             providesTags: ["Book"],
         }),
+        singleBook: builder.query({
+            query: (id) => ({
+                url: `/admin/book/${id}`,
+                method: "GET",
+            }),
+            providesTags: ["Book"],
+        }),
         // login: builder.mutation({
         //     query: (userInfo) => {
         //         return {
@@ -52,4 +59,4 @@ const authApi = baseApi.injectEndpoints({
     }),
 });
 
-export const { useGetAllPendingBooksQuery } = authApi;
+export const { useGetAllPendingBooksQuery, useSingleBookQuery } = authApi;
