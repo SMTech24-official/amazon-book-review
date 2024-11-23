@@ -32,8 +32,8 @@ export default function TabPage({ tabs, defaultTab }: TabPageProps) {
   };
 
   return (
-    <div className="min-h-screen p-4">
-     <MyBreadcrumbs breadcrumbLinks={breadcrumbLinks} className="mb-4"/>
+    <div className="min-h-screen">
+     {/* <MyBreadcrumbs breadcrumbLinks={breadcrumbLinks} className="mb-4"/> */}
       <div className="border-t ">
         <Tabs
           defaultValue={tab}
@@ -41,7 +41,7 @@ export default function TabPage({ tabs, defaultTab }: TabPageProps) {
         >
           <div className="pt-4 col-span-2 xl:col-span-1 sm:border-r w-full h-full sticky sm:block top-[49px]">
             <TabsList className="sm:flex sm:flex-col items-start justify-center sm:justify-start sm:pr-4 sm:sticky sm:top-20 top-16 bg-white xl:block w-full min-h-14 ">
-              {tabs.map((tabItem) => (
+              {tabs?.map((tabItem) => (
                 <TabsTrigger
                   key={tabItem.value}
                   onClick={() => handleTab(tabItem.value)}

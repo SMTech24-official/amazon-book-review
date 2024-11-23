@@ -1,62 +1,47 @@
-
 import { baseApi } from "../../api/baseApi";
 
 const authApi = baseApi.injectEndpoints({
-    endpoints: (builder) => ({
-        getAllPendingBooks: builder.query({
-            query: () => ({
-                url: "/admin",
-                method: "GET",
-            }),
-            providesTags: ["Book"],
-        }),
-        singleBook: builder.query({
-            query: (id) => ({
-                url: `/admin/book/${id}`,
-                method: "GET",
-            }),
-            providesTags: ["Book"],
-        }),
-        // login: builder.mutation({
-        //     query: (userInfo) => {
-        //         return {
-        //             url: "auth/login",
-        //             method: "POST",
-        //             body: userInfo,
-        //         }
-        //     },
-        //       invalidatesTags: ["User"]
-        // }),
-        // updateUser: builder.mutation({
-        //     query: (userInfo) => {
-        //         return {
-        //             url: "user/me",
-        //             method: "PATCH",
-        //             body: userInfo,
-        //         }
-        //     },
-        //     invalidatesTags: ["User"],
-        // }),
-        // register: builder.mutation({
-        //     query: (userInfo) => {
-        //         return {
-        //             url: "users/register",
-        //             method: "POST",
-        //             body: userInfo,
-        //         }
-        //     },
-        // }),
-        // otp: builder.mutation({
-        //     query: (userInfo) => {
-        //         return {
-        //             url: "users/verify-otp",
-        //             method: "POST",
-        //             body: userInfo,
-        //         }
-        //     },
-        // }),
-      
+  endpoints: (builder) => ({
+    getAllPendingBooks: builder.query({
+      query: () => ({
+        url: "/admin",
+        method: "GET",
+      }),
+      providesTags: ["Book"],
     }),
+    singleBook: builder.query({
+      query: (id) => ({
+        url: `/admin/book/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Book"],
+    }),
+    approveBook: builder.mutation({
+      query: (id) => {
+        return {
+          url: `admin/approve/${id}`,
+          method: "PUT",
+          // body: userInfo,
+        };
+      },
+      invalidatesTags: ["Book"],
+    }),
+    rejectBook: builder.mutation({
+      query: (id) => {
+        return {
+          url: `admin/reject/${id}`,
+          method: "PUT",
+          // body: userInfo,
+        };
+      },
+      invalidatesTags: ["Book"],
+    }),
+  }),
 });
 
-export const { useGetAllPendingBooksQuery, useSingleBookQuery } = authApi;
+export const {
+  useGetAllPendingBooksQuery,
+  useSingleBookQuery,
+  useApproveBookMutation,
+  useRejectBookMutation,
+} = authApi;

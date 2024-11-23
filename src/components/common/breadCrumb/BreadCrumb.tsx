@@ -24,14 +24,14 @@ const BreadCrumb = () => {
         <div className="">
             <div className="flex items-start gap-2 font-semibold lg:text-xl md:text-lg">
                 {/* Render path-based breadcrumbs */}
-                {pathnames.map((breadcrumb, index) => (
+                {pathnames?.map((breadcrumb, index) => (
                     <span key={`path-${index}`} className="text-black capitalize flex items-center gap-2">
                         {breadcrumb}
                         {index < pathnames.length - 1 && <ChevronRight className="min-h-5 min-w-5" />}
                     </span>
                 ))}
                 {/* Render tab-based breadcrumbs */}
-                {breadcrumbs.map((breadcrumb, index) => (
+                {breadcrumbs?.map((breadcrumb, index) => (
                     <span key={`tab-${index}`} className="text-black capitalize flex items-center">
                         {index == 0 && <ChevronRight className="min-h-5 min-w-5" />}
                         {breadcrumb}

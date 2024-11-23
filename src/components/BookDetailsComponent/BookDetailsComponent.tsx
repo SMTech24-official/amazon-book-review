@@ -1,16 +1,21 @@
 "use client";
-import bookCoverImage from "@/assets/Book Cover Image.png";
 import brokenLinkIcon from "@/assets/brokenLinkIcon.svg";
 import coins from "@/assets/coins.png";
 import pdfIcon from "@/assets/pdfIcon.svg";
 import { cn } from "@/lib/utils";
+import {
+  useApproveBookMutation,
+  useRejectBookMutation,
+  useSingleBookQuery,
+} from "@/redux/features/book/bookApi";
+import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
 import { Button } from "@nextui-org/react";
 import Image, { StaticImageData } from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React from "react";
 import MyBreadcrumbs from "../ui/MyBreadcrumbs";
-import { useSingleBookQuery } from "@/redux/features/book/bookApi";
 import MyLoading from "../ui/MyLoading";
+import BreadCrumb from "../common/breadCrumb/BreadCrumb";
 
 interface BreadcrumbLink {
   name: string;
@@ -36,37 +41,108 @@ const BookDetailsComponent = ({
   buttons,
 }: BookDetailsComponentProps) => {
   const params = useParams();
-  const bookId = params.bookId;
+  const router = useRouter();
+  const bookId = params?.bookId;
 
   const { data, isLoading } = useSingleBookQuery(bookId);
-  console.log(data);
+  const [approveBookMutation] = useApproveBookMutation();
+  const [rejectBookMutation] = useRejectBookMutation();
 
-  const handleButtonClick = (buttonText: string) => {
-    switch (buttonText) {
-      case "View the book on Amazon":
-        console.log("Navigating to the book on Amazon...");
-        break;
-      case "Review now on Amazon":
-        console.log("Starting the review process on Amazon...");
-        break;
-      case "Reviewed":
-        console.log("The book has already been reviewed.");
-        break;
-      case "Verify Amazon Link":
-        console.log("Verifying the Amazon link...");
-        break;
-      case "Approve":
-        console.log("The book has been approved.");
-        break;
-      case "Deny":
-        console.log("The book has been denied.");
-        break;
-      case "Verify Review now on amazon":
-        console.log("Verifying the review on Amazon...");
-        break;
-      default:
-        console.log(`Unknown action for button: ${buttonText}`);
+  const handleButtonClick = async (buttonText: string) => {
+    try {
+      switch (buttonText) {
+        case "View the book on Amazon":
+          console.log("Navigating to the book on Amazon...");
+          break;
+
+        case "Review now on Amazon":
+          console.log("Starting the review process on Amazon...");
+          break;
+
+        case "Reviewed":
+          console.log("The book has already been reviewed.");
+          break;
+
+        case "Verify Amazon Link":
+          if (data?.data?.amazonBookUrl) {
+            window.open(
+              data.data.amazonBookUrl,
+              "_blank",
+              "noopener,noreferrer"
+            );
+          } else {
+            console.error("Amazon book URL is not available.");
+          }
+          break;
+
+        case "Approve":
+          if (!data?.data?._id) {
+            console.error("Book ID is missing. Approval cannot proceed.");
+            return;
+          }
+          await handleAsyncWithToast(
+            async () => approveBookMutation(data.data._id),
+            "Approving...",
+            "Book approved successfully!",
+            "Approval failed. Please try again.",
+            false, // No Redux user update
+            null, // No dispatch needed
+            "/admin-dashboard?tab=New+Books",
+            router // Pass the router instance
+          );
+
+          break;
+
+        case "Deny":
+          console.log("The book has been denied.");
+          if (!data?.data?._id) {
+            console.error("Book ID is missing. Denial cannot proceed.");
+            return;
+          }
+          await handleAsyncWithToast(
+            async () => rejectBookMutation(data.data._id),
+            "Denying...",
+            "Book denied successfully!",
+            "Denial failed. Please try again.",
+            false, // No Redux user update
+            null, // No dispatch needed
+            "/admin-dashboard?tab=New+Books", // Redirect URL
+            router // Pass the router instance
+          );
+          break;
+
+        case "Verify Review now on amazon":
+          if (data?.data?.amazonReviewUrl) {
+            console.log("Verifying the review on Amazon...");
+            window.open(
+              data.data.amazonReviewUrl,
+              "_blank",
+              "noopener,noreferrer"
+            );
+          } else {
+            console.error("Amazon review URL is not available.");
+          }
+          break;
+
+        default:
+          console.log(`Unknown action for button: ${buttonText}`);
+      }
+    } catch (error) {
+      console.error(
+        `Error in handling action for button: ${buttonText}`,
+        error
+      );
     }
+  };
+
+  // Handle PDF download
+  const handleDownloadPdf = (pdfUrl: string) => {
+    if (!pdfUrl) {
+      alert("PDF not available");
+      return;
+    }
+    // Open the PDF in a new tab
+    window.open(pdfUrl, "_blank", "noopener,noreferrer");
   };
 
   if (isLoading) {
@@ -74,10 +150,11 @@ const BookDetailsComponent = ({
   }
   return (
     <div className="p-4 h-full max-h-[calc(100vh-70px)] flex flex-col">
-      <MyBreadcrumbs breadcrumbLinks={breadcrumbLinks} />
+      {/* <MyBreadcrumbs breadcrumbLinks={breadcrumbLinks} /> */}
+      <BreadCrumb/>
       <div className="  flex-grow flex flex-col">
         <Image
-          src={bookCoverImage}
+          src={data?.data?.bookCover}
           height={500}
           width={200}
           alt="image"
@@ -87,32 +164,39 @@ const BookDetailsComponent = ({
           <div className="w-full ">
             <div className="flex flex-col xs:flex-row gap-2 justify-between mb-3">
               <p className="text-xl font-medium">{data?.data?.title}</p>
-              <div className="border-2 border-gray-300 text-primary rounded-full flex items-center gap-2 px-4 py-1 w-fit">
+              <div
+                onClick={() => handleDownloadPdf(data?.data?.bookPdf)}
+                className="border-2 cursor-pointer border-gray-300 text-primary rounded-full flex items-center gap-2 px-4 py-1 w-fit"
+              >
                 <p>Download as PDF</p>
                 <Image src={pdfIcon} height={10} width={15} alt="image" />
               </div>
             </div>
             <div className="flex flex-col xs:flex-row gap-2 justify-between mb-3">
-              <p className="text-xs font-medium">By: {data?.data?.authorName}</p>
+              <p className="text-xs font-medium">
+                By: {data?.data?.authorName}
+              </p>
               <div className="border border-gray-300 text-primary rounded-full flex items-center gap-2 px-4 py-1 w-fit">
                 <Image src={coins} height={10} width={20} alt="image" />
-                <p>500</p>
+                <p>{data?.data?.points}</p>
               </div>
             </div>
             <div className="flex flex-col xs:flex-row gap-2 justify-between mb-3">
-              <p className="text-xs font-medium">Word count: 12000-20000</p>
-              <p className="text-xs font-medium">Book type: Fiction</p>
+              {/* <p className="text-xs font-medium">Word count: 12000-20000</p> */}
+              <p className="text-xs font-medium">
+                Book type: {data?.data?.bookType}
+              </p>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-3  mb-4 md:mb-8">
               <div className="border border-gray-300 text-gray-700 text-xs font-medium rounded-full flex items-center gap-2 px-4 py-1 w-fit">
-                <p>Action</p>
+                <p>{data?.data?.genre}</p>
               </div>
-              <div className="border border-gray-300 text-gray-700 text-xs font-medium rounded-full flex items-center gap-2 px-4 py-1 w-fit">
+              {/* <div className="border border-gray-300 text-gray-700 text-xs font-medium rounded-full flex items-center gap-2 px-4 py-1 w-fit">
                 <p>Romance</p>
               </div>
               <div className="border border-gray-300 text-gray-700 text-xs font-medium rounded-full flex items-center gap-2 px-4 py-1 w-fit">
                 <p>Mystery</p>
-              </div>
+              </div> */}
             </div>
             <div
               className={cn(

@@ -1,9 +1,12 @@
 "use client";
 import newBook from "@/assets/newBook.png";
 import BooksComponent from "@/components/AdminDashboard/BooksComponent/BooksComponent";
+import ReviewComponent from "@/components/AdminDashboard/ReviewComponent/ReviewComponent";
+import BreadCrumb from "@/components/common/breadCrumb/BreadCrumb";
 import TabPage from "@/components/common/tabPage/TabPage";
 import { TBooksAndMembers } from "@/interface/globalType";
 import { useGetAllPendingBooksQuery } from "@/redux/features/book/bookApi";
+import { useGetAllPendingReviewsQuery } from "@/redux/features/review/reviewApi";
 import { useEffect } from "react";
 import { FaClipboardList, FaUserCog } from "react-icons/fa";
 
@@ -33,7 +36,9 @@ const books: TBooksAndMembers[] = [
 
 const AdminDashboardPAge = () => {
   const { data, isLoading } = useGetAllPendingBooksQuery(undefined);
-  console.log(data?.data);
+  const { data: reviewData, isLoading: isReviewDataLoading } =
+    useGetAllPendingReviewsQuery(undefined);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const url = new URL(window.location.href);
@@ -50,25 +55,39 @@ const AdminDashboardPAge = () => {
       value: "New Books",
       icon: <FaUserCog className="min-w-6 min-h-6 mr-2" />,
       component: (
-        <BooksComponent
-          books={data?.data}
-          isLoading={isLoading}
-          title="New books pending"
-        />
+        // <BooksComponent
+        //   books={data?.data}
+        //   isLoading={isLoading}
+        //   title="New books pending"
+        // />
+        <>asd</>
       ),
     },
     {
       label: "New Reviews",
       value: "New Reviews",
       icon: <FaClipboardList className="min-w-6 min-h-6 mr-2" />,
-      component: <BooksComponent books={books} title="New review pending" />,
+      component: (
+        <ReviewComponent
+          items={reviewData?.data}
+          isLoading={isReviewDataLoading}
+          title="New review pending"
+        />
+      ),
     },
   ];
 
   // demo link for breadcrumb
   // http://localhost:3000/admin-dashboard/settings?tab=general/subtab1/subtab2
 
-  return <TabPage defaultTab="New Books" tabs={tabs} />;
+  return (
+    <div className="dashboard-containers">
+      <div className="mb-3">
+        <BreadCrumb />
+      </div>
+      <TabPage defaultTab="New Books" tabs={tabs} />
+    </div>
+  );
 };
 
 export default AdminDashboardPAge;

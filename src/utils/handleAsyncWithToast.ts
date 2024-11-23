@@ -11,7 +11,9 @@ export const handleAsyncWithToast = async (
   successMessage?: string,
   errorMessage?: string,
   isSetUserToRedux: boolean = false, // New parameter to determine if the user should be set
-  dispatch?: any // Accept the dispatch function as a parameter
+  dispatch?: any, // Accept the dispatch function as a parameter
+  redirectTo?: string, // URL to redirect after success
+  router?: any // Accept the router instance as a parameter
 ) => {
   const toastInit = toast.loading(loadingMessage);
 
@@ -32,6 +34,11 @@ export const handleAsyncWithToast = async (
         );
         // dispatch(setUser({ user: res.data.user, token: res.data.accessToken }));
       }
+
+        // Redirect if redirectTo is provided
+        if (redirectTo && router) {
+          router.push(redirectTo);
+        }
     }
 
     if (res?.message) {
