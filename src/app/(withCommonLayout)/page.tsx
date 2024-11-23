@@ -11,6 +11,7 @@ import PageTransition from "@/components/ui/PageTransition";
 const HomePage = () => {
   return (
     <PageTransition>
+      {/* main page */}
       <Navbar />
       <HeroSection />
       <GettingStarted />

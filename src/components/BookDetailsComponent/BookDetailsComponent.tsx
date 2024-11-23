@@ -86,14 +86,14 @@ const BookDetailsComponent = ({
         <div className="w-full max-w-5xl mx-auto flex-grow flex flex-col justify-between  gap-2 ">
           <div className="w-full ">
             <div className="flex flex-col xs:flex-row gap-2 justify-between mb-3">
-              <p className="text-xl font-medium">Fire & Blood</p>
+              <p className="text-xl font-medium">{data?.data?.title}</p>
               <div className="border-2 border-gray-300 text-primary rounded-full flex items-center gap-2 px-4 py-1 w-fit">
                 <p>Download as PDF</p>
                 <Image src={pdfIcon} height={10} width={15} alt="image" />
               </div>
             </div>
             <div className="flex flex-col xs:flex-row gap-2 justify-between mb-3">
-              <p className="text-xs font-medium">By: George R. R. Martin</p>
+              <p className="text-xs font-medium">By: {data?.data?.authorName}</p>
               <div className="border border-gray-300 text-primary rounded-full flex items-center gap-2 px-4 py-1 w-fit">
                 <Image src={coins} height={10} width={20} alt="image" />
                 <p>500</p>
