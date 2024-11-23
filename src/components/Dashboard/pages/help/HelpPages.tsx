@@ -9,8 +9,8 @@ const HelpPages = () => {
     return (
         <div>
             <p className='mt-4 py-5 border-b'>Email: <span>example@gmail.com</span></p>
-            <GradCircleWrapper>
-                <div className='flex flex-col items-center justify-center lg:space-y-6 md:space-y-4 space-y-2 aspect-square'>
+            <GradCircleWrapper className=''>
+                <div className='flex flex-col items-center justify-center lg:space-y-6 md:space-y-4 space-y-2 aspect-square '>
                     <p className='text-2xl font-medium text-center'>Let’s work together and solve the problem!</p>
                     <p className='max-w-sm text-center'>Our customer care will guide you step by step to your solution</p>
                     <Button radius='sm' className='bg-primary text-white flex items-center gap-2'>
