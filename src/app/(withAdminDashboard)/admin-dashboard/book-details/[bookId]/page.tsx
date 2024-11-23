@@ -1,4 +1,3 @@
-"use client";
 import BookDetailsComponent from "@/components/BookDetailsComponent/BookDetailsComponent";
 import { Metadata } from "next";
 

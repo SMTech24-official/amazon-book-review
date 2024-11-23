@@ -1,4 +1,3 @@
-"use client";
 import newBook from "@/assets/newBook.png";
 import BooksComponent from "@/components/AdminDashboard/BooksComponent/BooksComponent";
 import TabPage from "@/components/common/tabPage/TabPage";
