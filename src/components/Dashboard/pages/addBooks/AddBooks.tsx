@@ -12,15 +12,19 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { BookTypes } from "@/lib/fakeData/bookTypes"
 import { genres } from "@/lib/fakeData/genre"
+import { useAddBookMutation } from "@/redux/features/book/bookApi"
 
 export default function AddBooksO() {
-
+    const [addBook] = useAddBookMutation()
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget);
         const data = Object.fromEntries(formData.entries());
         console.log('Form Data:', data)
+        addBook(data).unwrap()
+            .then(res => console.log(res.json()))
     }
 
     return (
@@ -35,27 +39,25 @@ export default function AddBooksO() {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="author">Author name</Label>
-                        <Input id="author" name="author" placeholder="John" />
+                        <Label htmlFor="authorName">Author name</Label>
+                        <Input id="authorName" name="authorName" placeholder="John" />
                     </div>
                 </div>
 
                 <div className="grid gap-6 sm:grid-cols-2">
                     <div className="space-y-2">
-                        <Label htmlFor="amazonLink">Your book link of amazon books</Label>
-                        <Input id="amazonLink" name="amazonLink" placeholder="URL" />
+                        <Label htmlFor="amazonBookUrl">Your book link of amazon books</Label>
+                        <Input id="amazonBookUrl" name="amazonBookUrl" placeholder="URL" />
                     </div>
 
                     <div className="space-y-2">
                         <Label>Where will the reader read the book?</Label>
-                        <Select name="readingPlatform" >
+                        <Select name="bookFormat" >
                             <SelectTrigger>
                                 <SelectValue placeholder="Select reading location" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="pdf">PDF</SelectItem>
-                                <SelectItem value="kindle">Kindle</SelectItem>
-                                <SelectItem value="epub">EPUB</SelectItem>
+                                <SelectItem value="PDF">PDF</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
@@ -94,7 +96,7 @@ export default function AddBooksO() {
                                 </SelectTrigger>
                                 <SelectContent>
                                     {
-                                        genres?.map((data, idx) => <SelectItem key={idx} value={data.toLocaleLowerCase()}>{data}</SelectItem> )
+                                        genres?.map((data, idx) => <SelectItem key={idx} value={data.toLocaleLowerCase()}>{data}</SelectItem>)
                                     }
                                 </SelectContent>
                             </Select>
@@ -107,9 +109,11 @@ export default function AddBooksO() {
                                     <SelectValue placeholder="Select a type" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="fiction">Fiction</SelectItem>
-                                    <SelectItem value="nonfiction">Non-Fiction</SelectItem>
-                                    <SelectItem value="academic">Academic</SelectItem>
+                                    <SelectContent>
+                                        {
+                                            BookTypes?.map((data, idx) => <SelectItem key={idx} value={data.toLocaleLowerCase()}>{data}</SelectItem>)
+                                        }
+                                    </SelectContent>
                                 </SelectContent>
                             </Select>
                         </div>

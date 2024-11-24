@@ -1,13 +1,12 @@
 "use client"
-import { Button } from '@nextui-org/react';
-import Image from 'next/image';
-import React from 'react';
-import { RiCustomerService2Line } from 'react-icons/ri';
-import refer from "@/assets/fi_1921935.png"
-import referIcon from "@/assets/refer.png"
-import handIcon from "@/assets/fi_18188459.png"
-import ProgressBar from '../../components/progressBar/ProgressBar';
+import handIcon from "@/assets/fi_18188459.png";
+import refer from "@/assets/fi_1921935.png";
+import referIcon from "@/assets/refer.png";
 import GradCircleWrapper from '@/components/common/grad-circleWrapper/GradCircleWrapper';
+import { Button } from '@nextui-org/react';
+import { Copy } from 'lucide-react';
+import Image from 'next/image';
+import ProgressBar from '../../components/progressBar/ProgressBar';
 const Referral = () => {
     return (
         <div>
@@ -34,7 +33,7 @@ const Referral = () => {
                             className="rounded sm:w-6 sm:h-6 w-6 h-6"
                         />
                         Copy Referral Link
-                        <RiCustomerService2Line className='min-h-6 min-w-6' />
+                        <Copy className='min-h-6 min-w-6' />
                     </Button>
                 </div>
             </GradCircleWrapper>

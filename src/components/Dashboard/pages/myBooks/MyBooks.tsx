@@ -2,19 +2,27 @@
 
 import React, { useState } from 'react';
 import BooksCards from '../../components/cards/booksCard/BooksCards';
-import { booksReview } from '@/lib/fakeData/BooksReview';
 import { RiStickyNoteAddFill } from 'react-icons/ri';
 import Link from 'next/link';
 import BreadCrumb from '@/components/common/breadCrumb/BreadCrumb';
+import { useGetAllBooksQuery } from '@/redux/features/book/bookApi';
+import { Book, User } from '@/lib/types/type';
+import MyLoading from '@/components/ui/MyLoading';
 
 const MyBooks = () => {
+    const { data: BooksData, isLoading } = useGetAllBooksQuery(undefined)
+
     const [filter, setFilter] = useState('All'); // State to manage filter
 
     // Filter books based on the selected filter
-    const filteredBooks = booksReview.filter(book =>
-        filter === 'All' || book.status === filter.toLocaleLowerCase()
+    const filteredBooks = BooksData?.data.filter((book: User & Book) =>
+        filter === 'All' || book.status.toLowerCase() === filter.toLowerCase()
     );
 
+    if (isLoading) {
+        return <div className="h-screen"><MyLoading /></div>
+    }
+    
     return (
         <div>
             {/* heading */}
@@ -48,20 +56,22 @@ const MyBooks = () => {
                         <span className='text-primary group-hover:text-white'>Add Books</span>
                     </Link>
                 </div>
+
             </div>
 
             {/* Books Grid */}
             <div className='sm:grid sm:grid-cols-2 flex flex-wrap items-center justify-center xl:gap-5 lg:gap-4 md:gap-3 gap-2'>
-                {filteredBooks.map(data => (
+                {filteredBooks?.map((data: User & Book) => (
                     <BooksCards
-                        key={data.id}
-                        bookTitle={data.bookTitle}
+                        key={data._id}
+                        bookTitle={data.title}
                         status={data.status}
-                        readers={data.readers}
+                        readers={data.readers ?? 0}
                         publishedDate={new Date(data.publishedDate)}
                         coinsPerReview={data.coinsPerReview}
                         reviewCount={data.reviewCount}
-                        imageSrc={data.imageSrc}
+                        imageSrc={data.bookCover}
+                        isReadyForReview={data.isReadyForReview}
                     />
                 ))}
             </div>

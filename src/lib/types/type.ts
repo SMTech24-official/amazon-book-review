@@ -1,18 +1,7 @@
 import { IconType } from "react-icons";
 
-type UserRole = "Reviewer" | "Author" | "Admin";
 
-export type User = {
-  image: string | null; // URL to the user's image
-  name: string; // User's full name
-  amazonAuthorPage: string; // Link to the Amazon author page
-  email: string; // User's email address
-  amazonReviewerName: string; // Amazon reviewer username
-  reviewCountry: string | null; // Country associated with reviews
-  password: string; // Hashed password (store securely, never plain text)
-  role: UserRole; // Role of the user
-  plans: string;
-};
+
 
 export type NavLink = {
   name: string;
@@ -34,4 +23,50 @@ export type SubscriptionPlan = {
   features: string[];
   button: PlanFeature;
   image: string; // Path to the image
+};
+
+export type User = {
+  _id: string;
+  fullName: string;
+  reviewerName: string;
+  amazonCountry: string;
+  image: string | null; 
+  email: string;
+  password: string;
+  role: string;
+  points: number;
+  otp: string | null;
+  otpExpires: string | null;
+  isVerified: boolean;
+  isSubscribed: boolean;
+  subscriptionPlane: string;
+  invitedFriends: number;
+  termsAccepted: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
+
+export type Metadata = {
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type Book = {
+  _id: string;
+  title: string;
+  readers: number | null
+  status: string;
+  publishedDate: string;
+  coinsPerReview: number;
+  reviewCount: number;
+  bookCover: string;
+  authorName: string;
+  genre: string;
+  bookFormate: string;
+  userId: User; // Link to the `User` type
+  bookPdf: string;
+  isReadyForReview: boolean;
+  amazonBookUrl: string;
+  bookType: string;
 };

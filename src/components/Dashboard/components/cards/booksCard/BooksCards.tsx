@@ -2,7 +2,7 @@
 import Image from "next/image";
 import coins from "@/assets/coins.png"
 import reviewIcon from "@/assets/ReviewIcon.png"
-import {  Button } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import { cn } from "@/lib/utils";
 
 export default function BooksCards({
@@ -13,6 +13,7 @@ export default function BooksCards({
   coinsPerReview,
   reviewCount,
   imageSrc,
+  isReadyForReview
 }: {
   bookTitle: string;
   status: string;
@@ -21,6 +22,7 @@ export default function BooksCards({
   coinsPerReview: number;
   reviewCount: number;
   imageSrc: string;
+  isReadyForReview?:boolean
 }) {
   return (
     <div className="flex flex-col md:flex-row gap-6 p-4 xl:h-[225px] sm:w-full w-[250px] h-full border rounded-lg shadow-sm">
@@ -75,11 +77,12 @@ export default function BooksCards({
           </div>
           <div className="flex justify-end xl:mt-4">
             <Button
+              disabled={status.toLowerCase() === "pending"}
               radius="sm"
-              className={cn(`w-full py-5 font-normal flex items-center justify-center gap-2 text-xs md:text-sm lg:text-base bg-black text-white hover:bg-black/90`)}
-              // onClick={() => handleButtonClick(button.text)}
+              className={cn(`w-full py-5 font-normal flex items-center justify-center gap-2 text-xs md:text-sm lg:text-base ${isReadyForReview ? "bg-black text-white hover:bg-black/90" : "bg-primary text-white hover:bg-primary/90" } `)}
+            // onClick={() => handleButtonClick(button.text)}
             >
-              In for Review
+              {isReadyForReview === true ? "In for Review" : "Get Reviewed"}
             </Button>
           </div>
         </div>

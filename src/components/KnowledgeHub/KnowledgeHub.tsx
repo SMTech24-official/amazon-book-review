@@ -12,6 +12,8 @@ import { Button } from "@nextui-org/react";
 import KnowledgeHubStartReadingCard from "../cards/KnowledgeHubStartReadingCard";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { knowledge } from "@/lib/fakeData/knowledge";
+// import { useGetKnowledgeVideoQuery } from "@/redux/features/knowledge/knowledge";
+
 
 const validationSchema = z.object({
   url: z
@@ -23,6 +25,8 @@ const validationSchema = z.object({
 
 const KnowledgeHub = () => {
   const user = useAppSelector(selectCurrentUser);
+  // const { data, isLoading } = useGetKnowledgeVideoQuery(undefined);
+  // console.log(data);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const handleSubmit = async (formData: any) => {
