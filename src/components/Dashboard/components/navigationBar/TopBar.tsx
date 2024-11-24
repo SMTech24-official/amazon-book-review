@@ -8,6 +8,7 @@ import refer from "@/assets/refer.png"
 import coins from "@/assets/coins.png"
 import { Dispatch, SetStateAction } from 'react'
 import { HiMiniBellAlert } from 'react-icons/hi2'
+import Link from "next/link"
 
 export default function TopBar({ isOpen, setIsOpen }: { user: null | TUser, isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }) {
     const user = useAppSelector(selectCurrentUser);
@@ -50,7 +51,8 @@ export default function TopBar({ isOpen, setIsOpen }: { user: null | TUser, isOp
                 {/* Right Section */}
                 {
                     user?.role !== "admin" && <div className="flex items-center gap-4">
-                        <button
+                        <Link
+                            href={"/dashboard/referral"}
                             className="border-primary sm:text-lg text-primary font-bold border-2 flex gap-2 sm:px-4 px-3 py-1 sm:py-2 rounded-full"
                         >
                             <Image
@@ -61,7 +63,7 @@ export default function TopBar({ isOpen, setIsOpen }: { user: null | TUser, isOp
                                 className="rounded sm:w-7 sm:h-7 w-5 h-5"
                             />
                             <span>Referral</span>
-                        </button>
+                        </Link>
 
                         <div className="flex items-center justify-center sm:text-lg border border-gray-500 rounded-full sm:px-4 px-3 py-1 sm:py-2 gap-2">
                             <Image
