@@ -34,6 +34,6 @@ const reviewApi = baseApi.injectEndpoints({
 
 export const {
   useGetAllPendingReviewsQuery,
-useApproveReviewMutation,
-useRejectReviewMutation
+  useApproveReviewMutation,
+  useRejectReviewMutation,
 } = reviewApi;

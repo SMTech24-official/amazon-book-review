@@ -3,7 +3,7 @@ import { TQueryParam } from "@/interface/globalType";
 import { baseApi } from "../../api/baseApi";
 
 
-const reviewApi = baseApi.injectEndpoints({
+const memberApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllMembers: builder.query({
       query: () => ({
@@ -35,26 +35,6 @@ const reviewApi = baseApi.injectEndpoints({
       },
       providesTags: ["Member"],
     }),
-    // approveReview: builder.mutation({
-    //   query: (id) => {
-    //     return {
-    //       url: `admin/review/approve/${id}`,
-    //       method: "PUT",
-    //       // body: userInfo,
-    //     };
-    //   },
-    //   invalidatesTags: ["Book"],
-    // }),
-    // rejectReview: builder.mutation({
-    //   query: (id) => {
-    //     return {
-    //       url: `admin/review/rejected/${id}`,
-    //       method: "DELETE",
-    //       // body: userInfo,
-    //     };
-    //   },
-    //   invalidatesTags: ["Book"],
-    // }),
   }),
 });
 
@@ -62,6 +42,4 @@ export const {
   useGetAllMembersQuery,
   useGetSingleMemberQuery,
   useGetAllBooksForSingleAuthorQuery
-  // useApproveReviewMutation,
-  // useRejectReviewMutation
-} = reviewApi;
+} = memberApi;
