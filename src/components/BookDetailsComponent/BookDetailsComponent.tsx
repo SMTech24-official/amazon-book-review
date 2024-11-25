@@ -11,12 +11,20 @@ import {
 import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
 import { Button } from "@nextui-org/react";
 import Image, { StaticImageData } from "next/image";
-import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import React from "react";
 import MyBreadcrumbs from "../ui/MyBreadcrumbs";
 import MyLoading from "../ui/MyLoading";
 import BreadCrumb from "../common/breadCrumb/BreadCrumb";
-import { useApproveReviewMutation, useRejectReviewMutation } from "@/redux/features/review/reviewApi";
+import {
+  useApproveReviewMutation,
+  useRejectReviewMutation,
+} from "@/redux/features/review/reviewApi";
 
 interface BreadcrumbLink {
   name: string;
@@ -45,7 +53,7 @@ const BookDetailsComponent = ({
   const router = useRouter();
   const searchParams = useSearchParams(); // Access URL query parameters
   const bookId = params?.bookId;
-  const reviewId = searchParams.get('review');
+  const reviewId = searchParams.get("review");
 
   const { data, isLoading } = useSingleBookQuery(bookId);
   const pathName = usePathname();
@@ -86,7 +94,7 @@ const BookDetailsComponent = ({
             console.error("Book ID is missing. Approval cannot proceed.");
             return;
           }
-          
+
           if (pathName?.includes("review")) {
             await handleAsyncWithToast(
               async () => approveReviewMutation(reviewId),
@@ -98,7 +106,7 @@ const BookDetailsComponent = ({
               "/admin-dashboard?tab=New+Reviews",
               router // Pass the router instance
             );
-          }else{
+          } else {
             await handleAsyncWithToast(
               async () => approveBookMutation(data.data._id),
               "Approving...",
@@ -129,7 +137,7 @@ const BookDetailsComponent = ({
               "/admin-dashboard?tab=New+Reviews", // Redirect URL
               router // Pass the router instance
             );
-          }else {
+          } else {
             await handleAsyncWithToast(
               async () => rejectBookMutation(data.data._id),
               "Denying...",
@@ -142,7 +150,6 @@ const BookDetailsComponent = ({
             );
           }
 
-         
           break;
 
         case "Verify Review now on amazon":
@@ -264,30 +271,39 @@ const BookDetailsComponent = ({
                   </Button>
                 </div>
               </div> */}
-              {buttons?.map((button, index) => (
-                <Button
-                  key={index}
-                  radius="sm"
-                  className={cn(
-                    `w-full py-5 font-normal flex items-center justify-center gap-2 text-xs md:text-sm lg:text-base`,
-                    button.style
-                  )}
-                  onClick={() => handleButtonClick(button.text)}
-                >
-                  {button.text}
-                  {button.icon && <span>{button.icon}</span>}
-                  {button.svg && (
-                    <span>
-                      <Image
-                        src={button.svg}
-                        height={20}
-                        width={22}
-                        alt="image"
-                      />
-                    </span>
-                  )}
-                </Button>
-              ))}
+              {buttons?.map((button, index) => {
+                const isApproveButton = button.text === "Approve";
+                const isDenyButton = button.text === "Deny";
+                const shouldHide =
+                  (isApproveButton || isDenyButton) &&
+                  data?.data?.status !== "pending";
+
+                return (
+                  <Button
+                    key={index}
+                    radius="sm"
+                    className={cn(
+                      `w-full py-5 font-normal flex items-center justify-center gap-2 text-xs md:text-sm lg:text-base`,
+                      button.style,
+                      shouldHide ? "hidden" : ""
+                    )}
+                    onClick={() => handleButtonClick(button.text)}
+                  >
+                    {button.text}
+                    {button.icon && <span>{button.icon}</span>}
+                    {button.svg && (
+                      <span>
+                        <Image
+                          src={button.svg}
+                          height={20}
+                          width={22}
+                          alt="image"
+                        />
+                      </span>
+                    )}
+                  </Button>
+                );
+              })}
             </div>
           </div>
           <div className=" flex justify-end">

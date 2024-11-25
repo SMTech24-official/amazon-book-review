@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { TQueryParam } from "@/interface/globalType";
 import { baseApi } from "../../api/baseApi";
+
 
 const reviewApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -14,6 +17,22 @@ const reviewApi = baseApi.injectEndpoints({
         url: `/admin/single-user/${id}`,
         method: "GET",
       }),
+      providesTags: ["Member"],
+    }),
+    getAllBooksForSingleAuthor: builder.query({
+      query: (data) => {
+        const params = new URLSearchParams();
+        if (data?.queryObj) {
+          data?.queryObj.forEach((item: TQueryParam) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+        return {
+          url: `admin/books/get-all/${data?.memberId}`,
+          method: "GET",
+          params: params,
+        };
+      },
       providesTags: ["Member"],
     }),
     // approveReview: builder.mutation({
@@ -40,8 +59,9 @@ const reviewApi = baseApi.injectEndpoints({
 });
 
 export const {
-useGetAllMembersQuery,
-useGetSingleMemberQuery
-// useApproveReviewMutation,
-// useRejectReviewMutation
+  useGetAllMembersQuery,
+  useGetSingleMemberQuery,
+  useGetAllBooksForSingleAuthorQuery
+  // useApproveReviewMutation,
+  // useRejectReviewMutation
 } = reviewApi;

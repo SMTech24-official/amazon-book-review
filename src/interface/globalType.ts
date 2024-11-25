@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { StaticImageData } from "next/image";
 
 export interface TBooksAndMembers {
@@ -122,3 +123,10 @@ export interface Member {
   updatedAt: string;
   __v: number;
 }
+
+
+
+export type TQueryParam = {
+  name: string;
+  value: any;
+};

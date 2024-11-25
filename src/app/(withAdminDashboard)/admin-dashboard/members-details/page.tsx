@@ -1,7 +1,7 @@
 "use client";
 import TotalMembers from "@/components/AdminDashboard/TotalMembers/TotalMembers";
 import { TBooksAndMembers } from "@/interface/globalType";
-import React from "react";
+import React, { useState } from "react";
 import memberImage from "@/assets/member.png";
 import { useGetAllMembersQuery } from "@/redux/features/member/memberApi";
 import MyLoading from "@/components/ui/MyLoading";
@@ -28,8 +28,8 @@ const books: TBooksAndMembers[] = [
 ];
 
 const MemberPage = () => {
-  const { data: memberData, isLoading: isMemberLoading } =
-    useGetAllMembersQuery(undefined);
+  const [queryObj, setQueryObj] = useState([]);
+  const { data: memberData, isLoading: isMemberLoading } = useGetAllMembersQuery(undefined);
   console.log(memberData?.data);
   if (isMemberLoading) {
     return <MyLoading />;
