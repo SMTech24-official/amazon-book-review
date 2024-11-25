@@ -8,6 +8,10 @@ import {
   useRejectBookMutation,
   useSingleBookQuery,
 } from "@/redux/features/book/bookApi";
+import {
+  useApproveReviewMutation,
+  useRejectReviewMutation,
+} from "@/redux/features/review/reviewApi";
 import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
 import { Button } from "@nextui-org/react";
 import Image, { StaticImageData } from "next/image";
@@ -18,13 +22,8 @@ import {
   useSearchParams,
 } from "next/navigation";
 import React from "react";
-import MyBreadcrumbs from "../ui/MyBreadcrumbs";
-import MyLoading from "../ui/MyLoading";
 import BreadCrumb from "../common/breadCrumb/BreadCrumb";
-import {
-  useApproveReviewMutation,
-  useRejectReviewMutation,
-} from "@/redux/features/review/reviewApi";
+import MyLoading from "../ui/MyLoading";
 
 interface BreadcrumbLink {
   name: string;
@@ -39,13 +38,13 @@ interface ButtonConfig {
 }
 
 interface BookDetailsComponentProps {
-  breadcrumbLinks?: BreadcrumbLink[];
+  breadcrumbLinks?: BreadcrumbLink[]
   buttons?: ButtonConfig[];
   buttonLayoutClassName?: string;
 }
 
 const BookDetailsComponent = ({
-  breadcrumbLinks,
+
   buttonLayoutClassName,
   buttons,
 }: BookDetailsComponentProps) => {

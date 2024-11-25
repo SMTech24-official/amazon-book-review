@@ -1,23 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
-import { usePathname, useRouter } from "next/navigation";
-import React from "react";
-import { z } from "zod";
-import MyFormWrapper from "../ui/MyForm/MyFormWrapper/MyFormWrapper";
-import { zodResolver } from "@hookform/resolvers/zod";
-import MyFormInput from "../ui/MyForm/MyFormInput/MyFormInput";
-import { Button } from "@nextui-org/react";
-import KnowledgeHubStartReadingCard from "../cards/KnowledgeHubStartReadingCard";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useGetAllAuthorGuideQuery } from "@/redux/features/authorGuid/authorGuidApi";
 import {
   useAddKnowledgeHubVideoMutation,
   useGetKnowledgeHubVideoQuery,
   useUpdateKnowledgeHubVideoMutation,
 } from "@/redux/features/knowledgeHub/knowledgeHubApi";
-import { selectCurrentUser } from "@/redux/features/auth/authSlice";
-import { useGetAllAuthorGuideQuery, useGetSingleAuthorGuideQuery } from "@/redux/features/authorGuid/authorGuidApi";
+import { useAppSelector } from "@/redux/hooks";
+import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
 import { isNonEmptyArray } from "@/utils/isNonEmptyArray";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@nextui-org/react";
+import { usePathname } from "next/navigation";
+import { z } from "zod";
+import KnowledgeHubStartReadingCard from "../cards/KnowledgeHubStartReadingCard";
+import MyFormInput from "../ui/MyForm/MyFormInput/MyFormInput";
+import MyFormWrapper from "../ui/MyForm/MyFormWrapper/MyFormWrapper";
 import MyLoading from "../ui/MyLoading";
 
 const validationSchema = z.object({
@@ -29,10 +28,8 @@ const validationSchema = z.object({
 });
 
 const KnowledgeHub = () => {
-  const dispatch = useAppDispatch();
   const pathName = usePathname();
   const user = useAppSelector(selectCurrentUser);
-  const router = useRouter();
   const { data: knowledgeHubData } = useGetKnowledgeHubVideoQuery(undefined);
   const { data: allAuthorGuideData , isLoading: isAllAuthorGuideLoading} = useGetAllAuthorGuideQuery(undefined);
   // const { data: getSingleAuthorGuideQuery } = useGetSingleAuthorGuideQuery(undefined);

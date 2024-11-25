@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from 'next/image';
 import React from 'react';
-import book from "@/assets/newBook.png"
 import { Button } from '@nextui-org/react';
 
 const KnowledgeHubStartReadingCard = ({item} : {item:any}) => {

@@ -1,5 +1,5 @@
 'use client'
-import { BookRecord, BookReviewData } from "@/interface/globalType";
+import { BookReviewData } from "@/interface/globalType";
 import { isNonEmptyArray } from "@/utils/isNonEmptyArray";
 import { Button } from "@nextui-org/react";
 import Image from "next/image";

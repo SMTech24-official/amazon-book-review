@@ -1,38 +1,13 @@
 "use client";
-import newBook from "@/assets/newBook.png";
 import BooksComponent from "@/components/AdminDashboard/BooksComponent/BooksComponent";
 import ReviewComponent from "@/components/AdminDashboard/ReviewComponent/ReviewComponent";
 import BreadCrumb from "@/components/common/breadCrumb/BreadCrumb";
 import TabPage from "@/components/common/tabPage/TabPage";
-import { TBooksAndMembers } from "@/interface/globalType";
 import { useGetAllPendingBooksQuery } from "@/redux/features/book/bookApi";
 import { useGetAllPendingReviewsQuery } from "@/redux/features/review/reviewApi";
 import { useEffect } from "react";
 import { FaClipboardList, FaUserCog } from "react-icons/fa";
 
-const books: TBooksAndMembers[] = [
-  {
-    _id: 1,
-    title: "Harry Potter and the Philosopher's Stone",
-    authorName: "J. K. Rowling",
-    createdAt: "09-11-2024",
-    bookCover: newBook, // Use your image path here
-  },
-  {
-    _id: 2,
-    title: "Harry Potter and the Philosopher's Stone",
-    authorName: "J. K. Rowling",
-    createdAt: "09-11-2024",
-    bookCover: newBook,
-  },
-  {
-    _id: 3,
-    title: "Harry Potter and the Philosopher's Stone",
-    authorName: "J. K. Rowling",
-    createdAt: "09-11-2024",
-    bookCover: newBook,
-  },
-];
 
 const AdminDashboardPAge = () => {
   const { data, isLoading } = useGetAllPendingBooksQuery(undefined);

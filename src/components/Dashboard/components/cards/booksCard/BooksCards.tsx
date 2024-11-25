@@ -1,14 +1,13 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { TrendingUp } from "lucide-react";
 import coins from "@/assets/coins.png";
 import reviewIcon from "@/assets/ReviewIcon.png";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function BooksCards({
   bookTitle,
   status,
-  readers,
+  // readers,
   publishedDate,
   coinsPerReview,
   reviewCount,
@@ -18,7 +17,7 @@ export default function BooksCards({
 }: {
   bookTitle: string;
   status: string;
-  readers: number;
+  // readers: number;
   publishedDate: Date;
   coinsPerReview: number;
   reviewCount: number;

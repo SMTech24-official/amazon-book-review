@@ -1,20 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import memberImage from "@/assets/member.png";
-import { booksReview } from "@/lib/fakeData/BooksReview";
-import Image from "next/image";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import BooksCards from "../Dashboard/components/cards/booksCard/BooksCards";
-import MyBreadcrumbs from "../ui/MyBreadcrumbs";
+import avatar from "@/assets/avatar.svg";
 import { TQueryParam } from "@/interface/globalType";
 import {
   useGetAllBooksForSingleAuthorQuery,
   useGetSingleMemberQuery,
 } from "@/redux/features/member/memberApi";
-import avatar from "@/assets/avatar.svg";
-import MyLoading from "../ui/MyLoading";
 import { isNonEmptyArray } from "@/utils/isNonEmptyArray";
+import Image from "next/image";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import BooksCards from "../Dashboard/components/cards/booksCard/BooksCards";
+import MyBreadcrumbs from "../ui/MyBreadcrumbs";
+import MyLoading from "../ui/MyLoading";
 
 interface BreadcrumbLink {
   name: string;
@@ -127,7 +125,7 @@ const MemberDetailsComponent = ({
                   key={index}
                   bookTitle={data.title}
                   status={data.status}
-                  readers={data.readers}
+                  // readers={data.readers}
                   publishedDate={new Date(data.publishedDate)}
                   coinsPerReview={data.coinsPerReview}
                   reviewCount={data.reviewCount}

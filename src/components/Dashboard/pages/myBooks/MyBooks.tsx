@@ -57,11 +57,11 @@ const MyBooks = () => {
                         key={data.id}
                         bookTitle={data.bookTitle}
                         status={data.status}
-                        readers={data.readers}
+                        // readers={data.readers}
                         publishedDate={new Date(data.publishedDate)}
                         coinsPerReview={data.coinsPerReview}
                         reviewCount={data.reviewCount}
-                        avgRating={data.avgRating}
+                        // avgRating={data.avgRating}
                         imageSrc={data.imageSrc}
                     />
                 ))}

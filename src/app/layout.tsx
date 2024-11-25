@@ -1,11 +1,10 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import { NextUiProvider } from "@/lib/providers/NextUIProvider";
 import MyContextProvider from "@/lib/providers/MyContextProvider";
+import { NextUiProvider } from "@/lib/providers/NextUIProvider";
 import ReduxStoreProvider from "@/redux/ReduxStoreProvider";
-import { Toaster } from "sonner";
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from "sonner";
+import "./globals.css";
 
 
 const inter = Inter({
