@@ -46,7 +46,7 @@ const BookTable = ({ books }: BookTableProps) => {
         {/* Table Body */}
         <tbody>
           {books?.length > 0 &&
-            books?.map((book, index) => (
+            books.map((book, index) => (
               <tr key={index} className={`hover:bg-gray-100`}>
                 <td className="px-4 py-4 text-center lg:max-w-28">
                   <div className="flex gap-2 items-center">
@@ -81,7 +81,7 @@ const BookTable = ({ books }: BookTableProps) => {
                     <Button
                       radius="sm"
                       className="bg-primary text-white"
-                      aria-label={`View details for ${book?.title}`}
+                      // aria-label={`View details for ${book?.title}`}
                     >
                       View
                     </Button>

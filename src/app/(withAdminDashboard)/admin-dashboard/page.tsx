@@ -55,12 +55,11 @@ const AdminDashboardPAge = () => {
       value: "New Books",
       icon: <FaUserCog className="min-w-6 min-h-6 mr-2" />,
       component: (
-        // <BooksComponent
-        //   books={data?.data}
-        //   isLoading={isLoading}
-        //   title="New books pending"
-        // />
-        <>asd</>
+        <BooksComponent
+          books={data?.data}
+          isLoading={isLoading}
+          title="New books pending"
+        />
       ),
     },
     {
@@ -77,8 +76,6 @@ const AdminDashboardPAge = () => {
     },
   ];
 
-  // demo link for breadcrumb
-  // http://localhost:3000/admin-dashboard/settings?tab=general/subtab1/subtab2
 
   return (
     <div className="dashboard-containers">

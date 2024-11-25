@@ -1,11 +1,12 @@
 "use client";
 
 import MyLoading from "@/components/ui/MyLoading";
-import { BookRecord } from "@/interface/globalType";
+import { BookReviewData } from "@/interface/globalType";
+import ReviewCards from "../ReviewCards";
 import ReviewTable from "../ReviewTable";
 
 interface BookTableProps {
-  items: BookRecord[];
+  items: BookReviewData[];
   title: string;
   isLoading?: boolean;
 }
@@ -26,7 +27,7 @@ const ReviewComponent = ({ items, title, isLoading }: BookTableProps) => {
         </div>
         <div className=" ">
           <ReviewTable Items={items} />
-          {/* <BookCards books={items} className="grid-cols-1 xs:grid-cols-2 lg:grid-cols-3"/> */}
+          <ReviewCards Items={items} className="grid-cols-1 xs:grid-cols-2 xl:grid-cols-3"/>
         </div>
       </div>
     </div>

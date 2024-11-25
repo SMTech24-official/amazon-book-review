@@ -23,6 +23,7 @@ const MemberDetailsComponent = ({
   const params = useParams();
   const memberId = params?.memberId;
   console.log(memberId);
+  
 
   return (
     <div className="p-4 h-full flex flex-col">

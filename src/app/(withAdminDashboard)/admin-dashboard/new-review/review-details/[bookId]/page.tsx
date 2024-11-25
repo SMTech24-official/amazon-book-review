@@ -9,7 +9,7 @@ const BookDetailsPage = () => {
   ];
   const buttons = [
     {
-      text: "Verify Amazon Link",
+      text: "Verify Review now on amazon",
       style: "bg-black text-white col-span-2",
     },
     {
@@ -21,6 +21,7 @@ const BookDetailsPage = () => {
       style: "bg-red-500 text-white",
     },
   ];
+  
   return (
     <>
       <BookDetailsComponent

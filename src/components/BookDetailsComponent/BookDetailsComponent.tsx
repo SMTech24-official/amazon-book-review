@@ -11,7 +11,7 @@ import {
 import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
 import { Button } from "@nextui-org/react";
 import Image, { StaticImageData } from "next/image";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import MyBreadcrumbs from "../ui/MyBreadcrumbs";
 import MyLoading from "../ui/MyLoading";
@@ -43,7 +43,9 @@ const BookDetailsComponent = ({
 }: BookDetailsComponentProps) => {
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams(); // Access URL query parameters
   const bookId = params?.bookId;
+  const reviewId = searchParams.get('review');
 
   const { data, isLoading } = useSingleBookQuery(bookId);
   const pathName = usePathname();
@@ -84,9 +86,10 @@ const BookDetailsComponent = ({
             console.error("Book ID is missing. Approval cannot proceed.");
             return;
           }
-          if (pathName?.indexOf("review")) {
+          
+          if (pathName?.includes("review")) {
             await handleAsyncWithToast(
-              async () => approveReviewMutation(data.data._id),
+              async () => approveReviewMutation(reviewId),
               "Approving...",
               "Review approved successfully!",
               "Approval failed. Please try again.",
@@ -115,9 +118,9 @@ const BookDetailsComponent = ({
             console.error("Book ID is missing. Denial cannot proceed.");
             return;
           }
-          if (pathName?.indexOf("review")) {
+          if (pathName?.includes("review")) {
             await handleAsyncWithToast(
-              async () => rejectReviewMutation(data.data._id),
+              async () => rejectReviewMutation(reviewId),
               "Denying...",
               "Review denied successfully!",
               "Denial failed. Please try again.",
@@ -143,10 +146,10 @@ const BookDetailsComponent = ({
           break;
 
         case "Verify Review now on amazon":
-          if (data?.data?.amazonReviewUrl) {
+          if (data?.data?.amazonBookUrl) {
             console.log("Verifying the review on Amazon...");
             window.open(
-              data.data.amazonReviewUrl,
+              data?.data?.amazonBookUrl,
               "_blank",
               "noopener,noreferrer"
             );
