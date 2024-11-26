@@ -104,6 +104,7 @@ const BookDetailsComponent = (
           break;
 
         case "Reviewed":
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const completeRes = await handleAsyncWithToast(
             async () => {
               console.log(mainId)

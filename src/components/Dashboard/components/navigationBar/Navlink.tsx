@@ -91,7 +91,7 @@ export default function MainNavLink({ user, navLink, additionalRoutes }: { user:
                     </Link>)
                 }
                 <div
-                    onClick={handleLogout}
+                    onClick={() => handleLogout()}
                     className={`flex items-center gap-3 px-3 py-3 rounded-md cursor-pointer`}
                 >
                     <IoLogOut className="min-w-6 min-h-6" />
