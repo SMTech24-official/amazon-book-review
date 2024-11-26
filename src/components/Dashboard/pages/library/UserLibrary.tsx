@@ -33,22 +33,26 @@ const UserLibrary = () => {
             </div>
 
             {/* Books Grid */}
-            <div className='flex flex-wrap md:grid md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 gap-3 items-center justify-center'>
-                {filteredBooks?.map((data: User & Book) => (
-                    <LibraryBookCard
-                        key={data._id}
-                        bookTitleOrTitle={data.title}
-                        author={data.authorName}
-                        publishedDate={new Date(data.publishedDate)}
-                        coinsPerReview={data.coinsPerReview}
-                        imageSrc={data.bookCover}
-                    >
-                        <Button radius="sm" className="w-full bg-primary text-white py-2 rounded-lg">
-                            Start Reding
-                        </Button>
-                    </LibraryBookCard>
-                ))}
-            </div>
+            {
+                BooksData?.data.length > 0 ? <div className='flex flex-wrap md:grid md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 gap-3 items-center justify-center'>
+                    {filteredBooks?.map((data: User & Book) => (
+                        <LibraryBookCard
+                            key={data._id}
+                            bookTitleOrTitle={data.title}
+                            author={data.authorName}
+                            publishedDate={new Date(data.publishedDate)}
+                            coinsPerReview={data.coinsPerReview}
+                            imageSrc={data.bookCover}
+                        >
+                            <Button radius="sm" className="w-full bg-primary text-white py-2 rounded-lg">
+                                Start Reding
+                            </Button>
+                        </LibraryBookCard>
+                    ))}
+                </div>
+                    : <div className='h-[80vh] w-full flex items-center justify-center text-xl text-red-500'><p>No Books Found</p></div>
+            }
+
         </div>
     );
 };

@@ -31,10 +31,12 @@ export default function BookReview() {
       svg: ReviewedIcon
     }]
 
+
   if (isLoading) {
-    return <div className="h-screen"><MyLoading /></div>
+    return <div className=""><MyLoading /></div>
   }
-  if (data) {
+
+  if (!data) {
     return <div className="h-screen w-full flex items-center justify-center "><span className="text-red-500 border border-red-400 p-3 rounded-full">Sorry Something error happened Form our end</span></div>
   }
 

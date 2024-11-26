@@ -64,8 +64,9 @@ const authApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["Book"],
     }),
-    addBook: builder.mutation({
-      query: (data) => {
+        addBook: builder.mutation({
+      query: ({data}) => {
+        console.log(data);
         return {
           url: `book/add-book`,
           method: "POST",

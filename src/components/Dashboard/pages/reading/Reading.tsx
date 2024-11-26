@@ -41,7 +41,7 @@ const Reading = () => {
                             coinsPerReview={data.bookId?.coinsPerReview ?? 0}
                             imageSrc={data.bookId?.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
                         >
-                            <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data.bookId?._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
+                            <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
                                 Book Details
                             </Button>
                         </LibraryBookCard>
@@ -63,7 +63,7 @@ const Reading = () => {
                             coinsPerReview={data.bookId?.coinsPerReview ?? 0}
                             imageSrc={data.bookId?.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
                         >
-                            <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data.bookId?._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
+                            <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
                                 Book Details
                             </Button>
                         </LibraryBookCard>
@@ -85,7 +85,7 @@ const Reading = () => {
                             coinsPerReview={data.bookId?.coinsPerReview ?? 0}
                             imageSrc={data.bookId?.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
                         >
-                            <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data.bookId?._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
+                            <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
                                 Book Details
                             </Button>
                         </LibraryBookCard>

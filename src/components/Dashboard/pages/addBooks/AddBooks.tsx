@@ -17,16 +17,28 @@ import { genres } from "@/lib/fakeData/genre"
 import { useAddBookMutation } from "@/redux/features/book/bookApi"
 
 export default function AddBooksO() {
-    const [addBook] = useAddBookMutation()
+    const [addBook, { data, error }] = useAddBookMutation()
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget);
         const data = Object.fromEntries(formData.entries());
-        console.log('Form Data:', data)
-        addBook(data).unwrap()
-            .then(res => console.log(res.json()))
+        const newData = {
+            amazonBookUrl: "Minima doloremque qu",
+            authorName: "Lee Thornton",
+            bookCover: data.bookCover,
+            bookFormat: "PDF",
+            bookPdf: data.bookPdf,
+            bookType: "10x referral bonus",
+            genre: "non-fiction",
+            title: "Vel odio amet itaqu",
+            wordRange: "60000+"
+        }
+        console.log('Form Data:', data.bookCover, data.bookPdf)
+        addBook({ newData }).unwrap()
     }
-
+    if (data) {
+        console.log(data);
+    } else console.log(error);
     return (
         <div className="">
             <BreadCrumb />
