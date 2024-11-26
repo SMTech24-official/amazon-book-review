@@ -1,38 +1,10 @@
-import { IconType } from "react-icons";
-
-
-
-
-export type NavLink = {
-  name: string;
-  href: string;
-  icon: IconType; // The type for an icon component
-};
-
-export type PlanFeature = {
-  label: string;
-  variant: "outline" | "solid";
-  style: string;
-};
-
-export type SubscriptionPlan = {
-  type: "monthly" | "yearly";
-  name: string;
-  price: string;
-  description: string;
-  features: string[];
-  button: PlanFeature;
-  image: string; // Path to the image
-};
-
 export type User = {
   _id: string;
   fullName: string;
   reviewerName: string;
   amazonCountry: string;
-  image: string | null; 
+  profileImage: string;  // Adjusted to match the data (image -> profileImage)
   email: string;
-  password: string;
   role: string;
   points: number;
   otp: string | null;
@@ -45,6 +17,7 @@ export type User = {
   createdAt: string;
   updatedAt: string;
   __v: number;
+  amazonAuthorPageLink: string;
 };
 
 export type Metadata = {
@@ -55,7 +28,6 @@ export type Metadata = {
 export type Book = {
   _id: string;
   title: string;
-  readers: number | null
   status: string;
   publishedDate: string;
   coinsPerReview: number;
@@ -69,4 +41,33 @@ export type Book = {
   isReadyForReview: boolean;
   amazonBookUrl: string;
   bookType: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ReviewedBook = {
+  _id: string;
+  bookId: Book;  // The book details
+  userId: User;  // The user details who reviewed
+  readingStatus: string;
+  isApproved: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
+
+export type Button = {
+  label: string;
+  variant: "outline" | "solid";  // Can expand this based on button variants
+  style: string;
+};
+
+export type SubscriptionPlan = {
+  type: "monthly" | "yearly";  // Can expand this based on available types
+  name: string;
+  price: string;
+  description: string;
+  features: string[];
+  button: Button;
+  image: string;  // URL or path to image
 };

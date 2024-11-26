@@ -1,12 +1,12 @@
 "use client"
 
 import BreadCrumb from "@/components/common/breadCrumb/BreadCrumb";
-import { Book, User } from "@/lib/types/type";
+import MyLoading from "@/components/ui/MyLoading";
+import { ReviewedBook } from "@/lib/types/type";
 import { useGetAllReadingBooksQuery } from "@/redux/features/book/bookApi";
 import { Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import LibraryBookCard from "../../components/cards/libraryBookCard/LibraryBooksCard";
-import MyLoading from "@/components/ui/MyLoading";
 
 
 const Reading = () => {
@@ -14,7 +14,7 @@ const Reading = () => {
     const { data: BookReview, isLoading: isloading1 } = useGetAllReadingBooksQuery("to-be-reviewed")
     const { data: BookReviewDue, isLoading: isloading2 } = useGetAllReadingBooksQuery("review-overdue")
     const { data: BookReviewSubmitted, isLoading: isloading3 } = useGetAllReadingBooksQuery("review-finished")
-
+    console.log(BookReview, BookReviewDue);
     if (isloading1 || isloading2 || isloading3) {
         return <div className="h-screen"><MyLoading /></div>
     }
@@ -32,16 +32,16 @@ const Reading = () => {
                 </h3>
                 <div className='flex flex-wrap md:grid md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 gap-3 items-center justify-center'>
 
-                    {BookReviewDue?.data.length > 0 ? BookReviewDue?.data?.map((data: User & Book) => (
+                    {BookReviewDue?.data && BookReviewDue?.data.length > 0 ? BookReviewDue?.data?.map((data: ReviewedBook, idx: number) => (
                         <LibraryBookCard
-                            key={data._id}
-                            bookTitleOrTitle={data.title}
-                            author={data.authorName}
-                            publishedDate={new Date(data.publishedDate)}
-                            coinsPerReview={data.coinsPerReview}
-                            imageSrc={data.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
+                            key={data.bookId?._id ?? idx}
+                            bookTitleOrTitle={data.bookId?.title ?? "Book Title"}
+                            author={data.bookId?.authorName ?? "Author Name"}
+                            publishedDate={data.bookId?.publishedDate ? new Date(data.bookId?.publishedDate) : "No Data Found"}
+                            coinsPerReview={data.bookId?.coinsPerReview ?? 0}
+                            imageSrc={data.bookId?.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
                         >
-                            <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
+                            <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data.bookId?._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
                                 Book Details
                             </Button>
                         </LibraryBookCard>
@@ -54,16 +54,16 @@ const Reading = () => {
                     To be Reviewed
                 </h3>
                 <div className='flex flex-wrap md:grid md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 gap-3 items-center justify-center'>
-                    {BookReview?.data.length > 0 ? BookReview?.data?.map((data: User & Book) => (
+                    {BookReview?.data && BookReview?.data.length > 0 ? BookReview?.data?.map((data: ReviewedBook, idx: number) => (
                         <LibraryBookCard
-                            key={data._id}
-                            bookTitleOrTitle={data.title}
-                            author={data.authorName}
-                            publishedDate={new Date(data.publishedDate)}
-                            coinsPerReview={data.coinsPerReview}
-                            imageSrc={data.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
+                            key={data.bookId?._id ?? idx}
+                            bookTitleOrTitle={data.bookId?.title ?? "Book Title"}
+                            author={data.bookId?.authorName ?? "Author Name"}
+                            publishedDate={data.bookId?.publishedDate ? new Date(data.bookId?.publishedDate) : "No Data Found"}
+                            coinsPerReview={data.bookId?.coinsPerReview ?? 0}
+                            imageSrc={data.bookId?.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
                         >
-                            <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
+                            <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data.bookId?._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
                                 Book Details
                             </Button>
                         </LibraryBookCard>
@@ -76,16 +76,16 @@ const Reading = () => {
                     Submitted
                 </h3>
                 <div className='flex flex-wrap md:grid md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 gap-3 items-center justify-center'>
-                    {BookReviewSubmitted?.data.length > 0 ? BookReviewSubmitted?.data?.map((data: User & Book) => (
+                    {BookReviewSubmitted?.data && BookReviewSubmitted?.data.length > 0 ? BookReviewSubmitted?.data?.map((data: ReviewedBook, idx: number) => (
                         <LibraryBookCard
-                            key={data._id}
-                            bookTitleOrTitle={data.title}
-                            author={data.authorName}
-                            publishedDate={new Date(data.publishedDate)}
-                            coinsPerReview={data.coinsPerReview}
-                            imageSrc={data.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
+                            key={data.bookId?._id ?? idx}
+                            bookTitleOrTitle={data.bookId?.title ?? "Book Title"}
+                            author={data.bookId?.authorName ?? "Author Name"}
+                            publishedDate={data.bookId?.publishedDate ? new Date(data.bookId?.publishedDate) : "No Data Found"}
+                            coinsPerReview={data.bookId?.coinsPerReview ?? 0}
+                            imageSrc={data.bookId?.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
                         >
-                            <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
+                            <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data.bookId?._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
                                 Book Details
                             </Button>
                         </LibraryBookCard>

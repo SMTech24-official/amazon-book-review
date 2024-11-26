@@ -11,8 +11,6 @@ export default function BookDetailsComponents(
         author,
         coinsPerReview,
         imageSrc,
-        // amznLink,
-        // bookLink
     }: {
         bookTitle: string;
         author?: string;
@@ -23,7 +21,7 @@ export default function BookDetailsComponents(
     }
 ) {
     return (
-        <div className="flex flex-col items-center w-full">
+        <div className="flex flex-col items-center w-full bg-white">
             <Image
                 src={imageSrc}
                 alt={`${bookTitle} Cover`}

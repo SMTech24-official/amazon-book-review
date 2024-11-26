@@ -37,6 +37,13 @@ const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Book"],
     }),
+    singleBookReview: builder.query({
+      query: (id) => ({
+        url: `/reading/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Book"],
+    }),
     approveBook: builder.mutation({
       query: (id) => {
         return {
@@ -76,6 +83,7 @@ export const {
   useGetAllLibraryBooksQuery,
   useGetAllPendingBooksQuery,
   useSingleBookQuery,
+  useSingleBookReviewQuery,
   useApproveBookMutation,
   useRejectBookMutation,
   useAddBookMutation
