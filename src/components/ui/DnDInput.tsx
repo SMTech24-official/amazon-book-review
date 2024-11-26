@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { FileText, Plus } from 'lucide-react'
 import { Label } from "@/components/ui/label"
 import { useState } from "react"
@@ -8,7 +8,7 @@ import Image from "next/image"
 
 
 
-const DnDInput = ({ id, acceptedTypes, setNew, initialFile, label, width }: { label: string, initialFile: string | null, id: string, acceptedTypes: string, width: string }) => {
+const DnDInput = ({ id, acceptedTypes, setNew, initialFile, label, width }: { label: string, setNew: Dispatch<SetStateAction<File | null>>, initialFile: string | null, id: string, acceptedTypes: string, width: string }) => {
     const [file, setFile] = useState<string | null>(initialFile)
     // const [newFileType, setNewFileType] = useState<'image' | 'pdf' | null>(null)
 
@@ -24,8 +24,8 @@ const DnDInput = ({ id, acceptedTypes, setNew, initialFile, label, width }: { la
 
     const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFile = e.target.files?.[0]
-        setNew(selectedFile)
         if (selectedFile) {
+            setNew(selectedFile)
             handleFile(selectedFile)
         }
     }

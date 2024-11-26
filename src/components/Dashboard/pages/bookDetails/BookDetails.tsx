@@ -45,16 +45,16 @@ export default function BookReview() {
     <div className="dashboard-containers">
       <BookDetailsComponent
         buttons={buttons}
-        bookTitle={data?.data.bookId.title}
-        id={data?.data.bookId._id}
-        coinsPerReview={data?.data.bookId.coinsPerReview}
-        author={data?.data.bookId.authorName}
-        amznLink={data?.data.bookId.amazonBookUrl}
-        bookLink={data?.data.bookId.bookPdf}
-        bookType={data?.data.bookId.bookType}
-        imageSrc={data?.data.bookId.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
-        genre={data?.data.bookId.genre}
-        status={data?.data.bookId.status}
+        bookTitle={data?.data?.bookId?.title}
+        id={data?.data?.bookId?._id}
+        coinsPerReview={data?.data?.bookId?.coinsPerReview}
+        author={data?.data?.bookId?.authorName}
+        amznLink={data?.data?.bookId?.amazonBookUrl}
+        bookLink={data?.data?.bookId?.bookPdf}
+        bookType={data?.data?.bookId?.bookType}
+        imageSrc={data?.data?.bookId?.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
+        genre={data?.data?.bookId?.genre}
+        status={data?.data?.bookId?.status}
       >
         <div className="max-w-md mx-auto mt-20">
           <div className="flex flex-col text-center items-center space-x-2">

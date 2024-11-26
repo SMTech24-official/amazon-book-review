@@ -18,8 +18,8 @@ import { useAddBookMutation } from "@/redux/features/book/bookApi"
 import { useState } from "react"
 
 export default function AddBooksO() {
-    const [bookCover, setBookCover] = useState(null)
-    const [bookPdf, setBookPdf] = useState(null)
+    const [bookCover, setBookCover] = useState<File | null>(null)
+    const [bookPdf, setBookPdf] = useState<File | null>(null)
 
 
     const [addBook, { data, error }] = useAddBookMutation()
@@ -95,7 +95,6 @@ export default function AddBooksO() {
                         <DnDInput
                             width="w-full"
                             setNew={setBookCover}
-                            file={bookCover}
                             initialFile={null}
                             id="bookCover"
                             label="Upload Book cover"
@@ -108,7 +107,6 @@ export default function AddBooksO() {
                             width="w-full"
                             initialFile={null}
                             setNew={setBookPdf}
-                            file={bookPdf}
                             id="bookPdf"
                             label="Upload Book PDF"
                             acceptedTypes="pdf"
