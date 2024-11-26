@@ -21,7 +21,7 @@ const KnowledgeHubStartReadingCard = ({ item }: { item: any }) => {
     'https://img.freepik.com/free-photo/yellow-book-cover_1101-1118.jpg';
 
   return (
-    <div className="border border-gray-400 p-3 flex flex-col items-gap-3 rounded-xl">
+    <div className="border p-3 flex flex-col items-gap-3 rounded-xl">
       {
         // If image loading fails, use the fallback image
         !imageError && item?.cover ? (
@@ -30,7 +30,7 @@ const KnowledgeHubStartReadingCard = ({ item }: { item: any }) => {
             height={400}
             width={200}
             alt="img"
-            className="mx-auto"
+            className="mx-auto h-full max-h-60"
             onError={() => setImageError(true)} // Handle error here
           />
         ) : (

@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
-import { useGetAllAuthorGuideQuery } from "@/redux/features/authorGuid/authorGuidApi";
+import { useAddAuthorGuideMutationMutation, useGetAllAuthorGuideQuery } from "@/redux/features/authorGuid/authorGuidApi";
 import {
-  useAddAuthorGuideMutationMutation,
   useAddKnowledgeHubVideoMutation,
   useGetKnowledgeHubVideoQuery,
   useUpdateKnowledgeHubVideoMutation,
@@ -61,8 +60,7 @@ const KnowledgeHub = () => {
   // const { data: getSingleAuthorGuideQuery } = useGetSingleAuthorGuideQuery(undefined);
   const [addKnowledgeHubVideoMutation] = useAddKnowledgeHubVideoMutation();
   const [addAuthorGuideMutation] = useAddAuthorGuideMutationMutation();
-  const [updateKnowledgeHubVideoMutation] =
-    useUpdateKnowledgeHubVideoMutation();
+  const [updateKnowledgeHubVideoMutation] = useUpdateKnowledgeHubVideoMutation();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const handleSubmit = async (formData: any, reset: () => void) => {
@@ -99,6 +97,7 @@ const KnowledgeHub = () => {
       }
     }
   };
+  
   const handleSubmitForModal = async (data: any, reset: () => void) => {
     // Create FormData to handle file uploads
     const formData = new FormData();
@@ -238,18 +237,6 @@ const KnowledgeHub = () => {
                             </Button>
                           </MyFormWrapper>
                         </ModalBody>
-                        {/* <ModalFooter>
-                          <Button
-                            color="danger"
-                            variant="flat"
-                            onPress={onClose}
-                          >
-                            Close
-                          </Button>
-                          <Button color="primary" onPress={onClose}>
-                            Sign in
-                          </Button>
-                        </ModalFooter> */}
                       </>
                     )}
                   </ModalContent>

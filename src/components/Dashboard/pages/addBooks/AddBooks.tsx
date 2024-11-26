@@ -15,30 +15,45 @@ import {
 import { BookTypes } from "@/lib/fakeData/bookTypes"
 import { genres } from "@/lib/fakeData/genre"
 import { useAddBookMutation } from "@/redux/features/book/bookApi"
+import { useState } from "react"
 
 export default function AddBooksO() {
+    const [bookCover, setBookCover] = useState(null)
+    const [bookPdf, setBookPdf] = useState(null)
+
+
     const [addBook, { data, error }] = useAddBookMutation()
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const formData = new FormData(e.currentTarget);
-        const data = Object.fromEntries(formData.entries());
-        const newData = {
-            amazonBookUrl: "Minima doloremque qu",
-            authorName: "Lee Thornton",
-            bookCover: data.bookCover,
-            bookFormat: "PDF",
-            bookPdf: data.bookPdf,
-            bookType: "10x referral bonus",
-            genre: "non-fiction",
-            title: "Vel odio amet itaqu",
-            wordRange: "60000+"
+        const formData = new FormData();
+
+        const Alldata = new FormData(e.currentTarget);
+
+        const data = Object.fromEntries(Alldata.entries());
+        console.log(data.bookCover, data.bookPdf);
+        if (bookCover && bookPdf) {
+            console.log(bookCover, bookPdf);
+            formData.append("bookCover", bookCover)
+            formData.append("bookPdf", bookPdf)
+
+            const otherData = {
+                amazonBookUrl: data.amazonBookUrl,
+                authorName: data.authorName,
+                bookFormate: data.bookFormat,
+                bookType: data.bookType,
+                genre: data.genre,
+                title: data.title,
+            }
+            formData.append("data", JSON.stringify(otherData))
+            await addBook(formData)
         }
-        console.log('Form Data:', data.bookCover, data.bookPdf)
-        addBook({ newData }).unwrap()
+
     }
     if (data) {
         console.log(data);
     } else console.log(error);
+
+
     return (
         <div className="">
             <BreadCrumb />
@@ -79,6 +94,8 @@ export default function AddBooksO() {
                     <div className="space-y-2">
                         <DnDInput
                             width="w-full"
+                            setNew={setBookCover}
+                            file={bookCover}
                             initialFile={null}
                             id="bookCover"
                             label="Upload Book cover"
@@ -90,6 +107,8 @@ export default function AddBooksO() {
                         <DnDInput
                             width="w-full"
                             initialFile={null}
+                            setNew={setBookPdf}
+                            file={bookPdf}
                             id="bookPdf"
                             label="Upload Book PDF"
                             acceptedTypes="pdf"
@@ -130,21 +149,6 @@ export default function AddBooksO() {
                             </Select>
                         </div>
                     </div>
-                </div>
-
-                <div className="space-y-2">
-                    <Label>Word count</Label>
-                    <Select name="wordRange">
-                        <SelectTrigger>
-                            <SelectValue placeholder="Select word count range" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="12000-20000">12000 - 20000</SelectItem>
-                            <SelectItem value="20000-40000">20000 - 40000</SelectItem>
-                            <SelectItem value="40000-60000">40000 - 60000</SelectItem>
-                            <SelectItem value="60000+">60000+</SelectItem>
-                        </SelectContent>
-                    </Select>
                 </div>
 
                 <div className="flex gap-4">

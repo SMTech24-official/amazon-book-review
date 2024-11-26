@@ -8,7 +8,7 @@ import Image from "next/image"
 
 
 
-const DnDInput = ({ id, acceptedTypes, initialFile, label, width }: {  label: string, initialFile: string | null, id: string, acceptedTypes: string, width: string }) => {
+const DnDInput = ({ id, acceptedTypes, setNew, initialFile, label, width }: { label: string, initialFile: string | null, id: string, acceptedTypes: string, width: string }) => {
     const [file, setFile] = useState<string | null>(initialFile)
     // const [newFileType, setNewFileType] = useState<'image' | 'pdf' | null>(null)
 
@@ -24,6 +24,7 @@ const DnDInput = ({ id, acceptedTypes, initialFile, label, width }: {  label: st
 
     const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFile = e.target.files?.[0]
+        setNew(selectedFile)
         if (selectedFile) {
             handleFile(selectedFile)
         }
@@ -77,7 +78,7 @@ const DnDInput = ({ id, acceptedTypes, initialFile, label, width }: {  label: st
                                     type="file"
                                     className="hidden"
                                     onChange={handleFileSelect}
-                                    accept={acceptedTypes === 'image'? "image/*" : ".pdf"}
+                                    accept={acceptedTypes === 'image' ? "image/*" : ".pdf"}
                                 />
                             </label>
                         </div>
@@ -91,7 +92,7 @@ const DnDInput = ({ id, acceptedTypes, initialFile, label, width }: {  label: st
                         <p className="text-sm text-center text-gray-500 mb-2">Or</p>
                         <label className="bg-[#8B4C84] text-white px-4 py-2 rounded-md cursor-pointer">
                             Select
-                            <input name={id} type="file" className="hidden" onChange={handleFileSelect} accept={acceptedTypes === 'image'? "image/*" : ".pdf"} />
+                            <input name={id} type="file" className="hidden" onChange={handleFileSelect} accept={acceptedTypes === 'image' ? "image/*" : ".pdf"} />
                         </label>
                     </>
                 )}
