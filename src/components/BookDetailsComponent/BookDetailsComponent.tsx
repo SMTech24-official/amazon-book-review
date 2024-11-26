@@ -12,7 +12,12 @@ import { useApproveReviewMutation, useRejectReviewMutation } from "@/redux/featu
 import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
 import { Button } from "@nextui-org/react";
 import Image, { StaticImageData } from "next/image";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import React from "react";
 import BreadCrumb from "../common/breadCrumb/BreadCrumb";
 import MyLoading from "../ui/MyLoading";
@@ -37,7 +42,9 @@ const BookDetailsComponent = ({
 }: BookDetailsComponentProps) => {
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams(); // Access URL query parameters
   const bookId = params?.bookId;
+  const reviewId = searchParams.get("review");
 
   const { data, isLoading } = useSingleBookQuery(bookId);
   console.log(data?.data);
@@ -80,9 +87,10 @@ const BookDetailsComponent = ({
             console.error("Book ID is missing. Approval cannot proceed.");
             return;
           }
-          if (pathName?.indexOf("review")) {
+
+          if (pathName?.includes("review")) {
             await handleAsyncWithToast(
-              async () => approveReviewMutation(data.data._id),
+              async () => approveReviewMutation(reviewId),
               "Approving...",
               "Review approved successfully!",
               "Approval failed. Please try again.",
@@ -91,6 +99,7 @@ const BookDetailsComponent = ({
               "/admin-dashboard?tab=New+Reviews",
               router // Pass the router instance
             );
+          } else {
           } else {
             await handleAsyncWithToast(
               async () => approveBookMutation(data.data._id),
@@ -111,9 +120,9 @@ const BookDetailsComponent = ({
             console.error("Book ID is missing. Denial cannot proceed.");
             return;
           }
-          if (pathName?.indexOf("review")) {
+          if (pathName?.includes("review")) {
             await handleAsyncWithToast(
-              async () => rejectReviewMutation(data.data._id),
+              async () => rejectReviewMutation(reviewId),
               "Denying...",
               "Review denied successfully!",
               "Denial failed. Please try again.",
@@ -122,6 +131,7 @@ const BookDetailsComponent = ({
               "/admin-dashboard?tab=New+Reviews", // Redirect URL
               router // Pass the router instance
             );
+          } else {
           } else {
             await handleAsyncWithToast(
               async () => rejectBookMutation(data.data._id),
@@ -139,10 +149,10 @@ const BookDetailsComponent = ({
           break;
 
         case "Verify Review now on amazon":
-          if (data?.data?.amazonReviewUrl) {
+          if (data?.data?.amazonBookUrl) {
             console.log("Verifying the review on Amazon...");
             window.open(
-              data.data.amazonReviewUrl,
+              data?.data?.amazonBookUrl,
               "_blank",
               "noopener,noreferrer"
             );
@@ -257,30 +267,39 @@ const BookDetailsComponent = ({
                   </Button>
                 </div>
               </div> */}
-              {buttons?.map((button, index) => (
-                <Button
-                  key={index}
-                  radius="sm"
-                  className={cn(
-                    `w-full py-5 font-normal flex items-center justify-center gap-2 text-xs md:text-sm lg:text-base`,
-                    button.style
-                  )}
-                  onClick={() => handleButtonClick(button.text)}
-                >
-                  {button.text}
-                  {button.icon && <span>{button.icon}</span>}
-                  {button.svg && (
-                    <span>
-                      <Image
-                        src={button.svg}
-                        height={20}
-                        width={22}
-                        alt="image"
-                      />
-                    </span>
-                  )}
-                </Button>
-              ))}
+              {buttons?.map((button, index) => {
+                const isApproveButton = button.text === "Approve";
+                const isDenyButton = button.text === "Deny";
+                const shouldHide =
+                  (isApproveButton || isDenyButton) &&
+                  data?.data?.status !== "pending";
+
+                return (
+                  <Button
+                    key={index}
+                    radius="sm"
+                    className={cn(
+                      `w-full py-5 font-normal flex items-center justify-center gap-2 text-xs md:text-sm lg:text-base`,
+                      button.style,
+                      shouldHide ? "hidden" : ""
+                    )}
+                    onClick={() => handleButtonClick(button.text)}
+                  >
+                    {button.text}
+                    {button.icon && <span>{button.icon}</span>}
+                    {button.svg && (
+                      <span>
+                        <Image
+                          src={button.svg}
+                          height={20}
+                          width={22}
+                          alt="image"
+                        />
+                      </span>
+                    )}
+                  </Button>
+                );
+              })}
             </div>
           </div>
           <div className=" flex justify-end">

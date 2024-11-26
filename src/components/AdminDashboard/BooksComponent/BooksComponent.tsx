@@ -26,7 +26,7 @@ const BooksComponent = ({ books, title, isLoading }: BookTableProps) => {
         </div>
         <div className=" ">
           <BookTable books={books} />
-          <BookCards books={books} className="grid-cols-1 xs:grid-cols-2 lg:grid-cols-3"/>
+          <BookCards books={books} className="grid-cols-1 xs:grid-cols-2 xl:grid-cols-3"/>
         </div>
       </div>
     </div>

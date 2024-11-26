@@ -1,4 +1,3 @@
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"; 
 import { FormProvider, useForm } from "react-hook-form";
@@ -13,13 +12,12 @@ const MyFormWrapper = ({
   defaultValues,
   resolver,
 }: {
-  onSubmit: (data: any) => void;
+  onSubmit: (data: any, reset: () => void) => void;
   className?: string;
   children: React.ReactNode;
   defaultValues?: any;
   resolver?: import("react-hook-form").Resolver<any, any>;
 }) => {
-  // Change formConfig type to allow dynamic properties
   const formConfig: Record<string, any> = {};
 
   if (defaultValues) {
@@ -31,14 +29,10 @@ const MyFormWrapper = ({
   }
 
   const methods = useForm(formConfig);
-  const {
-    handleSubmit,
-    //  reset
-  } = methods;
+  const { handleSubmit, reset } = methods;
 
   const submit = (data: any) => {
-    onSubmit(data);
-    // reset();
+    onSubmit(data, reset); // Pass reset function to onSubmit
   };
 
   return (
@@ -49,13 +43,6 @@ const MyFormWrapper = ({
             hoverBorderColor: "#9B5983",
             activeBorderColor: "#9B5983",
           },
-        //   Select: {
-        //     colorBgElevated: isDark ? ' #191E3A' : '#F5F5F5',
-        //     colorText: isDark ? 'white' : '#212121',
-
-        //     selectorBg: isDark ? '#191E3A' : '#F5F5F5',
-        //     optionSelectedBg: isDark ? '#3697d8' : '#e6f4ff',
-        // },
           Input: {
             hoverBorderColor: "#9B5983",
             activeBorderColor: "#9B5983",
@@ -71,7 +58,7 @@ const MyFormWrapper = ({
             colorBorder: "#7F56D9",
             colorText: "#7F56D9",
             colorTextDisabled: "#7F56D9",
-          }
+          },
         },
       }}
     >

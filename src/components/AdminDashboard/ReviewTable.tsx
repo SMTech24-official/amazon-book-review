@@ -1,12 +1,13 @@
 'use client'
-import { BookRecord } from "@/interface/globalType";
+import { BookReviewData } from "@/interface/globalType";
+import { isNonEmptyArray } from "@/utils/isNonEmptyArray";
 import { Button } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
 interface BookTableProps {
-  Items: BookRecord[]; // books prop should be an array of Book
+  Items: BookReviewData[]; // books prop should be an array of Book
 }
 
 const ReviewTable = ({ Items }: BookTableProps) => {
@@ -29,6 +30,7 @@ const ReviewTable = ({ Items }: BookTableProps) => {
       )
     );
   };
+  // console.log({Items});
 
   return (
     <div className="hidden xl:block">
@@ -45,7 +47,7 @@ const ReviewTable = ({ Items }: BookTableProps) => {
 
         {/* Table Body */}
         <tbody>
-          {Items?.length > 0 &&
+          {isNonEmptyArray(Items) &&
             Items?.map((item, index) => (
               <tr key={index} className={`hover:bg-gray-100`}>
                 <td className="px-4 py-4 text-center lg:max-w-28">
@@ -77,7 +79,7 @@ const ReviewTable = ({ Items }: BookTableProps) => {
                   )}
                 </td>
                 <td className="px-4 py-4 text-center">
-                  <Link href={`/admin-dashboard/new-review/review-details/${item?.bookId?._id}`}>
+                  <Link href={`/admin-dashboard/new-review/review-details/${item?.bookId?._id}?review=${item?._id}`}>
                     <Button
                       radius="sm"
                       className="bg-primary text-white"

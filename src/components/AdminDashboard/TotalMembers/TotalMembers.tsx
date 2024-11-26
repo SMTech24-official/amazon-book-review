@@ -1,15 +1,14 @@
 "use client";
 
-import { TBooksAndMembers } from "@/interface/globalType";
-import BookCards from "../BookCards";
+import { Member } from "@/interface/globalType";
 import MemberTable from "../MemberTable";
 
-interface BookTableProps {
-  books: TBooksAndMembers[];
+interface MemberProps {
+  items: Member[];
   title: string;
 }
 
-const TotalMembers = ({ books, title }: BookTableProps) => {
+const TotalMembers = ({ items, title }: MemberProps) => {
   return (
     <div className="space-y-6 ">
       <div className="bg-white sm:px-6 rounded-lg   ">
@@ -18,11 +17,11 @@ const TotalMembers = ({ books, title }: BookTableProps) => {
         </div>
         <div className="flex items-center justify-between border-b py-3 md:py-5 px-4">
           <h2 className="text-lg font-semibold">{title}</h2>
-          <p>{books?.length}</p>
+          <p>{items?.length}</p>
         </div>
         <div className=" ">
-          <MemberTable books={books} />
-          <BookCards books={books}  className="grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4"/>
+          <MemberTable items={items} />
+          {/* <BookCards books={books}  className="grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4"/> */}
         </div>
       </div>
     </div>

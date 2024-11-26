@@ -14,6 +14,7 @@ interface TabPageProps {
 }
 
 
+
 export default function TabPage({ tabs, defaultTab }: TabPageProps) {
   const router = useRouter();
   const searchParams = useSearchParams();

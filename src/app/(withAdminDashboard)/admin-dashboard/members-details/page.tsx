@@ -39,4 +39,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default MemberPage;
