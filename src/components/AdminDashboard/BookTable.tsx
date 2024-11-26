@@ -4,6 +4,7 @@ import { TBooksAndMembers } from "@/interface/globalType";
 import { Button } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
+import { isNonEmptyArray } from "@/utils/isNonEmptyArray";
 
 interface BookTableProps {
   books: TBooksAndMembers[]; // books prop should be an array of Book
@@ -45,7 +46,7 @@ const BookTable = ({ books }: BookTableProps) => {
 
         {/* Table Body */}
         <tbody>
-          {books?.length > 0 &&
+          {isNonEmptyArray(books) &&
             books.map((book, index) => (
               <tr key={index} className={`hover:bg-gray-100`}>
                 <td className="px-4 py-4 text-center lg:max-w-28">

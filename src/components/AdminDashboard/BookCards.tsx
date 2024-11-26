@@ -5,6 +5,7 @@ import { Button } from "@nextui-org/react";
 import { TBooksAndMembers } from "@/interface/globalType";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { isNonEmptyArray } from "@/utils/isNonEmptyArray";
 
 interface BookTableProps {
   books: TBooksAndMembers[]; // books prop should be an array of Book
@@ -33,7 +34,7 @@ const BookCards = ({ books, className }: BookTableProps) => {
 
   return (
     <div className={cn("grid gap-3 xl:hidden p-4", className)}>
-      {books?.length > 0 &&
+      {isNonEmptyArray(books)  &&
         books.map((book, index) => (
           <div
             key={index}
