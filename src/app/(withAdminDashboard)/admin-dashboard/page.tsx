@@ -6,11 +6,10 @@ export const metadata: Metadata = {
   title: 'Admin Dashboard',
 }
 
-
 const page = () => {
   return (
     <div>
-      <AdminDashboardPAge/>
+      <AdminDashboardPAge />
     </div>
   );
 };

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const page = () => {
     return (
         <div>
-            <UnderCOnstruction pageName='Reading'/>
+            <UnderCOnstruction pageName='Reading'/> 
         </div>
     );
 };

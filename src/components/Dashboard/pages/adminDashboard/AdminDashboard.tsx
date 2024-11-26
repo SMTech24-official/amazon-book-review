@@ -1,15 +1,16 @@
-"use client"
-
+"use client";
+import BooksComponent from "@/components/AdminDashboard/BooksComponent/BooksComponent";
 import ReviewComponent from "@/components/AdminDashboard/ReviewComponent/ReviewComponent";
 import BreadCrumb from "@/components/common/breadCrumb/BreadCrumb";
 import TabPage from "@/components/common/tabPage/TabPage";
+import { useGetAllPendingBooksQuery } from "@/redux/features/book/bookApi";
 import { useGetAllPendingReviewsQuery } from "@/redux/features/review/reviewApi";
 import { useEffect } from "react";
 import { FaClipboardList, FaUserCog } from "react-icons/fa";
 
 
-
 const AdminDashboardPAge = () => {
+  const { data, isLoading } = useGetAllPendingBooksQuery(undefined);
   const { data: reviewData, isLoading: isReviewDataLoading } =
     useGetAllPendingReviewsQuery(undefined);
 
@@ -22,19 +23,18 @@ const AdminDashboardPAge = () => {
       }
     }
   }, []);
-
+  
   const tabs = [
     {
       label: "New Books",
       value: "New Books",
       icon: <FaUserCog className="min-w-6 min-h-6 mr-2" />,
       component: (
-        // <BooksComponent
-        //   books={data?.data}
-        //   isLoading={isLoading}
-        //   title="New books pending"
-        // />
-        <>asd</>
+        <BooksComponent
+          books={data?.data}
+          isLoading={isLoading}
+          title="New books pending"
+        />
       ),
     },
     {
@@ -51,8 +51,6 @@ const AdminDashboardPAge = () => {
     },
   ];
 
-  // demo link for breadcrumb
-  // http://localhost:3000/admin-dashboard/settings?tab=general/subtab1/subtab2
 
   return (
     <div className="dashboard-containers">

@@ -22,7 +22,7 @@ const BookDetailsPage = () => {
       text: "Deny",
       style: "bg-red-500 text-white",
     },
-  ];
+  ];  
   return (
     <>
       <BookDetailsComponent

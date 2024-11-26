@@ -12,7 +12,7 @@ const page = () => {
     return (
         <div className='dashboard-containers'>
             <Settings />
-        </div>
+        </div> 
     );
 };
 
