@@ -12,7 +12,7 @@ const MemberPage = () => {
   }
   return (
     <div>
-      <TotalMembers items={memberData?.data} title="Total members" />
+      <TotalMembers items={memberData?.data} title="Total members" />  
     </div>
   );
 };

@@ -11,7 +11,7 @@ const breadcrumbLinks = [
 const MemberDetailsPage = () => {
     return (
         <div>
-              <MemberDetailsComponent breadcrumbLinks={breadcrumbLinks}  />
+              <MemberDetailsComponent breadcrumbLinks={breadcrumbLinks}  />  
         </div>
     );
 };

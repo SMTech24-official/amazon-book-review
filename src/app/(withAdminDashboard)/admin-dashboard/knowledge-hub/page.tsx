@@ -4,7 +4,7 @@ const KnowledgeHubPage = () => {
     return (
         <div>
             {/* <UnderCOnstruction pageName='KnowLedge Hub'/> */}
-            <KnowledgeHub/>
+            <KnowledgeHub/>  
         </div>
     );
 };

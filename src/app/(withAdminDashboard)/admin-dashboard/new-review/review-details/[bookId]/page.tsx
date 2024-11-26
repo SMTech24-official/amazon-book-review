@@ -27,7 +27,7 @@ const BookDetailsPage = () => {
       <BookDetailsComponent
         // breadcrumbLinks={breadcrumbLinks}
         buttons={buttons}
-        buttonLayoutClassName="grid-cols-1 xs:grid-cols-2 sm:grid-cols-4"
+        buttonLayoutClassName="grid-cols-1 xs:grid-cols-2 sm:grid-cols-4"  
       />
     </>
   );
