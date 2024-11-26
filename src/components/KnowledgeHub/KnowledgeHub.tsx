@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
-import { useGetAllAuthorGuideQuery } from "@/redux/features/authorGuid/authorGuidApi";
+import { useAddAuthorGuideMutationMutation, useGetAllAuthorGuideQuery } from "@/redux/features/authorGuid/authorGuidApi";
 import {
-  useAddAuthorGuideMutationMutation,
   useAddKnowledgeHubVideoMutation,
   useGetKnowledgeHubVideoQuery,
   useUpdateKnowledgeHubVideoMutation,
