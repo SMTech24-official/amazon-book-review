@@ -13,7 +13,7 @@ export default function LibraryBookCard({
 }: {
     bookTitleOrTitle: string;
     author?: string;
-    publishedDate: Date;
+    publishedDate: Date | string;
     coinsPerReview?: number;
     children: React.ReactNode;
     imageSrc: string;

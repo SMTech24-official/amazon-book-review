@@ -131,7 +131,7 @@ const MemberDetailsComponent = ({
                   reviewCount={data.reviewCount}
                   // avgRating={data.avgRating}
                   imageSrc={data.bookCover}
-                  bookId={data?._id}
+                  // bookId={data?._id}
                 />
               ))}
           </div>

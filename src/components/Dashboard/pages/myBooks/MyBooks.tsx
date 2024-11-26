@@ -66,7 +66,7 @@ const MyBooks = () => {
                         key={data._id}
                         bookTitle={data.title}
                         status={data.status}
-                        readers={data.readers ?? 0}
+                        // readers={data.readers ?? 0}
                         publishedDate={new Date(data.publishedDate)}
                         coinsPerReview={data.coinsPerReview}
                         reviewCount={data.reviewCount}

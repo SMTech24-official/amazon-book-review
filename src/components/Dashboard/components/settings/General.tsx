@@ -39,7 +39,7 @@ const General = ({ user }: { user: User }) => {
                     <div className='flex xl:flex-row flex-col items-center lg:items-end gap-10'>
                         <DnDInput
                             width='w-[256px]'
-                            initialFile={user.image}
+                            initialFile={user.fullName}
                             id="profilePic"
                             label="profile Picture (Optional)"
                             acceptedTypes="image/*"
@@ -47,11 +47,11 @@ const General = ({ user }: { user: User }) => {
                         <div className="grid xl:grid-cols-2 gap-6 w-full">
                             <div className="space-y-2 xl:col-span-2">
                                 <Label htmlFor="name">Name</Label>
-                                <Input defaultValue={user?.name} className='w-full' id="name" placeholder="John" />
+                                <Input defaultValue={user?.fullName} className='w-full' id="name" placeholder="John" />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="author-link">Amazon Author page link</Label>
-                                <Input defaultValue={user?.amazonAuthorPage} className='w-full' id="authorLlink" name="authorLlink" placeholder="URL" />
+                                <Input defaultValue={user?.amazonAuthorPageLink} className='w-full' id="authorLlink" name="authorLlink" placeholder="URL" />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="email">Email</Label>
@@ -59,11 +59,11 @@ const General = ({ user }: { user: User }) => {
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="reviewer-name">Amazon reviewer name</Label>
-                                <Input defaultValue={user?.amazonReviewerName} className='w-full' id="reviewerName" name="reviewerName" placeholder="Jhon max" />
+                                <Input defaultValue={user?.reviewerName} className='w-full' id="reviewerName" name="reviewerName" placeholder="Jhon max" />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="country">Review Country</Label>
-                                <Input defaultValue={user?.reviewCountry ?? ""} className='w-full' id="country" name="country" placeholder="America" />
+                                <Input defaultValue={user?.amazonCountry ?? ""} className='w-full' id="country" name="country" placeholder="America" />
                             </div>
                         </div>
                     </div>

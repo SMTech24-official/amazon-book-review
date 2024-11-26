@@ -1,12 +1,13 @@
 import TabPage from "@/components/common/tabPage/TabPage";
-import General from "../../components/settings/General";
+import { SubscriptionsPlan } from "@/lib/fakeData/subscriptionPlans";
 import { FaClipboardList, FaUserCog } from "react-icons/fa";
+import General from "../../components/settings/General";
 import ManagePlans from "../../components/settings/MangePlans";
 import { user } from "@/lib/fakeData/user";
-import { SubscriptionsPlan } from "@/lib/fakeData/subscriptionPlans";
 
 
 export default function Settings() {
+
 
     const tabs = [
         {
@@ -19,7 +20,7 @@ export default function Settings() {
             label: "Manage Plans",
             value: "manage-plans",
             icon: <FaClipboardList className="min-w-6 min-h-6 mr-2" />,
-            component: <ManagePlans subscriptionsPlan={SubscriptionsPlan} plans={user.plans} />
+            component: <ManagePlans subscriptionsPlan={SubscriptionsPlan} plans={user.subscriptionPlane} />
         }
     ];
 

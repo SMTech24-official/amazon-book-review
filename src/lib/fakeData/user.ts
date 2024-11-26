@@ -1,13 +1,23 @@
 import { User } from "../types/type";
 
 export const user: User = {
-  image: null, // URL to the user's image
-  name: "John Doe",
-  amazonAuthorPage: "https://amazon.com/author/johndoe",
-  email: "johndoe@example.com",
-  amazonReviewerName: "JohnDReviewer",
-  reviewCountry: "United States",
-  password: "securePassword123", // Ensure passwords are securely hashed in real applications
-  role: "Author", // Example roles: "Reviewer", "Author", "Admin"
-  plans: "yearly",
+    _id: "6742aea7251ae2fcb0d12fbc",
+    fullName: "John Doe",
+    reviewerName: "johnnydoe",
+    amazonCountry: "USA",
+    profileImage: "https://randomuser.me/api/portraits/men/1.jpg",
+    email: "john.doe@example.com",
+    role: "author",
+    points: 150,
+    otp: null,
+    otpExpires: null,
+    isVerified: true,
+    isSubscribed: true,
+    subscriptionPlane: "Premium",
+    invitedFriends: 5,
+    termsAccepted: true,
+    createdAt: "2024-01-15T10:30:00Z",
+    updatedAt: "2024-11-01T12:45:00Z",
+    __v: 0,
+    amazonAuthorPageLink: "https://www.amazon.com/author/johndoe"
 };

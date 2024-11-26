@@ -5,24 +5,19 @@ import pdfIcon from "@/assets/pdfIcon.svg";
 import { cn } from "@/lib/utils";
 import {
   useApproveBookMutation,
-  useRejectBookMutation,
-  useSingleBookQuery,
+  useRejectBookMutation
 } from "@/redux/features/book/bookApi";
 import { useApproveReviewMutation, useRejectReviewMutation } from "@/redux/features/review/reviewApi";
 import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
 import { Button } from "@nextui-org/react";
 import Image, { StaticImageData } from "next/image";
 import {
-  useParams,
   usePathname,
   useRouter,
-  useSearchParams,
+  useSearchParams
 } from "next/navigation";
-import React from "react";
 import BreadCrumb from "../common/breadCrumb/BreadCrumb";
-import MyLoading from "../ui/MyLoading";
-
-
+import { useState } from "react";
 
 interface ButtonConfig {
   text: string;
@@ -31,39 +26,61 @@ interface ButtonConfig {
   svg?: string | null | StaticImageData;
 }
 
-interface BookDetailsComponentProps {
-  buttons?: ButtonConfig[];
-  buttonLayoutClassName?: string;
-}
 
-const BookDetailsComponent = ({
-  buttonLayoutClassName,
-  buttons,
-}: BookDetailsComponentProps) => {
-  const params = useParams();
+const BookDetailsComponent = (
+  {
+    bookTitle,
+    author,
+    coinsPerReview,
+    imageSrc,
+    buttons,
+    bookType,
+    bookLink,
+    amznLink,
+    genre,
+    status,
+    id,
+    children
+  }: {
+    bookTitle: string;
+    author?: string;
+    coinsPerReview?: number;
+    imageSrc: string;
+    genre: string;
+    status: string;
+    id: string;
+    amznLink?: string;
+    bookLink?: string;
+    bookType?: string;
+    buttons?: ButtonConfig[];
+    children: React.ReactNode;
+  }
+) => {
+  // const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams(); // Access URL query parameters
-  const bookId = params?.bookId;
+  // const bookId = params?.bookId;
   const reviewId = searchParams.get("review");
-
-  const { data, isLoading } = useSingleBookQuery(bookId);
-  console.log(data?.data);
+  // const { data, isLoading } = useSingleBookQuery(bookId);
   const pathName = usePathname();
   const [approveBookMutation] = useApproveBookMutation();
   const [approveReviewMutation] = useApproveReviewMutation();
   const [rejectBookMutation] = useRejectBookMutation();
   const [rejectReviewMutation] = useRejectReviewMutation();
-
+  const [brokenLink, setBrokenLink] = useState(false)
 
   const handleButtonClick = async (buttonText: string) => {
     try {
       switch (buttonText) {
         case "View the book on Amazon":
-          console.log("Navigating to the book on Amazon...");
+          if (amznLink) { router.push(amznLink) }
+          else setBrokenLink(true)
+
           break;
 
         case "Review now on Amazon":
-          console.log("Starting the review process on Amazon...");
+          if (amznLink) { router.push(amznLink) }
+          else setBrokenLink(true)
           break;
 
         case "Reviewed":
@@ -71,9 +88,9 @@ const BookDetailsComponent = ({
           break;
 
         case "Verify Amazon Link":
-          if (data?.data?.amazonBookUrl) {
+          if (amznLink) {
             window.open(
-              data.data.amazonBookUrl,
+              amznLink,
               "_blank",
               "noopener,noreferrer"
             );
@@ -83,7 +100,7 @@ const BookDetailsComponent = ({
           break;
 
         case "Approve":
-          if (!data?.data?._id) {
+          if (!id) {
             console.error("Book ID is missing. Approval cannot proceed.");
             return;
           }
@@ -101,7 +118,7 @@ const BookDetailsComponent = ({
             );
           } else {
             await handleAsyncWithToast(
-              async () => approveBookMutation(data.data._id),
+              async () => approveBookMutation(id),
               "Approving...",
               "Book approved successfully!",
               "Approval failed. Please try again.",
@@ -115,7 +132,7 @@ const BookDetailsComponent = ({
           break;
 
         case "Deny":
-          if (!data?.data?._id) {
+          if (!id) {
             console.error("Book ID is missing. Denial cannot proceed.");
             return;
           }
@@ -132,7 +149,7 @@ const BookDetailsComponent = ({
             );
           } else {
             await handleAsyncWithToast(
-              async () => rejectBookMutation(data.data._id),
+              async () => rejectBookMutation(id),
               "Denying...",
               "Book denied successfully!",
               "Denial failed. Please try again.",
@@ -147,10 +164,10 @@ const BookDetailsComponent = ({
           break;
 
         case "Verify Review now on amazon":
-          if (data?.data?.amazonBookUrl) {
+          if (amznLink) {
             console.log("Verifying the review on Amazon...");
             window.open(
-              data?.data?.amazonBookUrl,
+              amznLink,
               "_blank",
               "noopener,noreferrer"
             );
@@ -170,8 +187,9 @@ const BookDetailsComponent = ({
     }
   };
 
+
   // Handle PDF download
-  const handleDownloadPdf = (pdfUrl: string) => {
+  const handleDownloadPdf = (pdfUrl: string | undefined) => {
     if (!pdfUrl) {
       alert("PDF not available");
       return;
@@ -180,27 +198,26 @@ const BookDetailsComponent = ({
     window.open(pdfUrl, "_blank", "noopener,noreferrer");
   };
 
-  if (isLoading) {
-    return <MyLoading />;
-  }
 
   return (
-    <div className="dashboard-containers h-full max-h-[calc(100vh-70px)] flex flex-col">
+    <div className="h-full max-h-[calc(100vh-70px)] flex flex-col">
       <BreadCrumb />
       <div className="  flex-grow flex flex-col">
         <Image
-          src={data?.data?.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
+          src={imageSrc}
           height={500}
           width={200}
           alt="image"
           className="mx-auto my-5"
         />
+
+
         <div className="w-full max-w-5xl mx-auto flex-grow flex flex-col justify-between  gap-2 ">
           <div className="w-full ">
             <div className="flex flex-col xs:flex-row gap-2 justify-between mb-3">
-              <p className="text-xl font-medium">{data?.data?.title ?? "Book Title"}</p>
+              <p className="text-xl font-medium">{bookTitle ?? "Book Title"}</p>
               <div
-                onClick={() => handleDownloadPdf(data?.data?.bookPdf)}
+                onClick={() => handleDownloadPdf(bookLink)}
                 className="border-2 cursor-pointer border-gray-300 text-primary rounded-full flex items-center gap-2 px-4 py-1 w-fit"
               >
                 <p>Download as PDF</p>
@@ -209,68 +226,35 @@ const BookDetailsComponent = ({
             </div>
             <div className="flex flex-col xs:flex-row gap-2 justify-between mb-3">
               <p className="text-xs font-medium">
-                By: {data?.data?.authorName ?? "Author Name"}
+                By: {author ?? "Author Name"}
               </p>
               <div className="border border-gray-300 text-primary rounded-full flex items-center gap-2 px-4 py-1 w-fit">
                 <Image src={coins} height={10} width={20} alt="image" />
-                <p>{data?.data?.points ?? 0}</p>
+                <p>{coinsPerReview ?? 0}</p>
               </div>
             </div>
             <div className="flex flex-col xs:flex-row gap-2 justify-between mb-3">
               {/* <p className="text-xs font-medium">Word count: 12000-20000</p> */}
               <p className="text-xs font-medium">
-                Book type: {data?.data?.bookType ?? "Book Type"}
+                Book type: {bookType ?? "Book Type"}
               </p>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-3  mb-4 md:mb-8">
               <div className="border border-gray-300 text-gray-700 text-xs font-medium rounded-full flex items-center gap-2 px-4 py-1 w-fit">
-                <p>{data?.data?.genre ?? "Genre"}</p>
+                <p>{genre ?? "Genre"}</p>
               </div>
-              {/* <div className="border border-gray-300 text-gray-700 text-xs font-medium rounded-full flex items-center gap-2 px-4 py-1 w-fit">
-                <p>Romance</p>
-              </div>
-              <div className="border border-gray-300 text-gray-700 text-xs font-medium rounded-full flex items-center gap-2 px-4 py-1 w-fit">
-                <p>Mystery</p>
-              </div> */}
+
             </div>
             <div
               className={cn(
-                "grid gap-2 md:gap-5 mb-3  ",
-                buttonLayoutClassName || "xs:grid-cols-3"
+                " grid md:grid-cols-3  gap-4 "
               )}
             >
-              {/* <div className="w-full">
-                <Button
-                  radius="sm"
-                  className="bg-black text-white w-full py-5 text-base font-normal"
-                >
-                  Verify Amazon Link
-                </Button>
-              </div>
-              <div className="w-full flex items-center gap-2 md:gap-5">
-                <div className="w-full">
-                  <Button
-                    radius="sm"
-                    className="bg-primary text-white w-full py-5 text-base font-normal"
-                  >
-                    Approve
-                  </Button>
-                </div>{" "}
-                <div className="w-full">
-                  <Button
-                    radius="sm"
-                    className="bg-red-500 text-white w-full py-5 text-base font-normal"
-                  >
-                    Deny
-                  </Button>
-                </div>
-              </div> */}
               {buttons?.map((button, index) => {
                 const isApproveButton = button.text === "Approve";
                 const isDenyButton = button.text === "Deny";
                 const shouldHide =
-                  (isApproveButton || isDenyButton) &&
-                  data?.data?.status !== "pending";
+                  (isApproveButton || isDenyButton) && status !== "pending";
 
                 return (
                   <Button
@@ -300,12 +284,16 @@ const BookDetailsComponent = ({
               })}
             </div>
           </div>
-          <div className=" flex justify-end">
-            <div className="border-2 border-red-500 text-red-500 rounded-full flex items-center gap-2 px-4 py-1 w-fit ">
-              <p className="text-xs">Amazon link not working</p>
-              <Image src={brokenLinkIcon} height={10} width={25} alt="image" />
+          {children}
+          {
+            brokenLink && <div className=" flex justify-end">
+              <div className="border-2 border-red-500 text-red-500 rounded-full flex items-center gap-2 px-4 py-1 w-fit ">
+                <p className="text-xs">Amazon link not working</p>
+                <Image src={brokenLinkIcon} height={10} width={25} alt="image" />
+              </div>
             </div>
-          </div>
+          }
+
         </div>
       </div>
     </div>

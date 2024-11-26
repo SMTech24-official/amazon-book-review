@@ -34,7 +34,7 @@ const UDBookReview = () => {
                         key={book._id}
                         bookTitle={book.title}
                         status={book.status}
-                        readers={book.readers ?? 0}
+                        // readers={book.readers ?? 0}
                         publishedDate={new Date(book.publishedDate)}
                         coinsPerReview={book.coinsPerReview}
                         reviewCount={book.reviewCount}
