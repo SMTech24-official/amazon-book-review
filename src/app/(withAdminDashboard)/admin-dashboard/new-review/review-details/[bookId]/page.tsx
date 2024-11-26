@@ -1,5 +1,4 @@
-"use client";
-import BookDetailsComponent from "@/components/BookDetailsComponent/BookDetailsComponent";
+import BookReview from "@/components/Dashboard/pages/bookDetails/BookDetails";
 
 const BookDetailsPage = () => {
   // const breadcrumbLinks = [
@@ -8,30 +7,24 @@ const BookDetailsPage = () => {
   //   { name: "Book details", href: null }, // Last breadcrumb is static
   // ];
 
-  const buttons = [
-    {
-      text: "Verify Review now on amazon",
-      style: "bg-black text-white col-span-2",
-    },
-    {
-      text: "Approve",
-      style: "bg-primary text-white",
-    },
-    {
-      text: "Deny",
-      style: "bg-red-500 text-white",
-    },
-  ];
-  
+  // const buttons = [
+  //   {
+  //     text: "Verify Review now on amazon",
+  //     style: "bg-black text-white col-span-2",
+  //   },
+  //   {
+  //     text: "Approve",
+  //     style: "bg-primary text-white",
+  //   },
+  //   {
+  //     text: "Deny",
+  //     style: "bg-red-500 text-white",
+  //   },
+  // ];
+
   return (
-    <>
-      <BookDetailsComponent
-        // breadcrumbLinks={breadcrumbLinks}
-        buttons={buttons}
-        buttonLayoutClassName="grid-cols-1 xs:grid-cols-2 sm:grid-cols-4"  
-      />
-    </>
-  );
+      <BookReview />
+      );
 };
 
-export default BookDetailsPage;
+      export default BookDetailsPage;

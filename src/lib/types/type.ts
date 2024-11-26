@@ -1,9 +1,11 @@
+import { IconType } from "react-icons/lib";
+
 export type User = {
   _id: string;
   fullName: string;
   reviewerName: string;
   amazonCountry: string;
-  profileImage: string;  // Adjusted to match the data (image -> profileImage)
+  profileImage: string | null;  // Adjusted to match the data (image -> profileImage)
   email: string;
   role: string;
   points: number;
@@ -18,6 +20,7 @@ export type User = {
   updatedAt: string;
   __v: number;
   amazonAuthorPageLink: string;
+  
 };
 
 export type Metadata = {
@@ -70,4 +73,10 @@ export type SubscriptionPlan = {
   features: string[];
   button: Button;
   image: string;  // URL or path to image
+};
+
+export type NavLink = {
+  name: string;
+  href: string;
+  icon: IconType;  // Using IconType from react-icons
 };
