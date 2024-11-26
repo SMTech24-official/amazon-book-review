@@ -100,7 +100,6 @@ const BookDetailsComponent = ({
               router // Pass the router instance
             );
           } else {
-          } else {
             await handleAsyncWithToast(
               async () => approveBookMutation(data.data._id),
               "Approving...",
@@ -131,7 +130,6 @@ const BookDetailsComponent = ({
               "/admin-dashboard?tab=New+Reviews", // Redirect URL
               router // Pass the router instance
             );
-          } else {
           } else {
             await handleAsyncWithToast(
               async () => rejectBookMutation(data.data._id),
