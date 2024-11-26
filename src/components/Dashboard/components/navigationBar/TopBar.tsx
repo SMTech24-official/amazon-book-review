@@ -12,7 +12,7 @@ import Link from "next/link"
 
 export default function TopBar({ isOpen, setIsOpen }: { user: null | TUser, isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }) {
     const user = useAppSelector(selectCurrentUser);
-
+    console.log(user);
     return (
         <header className="border-b bg-white">
             <div className="flex items-center justify-between px-6 py-3 w-full">
@@ -85,7 +85,13 @@ export default function TopBar({ isOpen, setIsOpen }: { user: null | TUser, isOp
                         </Button>
                     </div>
                 }
-
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    className="p-1 border rounded-full"
+                >
+                    <HiMiniBellAlert className="min-h-[27px] min-w-[27px]" />
+                </Button>
             </div>
         </header>
     )
