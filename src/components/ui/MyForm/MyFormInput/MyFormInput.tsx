@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { Form, Input } from "antd";
 import { useEffect } from "react";
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller, useFormContext, useWatch } from "react-hook-form";
 
 const MyFormInput = ({
   type = "text",
@@ -14,6 +14,7 @@ const MyFormInput = ({
   placeHolder,
   value,
   isPassword = false,
+  onValueChange
 }: {
   type?: string;
   name: string;
@@ -23,12 +24,27 @@ const MyFormInput = ({
   placeHolder?: string;
   value?: any;
   isPassword?: boolean;
+  onValueChange?: (newValue: any) => void;
 }) => {
   const { setValue, control } = useFormContext();
+
+
+    // Watch the input field's value
+    const inputValue = useWatch({
+      control,
+      name, 
+    });
 
   useEffect(() => {
     setValue(name, value, { shouldValidate: false });
   }, [value, name, setValue]);
+
+
+  useEffect(() => {
+    if (onValueChange) {
+      onValueChange(inputValue); // Trigger the callback whenever the value changes
+    }
+  }, [inputValue, onValueChange]);
 
   return (
     <div>

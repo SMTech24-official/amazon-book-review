@@ -44,7 +44,7 @@ const KnowledgeHubStartReadingCard = ({ item }: { item: any }) => {
         )
       }
       <h3 className="text-xl font-medium mt-1 mb-3">{item?.title}</h3>
-      <p className="text-start font-medium">By: {item?.addedBy}</p>
+      <p className="text-start font-medium text-xs mb-2">By: {item?.addedBy}</p>
       <Button radius="sm" onClick={() => handleDownloadPdf(item?.pdfFile)} className="bg-primary text-white">
         Start reading
       </Button>

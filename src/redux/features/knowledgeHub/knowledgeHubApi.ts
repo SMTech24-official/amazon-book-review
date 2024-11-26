@@ -19,6 +19,16 @@ const knowledgeHubApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["knowledgeHub"],
     }),
+    addAuthorGuideMutation: builder.mutation({
+      query: (body) => {
+        return {
+          url: `authorGuide/add-author-guide`,
+          method: "POST",
+          body: body,
+        };
+      },
+      invalidatesTags: ["knowledgeHub"],
+    }),
     updateKnowledgeHubVideo: builder.mutation({
       query: (body) => {
         return {
@@ -36,5 +46,6 @@ const knowledgeHubApi = baseApi.injectEndpoints({
 export const {
     useGetKnowledgeHubVideoQuery,
     useAddKnowledgeHubVideoMutation,
+    useAddAuthorGuideMutationMutation,
     useUpdateKnowledgeHubVideoMutation
 } = knowledgeHubApi;
