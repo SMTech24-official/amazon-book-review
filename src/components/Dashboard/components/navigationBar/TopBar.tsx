@@ -75,14 +75,6 @@ export default function TopBar({ isOpen, setIsOpen }: { user: null | TUser, isOp
                             />
                             <span>100</span>
                         </div>
-
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className="p-1 border rounded-full"
-                        >
-                            <HiMiniBellAlert className="min-h-[27px] min-w-[27px]" />
-                        </Button>
                     </div>
                 }
                 <Button
