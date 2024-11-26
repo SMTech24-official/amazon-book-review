@@ -5,6 +5,8 @@ import pdfIcon from "@/assets/pdfIcon.svg";
 import { cn } from "@/lib/utils";
 import {
   useApproveBookMutation,
+  useCompleteReviewMutation,
+  useFinishReadingMutation,
   useRejectBookMutation
 } from "@/redux/features/book/bookApi";
 import { useApproveReviewMutation, useRejectReviewMutation } from "@/redux/features/review/reviewApi";
@@ -18,6 +20,7 @@ import {
 } from "next/navigation";
 import BreadCrumb from "../common/breadCrumb/BreadCrumb";
 import { useState } from "react";
+import { useAppDispatch } from "@/redux/hooks";
 
 interface ButtonConfig {
   text: string;
@@ -40,6 +43,7 @@ const BookDetailsComponent = (
     genre,
     status,
     id,
+    mainId,
     children
   }: {
     bookTitle: string;
@@ -49,6 +53,7 @@ const BookDetailsComponent = (
     genre: string;
     status: string;
     id: string;
+    mainId: string;
     amznLink?: string;
     bookLink?: string;
     bookType?: string;
@@ -69,11 +74,26 @@ const BookDetailsComponent = (
   const [rejectReviewMutation] = useRejectReviewMutation();
   const [brokenLink, setBrokenLink] = useState(false)
 
+  const dispatch = useAppDispatch();
+  const [finishReading] = useFinishReadingMutation()
+  const [completeReview] = useCompleteReviewMutation()
+
   const handleButtonClick = async (buttonText: string) => {
     try {
       switch (buttonText) {
         case "View the book on Amazon":
-          if (amznLink) { router.push(amznLink) }
+          const finishRes = await handleAsyncWithToast(
+            async () => {
+              console.log(mainId)
+              return finishReading(mainId); // Replace with your actual login function
+            },
+            "Finish to read...", // Toast message for the start of the process
+            "Reading Book Completed!", // Toast message for success
+            "Failed to start reading. Please try again.", // Toast message for failure
+            true,
+            dispatch
+          );
+          if (amznLink && finishRes) { router.push(amznLink) }
           else setBrokenLink(true)
 
           break;
@@ -84,7 +104,17 @@ const BookDetailsComponent = (
           break;
 
         case "Reviewed":
-          console.log("The book has already been reviewed.");
+          const completeRes = await handleAsyncWithToast(
+            async () => {
+              console.log(mainId)
+              return completeReview(mainId); // Replace with your actual login function
+            },
+            "Submitting Review...", // Toast message for the start of the process
+            "Review Submitted!", // Toast message for success
+            "Failed to submit review. Please try again.", // Toast message for failure
+            true,
+            dispatch
+          );
           break;
 
         case "Verify Amazon Link":

@@ -1,17 +1,18 @@
 "use client"
+import ReviewedIcon from "@/assets/ReviewedIcon.svg";
 import BookDetailsComponent from "@/components/BookDetailsComponent/BookDetailsComponent";
 import MyLoading from "@/components/ui/MyLoading";
 import { useSingleBookReviewQuery } from "@/redux/features/book/bookApi";
-import { useParams } from "next/navigation";
-import ReviewedIcon from "@/assets/ReviewedIcon.svg";
-import { AiOutlineAmazon } from "react-icons/ai";
 import { Info } from "lucide-react";
+import { useParams } from "next/navigation";
+import { AiOutlineAmazon } from "react-icons/ai";
 
 export default function BookReview() {
   const params = useParams()
-  console.log(params.id);
   const { data, isLoading } = useSingleBookReviewQuery(params.id)
-  console.log(data);
+
+
+
 
   const buttons = [
     {
@@ -44,6 +45,7 @@ export default function BookReview() {
   return (
     <div className="dashboard-containers">
       <BookDetailsComponent
+        mainId={data?.data?._id}
         buttons={buttons}
         bookTitle={data?.data?.bookId?.title}
         id={data?.data?.bookId?._id}
