@@ -60,8 +60,7 @@ const KnowledgeHub = () => {
   // const { data: getSingleAuthorGuideQuery } = useGetSingleAuthorGuideQuery(undefined);
   const [addKnowledgeHubVideoMutation] = useAddKnowledgeHubVideoMutation();
   const [addAuthorGuideMutation] = useAddAuthorGuideMutationMutation();
-  const [updateKnowledgeHubVideoMutation] =
-    useUpdateKnowledgeHubVideoMutation();
+  const [updateKnowledgeHubVideoMutation] = useUpdateKnowledgeHubVideoMutation();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const handleSubmit = async (formData: any, reset: () => void) => {
@@ -237,18 +236,6 @@ const KnowledgeHub = () => {
                             </Button>
                           </MyFormWrapper>
                         </ModalBody>
-                        {/* <ModalFooter>
-                          <Button
-                            color="danger"
-                            variant="flat"
-                            onPress={onClose}
-                          >
-                            Close
-                          </Button>
-                          <Button color="primary" onPress={onClose}>
-                            Sign in
-                          </Button>
-                        </ModalFooter> */}
                       </>
                     )}
                   </ModalContent>

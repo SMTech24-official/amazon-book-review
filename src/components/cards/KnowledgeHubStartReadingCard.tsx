@@ -30,7 +30,7 @@ const KnowledgeHubStartReadingCard = ({ item }: { item: any }) => {
             height={400}
             width={200}
             alt="img"
-            className="mx-auto"
+            className="mx-auto h-full max-h-60"
             onError={() => setImageError(true)} // Handle error here
           />
         ) : (
