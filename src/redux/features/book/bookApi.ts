@@ -4,7 +4,7 @@ const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllBooks: builder.query({
       query: () => ({
-        url: "/book",
+        url: "/book?status=live",
         method: "GET",
       }),
       providesTags: ["Book"],
