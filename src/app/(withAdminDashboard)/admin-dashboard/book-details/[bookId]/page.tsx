@@ -1,5 +1,5 @@
 // import BookDetailsComponent from "@/components/BookDetailsComponent/BookDetailsComponent";
-import BookReview from "@/components/Dashboard/pages/bookDetails/BookDetails";
+import AdminBookDetails from "@/components/Dashboard/pages/adminbookReview/AdminBookReview";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -10,23 +10,10 @@ export const metadata: Metadata = {
 
 const BookDetailsPage = () => {
 
-  // const buttons = [
-  //   {
-  //     text: "Verify Amazon Link",
-  //     style: "bg-black text-white col-span-2",
-  //   },
-  //   {
-  //     text: "Approve",
-  //     style: "bg-primary text-white",
-  //   },
-  //   {
-  //     text: "Deny",
-  //     style: "bg-red-500 text-white",
-  //   },
-  // ];
+
   return (
     <div>
-      <BookReview />
+      <AdminBookDetails />
     </div>
   );
 };

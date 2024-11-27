@@ -58,7 +58,7 @@ const BookDetailsComponent = (
     bookLink?: string;
     bookType?: string;
     buttons?: ButtonConfig[];
-    children: React.ReactNode;
+    children?: React.ReactNode;
   }
 ) => {
   // const params = useParams();
@@ -84,7 +84,6 @@ const BookDetailsComponent = (
         case "View the book on Amazon":
           const finishRes = await handleAsyncWithToast(
             async () => {
-              console.log(mainId)
               return finishReading(mainId); // Replace with your actual login function
             },
             "Finish to read...", // Toast message for the start of the process
@@ -119,15 +118,9 @@ const BookDetailsComponent = (
           break;
 
         case "Verify Amazon Link":
-          if (amznLink) {
-            window.open(
-              amznLink,
-              "_blank",
-              "noopener,noreferrer"
-            );
-          } else {
-            console.error("Amazon book URL is not available.");
-          }
+          console.log(amznLink);
+          if (amznLink) { router.push(amznLink) }
+          else setBrokenLink(true)
           break;
 
         case "Approve":

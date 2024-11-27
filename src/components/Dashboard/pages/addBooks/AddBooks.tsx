@@ -15,14 +15,17 @@ import {
 import { BookTypes } from "@/lib/fakeData/bookTypes"
 import { genres } from "@/lib/fakeData/genre"
 import { useAddBookMutation } from "@/redux/features/book/bookApi"
+import { useAppDispatch } from "@/redux/hooks"
+import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast"
 import { useState } from "react"
 
 export default function AddBooksO() {
     const [bookCover, setBookCover] = useState<File | null>(null)
     const [bookPdf, setBookPdf] = useState<File | null>(null)
 
+    const dispatch = useAppDispatch();
+    const [addBook] = useAddBookMutation()
 
-    const [addBook, { data, error }] = useAddBookMutation()
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData();
@@ -45,13 +48,21 @@ export default function AddBooksO() {
                 title: data.title,
             }
             formData.append("data", JSON.stringify(otherData))
-            await addBook(formData)
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const finishRes = await handleAsyncWithToast(
+                async () => {
+                    return addBook(formData); // Replace with your actual login function
+                },
+                "Adding Books...", // Toast message for the start of the process
+                "Book Added Completed!", // Toast message for success
+                `Please Check Your Book Data`, // Toast message for failure
+                true,
+                dispatch
+            );
         }
 
     }
-    if (data) {
-        console.log(data);
-    } else console.log(error);
+
 
 
     return (

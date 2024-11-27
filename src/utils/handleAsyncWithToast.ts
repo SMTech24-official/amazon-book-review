@@ -35,10 +35,10 @@ export const handleAsyncWithToast = async (
         // dispatch(setUser({ user: res.data.user, token: res.data.accessToken }));
       }
 
-        // Redirect if redirectTo is provided
-        if (redirectTo && router) {
-          router.push(redirectTo);
-        }
+      // Redirect if redirectTo is provided
+      if (redirectTo && router) {
+        router.push(redirectTo);
+      }
     }
 
     if (res?.message) {
@@ -56,7 +56,9 @@ export const handleAsyncWithToast = async (
     return res; // Return response if needed
   } catch (error) {
     toast.error(
-      (error as any)?.errorSources?.[0]?.message || errorMessage || "Something went wrong",
+      (error as any)?.errorSources?.[0]?.message ||
+        errorMessage ||
+        "Something went wrong",
       {
         id: toastInit,
       }
