@@ -31,7 +31,7 @@ export default function BooksCards({
 }) {
   const dispatch = useAppDispatch();
   const [requestReview] = useRequestReviewMutation()
-  
+
   const handleRequestReview = async () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const finishRes = await handleAsyncWithToast(
@@ -45,7 +45,7 @@ export default function BooksCards({
       dispatch
     );
   }
-
+  console.log(coinsPerReview);
   return (
     <div className="flex flex-col md:flex-row gap-6 p-4 xl:h-[225px] sm:w-full w-[250px] h-full border rounded-lg shadow-sm">
       <div className="w-[129px] h-[190px]">
@@ -118,9 +118,9 @@ export default function BooksCards({
           </div>
           <div className="flex justify-end xl:mt-4">
             <Button
-              disabled={status.toLowerCase() === "pending" || isReadyForReview}
+              disabled={status?.toLowerCase() === "pending" || isReadyForReview}
               radius="sm"
-              className={cn(`w-full py-5 font-normal flex items-center justify-center gap-2 text-xs md:text-sm lg:text-base  ${status.toLowerCase() === "pending" ? "bg-gray-500 text-white" : isReadyForReview ? "bg-black text-white" : "bg-primary text-white hover:bg-primary/90"} cursor-pointer`)}
+              className={cn(`w-full py-5 font-normal flex items-center justify-center gap-2 text-xs md:text-sm lg:text-base  ${status?.toLowerCase() === "pending" ? "bg-gray-500 text-white" : isReadyForReview ? "bg-black text-white" : "bg-primary text-white hover:bg-primary/90"} cursor-pointer`)}
               onClick={() => handleRequestReview()}
             >
               {isReadyForReview === true ? "In for Review" : "Get Review"}

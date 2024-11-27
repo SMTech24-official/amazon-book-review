@@ -8,6 +8,7 @@ import BreadCrumb from '@/components/common/breadCrumb/BreadCrumb';
 import { useGetAllBooksQuery } from '@/redux/features/book/bookApi';
 import { Book, User } from '@/lib/types/type';
 import MyLoading from '@/components/ui/MyLoading';
+import { NoBooksFound } from '@/components/noBooksFound/NoFoundBooks';
 
 const MyBooks = () => {
     const { data: BooksData, isLoading } = useGetAllBooksQuery(undefined)
@@ -16,13 +17,13 @@ const MyBooks = () => {
 
     // Filter books based on the selected filter
     const filteredBooks = BooksData?.data.filter((book: User & Book) =>
-        filter === 'All' || book.status.toLowerCase() === filter.toLowerCase()
+        filter === 'All' || book?.status?.toLowerCase() === filter?.toLowerCase()
     );
 
     if (isLoading) {
         return <div className="h-screen"><MyLoading /></div>
     }
-    
+
     return (
         <div>
             {/* heading */}
@@ -60,23 +61,27 @@ const MyBooks = () => {
             </div>
 
             {/* Books Grid */}
-            <div className='sm:grid sm:grid-cols-2 flex flex-wrap items-center justify-center xl:gap-5 lg:gap-4 md:gap-3 gap-2'>
-                {filteredBooks?.map((data: User & Book) => (
-                    <BooksCards
+            {
+                filteredBooks?.length > 0 ? <div className='sm:grid sm:grid-cols-2 flex flex-wrap items-center justify-center xl:gap-5 lg:gap-4 md:gap-3 gap-2'>
+                    {filteredBooks?.map((data: User & Book) => (
+                        <BooksCards
 
-                        key={data._id}
-                        id={data._id}
-                        bookTitle={data.title}
-                        status={data.status}
-                        // readers={data.readers ?? 0}
-                        publishedDate={new Date(data.publishedDate)}
-                        coinsPerReview={data.coinsPerReview}
-                        reviewCount={data.reviewCount}
-                        imageSrc={data.bookCover}
-                        isReadyForReview={data.isReadyForReview}
-                    />
-                ))}
-            </div>
+                            key={data._id}
+                            id={data._id}
+                            bookTitle={data.title}
+                            status={data.status}
+                            // readers={data.readers ?? 0}
+                            publishedDate={new Date(data.publishedDate)}
+                            coinsPerReview={data.coinsPerReview}
+                            reviewCount={data.reviewCount}
+                            imageSrc={data.bookCover}
+                            isReadyForReview={data.isReadyForReview}
+                        />
+                    ))
+                    }
+                </div> : <NoBooksFound />
+            }
+
         </div>
     );
 };

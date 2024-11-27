@@ -11,6 +11,7 @@ import LibraryBookCard from '../../components/cards/libraryBookCard/LibraryBooks
 import FilterDropdown from '../../components/filterButton/FilterButton';
 import { handleAsyncWithToast } from '@/utils/handleAsyncWithToast';
 import { useAppDispatch } from '@/redux/hooks';
+import { NoBooksFound } from '@/components/noBooksFound/NoFoundBooks';
 
 const UserLibrary = () => {
     const dispatch = useAppDispatch();
@@ -53,7 +54,7 @@ const UserLibrary = () => {
 
             {/* Books Grid */}
             {
-                BooksData?.data.length > 0 ? <div className='flex flex-wrap md:grid md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 gap-3 items-center justify-center'>
+                filteredBooks?.length > 0 ? <div className='flex flex-wrap md:grid md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 gap-3 items-center justify-center'>
                     {filteredBooks?.map((data: User & Book) => (
                         <LibraryBookCard
                             key={data._id}
@@ -69,7 +70,7 @@ const UserLibrary = () => {
                         </LibraryBookCard>
                     ))}
                 </div>
-                    : <div className='h-[80vh] w-full flex items-center justify-center text-xl text-red-500'><p>No Books Found</p></div>
+                    : <NoBooksFound/>
             }
 
         </div>
