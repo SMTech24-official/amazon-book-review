@@ -63,7 +63,9 @@ const MyBooks = () => {
             <div className='sm:grid sm:grid-cols-2 flex flex-wrap items-center justify-center xl:gap-5 lg:gap-4 md:gap-3 gap-2'>
                 {filteredBooks?.map((data: User & Book) => (
                     <BooksCards
+
                         key={data._id}
+                        id={data._id}
                         bookTitle={data.title}
                         status={data.status}
                         // readers={data.readers ?? 0}

@@ -4,10 +4,14 @@ import coins from "@/assets/coins.png"
 import reviewIcon from "@/assets/ReviewIcon.png"
 import { Button } from "@nextui-org/react";
 import { cn } from "@/lib/utils";
+import { useRequestReviewMutation } from "@/redux/features/book/bookApi";
+import { useAppDispatch } from "@/redux/hooks";
+import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
 
 export default function BooksCards({
   bookTitle,
   status,
+  id,
   // readers,
   publishedDate,
   coinsPerReview,
@@ -17,13 +21,31 @@ export default function BooksCards({
 }: {
   bookTitle: string;
   status: string;
+  id?: string;
   // readers: number;
   publishedDate: Date;
   coinsPerReview: number;
   reviewCount: number;
   imageSrc: string;
-  isReadyForReview?:boolean
+  isReadyForReview?: boolean
 }) {
+  const dispatch = useAppDispatch();
+  const [requestReview] = useRequestReviewMutation()
+  
+  const handleRequestReview = async () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const finishRes = await handleAsyncWithToast(
+      async () => {
+        return requestReview(id); // Replace with your actual login function
+      },
+      "Requesting for review...", // Toast message for the start of the process
+      "Review request Successful", // Toast message for success
+      "Failed to request review. Please try again.", // Toast message for failure
+      true,
+      dispatch
+    );
+  }
+
   return (
     <div className="flex flex-col md:flex-row gap-6 p-4 xl:h-[225px] sm:w-full w-[250px] h-full border rounded-lg shadow-sm">
       <div className="w-[129px] h-[190px]">
@@ -96,12 +118,12 @@ export default function BooksCards({
           </div>
           <div className="flex justify-end xl:mt-4">
             <Button
-              disabled={status.toLowerCase() === "pending"}
+              disabled={status.toLowerCase() === "pending" || isReadyForReview}
               radius="sm"
-              className={cn(`w-full py-5 font-normal flex items-center justify-center gap-2 text-xs md:text-sm lg:text-base ${isReadyForReview ? "bg-black text-white hover:bg-black/90" : "bg-primary text-white hover:bg-primary/90" } `)}
-            // onClick={() => handleButtonClick(button.text)}
+              className={cn(`w-full py-5 font-normal flex items-center justify-center gap-2 text-xs md:text-sm lg:text-base  ${status.toLowerCase() === "pending" ? "bg-gray-500 text-white" : isReadyForReview ? "bg-black text-white" : "bg-primary text-white hover:bg-primary/90"} cursor-pointer`)}
+              onClick={() => handleRequestReview()}
             >
-              {isReadyForReview === true ? "In for Review" : "Get Reviewed"}
+              {isReadyForReview === true ? "In for Review" : "Get Review"}
             </Button>
           </div>
         </div>

@@ -94,6 +94,16 @@ const authApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["Book"],
     }),
+    requestReview: builder.mutation({
+      query: ( id ) => {
+        console.log(id);
+        return {
+          url: `book/get-reviewed/${id}`,
+          method: "PUT",
+        };
+      },
+      invalidatesTags: ["Book"],
+    }),
     completeReview: builder.mutation({
       query: ( id ) => {
         console.log(id);
@@ -119,5 +129,6 @@ export const {
   useAddBookMutation,
   useStartReadingMutation,
   useFinishReadingMutation,
-  useCompleteReviewMutation
+  useCompleteReviewMutation,
+  useRequestReviewMutation
 } = authApi;
