@@ -41,8 +41,8 @@ const BookDetailsComponent = (
     bookLink,
     amznLink,
     genre,
-    status,
     id,
+    status,
     mainId,
     children
   }: {
@@ -51,7 +51,7 @@ const BookDetailsComponent = (
     coinsPerReview?: number;
     imageSrc: string;
     genre: string;
-    status: string;
+    status?: string;
     id: string;
     mainId: string;
     amznLink?: string;
@@ -63,9 +63,7 @@ const BookDetailsComponent = (
 ) => {
   // const params = useParams();
   const router = useRouter();
-  const searchParams = useSearchParams(); // Access URL query parameters
   // const bookId = params?.bookId;
-  const reviewId = searchParams.get("review");
   // const { data, isLoading } = useSingleBookQuery(bookId);
   const pathName = usePathname();
   const [approveBookMutation] = useApproveBookMutation();
@@ -124,14 +122,14 @@ const BookDetailsComponent = (
           break;
 
         case "Approve":
-          if (!id) {
+          if (!mainId) {
             console.error("Book ID is missing. Approval cannot proceed.");
             return;
           }
 
           if (pathName?.includes("review")) {
             await handleAsyncWithToast(
-              async () => approveReviewMutation(reviewId),
+              async () => approveReviewMutation(mainId),
               "Approving...",
               "Review approved successfully!",
               "Approval failed. Please try again.",
@@ -142,7 +140,7 @@ const BookDetailsComponent = (
             );
           } else {
             await handleAsyncWithToast(
-              async () => approveBookMutation(id),
+              async () => approveBookMutation(mainId),
               "Approving...",
               "Book approved successfully!",
               "Approval failed. Please try again.",
@@ -162,7 +160,7 @@ const BookDetailsComponent = (
           }
           if (pathName?.includes("review")) {
             await handleAsyncWithToast(
-              async () => rejectReviewMutation(reviewId),
+              async () => rejectReviewMutation(mainId),
               "Denying...",
               "Review denied successfully!",
               "Denial failed. Please try again.",
@@ -173,7 +171,7 @@ const BookDetailsComponent = (
             );
           } else {
             await handleAsyncWithToast(
-              async () => rejectBookMutation(id),
+              async () => rejectBookMutation(mainId),
               "Denying...",
               "Book denied successfully!",
               "Denial failed. Please try again.",
@@ -221,7 +219,6 @@ const BookDetailsComponent = (
     // Open the PDF in a new tab
     window.open(pdfUrl, "_blank", "noopener,noreferrer");
   };
-
 
   return (
     <div className="h-full max-h-[calc(100vh-70px)] flex flex-col">
@@ -271,14 +268,13 @@ const BookDetailsComponent = (
             </div>
             <div
               className={cn(
-                " grid md:grid-cols-3  gap-4 "
+                " grid md:grid-cols-3 gap-4 "
               )}
             >
               {buttons?.map((button, index) => {
-                const isApproveButton = button.text === "Approve";
-                const isDenyButton = button.text === "Deny";
-                const shouldHide =
-                  (isApproveButton || isDenyButton) && status !== "pending";
+                // const isApproveButton = button.text === "Approve";
+                // const isDenyButton = button.text === "Deny";
+                // const shouldHide =  status !== "pending";
 
                 return (
                   <Button
@@ -287,7 +283,7 @@ const BookDetailsComponent = (
                     className={cn(
                       `w-full py-5 font-normal flex items-center justify-center gap-2 text-xs md:text-sm lg:text-base`,
                       button.style,
-                      shouldHide ? "hidden" : ""
+                      // shouldHide ? "hidden" : ""
                     )}
                     onClick={() => handleButtonClick(button.text)}
                   >

@@ -38,7 +38,7 @@ const Reading = () => {
                             bookTitleOrTitle={data.bookId?.title ?? "Book Title"}
                             author={data.bookId?.authorName ?? "Author Name"}
                             publishedDate={data.bookId?.publishedDate ? new Date(data.bookId?.publishedDate) : "No Data Found"}
-                            coinsPerReview={data.bookId?.coinsPerReview ?? 0}
+                            coinsPerReview={data.bookId?.points ?? 0}
                             imageSrc={data.bookId?.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
                         >
                             <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
@@ -60,7 +60,7 @@ const Reading = () => {
                             bookTitleOrTitle={data.bookId?.title ?? "Book Title"}
                             author={data.bookId?.authorName ?? "Author Name"}
                             publishedDate={data.bookId?.publishedDate ? new Date(data.bookId?.publishedDate) : "No Data Found"}
-                            coinsPerReview={data.bookId?.coinsPerReview ?? 0}
+                            coinsPerReview={data.bookId?.points ?? 0}
                             imageSrc={data.bookId?.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
                         >
                             <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
@@ -82,7 +82,7 @@ const Reading = () => {
                             bookTitleOrTitle={data.bookId?.title ?? "Book Title"}
                             author={data.bookId?.authorName ?? "Author Name"}
                             publishedDate={data.bookId?.publishedDate ? new Date(data.bookId?.publishedDate) : "No Data Found"}
-                            coinsPerReview={data.bookId?.coinsPerReview ?? 0}
+                            coinsPerReview={data.bookId?.points ?? 0}
                             imageSrc={data.bookId?.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
                         >
                             <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">

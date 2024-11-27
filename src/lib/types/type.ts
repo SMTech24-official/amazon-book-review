@@ -33,7 +33,7 @@ export type Book = {
   title: string;
   status: string;
   publishedDate: string;
-  coinsPerReview: number;
+  points: number;
   reviewCount: number;
   bookCover: string;
   authorName: string;

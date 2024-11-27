@@ -47,6 +47,7 @@ export default function AddBooksO() {
                 genre: data.genre,
                 title: data.title,
             }
+            console.log(otherData);
             formData.append("data", JSON.stringify(otherData))
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const finishRes = await handleAsyncWithToast(
@@ -151,7 +152,7 @@ export default function AddBooksO() {
                                 <SelectContent>
                                     <SelectContent>
                                         {
-                                            BookTypes?.map((data, idx) => <SelectItem key={idx} value={data.toLocaleLowerCase()}>{data}</SelectItem>)
+                                            BookTypes?.map((data, idx) => <SelectItem key={idx} value={data}>{data}</SelectItem>)
                                         }
                                     </SelectContent>
                                 </SelectContent>

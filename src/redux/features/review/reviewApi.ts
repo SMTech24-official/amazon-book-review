@@ -9,6 +9,13 @@ const reviewApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Review"],
     }),
+    getSinglePendingReviews: builder.query({
+      query: (id) => ({
+        url: `/admin/single-review/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Review"],
+    }),
     approveReview: builder.mutation({
       query: (id) => {
         return {
@@ -34,6 +41,7 @@ const reviewApi = baseApi.injectEndpoints({
 
 export const {
   useGetAllPendingReviewsQuery,
+  useGetSinglePendingReviewsQuery,
   useApproveReviewMutation,
   useRejectReviewMutation,
 } = reviewApi;

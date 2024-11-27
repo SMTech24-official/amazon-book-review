@@ -79,7 +79,7 @@ const ReviewTable = ({ Items }: BookTableProps) => {
                   )}
                 </td>
                 <td className="px-4 py-4 text-center">
-                  <Link href={`/admin-dashboard/new-review/review-details/${item?.bookId?._id}?review=${item?._id}`}>
+                  <Link href={`/admin-dashboard/new-review/review-details/${item?._id}`}>
                     <Button
                       radius="sm"
                       className="bg-primary text-white"

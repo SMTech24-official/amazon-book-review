@@ -11,8 +11,7 @@ import { FaClipboardList, FaUserCog } from "react-icons/fa";
 
 const AdminDashboardPAge = () => {
   const { data, isLoading } = useGetAllPendingBooksQuery(undefined);
-  const { data: reviewData, isLoading: isReviewDataLoading } =
-    useGetAllPendingReviewsQuery(undefined);
+  const { data: reviewData, isLoading: isReviewDataLoading } = useGetAllPendingReviewsQuery(undefined);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -23,7 +22,7 @@ const AdminDashboardPAge = () => {
       }
     }
   }, []);
-  
+
   const tabs = [
     {
       label: "New Books",

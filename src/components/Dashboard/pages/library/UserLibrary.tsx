@@ -61,7 +61,7 @@ const UserLibrary = () => {
                             bookTitleOrTitle={data.title}
                             author={data.authorName}
                             publishedDate={new Date(data.publishedDate)}
-                            coinsPerReview={data.coinsPerReview}
+                            coinsPerReview={data.points}
                             imageSrc={data.bookCover}
                         >
                             <Button onClick={() => handleStartReading(data._id)} radius="sm" className="w-full bg-primary text-white py-2 rounded-lg">

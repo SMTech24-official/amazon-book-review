@@ -49,7 +49,7 @@ export default function BookReview() {
         buttons={buttons}
         bookTitle={data?.data?.bookId?.title}
         id={data?.data?.bookId?._id}
-        coinsPerReview={data?.data?.bookId?.coinsPerReview}
+        coinsPerReview={data?.data?.bookId?.points}
         author={data?.data?.bookId?.authorName}
         amznLink={data?.data?.bookId?.amazonBookUrl}
         bookLink={data?.data?.bookId?.bookPdf}

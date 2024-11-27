@@ -72,7 +72,7 @@ const MyBooks = () => {
                             status={data.status}
                             // readers={data.readers ?? 0}
                             publishedDate={new Date(data.publishedDate)}
-                            coinsPerReview={data.coinsPerReview}
+                            coinsPerReview={data.points}
                             reviewCount={data.reviewCount}
                             imageSrc={data.bookCover}
                             isReadyForReview={data.isReadyForReview}

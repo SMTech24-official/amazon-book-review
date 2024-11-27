@@ -65,7 +65,7 @@ export type BookReviewData = {
     title: string;
     status: string;
     publishedDate: string;
-    coinsPerReview: number;
+    po: number;
     reviewCount: number;
     bookCover: string;
     authorName: string;
