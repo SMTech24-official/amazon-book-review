@@ -1,31 +1,37 @@
+"use client"
+
 import TabPage from "@/components/common/tabPage/TabPage";
 import { SubscriptionsPlan } from "@/lib/fakeData/subscriptionPlans";
+
+import MyLoading from "@/components/ui/MyLoading";
+import { useUserDataQuery } from "@/redux/features/auth/authApi";
 import { FaClipboardList, FaUserCog } from "react-icons/fa";
 import General from "../../components/settings/General";
 import ManagePlans from "../../components/settings/MangePlans";
-import { user } from "@/lib/fakeData/user";
 
 
 export default function Settings() {
+    const { data: UserData, isLoading } = useUserDataQuery(undefined)
 
 
+    if (isLoading) {
+        return <MyLoading />
+    }
     const tabs = [
         {
             label: "General",
             value: "general",
             icon: <FaUserCog className="min-w-6 min-h-6 mr-2" />,
-            component: <General user={user} />
+            component: <General user={UserData?.data} />
         },
         {
             label: "Manage Plans",
             value: "manage-plans",
             icon: <FaClipboardList className="min-w-6 min-h-6 mr-2" />,
-            component: <ManagePlans subscriptionsPlan={SubscriptionsPlan} plans={user.subscriptionPlane} />
+            component: <ManagePlans subscriptionsPlan={SubscriptionsPlan} plans={UserData?.data.subscriptionPlane} />
         }
     ];
 
-    // demo link for breadcrumb 
-    // http://localhost:3000/admin-dashboard/settings?tab=general/subtab1/subtab2
     return (
         <TabPage defaultTab="general" tabs={tabs} />
     )

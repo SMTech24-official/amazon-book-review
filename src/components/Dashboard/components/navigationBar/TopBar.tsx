@@ -1,17 +1,18 @@
+import coins from "@/assets/coins.png"
+import refer from "@/assets/refer.png"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { selectCurrentUser, TUser } from '@/redux/features/auth/authSlice'
-import { useAppSelector } from "@/redux/hooks"
+import { useUserDataQuery } from "@/redux/features/auth/authApi"
+import { TUser } from '@/redux/features/auth/authSlice'
 import { Menu, Search, X } from 'lucide-react'
 import Image from "next/image"
-import refer from "@/assets/refer.png"
-import coins from "@/assets/coins.png"
+import Link from "next/link"
 import { Dispatch, SetStateAction } from 'react'
 import { HiMiniBellAlert } from 'react-icons/hi2'
-import Link from "next/link"
 
 export default function TopBar({ isOpen, setIsOpen }: { user: null | TUser, isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }) {
-    const user = useAppSelector(selectCurrentUser);
+    const { data: user } = useUserDataQuery(undefined)
+    
     return (
         <header className="border-b bg-white">
             <div className="flex items-center justify-between px-6 py-3 w-full">
@@ -25,8 +26,8 @@ export default function TopBar({ isOpen, setIsOpen }: { user: null | TUser, isOp
 
                 {/* Left Section */}
                 {
-                    user?.role !== "admin" && <div className="lg:flex items-center gap-2 hidden">
-                        <span className="hidden sm:inline text-[15px]">Welcome Back, {user?.name}!</span>
+                    user?.data.role !== "admin" && <div className="lg:flex items-center gap-2 hidden">
+                        <span className="hidden sm:inline text-[15px]">Welcome Back, {user?.data.name}!</span>
                         <span className="text-xl">👋</span>
                     </div>
                 }
@@ -34,7 +35,7 @@ export default function TopBar({ isOpen, setIsOpen }: { user: null | TUser, isOp
 
                 {/* Center Section */}
                 {
-                    user?.role !== "admin" && <div className="flex-1 max-w-[600px] mx-4 hidden sm:block">
+                    user?.data.role !== "admin" && <div className="flex-1 max-w-[600px] mx-4 hidden sm:block">
                         <div className="relative">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                             <Input
@@ -49,7 +50,7 @@ export default function TopBar({ isOpen, setIsOpen }: { user: null | TUser, isOp
 
                 {/* Right Section */}
                 {
-                    user?.role !== "admin" && <div className="flex items-center gap-4">
+                    user?.data.role !== "admin" && <div className="flex items-center gap-4">
                         <Link
                             href={"/dashboard/referral"}
                             className="border-primary sm:text-lg text-primary font-bold border-2 flex gap-2 sm:px-4 px-3 py-1 sm:py-2 rounded-full"
@@ -72,7 +73,7 @@ export default function TopBar({ isOpen, setIsOpen }: { user: null | TUser, isOp
                                 height={100}
                                 className="rounded sm:w-7 sm:h-7 w-5 h-5"
                             />
-                            <span>100</span>
+                            <span>{user?.data.points}</span>
                         </div>
                     </div>
                 }

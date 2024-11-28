@@ -7,6 +7,9 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { User } from '@/lib/types/type';
 import DnDInput from '@/components/ui/DnDInput';
+import { useAppDispatch } from '@/redux/hooks';
+import { handleAsyncWithToast } from '@/utils/handleAsyncWithToast';
+import { useUpdateUserMutation } from '@/redux/features/auth/authApi';
 
 
 
@@ -14,20 +17,48 @@ const General = ({ user }: { user: User }) => {
     const [showOldPassword, setShowOldPassword] = useState(false)
     const [showNewPassword, setShowNewPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+    const [image, setImage] = useState<File | null>(null)
+    const dispatch = useAppDispatch();
 
+
+    const [updateUser] = useUpdateUserMutation()
+    
     const handlePersonalInfoSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const formData = new FormData(event.currentTarget);
-        const data = Object.fromEntries(formData.entries());
-        console.log("Personal Info Form Data:", data);
+        const newFormData = new FormData(event.currentTarget);
+        const data = Object.fromEntries(newFormData.entries());
+        const formData = new FormData();
+        if (image) {
+            formData.append("image", image)
+            const otherData = {
+                fullName: data.name,
+                amazonAuthorPageLink: data.authorLink,
+                email: data.email,
+                amazonCountry: data.country,
+                reviewerName: data.reviewerName
+            }
+            console.log(otherData);
+            formData.append("data", JSON.stringify(otherData))
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const finishRes = await handleAsyncWithToast(
+                async () => {
+                    return updateUser(formData); // Replace with your actual login function
+                },
+                "Updating Profile...", // Toast message for the start of the process
+                "User update Completed!", // Toast message for success
+                `Please Check Your network`, // Toast message for failure
+                true,
+                dispatch
+            );
+        }
     };
 
 
     const handlePasswordSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const formData = new FormData(event.currentTarget);
-        const data = Object.fromEntries(formData.entries());
-        console.log("Password Form Data:", data);
+        const newFormData = new FormData(event.currentTarget);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const data = Object.fromEntries(newFormData.entries());
     };
 
     return (
@@ -38,20 +69,21 @@ const General = ({ user }: { user: User }) => {
                 <div className="space-y-6">
                     <div className='flex xl:flex-row flex-col items-center lg:items-end gap-10'>
                         <DnDInput
+                            setNew={setImage}
                             width='w-[256px]'
-                            initialFile={user.fullName}
+                            initialFile={user.profileImage}
                             id="profilePic"
                             label="profile Picture (Optional)"
-                            acceptedTypes="image/*"
+                            acceptedTypes="image"
                         />
                         <div className="grid xl:grid-cols-2 gap-6 w-full">
                             <div className="space-y-2 xl:col-span-2">
                                 <Label htmlFor="name">Name</Label>
-                                <Input defaultValue={user?.fullName} className='w-full' id="name" placeholder="John" />
+                                <Input defaultValue={user?.fullName} className='w-full' id="name" name="name" placeholder="John" />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="author-link">Amazon Author page link</Label>
-                                <Input defaultValue={user?.amazonAuthorPageLink} className='w-full' id="authorLlink" name="authorLlink" placeholder="URL" />
+                                <Input defaultValue={user?.amazonAuthorPageLink} className='w-full' id="authorLink" name="authorLink" placeholder="URL" />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="email">Email</Label>

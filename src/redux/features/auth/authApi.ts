@@ -16,7 +16,7 @@ const authApi = baseApi.injectEndpoints({
         updateUser: builder.mutation({
             query: (userInfo) => {
                 return {
-                    url: "user/me",
+                    url: "users/update-profile",
                     method: "PATCH",
                     body: userInfo,
                 }
@@ -43,7 +43,14 @@ const authApi = baseApi.injectEndpoints({
         }),
         userData: builder.query({
             query: () => ({
-                url: "user/me",
+                url: "users/get-me",
+                method: "GET",
+            }),
+            providesTags: ["User"],
+        }),
+        reviewData: builder.query({
+            query: () => ({
+                url: "reading/my-book-review/all",
                 method: "GET",
             }),
             providesTags: ["User"],
@@ -51,4 +58,4 @@ const authApi = baseApi.injectEndpoints({
     }),
 });
 
-export const {useLoginMutation, useRegisterMutation, useUpdateUserMutation, useOtpMutation, useUserDataQuery} = authApi;
+export const {useLoginMutation, useRegisterMutation, useUpdateUserMutation, useOtpMutation, useUserDataQuery, useReviewDataQuery} = authApi;
