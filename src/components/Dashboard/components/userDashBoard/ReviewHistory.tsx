@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client"
 import {
   Select,
   SelectContent,
@@ -13,16 +15,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { useReviewDataQuery } from "@/redux/features/auth/authApi"
 
 export default function ReviewHistory() {
-  const reviews = [
-    { bookName: "Sandworms of Dune", review: 10 },
-    { bookName: "Hunters of Dune", review: 10 },
-    { bookName: "Dune", review: 10 },
-    { bookName: "Chapterhouse: Dune", review: 10 },
-    { bookName: "Dune Messiah", review: 10 },
-    { bookName: "God Emperor of Dune", review: 10 },
-  ]
+  const { data: reviews } = useReviewDataQuery(undefined)
+  console.log(reviews);
 
   return (
     <div className="w-full max-w-4xl space-y-4 ">
@@ -52,12 +49,13 @@ export default function ReviewHistory() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {reviews.map((review) => (
-            <TableRow key={review.bookName}>
+
+          {reviews?.data.map((review: any, idx: number) => (
+            <TableRow key={idx}>
               <TableCell className="font-medium  hover:underline">
-                <p>{review.bookName}</p>
+                <p>{review.bookTitle}</p>
               </TableCell>
-              <TableCell>{review.review}</TableCell>
+              <TableCell>{review.reviewCount}</TableCell>
             </TableRow>
           ))}
         </TableBody>
