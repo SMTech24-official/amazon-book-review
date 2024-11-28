@@ -5,7 +5,6 @@ import { useSingleBookQuery } from "@/redux/features/book/bookApi";
 
 export default function AdminBookDetails() {
     const id = JSON.parse(localStorage.getItem("id") ?? "")
-    console.log(id);
     const { data, isLoading } = useSingleBookQuery(id)
 
 

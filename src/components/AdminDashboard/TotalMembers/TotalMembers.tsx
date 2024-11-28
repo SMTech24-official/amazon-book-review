@@ -11,7 +11,7 @@ interface MemberProps {
 const TotalMembers = ({ items, title }: MemberProps) => {
   return (
     <div className="space-y-6 ">
-      <div className="bg-white sm:px-6 rounded-lg   ">
+      <div className="bg-white rounded-lg">
         <div className="border-b py-3 md:py-5 px-4">
           <p>Members list</p>
         </div>

@@ -2,14 +2,12 @@
 import BookDetailsComponent from "@/components/BookDetailsComponent/BookDetailsComponent";
 import MyLoading from "@/components/ui/MyLoading";
 import { useGetSinglePendingReviewsQuery } from "@/redux/features/review/reviewApi";
-import { useParams } from "next/navigation";
 
 export default function VerifyReview() {
-    const params = useParams()
-    const { data, isLoading } = useGetSinglePendingReviewsQuery(params.bookId)
+    
+    const id = JSON.parse(localStorage.getItem("id") ?? "")
+    const { data, isLoading } = useGetSinglePendingReviewsQuery(id)
 
-
-    console.log(data);
 
     const buttons = [
         {

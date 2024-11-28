@@ -3,6 +3,7 @@ import BooksComponent from "@/components/AdminDashboard/BooksComponent/BooksComp
 import ReviewComponent from "@/components/AdminDashboard/ReviewComponent/ReviewComponent";
 import BreadCrumb from "@/components/common/breadCrumb/BreadCrumb";
 import TabPage from "@/components/common/tabPage/TabPage";
+import MyLoading from "@/components/ui/MyLoading";
 import { useGetAllPendingBooksQuery } from "@/redux/features/book/bookApi";
 import { useGetAllPendingReviewsQuery } from "@/redux/features/review/reviewApi";
 import { useEffect } from "react";
@@ -23,6 +24,9 @@ const AdminDashboardPAge = () => {
     }
   }, []);
 
+  if (isLoading || isReviewDataLoading) {
+    return <MyLoading/>
+  }
   const tabs = [
     {
       label: "New Books",

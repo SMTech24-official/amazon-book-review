@@ -21,12 +21,12 @@ const BreadCrumb = () => {
 
 
     return (
-        <div className="">
-            <div className="flex items-start gap-2 font-semibold  md:text-lg">
+        <div className="hidden sm:block">
+            <div className="flex items-start gap-2 font-semibold sm:text-base text-xs md:text-lg text-wrap">
                 {/* Render path-based breadcrumbs */}
                 {pathnames?.map((breadcrumb, index) => {
                     return (
-                        <Link href={index == 0 ? `/${pathnames[0]}`: index == 1 ? `/${pathnames[0]}/${pathnames[1]}` : index == 2 ? `/${pathnames[0]}/${pathnames[1]}/${pathnames[2]}` : `/${pathnames[0]}` } key={`path-${index}`} className="text-black capitalize flex items-center gap-2">
+                        <Link href={index == 0 ? `/${pathnames[0]}`: index == 1 ? `/${pathnames[0]}/${pathnames[1]}` : index == 2 ? `/${pathnames[0]}/${pathnames[1]}/${pathnames[2]}` : `/${pathnames[0]}` } key={`path-${index}`} className="text-black capitalize flex items-center gap-2 text-balance ">
                             {breadcrumb}
                             {index < pathnames.length - 1 && <ChevronRight className="min-h-5 min-w-5" />}
                         </Link>
@@ -34,7 +34,7 @@ const BreadCrumb = () => {
                 })}
                 {/* Render tab-based breadcrumbs */}
                 {breadcrumbs?.map((breadcrumb, index) => (
-                    <span key={`tab-${index}`} className="text-black capitalize flex items-center">
+                    <span key={`tab-${index}`} className="text-black capitalize flex items-center text-balance">
                         {index == 0 && <ChevronRight className="min-h-5 min-w-5" />}
                         {breadcrumb}
                         {index < breadcrumbs.length - 1 && <ChevronRight className="min-h-5 min-w-5" />}

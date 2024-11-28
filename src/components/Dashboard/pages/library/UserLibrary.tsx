@@ -60,7 +60,7 @@ const UserLibrary = () => {
                             key={data._id}
                             bookTitleOrTitle={data.title}
                             author={data.authorName}
-                            publishedDate={new Date(data.publishedDate)}
+                            publishedDate={new Date(data.createdAt)}
                             coinsPerReview={data.points}
                             imageSrc={data.bookCover}
                         >

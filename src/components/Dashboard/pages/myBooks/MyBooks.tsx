@@ -12,7 +12,7 @@ import { NoBooksFound } from '@/components/noBooksFound/NoFoundBooks';
 
 const MyBooks = () => {
     const { data: BooksData, isLoading } = useGetAllBooksQuery(undefined)
-
+    console.log(BooksData);
     const [filter, setFilter] = useState('All'); // State to manage filter
 
     // Filter books based on the selected filter
@@ -71,7 +71,7 @@ const MyBooks = () => {
                             bookTitle={data.title}
                             status={data.status}
                             // readers={data.readers ?? 0}
-                            publishedDate={new Date(data.publishedDate)}
+                            publishedDate={new Date(data.createdAt)}
                             coinsPerReview={data.points}
                             reviewCount={data.reviewCount}
                             imageSrc={data.bookCover}

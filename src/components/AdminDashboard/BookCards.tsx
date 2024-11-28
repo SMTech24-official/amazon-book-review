@@ -1,12 +1,11 @@
 "use client";
-import { useState } from "react";
-import Image from "next/image";
-import { Button } from "@nextui-org/react";
 import { TBooksAndMembers } from "@/interface/globalType";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import { isNonEmptyArray } from "@/utils/isNonEmptyArray";
+import { Button } from "@nextui-org/react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 interface BookTableProps {
   books: TBooksAndMembers[]; // books prop should be an array of Book
@@ -41,7 +40,7 @@ const BookCards = ({ books, className }: BookTableProps) => {
 
   return (
     <div className={cn("grid gap-3 xl:hidden p-4", className)}>
-      {isNonEmptyArray(books)  &&
+      {isNonEmptyArray(books) &&
         books.map((book, index) => (
           <div
             key={index}
@@ -82,11 +81,9 @@ const BookCards = ({ books, className }: BookTableProps) => {
 
               {/* View Button */}
               <div className="mt-4 text-center">
-                <Link href={`/admin-dashboard/new/${book?._id}`}>
-                  <Button onClick={() => handleDetails(book?._id)} radius="sm" className="bg-primary text-white">
-                    View
-                  </Button>
-                </Link>
+                <Button onClick={() => handleDetails(book?._id)} radius="sm" className="bg-primary text-white">
+                  View
+                </Button>
               </div>
             </div>
           </div>

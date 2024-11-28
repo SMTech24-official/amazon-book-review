@@ -3,7 +3,7 @@ import { BookReviewData } from "@/interface/globalType";
 import { isNonEmptyArray } from "@/utils/isNonEmptyArray";
 import { Button } from "@nextui-org/react";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface BookTableProps {
@@ -11,6 +11,7 @@ interface BookTableProps {
 }
 
 const ReviewTable = ({ Items }: BookTableProps) => {
+  const router = useRouter()
   // Initialize state for image sources for all Items
   const [imgSrcs, setImgSrcs] = useState(
     Items?.map(
@@ -30,7 +31,11 @@ const ReviewTable = ({ Items }: BookTableProps) => {
       )
     );
   };
-  // console.log({Items});
+  const handleDetails = (id: string | number) => {
+    localStorage.setItem("id", JSON.stringify(id))
+    router.push(`/admin-dashboard/new-review/review-details/review`)
+  }
+
 
   return (
     <div className="hidden xl:block">
@@ -79,15 +84,9 @@ const ReviewTable = ({ Items }: BookTableProps) => {
                   )}
                 </td>
                 <td className="px-4 py-4 text-center">
-                  <Link href={`/admin-dashboard/new-review/review-details/${item?._id}`}>
-                    <Button
-                      radius="sm"
-                      className="bg-primary text-white"
-                      // aria-label={`View details for ${item?.title}`}
-                    >
-                      View
-                    </Button>
-                  </Link>
+                  <Button onClick={() => handleDetails(item?._id)} radius="sm" className="bg-primary text-white">
+                    View
+                  </Button>
                 </td>
               </tr>
             ))}

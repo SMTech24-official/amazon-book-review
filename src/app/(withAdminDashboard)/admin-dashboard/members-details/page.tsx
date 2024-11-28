@@ -1,3 +1,4 @@
+import BreadCrumb from '@/components/common/breadCrumb/BreadCrumb';
 import MemberPage from '@/components/Dashboard/pages/memberPage/MemberPage';
 import { Metadata } from 'next';
 
@@ -8,8 +9,9 @@ export const metadata: Metadata = {
 
 const page = () => {
   return (
-    <div>
-      <MemberPage/>  
+    <div className='dashboard-containers'>
+      <BreadCrumb />
+      <MemberPage />
     </div>
   );
 };

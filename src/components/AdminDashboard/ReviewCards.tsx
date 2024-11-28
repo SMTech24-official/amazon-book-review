@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { isNonEmptyArray } from "@/utils/isNonEmptyArray";
 import { Button } from "@nextui-org/react";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface BookTableProps {
@@ -13,6 +13,7 @@ interface BookTableProps {
 }
 
 const ReviewCards = ({ Items, className }: BookTableProps) => {
+  const router = useRouter()
   // State for handling fallback images
   const [imgSrcs, setImgSrcs] = useState(
     Items.map(
@@ -31,6 +32,12 @@ const ReviewCards = ({ Items, className }: BookTableProps) => {
       )
     );
   };
+
+  const handleDetails = (id: string | number) => {
+    localStorage.setItem("id", JSON.stringify(id))
+    router.push(`/admin-dashboard/new-review/review-details/review`)
+  }
+
 
   return (
     <div className={cn("grid gap-3 xl:hidden p-4", className)}>
@@ -75,11 +82,9 @@ const ReviewCards = ({ Items, className }: BookTableProps) => {
 
               {/* View Button */}
               <div className="mt-4 text-center">
-                <Link href={`/admin-dashboard/new-review/review-details/${item?.bookId?._id}?review=${item?._id}`}>
-                  <Button radius="sm" className="bg-primary text-white">
+                  <Button     onClick={() => handleDetails(item?._id)} radius="sm" className="bg-primary text-white">
                     View
                   </Button>
-                </Link>
               </div>
             </div>
           </div>

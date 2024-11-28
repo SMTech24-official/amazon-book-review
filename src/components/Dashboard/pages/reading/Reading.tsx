@@ -42,7 +42,7 @@ const Reading = () => {
                             key={data.bookId?._id ?? idx}
                             bookTitleOrTitle={data.bookId?.title ?? "Book Title"}
                             author={data.bookId?.authorName ?? "Author Name"}
-                            publishedDate={data.bookId?.publishedDate ? new Date(data.bookId?.publishedDate) : "No Data Found"}
+                            publishedDate={data.bookId?.createdAt ? new Date(data.bookId?.createdAt) : "No Data Found"}
                             coinsPerReview={data.bookId?.points ?? 0}
                             imageSrc={data.bookId?.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
                         >
@@ -64,7 +64,7 @@ const Reading = () => {
                             key={data.bookId?._id ?? idx}
                             bookTitleOrTitle={data.bookId?.title ?? "Book Title"}
                             author={data.bookId?.authorName ?? "Author Name"}
-                            publishedDate={data.bookId?.publishedDate ? new Date(data.bookId?.publishedDate) : "No Data Found"}
+                            publishedDate={data.bookId?.createdAt ? new Date(data.bookId?.createdAt) : "No Data Found"}
                             coinsPerReview={data.bookId?.points ?? 0}
                             imageSrc={data.bookId?.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
                         >
@@ -86,7 +86,7 @@ const Reading = () => {
                             key={data.bookId?._id ?? idx}
                             bookTitleOrTitle={data.bookId?.title ?? "Book Title"}
                             author={data.bookId?.authorName ?? "Author Name"}
-                            publishedDate={data.bookId?.publishedDate ? new Date(data.bookId?.publishedDate) : "No Data Found"}
+                            publishedDate={data.bookId?.createdAt ? new Date(data.bookId?.createdAt) : "No Data Found"}
                             coinsPerReview={data.bookId?.points ?? 0}
                             imageSrc={data.bookId?.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
                         >
