@@ -19,14 +19,19 @@ const UserLibrary = () => {
     const [startReading] = useStartReadingMutation(undefined)
     const [filter, setFilter] = useState('All'); // State to manage filter
 
-    // Filter books based on the selected filter
-    const filteredBooks = BooksData?.data.filter((book: User & Book) =>
-        filter === 'All' || book.genre.toLocaleLowerCase() == filter.toLocaleLowerCase() || book.bookFormate == filter.toLocaleLowerCase()
-    );
-
+    
     if (isLoading) {
         return <div className="h-screen"><MyLoading /></div>
     }
+    if (BooksData?.data?.message) {
+        return <div className="h-screen"><NoBooksFound/></div>
+    }
+    // Filter books based on the selected filter
+    const filteredBooks = BooksData?.data?.filter((book: User & Book) =>
+        filter === 'All' || book.genre.toLocaleLowerCase() == filter.toLocaleLowerCase() || book.bookFormate == filter.toLocaleLowerCase()
+    );
+
+
 
     const handleStartReading = async (id: string) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars

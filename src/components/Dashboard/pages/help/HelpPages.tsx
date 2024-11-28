@@ -14,7 +14,7 @@ const HelpPages = () => {
                     <p className='text-2xl font-medium text-center'>Let’s work together and solve the problem!</p>
                     <p className='max-w-sm text-center'>Our customer care will guide you step by step to your solution</p>
                     <Button radius='sm' className='bg-primary text-white flex items-center gap-2'>
-                        Start Chat
+                        Send Email
                         <RiCustomerService2Line className='min-h-6 min-w-6' />
                     </Button>
                 </div>

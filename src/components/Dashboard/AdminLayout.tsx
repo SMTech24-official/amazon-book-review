@@ -9,7 +9,7 @@ import { BiSolidBookAdd } from 'react-icons/bi';
 import { FaBookBookmark } from 'react-icons/fa6';
 import { IoLibrarySharp, IoSettingsSharp } from 'react-icons/io5';
 import { RiDashboardFill } from 'react-icons/ri';
-import { SiBookstack } from 'react-icons/si';
+// import { SiBookstack } from 'react-icons/si';
 import SideBar from './components/navigationBar/SiderBar';
 
 
@@ -39,7 +39,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         { name: 'Members details', href: '/admin-dashboard/members-details', icon: FaBookBookmark },
         { name: 'Knowledge hub', href: '/admin-dashboard/knowledge-hub', icon: BiSolidBookAdd },
         { name: 'BuzzPoints', href: '/admin-dashboard/buzzPoints', icon: IoLibrarySharp },
-        { name: 'Support', href: '/admin-dashboard/support', icon: SiBookstack },
+        // { name: 'Support', href: '/admin-dashboard/support', icon: SiBookstack },
     ];
     const additionalRoutes = [
         { name: 'Settings', href: '/admin-dashboard/settings', icon: IoSettingsSharp },
