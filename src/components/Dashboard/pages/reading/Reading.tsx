@@ -14,9 +14,14 @@ const Reading = () => {
     const { data: BookReview, isLoading: isloading1 } = useGetAllReadingBooksQuery("to-be-reviewed")
     const { data: BookReviewDue, isLoading: isloading2 } = useGetAllReadingBooksQuery("review-overdue")
     const { data: BookReviewSubmitted, isLoading: isloading3 } = useGetAllReadingBooksQuery("review-finished")
-    console.log(BookReview, BookReviewDue);
+
     if (isloading1 || isloading2 || isloading3) {
         return <div className="h-screen"><MyLoading /></div>
+    }
+
+    const handleDetails = (id: string) => {
+        localStorage.setItem("id", JSON.stringify(id))
+        router.push(`/dashboard/reading/bookDetails`)
     }
     return (
         <div>
@@ -41,7 +46,7 @@ const Reading = () => {
                             coinsPerReview={data.bookId?.points ?? 0}
                             imageSrc={data.bookId?.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
                         >
-                            <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
+                            <Button radius="sm" onClick={() => handleDetails(data._id)} className="w-full bg-primary text-white py-2 rounded-lg">
                                 Book Details
                             </Button>
                         </LibraryBookCard>
@@ -63,7 +68,7 @@ const Reading = () => {
                             coinsPerReview={data.bookId?.points ?? 0}
                             imageSrc={data.bookId?.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
                         >
-                            <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
+                            <Button radius="sm" onClick={() => handleDetails(data._id)} className="w-full bg-primary text-white py-2 rounded-lg">
                                 Book Details
                             </Button>
                         </LibraryBookCard>
@@ -85,7 +90,7 @@ const Reading = () => {
                             coinsPerReview={data.bookId?.points ?? 0}
                             imageSrc={data.bookId?.bookCover ?? "https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg"}
                         >
-                            <Button radius="sm" onClick={() => router.push(`/dashboard/reading/${data._id}`)} className="w-full bg-primary text-white py-2 rounded-lg">
+                            <Button radius="sm" onClick={() => handleDetails(data._id)} className="w-full bg-primary text-white py-2 rounded-lg">
                                 Book Details
                             </Button>
                         </LibraryBookCard>

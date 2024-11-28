@@ -6,6 +6,7 @@ import { TBooksAndMembers } from "@/interface/globalType";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { isNonEmptyArray } from "@/utils/isNonEmptyArray";
+import { useRouter } from "next/navigation";
 
 interface BookTableProps {
   books: TBooksAndMembers[]; // books prop should be an array of Book
@@ -13,6 +14,8 @@ interface BookTableProps {
 }
 
 const BookCards = ({ books, className }: BookTableProps) => {
+
+  const router = useRouter()
   // State for handling fallback images
   const [imgSrcs, setImgSrcs] = useState(
     books.map(
@@ -31,6 +34,10 @@ const BookCards = ({ books, className }: BookTableProps) => {
       )
     );
   };
+  const handleDetails = (id: string | number) => {
+    localStorage.setItem("id", JSON.stringify(id))
+    router.push(`/admin-dashboard/new-Books/book-details`)
+  }
 
   return (
     <div className={cn("grid gap-3 xl:hidden p-4", className)}>
@@ -75,8 +82,8 @@ const BookCards = ({ books, className }: BookTableProps) => {
 
               {/* View Button */}
               <div className="mt-4 text-center">
-                <Link href={`/admin-dashboard/book-details/${book?._id}`}>
-                  <Button radius="sm" className="bg-primary text-white">
+                <Link href={`/admin-dashboard/new/${book?._id}`}>
+                  <Button onClick={() => handleDetails(book?._id)} radius="sm" className="bg-primary text-white">
                     View
                   </Button>
                 </Link>

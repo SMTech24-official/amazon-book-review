@@ -4,12 +4,12 @@ import BookDetailsComponent from "@/components/BookDetailsComponent/BookDetailsC
 import MyLoading from "@/components/ui/MyLoading";
 import { useSingleBookReviewQuery } from "@/redux/features/book/bookApi";
 import { Info } from "lucide-react";
-import { useParams } from "next/navigation";
 import { AiOutlineAmazon } from "react-icons/ai";
 
 export default function BookReview() {
-  const params = useParams()
-  const { data, isLoading } = useSingleBookReviewQuery(params.id)
+  const id = JSON.parse(localStorage.getItem("id") ?? "")
+
+  const { data, isLoading } = useSingleBookReviewQuery(id)
 
 
 

@@ -2,11 +2,11 @@
 import BookDetailsComponent from "@/components/BookDetailsComponent/BookDetailsComponent";
 import MyLoading from "@/components/ui/MyLoading";
 import { useSingleBookQuery } from "@/redux/features/book/bookApi";
-import { useParams } from "next/navigation";
 
 export default function AdminBookDetails() {
-    const params = useParams()
-    const { data, isLoading } = useSingleBookQuery(params.bookId)
+    const id = JSON.parse(localStorage.getItem("id") ?? "")
+    console.log(id);
+    const { data, isLoading } = useSingleBookQuery(id)
 
 
 

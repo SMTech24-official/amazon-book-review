@@ -1,10 +1,10 @@
 'use client'
-import { useState } from "react";
 import { TBooksAndMembers } from "@/interface/globalType";
+import { isNonEmptyArray } from "@/utils/isNonEmptyArray";
 import { Button } from "@nextui-org/react";
 import Image from "next/image";
-import Link from "next/link";
-import { isNonEmptyArray } from "@/utils/isNonEmptyArray";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 interface BookTableProps {
   books: TBooksAndMembers[]; // books prop should be an array of Book
@@ -12,6 +12,7 @@ interface BookTableProps {
 
 const BookTable = ({ books }: BookTableProps) => {
   // Initialize state for image sources for all books
+  const router = useRouter()
   const [imgSrcs, setImgSrcs] = useState(
     books?.map(
       (book) =>
@@ -31,6 +32,10 @@ const BookTable = ({ books }: BookTableProps) => {
     );
   };
 
+  const handleDetails = (id: string | number) => {
+    localStorage.setItem("id", JSON.stringify(id))
+    router.push(`/admin-dashboard/new-books/book-details`)
+  }
   return (
     <div className="hidden xl:block">
       <table className="w-full table-auto border-collapse">
@@ -78,21 +83,20 @@ const BookTable = ({ books }: BookTableProps) => {
                   )}
                 </td>
                 <td className="px-4 py-4 text-center">
-                  <Link href={`/admin-dashboard/book-details/${book?._id}`}>
-                    <Button
-                      radius="sm"
-                      className="bg-primary text-white"
-                      // aria-label={`View details for ${book?.title}`}
-                    >
-                      View
-                    </Button>
-                  </Link>
+                  <Button
+                    onClick={() => handleDetails(book?._id)}
+                    radius="sm"
+                    className="bg-primary text-white"
+                  // aria-label={`View details for ${book?.title}`}
+                  >
+                    View
+                  </Button>
                 </td>
               </tr>
             ))}
         </tbody>
       </table>
-    </div>
+    </div >
   );
 };
 

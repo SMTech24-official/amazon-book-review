@@ -19,14 +19,12 @@ const BreadCrumb = () => {
         setBreadcrumbs(tabPath);
     }, [searchParams]);
 
-    console.log(breadcrumbs);
 
     return (
         <div className="">
             <div className="flex items-start gap-2 font-semibold  md:text-lg">
                 {/* Render path-based breadcrumbs */}
                 {pathnames?.map((breadcrumb, index) => {
-                    console.log(breadcrumb, index);
                     return (
                         <Link href={index == 0 ? `/${pathnames[0]}`: index == 1 ? `/${pathnames[0]}/${pathnames[1]}` : index == 2 ? `/${pathnames[0]}/${pathnames[1]}/${pathnames[2]}` : `/${pathnames[0]}` } key={`path-${index}`} className="text-black capitalize flex items-center gap-2">
                             {breadcrumb}
