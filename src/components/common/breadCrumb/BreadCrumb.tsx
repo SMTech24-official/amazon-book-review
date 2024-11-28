@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -24,12 +25,15 @@ const BreadCrumb = () => {
         <div className="">
             <div className="flex items-start gap-2 font-semibold  md:text-lg">
                 {/* Render path-based breadcrumbs */}
-                {pathnames?.map((breadcrumb, index) => (
-                    <span key={`path-${index}`} className="text-black capitalize flex items-center gap-2">
-                        {breadcrumb}
-                        {index < pathnames.length - 1 && <ChevronRight className="min-h-5 min-w-5" />}
-                    </span>
-                ))}
+                {pathnames?.map((breadcrumb, index) => {
+                    console.log(breadcrumb, index);
+                    return (
+                        <Link href={index == 0 ? `/${pathnames[0]}`: index == 1 ? `/${pathnames[0]}/${pathnames[1]}` : index == 2 ? `/${pathnames[0]}/${pathnames[1]}/${pathnames[2]}` : `/${pathnames[0]}` } key={`path-${index}`} className="text-black capitalize flex items-center gap-2">
+                            {breadcrumb}
+                            {index < pathnames.length - 1 && <ChevronRight className="min-h-5 min-w-5" />}
+                        </Link>
+                    )
+                })}
                 {/* Render tab-based breadcrumbs */}
                 {breadcrumbs?.map((breadcrumb, index) => (
                     <span key={`tab-${index}`} className="text-black capitalize flex items-center">
