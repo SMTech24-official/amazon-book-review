@@ -10,17 +10,16 @@ import {
   useRejectBookMutation
 } from "@/redux/features/book/bookApi";
 import { useApproveReviewMutation, useRejectReviewMutation } from "@/redux/features/review/reviewApi";
+import { useAppDispatch } from "@/redux/hooks";
 import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
 import { Button } from "@nextui-org/react";
 import Image, { StaticImageData } from "next/image";
 import {
   usePathname,
-  useRouter,
-  useSearchParams
+  useRouter
 } from "next/navigation";
-import BreadCrumb from "../common/breadCrumb/BreadCrumb";
 import { useState } from "react";
-import { useAppDispatch } from "@/redux/hooks";
+import BreadCrumb from "../common/breadCrumb/BreadCrumb";
 
 interface ButtonConfig {
   text: string;
@@ -42,6 +41,7 @@ const BookDetailsComponent = (
     amznLink,
     genre,
     id,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     status,
     mainId,
     children
