@@ -55,7 +55,14 @@ const authApi = baseApi.injectEndpoints({
             }),
             providesTags: ["User"],
         }),
+        userActivity: builder.query({
+            query: () => ({
+                url: "activity/get-all/all",
+                method: "GET",
+            }),
+            providesTags: ["User"],
+        }),
     }),
 });
 
-export const {useLoginMutation, useRegisterMutation, useUpdateUserMutation, useOtpMutation, useUserDataQuery, useReviewDataQuery} = authApi;
+export const {useLoginMutation, useRegisterMutation, useUpdateUserMutation, useOtpMutation, useUserDataQuery, useReviewDataQuery, useUserActivityQuery} = authApi;

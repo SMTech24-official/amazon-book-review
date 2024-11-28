@@ -19,7 +19,6 @@ import { useReviewDataQuery } from "@/redux/features/auth/authApi"
 
 export default function ReviewHistory() {
   const { data: reviews } = useReviewDataQuery(undefined)
-  console.log(reviews);
 
   return (
     <div className="w-full max-w-4xl space-y-4 ">
@@ -41,7 +40,7 @@ export default function ReviewHistory() {
         </Select>
       </div>
 
-      <Table>
+      <Table className=" max-h-[50vh] overflow-y-scroll">
         <TableHeader>
           <TableRow>
             <TableHead className="font-bold !text-black">Book Name</TableHead>
