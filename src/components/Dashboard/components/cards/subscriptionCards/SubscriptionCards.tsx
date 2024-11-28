@@ -1,10 +1,14 @@
+"use client"
 import { SubscriptionPlan } from '@/lib/types/type';
 import { Check } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 
 const SubscriptionCards = ({ plans, plan }: { plans: string, plan: SubscriptionPlan }) => {
+    const router = useRouter()
+
     return (
         <div
             className={`border rounded-lg p-6 space-y-6 flex flex-col items-center ${plans == plan.type ? "border border-primary" : ""}`}
@@ -23,7 +27,11 @@ const SubscriptionCards = ({ plans, plan }: { plans: string, plan: SubscriptionP
                     <h3 className="text-xl">{plan.name}</h3>
                 </div>
             </div>
-            <button className={`p-3 border rounded-md text-[18px] ${plans == plan.type ? "bg-primary text-white" : "border border-primary text-primary"} flex items-center justify-center gap-3`}>
+            <button 
+            // onClick={() => handleCheckout()}
+            // onClick={() => router.push("/payment")}
+            onClick={() => router.push("https://buy.stripe.com/test_8wMdSB47a9l8cO4aEF")}
+             className={`p-3 border rounded-md text-[18px] ${plans == plan.type ? "bg-primary text-white" : "border border-primary text-primary"} flex items-center justify-center gap-3`}>
                 {plan.button.label}
                 <IoIosArrowForward />
             </button>

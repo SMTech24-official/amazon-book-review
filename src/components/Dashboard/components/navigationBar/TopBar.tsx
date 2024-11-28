@@ -1,6 +1,5 @@
 import coins from "@/assets/coins.png"
 import refer from "@/assets/refer.png"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useUserDataQuery } from "@/redux/features/auth/authApi"
 import { TUser } from '@/redux/features/auth/authSlice'
@@ -8,7 +7,6 @@ import { Menu, Search, X } from 'lucide-react'
 import Image from "next/image"
 import Link from "next/link"
 import { Dispatch, SetStateAction } from 'react'
-import { HiMiniBellAlert } from 'react-icons/hi2'
 
 export default function TopBar({ isOpen, setIsOpen }: { user: null | TUser, isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }) {
     const { data: user } = useUserDataQuery(undefined)
@@ -77,13 +75,6 @@ export default function TopBar({ isOpen, setIsOpen }: { user: null | TUser, isOp
                         </div>
                     </div>
                 }
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    className="p-1 border rounded-full"
-                >
-                    <HiMiniBellAlert className="min-h-[27px] min-w-[27px]" />
-                </Button>
             </div>
         </header>
     )
