@@ -78,8 +78,8 @@ const MemberDetailsComponent = () => {
               <div
                 onClick={() => setActiveButton("")}
                 className={` px-4 py-2 text-xs font-medium rounded-full cursor-pointer ${activeButton == ""
-                    ? "bg-primary text-white"
-                    : "bg-white border border-gray-300 text-gray-700"
+                  ? "bg-primary text-white"
+                  : "bg-white border border-gray-300 text-gray-700"
                   }`}
               >
                 All
@@ -87,8 +87,8 @@ const MemberDetailsComponent = () => {
               <div
                 onClick={() => setActiveButton("live")}
                 className={` px-4 py-2 text-xs font-medium rounded-full cursor-pointer ${activeButton == "live"
-                    ? "bg-primary text-white"
-                    : "bg-white border border-gray-300 text-gray-700"
+                  ? "bg-primary text-white"
+                  : "bg-white border border-gray-300 text-gray-700"
                   }`}
               >
                 Live
@@ -96,8 +96,8 @@ const MemberDetailsComponent = () => {
               <div
                 onClick={() => setActiveButton("pending")}
                 className={` px-4 py-2 text-xs font-medium rounded-full cursor-pointer ${activeButton == "pending"
-                    ? "bg-primary text-white"
-                    : "bg-white border border-gray-300 text-gray-700"
+                  ? "bg-primary text-white"
+                  : "bg-white border border-gray-300 text-gray-700"
                   }`}
               >
                 Pending
@@ -117,7 +117,8 @@ const MemberDetailsComponent = () => {
                   reviewCount={data.reviewCount}
                   // avgRating={data.avgRating}
                   imageSrc={data.bookCover}
-                // bookId={data?._id}
+                  id={data?._id}
+                  isAdmin={true}
                 />
               ))}
           </div>
