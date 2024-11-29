@@ -9,7 +9,8 @@ import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://api.booksy.buzz/api/",
+  baseUrl: "https://traceylongfield.vercel.app/api/",
+  // baseUrl: "https://api.booksy.buzz/api/",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
@@ -76,7 +77,8 @@ export const baseApi = createApi({
     "knowledgeHub",
     "authorGuide",
     "point",
-    "invite"
+    "invite",
+    "payment"
   ],
   endpoints: () => ({}),
 });
