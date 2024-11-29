@@ -3,11 +3,30 @@ import handIcon from "@/assets/fi_18188459.png";
 import refer from "@/assets/fi_1921935.png";
 import referIcon from "@/assets/refer.png";
 import GradCircleWrapper from '@/components/common/grad-circleWrapper/GradCircleWrapper';
+import { useGetInviteLinkQuery } from "@/redux/features/invite/inviteApi";
 import { Button } from '@nextui-org/react';
-import { Copy } from 'lucide-react';
+import copy from 'clipboard-copy';
+import { CheckCheck, Copy } from 'lucide-react';
 import Image from 'next/image';
+import { useState } from "react";
 import ProgressBar from '../../components/progressBar/ProgressBar';
+import { useUserDataQuery } from "@/redux/features/auth/authApi";
 const Referral = () => {
+    const { data: user } = useUserDataQuery(undefined)
+    const { data, isLoading } = useGetInviteLinkQuery(undefined)
+
+    console.log(data?.data);
+    const [isCopied, setIsCopied] = useState(false);
+
+    const handleCopyClick = async () => {
+      try {
+        await copy(data?.data);
+        setIsCopied(true);
+      } catch (error) {
+        console.error('Failed to copy text to clipboard', error);
+      }
+    };
+    
     return (
         <div>
             <p className="text-center text-2xl font-medium">
@@ -24,7 +43,7 @@ const Referral = () => {
                     />
                     <p className='text-xl font-medium text-center max-w-2xl'>By inviting your friends you and your friend both can earn BuzzPoints
                         And also earn a  “Community Builder” badge.</p>
-                    <Button radius='sm' className='bg-primary text-white flex items-center gap-2'>
+                    <Button isLoading={isLoading} onClick={() => handleCopyClick()} radius='sm' className='bg-primary text-white flex items-center gap-2'>
                         <Image
                             src={referIcon}
                             alt="Referral icon"
@@ -33,12 +52,15 @@ const Referral = () => {
                             className="rounded sm:w-6 sm:h-6 w-6 h-6"
                         />
                         Copy Referral Link
-                        <Copy className='min-h-6 min-w-6' />
+                        {
+                            isCopied ? <CheckCheck className='min-h-6 min-w-6'/> : <Copy className='min-h-6 min-w-6' />
+                        }
+                        
                     </Button>
                 </div>
             </GradCircleWrapper>
 
-            <ProgressBar value={10} max={20} middleValue={10} />
+            <ProgressBar value={user?.data.invitedFriends ?? 0} max={20} middleValue={10} />
             <div className="mt-20 max-w-2xl mx-auto flex flex-col gap-4 items-center">
                 <Image
                     src={handIcon}

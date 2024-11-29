@@ -76,6 +76,7 @@ export const baseApi = createApi({
     "knowledgeHub",
     "authorGuide",
     "point",
+    "invite"
   ],
   endpoints: () => ({}),
 });
