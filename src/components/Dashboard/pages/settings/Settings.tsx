@@ -13,7 +13,7 @@ import ManagePlans from "../../components/settings/MangePlans";
 export default function Settings() {
     const { data: UserData, isLoading } = useUserDataQuery(undefined)
 
-
+    console.log(UserData);
     if (isLoading) {
         return <MyLoading />
     }
