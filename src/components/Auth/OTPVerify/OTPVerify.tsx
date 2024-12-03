@@ -39,7 +39,6 @@ const OTPVerify = () => {
         ""
       );
       if (res?.data?.success) {
-        localStorage.removeItem("verifyEmailByOTP");
         router.push("/plans");
       }
     };

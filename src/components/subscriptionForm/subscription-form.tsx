@@ -19,6 +19,7 @@ export function SubscriptionForm() {
   const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'yearly'>('monthly')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const selectPlan = localStorage.getItem("plan")
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
@@ -41,8 +42,8 @@ export function SubscriptionForm() {
       }
       console.log(paymentMethod.id);
       const data = {
-        planType: "monthly",
-        userEmail: "tajisan789@gmail.com",
+        planType: localStorage.getItem("plan"),
+        userEmail: localStorage.getItem("verifyEmailByOTP"),
         paymentMethodId: paymentMethod.id,
       }
       if (paymentMethod.id) {
@@ -55,7 +56,7 @@ export function SubscriptionForm() {
             body: JSON.stringify(data),
           })
           console.log(res);
-          if (res?.status) {
+          if (res?.status === 200) {
             toast.success("Subscription successful");
           } else {
             toast.error("Subscription failed");
@@ -91,13 +92,13 @@ export function SubscriptionForm() {
                 return (
                   <div key={idx}>
                     <RadioGroupItem
-                      value={plan.type}
+                      value={plan.name}
                       id={plan.type}
                       className="peer sr-only"
                     />
                     <Label
                       htmlFor={plan.type}
-                      className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                      className={`flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary ${selectPlan === plan.name ? "border-primary" : ""}`}
                     >
                       <div className="space-y-1">
                         <p className="text-lg font-medium leading-none">{plan.name}</p>

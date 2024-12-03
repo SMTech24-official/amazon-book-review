@@ -6,12 +6,12 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 
-const SubscriptionCards = ({ plans, plan }: { plans: string, plan: SubscriptionPlan }) => {
+const SubscriptionCards = ({ plan }: { plan: SubscriptionPlan }) => {
     const router = useRouter()
 
     return (
         <div
-            className={`border rounded-lg p-6 space-y-6 flex flex-col items-center ${plans == plan.type ? "border border-primary" : ""}`}
+            className={`border rounded-lg p-6 space-y-6 flex flex-col items-center `}
         >
             <div className="flex items-center gap-4 flex-col">
                 <div className={` p-2 rounded-lg`}>
@@ -27,12 +27,15 @@ const SubscriptionCards = ({ plans, plan }: { plans: string, plan: SubscriptionP
                     <h3 className="text-xl">{plan.name}</h3>
                 </div>
             </div>
-            <button 
-            // onClick={() => handleCheckout()}
-            // onClick={() => router.push("/payment")}
-            onClick={() => router.push("https://buy.stripe.com/test_8wMdSB47a9l8cO4aEF")}
-             className={`p-3 border rounded-md text-[18px] ${plans == plan.type ? "bg-primary text-white" : "border border-primary text-primary"} flex items-center justify-center gap-3`}>
-                {plan.button.label}
+            <button
+                // onClick={() => handleCheckout()}
+                onClick={() => {
+                    localStorage.setItem("plan", plan.name)
+                    router.push("/payment")
+                }}
+                // onClick={() => router.push("https://buy.stripe.com/test_8wMdSB47a9l8cO4aEF")}
+                className={`p-3 border rounded-md text-[18px]  flex items-center justify-center gap-3`}>
+                Select
                 <IoIosArrowForward />
             </button>
             <div className="space-y-4">

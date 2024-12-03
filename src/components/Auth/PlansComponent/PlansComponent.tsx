@@ -12,7 +12,7 @@ const PlansComponent = () => {
   return (
     <div>
       <AuthLayout backLink="/signup">
-        <div className=" w-full  px-5 mt-24 ">
+        <div className=" w-full mt-24">
           <ManagePlans subscriptionsPlan={SubscriptionsPlan} plans={user.subscriptionPlane} />
         </div>
       </AuthLayout>
