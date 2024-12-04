@@ -80,3 +80,9 @@ export type NavLink = {
   href: string;
   icon: IconType;  // Using IconType from react-icons
 };
+
+export type FAQItem = {
+  id: string;
+  question: string;
+  answer: string;
+};
