@@ -1,6 +1,5 @@
 "use client"
 
-import TopBar from '@/components/Dashboard/components/navigationBar/TopBar';
 // import { user } from '@/lib/fakeData/user';
 import { selectCurrentUser } from '@/redux/features/auth/authSlice';
 import { useAppSelector } from '@/redux/hooks';
@@ -53,9 +52,6 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                 <SideBar additionalRoutes={additionalRoutes} navLink={navLink} isOpen={isOpen} user={user} navRef={navRef} />
             </div>
             <div className='w-full'>
-                <div className='sticky top-0 z-40'>
-                    <TopBar setIsOpen={setIsOpen} isOpen={isOpen} user={user} />
-                </div>
                 {children}
             </div>
         </div>
