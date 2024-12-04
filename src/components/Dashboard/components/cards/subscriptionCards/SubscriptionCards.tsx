@@ -30,7 +30,7 @@ const SubscriptionCards = ({ plan }: { plan: SubscriptionPlan }) => {
             <button
                 // onClick={() => handleCheckout()}
                 onClick={() => {
-                    localStorage.setItem("plan", plan.name)
+                    localStorage.setItem("plan", plan.type)
                     router.push("/payment")
                 }}
                 // onClick={() => router.push("https://buy.stripe.com/test_8wMdSB47a9l8cO4aEF")}

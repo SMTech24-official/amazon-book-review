@@ -11,15 +11,20 @@ import { Icons } from '@/components/icons/Icons'
 import { toast } from 'sonner'
 import { SubscriptionsPlan } from '@/lib/fakeData/subscriptionPlans'
 import { SubscriptionPlan } from '@/lib/types/type'
+import { usePaymentMutation } from '@/redux/features/payment/payMent'
+import { useRouter } from 'next/navigation'
 
 
 export function SubscriptionForm() {
   const stripe = useStripe()
   const elements = useElements()
+  const [payment] = usePaymentMutation()
   const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'yearly'>('monthly')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const selectPlan = localStorage.getItem("plan")
+
+  const router = useRouter()
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
@@ -42,22 +47,18 @@ export function SubscriptionForm() {
       }
       console.log(paymentMethod.id);
       const data = {
+        // planType: "yearly",
         planType: localStorage.getItem("plan"),
-        userEmail: localStorage.getItem("verifyEmailByOTP"),
+        email: localStorage.getItem("verifyEmailByOTP"),
+        // email: "waveray575@bflcafe.com",
         paymentMethodId: paymentMethod.id,
       }
       if (paymentMethod.id) {
         try {
-          const res = await fetch('https://traceylongfield.vercel.app/api/payment/subscribe', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          })
-          console.log(res);
-          if (res?.status === 200) {
+          const res = await payment(data)
+          if (res?.data) {
             toast.success("Subscription successful");
+            router.push("/login")
           } else {
             toast.error("Subscription failed");
           }
@@ -92,9 +93,10 @@ export function SubscriptionForm() {
                 return (
                   <div key={idx}>
                     <RadioGroupItem
-                      value={plan.name}
+                      value={plan.type}
                       id={plan.type}
                       className="peer sr-only"
+                      onChange={() => localStorage.setItem("plan", plan.type)}
                     />
                     <Label
                       htmlFor={plan.type}

@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { baseApi } from "../../api/baseApi";
 
-const pointApi = baseApi.injectEndpoints({
+const paymentApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     payment: builder.mutation({
       query: (body) => {
         return {
-          url: `payment/subscribe`,
-          method: "PATCH",
+          url: `payment/create-subscription`,
+          method: "POST",
           body: body,
         };
       },
@@ -16,4 +16,4 @@ const pointApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { usePaymentMutation } = pointApi;
+export const { usePaymentMutation } = paymentApi;
