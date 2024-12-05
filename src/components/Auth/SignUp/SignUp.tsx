@@ -6,7 +6,7 @@ import MyFormWrapper from "@/components/ui/MyForm/MyFormWrapper/MyFormWrapper";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FaChevronRight } from "react-icons/fa";
 import { z } from "zod";
 import AuthLayout from "../AuthLayout";
@@ -61,10 +61,13 @@ const validationSchema = z.object({
 const SignUp = () => {
   const router = useRouter();
   const [register] = useRegisterMutation();
+  const query = useSearchParams()
+  const token = query?.toString().split("=")[1]
+  console.log(token)
   const handleSubmit = async (formData: any) => {
     const res = await handleAsyncWithToast(
       async () => {
-        return register(formData); // Replace with your actual login function
+        return register({ userInfo: formData, token: token ?? null }); // Replace with your actual login function
       },
       "Signing in...",
       "",
@@ -76,6 +79,12 @@ const SignUp = () => {
       router.push("/otp-verify");
     }
   };
+
+
+
+
+
+
 
   return (
     <div>

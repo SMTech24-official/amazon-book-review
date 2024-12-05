@@ -1,14 +1,13 @@
 "use client"
 
-import TopBar from '@/components/Dashboard/components/navigationBar/TopBar';
 // import { user } from '@/lib/fakeData/user';
 import { selectCurrentUser } from '@/redux/features/auth/authSlice';
 import { useAppSelector } from '@/redux/hooks';
 import React, { useEffect, useRef, useState } from 'react';
 import { BiSolidBookAdd } from 'react-icons/bi';
-import { FaBookBookmark } from 'react-icons/fa6';
+import { FaBookBookmark, FaQ } from 'react-icons/fa6';
 import { IoLibrarySharp, IoSettingsSharp } from 'react-icons/io5';
-import { RiDashboardFill } from 'react-icons/ri';
+import { RiDashboardFill, RiFeedbackLine } from 'react-icons/ri';
 // import { SiBookstack } from 'react-icons/si';
 import SideBar from './components/navigationBar/SiderBar';
 
@@ -43,6 +42,8 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
     ];
     const additionalRoutes = [
         { name: 'Settings', href: '/admin-dashboard/settings', icon: IoSettingsSharp },
+        { name: 'FAQ', href: '/admin-dashboard/faq', icon: FaQ },
+        { name: 'Reviews', href: '/admin-dashboard/reviews', icon: RiFeedbackLine },
     ];
 
     return (
@@ -51,9 +52,6 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                 <SideBar additionalRoutes={additionalRoutes} navLink={navLink} isOpen={isOpen} user={user} navRef={navRef} />
             </div>
             <div className='w-full'>
-                <div className='sticky top-0 z-40'>
-                    <TopBar setIsOpen={setIsOpen} isOpen={isOpen} user={user} />
-                </div>
                 {children}
             </div>
         </div>

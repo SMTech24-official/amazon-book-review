@@ -9,7 +9,7 @@ const paymentApi = baseApi.injectEndpoints({
           method: "POST",
         };
       },
-      invalidatesTags: ["payment"],
+   
     }),
   }),
 });

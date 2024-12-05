@@ -33,7 +33,8 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   if (result.error?.status === 401) {
     try {
       const res = await fetch(
-        "https://api.booksy.buzz/api/auth/refresh-token",
+        "https://traceylongfield.vercel.app/refresh-token",
+        // "https://api.booksy.buzz/api/auth/refresh-token",
         {
           method: "POST",
           credentials: "include", // Sends cookies with the request
@@ -78,7 +79,7 @@ export const baseApi = createApi({
     "authorGuide",
     "point",
     "invite",
-    "payment"
+    "subscribe"
   ],
   endpoints: () => ({}),
 });

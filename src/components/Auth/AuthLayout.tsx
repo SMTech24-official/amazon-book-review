@@ -24,7 +24,7 @@ const AuthLayout = ({
         </div>
       </div>
 
-      <div className="w-full md:h-screen md:w-7/12 relative">
+      <div className="w-full lg:h-screen md:w-7/12 relative">
         <div className="absolute top-8 left-8">
           <Link
             href={backLink}

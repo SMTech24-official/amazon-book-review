@@ -18,7 +18,6 @@ import { useAppSelector } from '@/redux/hooks';
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     const user = useAppSelector(selectCurrentUser);
     const [isOpen, setIsOpen] = useState(false)
-
     const navRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {

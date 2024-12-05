@@ -39,7 +39,6 @@ const OTPVerify = () => {
         ""
       );
       if (res?.data?.success) {
-        localStorage.removeItem("verifyEmailByOTP");
         router.push("/plans");
       }
     };
@@ -58,7 +57,7 @@ const OTPVerify = () => {
             </div>
           </div>
           <div className=" flex flex-col items-center">
-            <p>Sent OTP to ex********ail.com</p>
+            <p>Sent OTP to {localStorage.getItem("verifyEmailByOTP")}</p>
             <h5 className="text-xl md:text-3xl font-semibold mb-4 md:mb-8">
               <span className="text-primary">Verify</span> your email with
               <br />
