@@ -28,6 +28,7 @@ const othersApi = baseApi.injectEndpoints({
     }),
     deleteFAq: builder.mutation({
       query: (id) => {
+        console.log(id);
         return {
           url: `questions/${id}`,
           method: "DELETE",
