@@ -1,13 +1,20 @@
 "use client";
 import chat from "@/assets/chat.png";
+import { useGetAllFaqQuery } from "@/redux/features/others/othersApi";
 import { Accordion, AccordionItem, Button } from "@nextui-org/react";
 import Image from "next/image";
 import { FaChevronDown } from "react-icons/fa";
+import MyLoading from "../ui/MyLoading";
 
 const FAQs = () => {
-  const defaultContent =
-    "Answer: Booksy.buzz uses BuzzPoints as a way for authors to earn and request reviews. You earn BuzzPoints by reviewing books from other authors or by inviting friends to join the platform. Once you've accumulated BuzzPoints, you can use them to request reviews for your own books. Different book types and formats require varying amounts of BuzzPoints, ensuring a fair exchange based on the effort required.";
+  const { data, isLoading } = useGetAllFaqQuery(undefined)
 
+  if (isLoading) {
+    return <MyLoading />
+  }
+  if (data?.data.length === 0) {
+    return ""
+  }
   return (
     <div className="mb-10" id="faqs">
       <div className="container mb-10">
@@ -20,45 +27,23 @@ const FAQs = () => {
             "How does the points system work on Booksy.buzz?",
           ]}
         >
-          <AccordionItem
-            key="How does the points system work on Booksy.buzz?"
-            indicator={<FaChevronDown size={14} className="text-primary" />}
-            className="!border-b !border-primary"
-            title={
-              <span className="text-primary">
-                How does the points system work on Booksy.buzz?
-              </span>
-            }
-            textValue="How does the points system work on Booksy.buzz?" // Add textValue for accessibility
-          >
-            {defaultContent}
-          </AccordionItem>
-          <AccordionItem
-            key="Can I choose which books to review?"
-            indicator={<FaChevronDown size={14} className="text-primary" />}
-            className="!border-b !border-primary"
-            title={
-              <span className="text-primary">
-                Can I choose which books to review?
-              </span>
-            }
-            textValue="Can I choose which books to review?" // Add textValue for accessibility
-          >
-            {defaultContent}
-          </AccordionItem>
-          <AccordionItem
-            key="How are reviews verified on Booksy.buzz?"
-            indicator={<FaChevronDown size={14} className="text-primary" />}
-            className="!border-b !border-primary"
-            title={
-              <span className="text-primary">
-                How are reviews verified on Booksy.buzz?
-              </span>
-            }
-            textValue="How are reviews verified on Booksy.buzz?" // Add textValue for accessibility
-          >
-            {defaultContent}
-          </AccordionItem>
+          {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            data?.data.map((faq: any) => <AccordionItem
+              key={faq._id}
+              indicator={<FaChevronDown size={14} className="text-primary" />}
+              className="!border-b !border-primary"
+              title={
+                <span className="text-primary">
+                  {faq.question}
+                </span>
+              }
+              textValue={faq.question}
+            >
+              {faq.answer}
+            </AccordionItem>)
+          }
+
         </Accordion>
       </div>
       <div className="flex flex-col justify-center items-center">
