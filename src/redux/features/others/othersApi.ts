@@ -9,17 +9,27 @@ const othersApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Others"],
     }),
-    getSinglePendingReviews: builder.query({
-      query: (id) => ({
-        url: `/admin/single-review/${id}`,
+    getAllCustomersReviews: builder.query({
+      query: () => ({
+        url: `/homeReview`,
         method: "GET",
       }),
-      providesTags: ["Review"],
+      providesTags: ["Others"],
     }),
     postFAQ: builder.mutation({
       query: (data) => {
         return {
           url: `questions`,
+          method: "POST",
+          body: data,
+        };
+      },
+      invalidatesTags: ["Others"],
+    }),
+    postCustomerReview: builder.mutation({
+      query: (data) => {
+        return {
+          url: `homeReview`,
           method: "POST",
           body: data,
         };
@@ -42,7 +52,8 @@ const othersApi = baseApi.injectEndpoints({
 
 export const {
   useGetAllFaqQuery,
-  useGetSinglePendingReviewsQuery,
+  useGetAllCustomersReviewsQuery,
   usePostFAQMutation,
   useDeleteFAqMutation,
+  usePostCustomerReviewMutation,
 } = othersApi;
