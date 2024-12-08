@@ -5,8 +5,11 @@ import "swiper/css/navigation";
 import TestimonialCard from "../cards/TestimonialCard";
 import ItemSwiper from "../ui/ItemSwiper/ItemSwiper";
 import Marquee from "../ui/marquee";
+import { useGetAllCustomersReviewsQuery } from "@/redux/features/others/othersApi";
 
 const WhatOurCustomerThinks = () => {
+  const { data } = useGetAllCustomersReviewsQuery(undefined)
+
   return (
     <div className="container mb-5">
       <div className="flex flex-col xs:flex-row gap-2 xs:items-center justify-between">
@@ -24,27 +27,25 @@ const WhatOurCustomerThinks = () => {
 
         {/* Marquee with testimonial cards */}
         <Marquee pauseOnHover className="[--duration:60s]">
-          {Array.from({ length: 9 }, (_, index) => (
-            <div key={index}>
-              <TestimonialCard />
-            </div>
-          ))}
+          {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            data?.data.map((review: any) => <TestimonialCard key={review._id} name={review.name} reviews={review.review} />)
+          }
+
         </Marquee>
 
         <Marquee reverse pauseOnHover className="[--duration:50s]">
-          {Array.from({ length: 9 }, (_, index) => (
-            <div key={index}>
-              <TestimonialCard />
-            </div>
-          ))}
+          {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            data?.data.map((review: any) => <TestimonialCard key={review._id} name={review.name} reviews={review.review} />)
+          }
         </Marquee>
 
         <Marquee pauseOnHover className="[--duration:60s]">
-          {Array.from({ length: 9 }, (_, index) => (
-            <div key={index}>
-              <TestimonialCard />
-            </div>
-          ))}
+          {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            data?.data.map((review: any) => <TestimonialCard key={review._id} name={review.name} reviews={review.review} />)
+          }
         </Marquee>
 
         {/* Button for 'See more' */}

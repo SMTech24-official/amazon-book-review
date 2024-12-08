@@ -1,5 +1,6 @@
 'use client'
 
+import TestimonialCard from '@/components/cards/TestimonialCard'
 import {
   Form,
   FormControl,
@@ -9,6 +10,7 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import MyLoading from '@/components/ui/MyLoading'
 import {
   Select,
   SelectContent,
@@ -17,7 +19,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
-import { usePostCustomerReviewMutation } from '@/redux/features/others/othersApi'
+import { useGetAllCustomersReviewsQuery, usePostCustomerReviewMutation } from '@/redux/features/others/othersApi'
 import { useAppDispatch } from '@/redux/hooks'
 import { handleAsyncWithToast } from '@/utils/handleAsyncWithToast'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -43,7 +45,7 @@ const formSchema = z.object({
 export function AddReviewForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [postReview] = usePostCustomerReviewMutation()
-
+  const { data, isLoading } = useGetAllCustomersReviewsQuery(undefined)
   const dispatch = useAppDispatch();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -79,6 +81,10 @@ export function AddReviewForm() {
     );
     form.reset()
     setIsSubmitting(false)
+  }
+
+  if (isLoading) {
+    return <MyLoading />
   }
 
   return (
@@ -144,6 +150,13 @@ export function AddReviewForm() {
           </Button>
         </form>
       </Form>
+      <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          data?.data.map((review: any) => <TestimonialCard key={review._id} name={review.name} reviews={review.review} />)
+        }
+
+      </div>
     </div>
   )
 }
