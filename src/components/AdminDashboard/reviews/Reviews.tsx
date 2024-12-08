@@ -1,6 +1,6 @@
 'use client'
 
-import TestimonialCard from '@/components/cards/TestimonialCard'
+import AdminTestimonialCard from '@/components/cards/AdminTestimonialCard'
 import {
   Form,
   FormControl,
@@ -152,8 +152,9 @@ export function AddReviewForm() {
       </Form>
       <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-10">
         {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          data?.data.map((review: any) => <TestimonialCard key={review._id} name={review.name} reviews={review.review} />)
+          data?.data.length === 0 ? <p>No Reviews Found</p> :
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            data?.data.map((review: any) => <AdminTestimonialCard id={review._id} key={review._id} name={review.name} reviews={review.review} />)
         }
 
       </div>

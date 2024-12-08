@@ -47,6 +47,16 @@ const othersApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["Others"],
     }),
+    deleteCustomerReview: builder.mutation({
+      query: (id) => {
+        console.log(id);
+        return {
+          url: `homeReview/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["Others"],
+    }),
   }),
 });
 
@@ -56,4 +66,5 @@ export const {
   usePostFAQMutation,
   useDeleteFAqMutation,
   usePostCustomerReviewMutation,
+  useDeleteCustomerReviewMutation,
 } = othersApi;

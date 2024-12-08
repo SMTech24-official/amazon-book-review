@@ -9,7 +9,9 @@ import { useGetAllCustomersReviewsQuery } from "@/redux/features/others/othersAp
 
 const WhatOurCustomerThinks = () => {
   const { data } = useGetAllCustomersReviewsQuery(undefined)
-
+  if (data?.data.length === 0) {
+    return ""
+  }
   return (
     <div className="container mb-5">
       <div className="flex flex-col xs:flex-row gap-2 xs:items-center justify-between">
@@ -60,7 +62,7 @@ const WhatOurCustomerThinks = () => {
       <ItemSwiper />
       {/* Swiper for mobile end */}
     </div>
-  );
+  )
 };
 
 export default WhatOurCustomerThinks;
