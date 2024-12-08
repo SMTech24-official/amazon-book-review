@@ -5,6 +5,9 @@ import { useFormStatus } from 'react-dom'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { Button, Input, Textarea } from '@nextui-org/react'
+import { usePostFAQMutation } from '@/redux/features/others/othersApi'
+import { useAppDispatch } from '@/redux/hooks'
+import { handleAsyncWithToast } from '@/utils/handleAsyncWithToast'
 
 function SubmitButton() {
     const { pending } = useFormStatus()
@@ -19,11 +22,30 @@ function SubmitButton() {
 export function AddFAQForm() {
     const [question, setQuestion] = useState('')
     const [answer, setAnswer] = useState('')
+    const [postFAQ] = usePostFAQMutation()
 
+    const dispatch = useAppDispatch();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async function handleSubmit(formData: FormData) {
-        console.log(question, answer);
+        const data = {
+            question: question, answer: answer
+        }
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const finishRes = await handleAsyncWithToast(
+            async () => {
+                return postFAQ(data); // Replace with your actual login function
+            },
+            "Adding FAQ...", // Toast message for the start of the process
+            "FAQ Added Completed!", // Toast message for success
+            `Please Check Your Network`, // Toast message for failure
+            true,
+            dispatch
+        );
+        setQuestion("")
+        setAnswer("")
     }
+
+
 
     return (
         <Card>

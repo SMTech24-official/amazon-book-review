@@ -5,7 +5,7 @@ export type User = {
   fullName: string;
   reviewerName: string;
   amazonCountry: string;
-  profileImage: string | null;  // Adjusted to match the data (image -> profileImage)
+  profileImage: string | null; // Adjusted to match the data (image -> profileImage)
   email: string;
   role: string;
   points: number;
@@ -20,7 +20,6 @@ export type User = {
   updatedAt: string;
   __v: number;
   amazonAuthorPageLink: string;
-  
 };
 
 export type Metadata = {
@@ -50,8 +49,8 @@ export type Book = {
 
 export type ReviewedBook = {
   _id: string;
-  bookId: Book;  // The book details
-  userId: User;  // The user details who reviewed
+  bookId: Book; // The book details
+  userId: User; // The user details who reviewed
   readingStatus: string;
   isApproved: boolean;
   createdAt: string;
@@ -61,28 +60,28 @@ export type ReviewedBook = {
 
 export type Button = {
   label: string;
-  variant: "outline" | "solid";  // Can expand this based on button variants
+  variant: "outline" | "solid"; // Can expand this based on button variants
   style: string;
 };
 
 export type SubscriptionPlan = {
-  type: "monthly" | "yearly";  // Can expand this based on available types
+  type: "monthly" | "yearly"; // Can expand this based on available types
   name: string;
   price: string;
   description: string;
   features: string[];
   button: Button;
-  image: string;  // URL or path to image
+  image: string; // URL or path to image
 };
 
 export type NavLink = {
   name: string;
   href: string;
-  icon: IconType;  // Using IconType from react-icons
+  icon: IconType; // Using IconType from react-icons
 };
 
 export type FAQItem = {
-  id: string;
+  _id: string;
   question: string;
   answer: string;
 };

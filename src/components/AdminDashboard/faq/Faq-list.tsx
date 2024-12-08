@@ -1,21 +1,14 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { FAQItem } from '@/lib/types/type';
 import { Accordion, AccordionItem } from "@nextui-org/react";
-import { FAQItem } from '@/lib/types/type'
 import { FaChevronDown } from 'react-icons/fa6';
 
-interface FAQListProps {
-    initialFaqs: FAQItem[]
-}
 
-export function FAQList({ initialFaqs }: FAQListProps) {
-    const [faqs, setFaqs] = useState(initialFaqs)
 
-    useEffect(() => {
-        setFaqs(initialFaqs)
-    }, [initialFaqs])
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function FAQList({ initialFaqs }: any) {
 
     return (
         <Card>
@@ -24,9 +17,9 @@ export function FAQList({ initialFaqs }: FAQListProps) {
             </CardHeader>
             <CardContent>
                 <Accordion className="w-full">
-                    {faqs.map((faq) => (
+                    {initialFaqs?.data?.map((faq: FAQItem) => (
                         <AccordionItem
-                            key={faq.id}
+                            key={faq._id}
                             indicator={<FaChevronDown size={14} className="text-primary" />}
                             className="!border-b !border-primary"
                             title={
