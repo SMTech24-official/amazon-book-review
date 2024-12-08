@@ -1,10 +1,11 @@
-"use client"
-import { SubscriptionPlan } from '@/lib/types/type';
-import { Check } from 'lucide-react';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import React from 'react';
-import { IoIosArrowForward } from 'react-icons/io';
+"use client";
+import { SubscriptionPlan } from "@/lib/types/type";
+import { Check } from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
+import React from "react";
+import { IoIosArrowForward } from "react-icons/io";
 
 const SubscriptionCards = ({ plan }: { plan: SubscriptionPlan }) => {
     const router = useRouter()
