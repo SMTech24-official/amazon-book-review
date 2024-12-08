@@ -9,7 +9,8 @@ import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://traceylongfield.vercel.app/api/",
+  // baseUrl: "https://traceylongfield.vercel.app/api/",
+  baseUrl: "http://192.168.11.51:5005/api/",
   // baseUrl: "https://api.booksy.buzz/api/",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
@@ -33,7 +34,8 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   if (result.error?.status === 401) {
     try {
       const res = await fetch(
-        "https://traceylongfield.vercel.app/refresh-token",
+        "http://192.168.11.51:5005/refresh-token",
+        // "https://traceylongfield.vercel.app/refresh-token",
         // "https://api.booksy.buzz/api/auth/refresh-token",
         {
           method: "POST",
@@ -79,7 +81,7 @@ export const baseApi = createApi({
     "authorGuide",
     "point",
     "invite",
-    "subscribe"
+    "subscribe",
   ],
   endpoints: () => ({}),
 });
