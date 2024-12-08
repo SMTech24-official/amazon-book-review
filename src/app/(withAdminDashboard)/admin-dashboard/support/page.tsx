@@ -1,30 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React, { useEffect, useState } from "react";
-import { io } from "socket.io-client";
-import Image from "next/image";
-import {
-  Camera,
-  ImageIcon,
-  Mic,
-  MoreVertical,
-  Phone,
-  PlusCircle,
-  Send,
-  SmilePlus,
-  Video,
-} from "lucide-react";
-import {
-  useGetAllUserQuery,
-  useUserDataQuery,
-} from "@/redux/features/auth/authApi";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Send
+} from "lucide-react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 
-const socket = io("http://localhost:5000"); // Replace with your server URL
+const socket = io("http://192.168.11.51:5005");
 
 export default function HelpPages() {
- // const { data: allUser } = useGetAllUserQuery(undefined);
-const [allUser, setAllUser]=useState([])
+  // const { data: allUser } = useGetAllUserQuery(undefined);
+  const [allUser, setAllUser] = useState([])
   const [message, setMessage] = useState(""); // State for input value
   const [id, setId] = useState("");
   const [showMessage, setShowMessage] = useState([]);
@@ -52,7 +41,7 @@ const [allUser, setAllUser]=useState([])
     socket.on("receive_message", (data) => {
       setShowMessage(data);
     });
-  
+
 
     return () => {
       socket.off("receive_message");
@@ -64,11 +53,11 @@ const [allUser, setAllUser]=useState([])
     setSelectedUser(user);
   };
 
-    socket.on("get_users", (data) => {
-        console.log("Users:", data);
-        setAllUser(data);
-      
-    })
+  socket.on("get_users", (data) => {
+    console.log("Users:", data);
+    setAllUser(data);
+
+  })
   console.log(id, showMessage);
   return (
     <div className="mt-32 grid md:grid-cols-2">
@@ -112,16 +101,14 @@ const [allUser, setAllUser]=useState([])
             {showMessage.map((msg: any, index) => (
               <div
                 key={index}
-                className={`flex ${
-                  msg.role === "admin" ? "justify-end" : "justify-start"
-                }`}
+                className={`flex ${msg.role === "admin" ? "justify-end" : "justify-start"
+                  }`}
               >
                 <div
-                  className={`p-3 rounded-lg max-w-xs ${
-                    msg.role === "admin"
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 text-black"
-                  }`}
+                  className={`p-3 rounded-lg max-w-xs ${msg.role === "admin"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 text-black"
+                    }`}
                 >
                   <p>{msg.message}</p>
                 </div>
