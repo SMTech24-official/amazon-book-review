@@ -26,15 +26,15 @@ const othersApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["Others"],
     }),
-    rejectReview: builder.mutation({
+    deleteFAq: builder.mutation({
       query: (id) => {
         return {
-          url: `questions`,
+          url: `questions/${id}`,
           method: "DELETE",
           // body: userInfo,
         };
       },
-      invalidatesTags: ["Book"],
+      invalidatesTags: ["Others"],
     }),
   }),
 });
@@ -42,6 +42,6 @@ const othersApi = baseApi.injectEndpoints({
 export const {
   useGetAllFaqQuery,
   useGetSinglePendingReviewsQuery,
-  useRejectReviewMutation,
   usePostFAQMutation,
+  useDeleteFAqMutation,
 } = othersApi;
