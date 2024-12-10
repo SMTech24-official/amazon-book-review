@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -59,6 +59,7 @@ export default function HelpPages() {
 
   })
   console.log(id, showMessage);
+
   return (
     <div className="mt-32 grid md:grid-cols-2">
       <div className=" h-[81vh] w-[400px]  rounded-lg p-4 relative bg-slate-300">
@@ -144,3 +145,17 @@ export default function HelpPages() {
     </div>
   );
 }
+
+// import CommunicationComponent from '@/components/communication/MainCommunication';
+// import React from 'react';
+
+// const page = () => {
+//   return (
+//     <div>
+//       <CommunicationComponent />
+
+//     </div>
+//   );
+// };
+
+// export default page;
