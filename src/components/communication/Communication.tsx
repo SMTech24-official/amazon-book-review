@@ -39,6 +39,13 @@ const Communication: React.FC<CommunicationProps> = ({
 
   return (
     <div className="flex flex-col ">
+      <div className="flex items-center gap-4 border-b pb-2">
+        <div className="relative h-10 w-10"></div>
+        <div>
+          {/* <Image src={selectedUser?.profileImage??"/placeholder.svg"} alt='profile image'></Image> */}
+          <h1 className="font-medium">{messages?.fullName}</h1>
+        </div>
+      </div>
       <div className="h-full">
         <ScrollArea className="p-4 h-[65vh] md:h-[60vh] overflow-y-auto">
           {messages.map((msg: any) => (
