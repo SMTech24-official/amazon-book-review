@@ -69,7 +69,7 @@ export default function CommunicationComponent() {
     const ConversationList = () => (
         <div className="w-full h-full">
             <div>
-                <p className="font-semibold text-center py-[22px] text-secondary text-xl shadow-sm bg-section rounded-lr-md">Recent Chats</p>
+                <p className="font-semibold text-center py-[22px] text-primary text-xl shadow-sm bg-section rounded-lr-md">Recent Chats</p>
             </div>
             <ScrollArea className="md:h-[calc(79vh-8rem)] h-full">
                 {allUser.map((chat: any, index) => (
@@ -113,13 +113,26 @@ export default function CommunicationComponent() {
 
                 <div className="flex-1">
                     {showMessage ? (
-                        <Communication
-                            message={message}
-                            messages={showMessage}
-                            setMessages={setMessage}
-                            handelSend={handelSend}
-
-                        />
+                        <div>
+                            <header className="flex items-center justify-between border-b px-4 py-2 bg-card">
+                                <div className="flex items-center gap-3">
+                                    <Avatar>
+                                        <AvatarFallback>AD</AvatarFallback>
+                                    </Avatar>
+                                    <div>
+                                        <h1 className="font-semibold">Chat with Admin</h1>
+                                        <p className="text-sm text-muted-foreground">Online</p>
+                                    </div>
+                                </div>
+                            </header>
+                            <Communication
+                                message={message}
+                                messages={showMessage}
+                                setMessages={setMessage}
+                                handelSend={handelSend}
+                                userRole={"admin"}
+                            />
+                        </div>
                     ) : (
                         <div className="w-full h-full flex items-center justify-center text-gray-500">
                             Select a message to view details

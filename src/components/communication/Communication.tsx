@@ -12,6 +12,7 @@ import React, { useEffect, useRef } from 'react'
 
 interface CommunicationProps {
   message: string
+  userRole: string
   messages: any
   setMessages: React.Dispatch<React.SetStateAction<string>>
   handelSend: () => void
@@ -20,6 +21,7 @@ interface CommunicationProps {
 const Communication: React.FC<CommunicationProps> = ({
   message,
   messages,
+  userRole,
   setMessages,
   handelSend
 }
@@ -39,13 +41,6 @@ const Communication: React.FC<CommunicationProps> = ({
 
   return (
     <div className="flex flex-col ">
-      <div className="flex items-center gap-4 border-b pb-2">
-        <div className="relative h-10 w-10"></div>
-        <div>
-          {/* <Image src={selectedUser?.profileImage??"/placeholder.svg"} alt='profile image'></Image> */}
-          <h1 className="font-medium">{messages?.fullName}</h1>
-        </div>
-      </div>
       <div className="h-full">
         <ScrollArea className="p-4 h-[65vh] md:h-[60vh] overflow-y-auto">
           {messages.map((msg: any) => (
@@ -53,10 +48,11 @@ const Communication: React.FC<CommunicationProps> = ({
               key={msg._id}
               message={msg.message}
               role={msg.role}
-              colorScheme={msg.role === "admin"
+              colorScheme={msg.role !== userRole
                 ? "bg-gray-200 text-black ms-2"
                 : "bg-primary text-white me-2"
               }
+              userRole={userRole}
             />
           ))}
           <div ref={containerRef} />
@@ -90,10 +86,11 @@ interface MessageBubbleProps {
   message: string
   role?: string // This should match the message sender
   colorScheme?: string
+  userRole: string
 }
 
-const MessageBubble: React.FC<MessageBubbleProps> = ({ message, role, colorScheme }) => {
-  const isSender = role !== "admin";
+const MessageBubble: React.FC<MessageBubbleProps> = ({ message, role, colorScheme, userRole }) => {
+  const isSender = role === userRole;
   // Determine if the message is from the sender or receiver
 
   return (

@@ -72,7 +72,7 @@ export default function HelpPages() {
           messages={showMessage}
           setMessages={setMessage}
           handelSend={handelSend}
-
+          userRole={"user"}
         />
       }
     </div>
