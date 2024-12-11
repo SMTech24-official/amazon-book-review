@@ -13,6 +13,16 @@ const paymentApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["subscribe"],
     }),
+    unSubscribe: builder.mutation({
+      query: (body) => {
+        return {
+          url: `payment/cancel-subscription`,
+          method: "POST",
+          body: body,
+        };
+      },
+      invalidatesTags: ["subscribe"],
+    }),
   }),
 });
 
