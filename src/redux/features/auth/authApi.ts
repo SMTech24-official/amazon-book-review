@@ -24,9 +24,10 @@ const authApi = baseApi.injectEndpoints({
     }),
     changePassword: builder.mutation({
       query: (data) => {
+        console.log(data);
         return {
-          url: "users/change-password",
-          method: "PATCH",
+          url: "auth/change-password",
+          method: "POST",
           body: data,
         };
       },

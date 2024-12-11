@@ -67,10 +67,12 @@ const General = ({ user }: { user: User }) => {
             return;
         }
 
+        console.log(getData);
         const data = {
+            oldPassword: getData["old-password"],
+            newPassword: getData["confirm-password"]
 
         }
-
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const finishRes = await handleAsyncWithToast(
             async () => {
@@ -82,6 +84,7 @@ const General = ({ user }: { user: User }) => {
             true,
             dispatch
         );
+
     };
 
 
