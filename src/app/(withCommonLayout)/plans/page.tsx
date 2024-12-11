@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const PlansPage = () => {
     return (
         <>
-            <PlansComponent/>
+            <PlansComponent />
         </>
     );
 };
