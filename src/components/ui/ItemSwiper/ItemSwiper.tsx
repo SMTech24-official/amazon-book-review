@@ -32,7 +32,8 @@ const ItemSwiper: React.FC = () => {
         {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           data?.data.map((review: any) =>
-            <SwiperSlide key={review._id}> <TestimonialCard name={review.name} reviews={review.review} /></SwiperSlide>
+            <SwiperSlide key={review._id}> <div className="max-w-[270px] mx-auto">
+              <TestimonialCard name={review.name} reviews={review.review} /></div></SwiperSlide>
 
           )
         }

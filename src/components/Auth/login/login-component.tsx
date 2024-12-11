@@ -96,8 +96,8 @@ const LoginComponent = () => {
     if (res?.data?.success) {
       router.push("/");
     }
-
-    if (res?.error?.status === 403) {
+    console.log(res.error);
+    if (res?.error?.status === 400) {
       router.push("/plans");
     }
   };
