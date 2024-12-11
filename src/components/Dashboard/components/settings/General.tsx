@@ -9,7 +9,8 @@ import { User } from '@/lib/types/type';
 import DnDInput from '@/components/ui/DnDInput';
 import { useAppDispatch } from '@/redux/hooks';
 import { handleAsyncWithToast } from '@/utils/handleAsyncWithToast';
-import { useUpdateUserMutation } from '@/redux/features/auth/authApi';
+import { useChangePasswordMutation, useUpdateUserMutation } from '@/redux/features/auth/authApi';
+import { toast } from 'sonner';
 
 
 
@@ -22,7 +23,8 @@ const General = ({ user }: { user: User }) => {
 
 
     const [updateUser] = useUpdateUserMutation()
-    
+    const [ChangePass] = useChangePasswordMutation()
+
     const handlePersonalInfoSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const newFormData = new FormData(event.currentTarget);
@@ -57,9 +59,33 @@ const General = ({ user }: { user: User }) => {
     const handlePasswordSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const newFormData = new FormData(event.currentTarget);
+        const getData = Object.fromEntries(newFormData.entries());
+
+        if (getData['new-password'] !== getData['confirm-password']) {
+            // You might want to use a toast or some other UI feedback here
+            toast.error("New password and confirm password do not match");
+            return;
+        }
+
+        const data = {
+
+        }
+
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const data = Object.fromEntries(newFormData.entries());
+        const finishRes = await handleAsyncWithToast(
+            async () => {
+                return ChangePass(data); // Replace with your actual login function
+            },
+            "Updating Profile...", // Toast message for the start of the process
+            "User update Completed!", // Toast message for success
+            `Please Check Your network`, // Toast message for failure
+            true,
+            dispatch
+        );
     };
+
+
+
 
     return (
         <div className="space-y-6">
@@ -198,3 +224,4 @@ const General = ({ user }: { user: User }) => {
 };
 
 export default General;
+
