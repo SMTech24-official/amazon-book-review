@@ -12,6 +12,7 @@ import { z } from "zod";
 import AuthLayout from "../AuthLayout";
 import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
 import { useRegisterMutation } from "@/redux/features/auth/authApi";
+import { countries } from "@/lib/fakeData/countery";
 
 const validationSchema = z.object({
   fullName: z
@@ -63,7 +64,9 @@ const SignUp = () => {
   const [register] = useRegisterMutation();
   const query = useSearchParams()
   const token = query?.toString().split("=")[1]
-  console.log(token)
+
+
+
   const handleSubmit = async (formData: any) => {
     const res = await handleAsyncWithToast(
       async () => {
@@ -132,7 +135,7 @@ const SignUp = () => {
                   labelClassName="mb-0 text-xs font-medium"
                   name={"amazonCountry"}
                   placeHolder="Amazon.com"
-                  options={[{ label: "Amazon.com", value: "Amazon" }]}
+                  options={countries}
                 />
               </div>
             </div>

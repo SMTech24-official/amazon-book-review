@@ -14,17 +14,16 @@ import { SubscriptionPlan } from '@/lib/types/type'
 import { usePaymentMutation } from '@/redux/features/payment/payMent'
 import { useRouter } from 'next/navigation'
 import { Icons } from '../icons/Icons'
+import { countries } from '@/lib/fakeData/countery'
 
 export function SubscriptionForm() {
   const stripe = useStripe()
   const elements = useElements()
   const [payment] = usePaymentMutation()
-  const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'yearly' | null>(null)
+
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [coupon, setCoupon] = useState('')
-  const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null)
-  const [couponError, setCouponError] = useState<string | null>(null)
   const selectPlan = localStorage.getItem("plan")
 
   const router = useRouter()
@@ -53,7 +52,7 @@ export function SubscriptionForm() {
         planType: localStorage.getItem("plan"),
         email: localStorage.getItem("verifyEmailByOTP"),
         paymentMethodId: paymentMethod.id,
-        coupon: appliedCoupon,
+        coupon: coupon,
       }
 
       if (paymentMethod.id) {
@@ -77,20 +76,9 @@ export function SubscriptionForm() {
     }
   }
 
-  const handleApplyCoupon = () => {
-    // This is a mock function. In a real application, you would validate the coupon with your backend.
-    if (coupon.toLowerCase() === 'discount10') {
-      setAppliedCoupon(coupon)
-      setCouponError(null)
-      toast.success("Coupon applied successfully")
-    } else {
-      setAppliedCoupon(null)
-      setCouponError('Invalid coupon code')
-    }
-  }
 
   return (
-    <Card className="w-full max-w-md mx-auto">
+    <Card className="w-full max-w-lg mx-auto">
       <form onSubmit={handleSubmit}>
         <CardHeader>
           <CardTitle>Choose Your Subscription Plan</CardTitle>
@@ -99,8 +87,7 @@ export function SubscriptionForm() {
         <CardContent className="space-y-6">
           <RadioGroup
             value={selectPlan ?? ""}
-            onValueChange={(value) => setSelectedPlan(value as 'monthly' | 'yearly')}
-            className="grid gap-4 md:grid-cols-2"
+            className="grid gap-4 md:grid-cols-1"
           >
             {SubscriptionsPlan?.map((plan: SubscriptionPlan, idx) => (
               <div key={idx}>
@@ -113,13 +100,13 @@ export function SubscriptionForm() {
                 <Label
                   htmlFor={plan.type}
                   className={cn(
-                    "flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary",
+                    "flex flex-col items-start justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary",
                     selectPlan === plan.type && "border-primary"
                   )}
                 >
-                  <div className="space-y-1 text-center">
+                  <div className="space-y-1 text-start">
                     <p className="text-lg font-medium leading-none">{plan.name}</p>
-                    <p className="text-2xl font-bold">${plan.price}</p>
+                    <p className="text-2xl font-bold">{plan.price}</p>
                     <p className="text-sm text-muted-foreground">per {plan.type}</p>
                   </div>
                 </Label>
@@ -136,12 +123,10 @@ export function SubscriptionForm() {
                 onChange={(e) => setCoupon(e.target.value)}
                 placeholder="Enter coupon code"
               />
-              <Button type="button" onClick={handleApplyCoupon} disabled={!coupon}>
+              <Button type="button" disabled={!coupon}>
                 Apply
               </Button>
             </div>
-            {couponError && <p className="text-sm text-destructive">{couponError}</p>}
-            {appliedCoupon && <p className="text-sm text-green-600">Coupon applied: {appliedCoupon}</p>}
           </div>
 
           <div className="space-y-2">
