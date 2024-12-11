@@ -6,22 +6,25 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
-import { Icons } from '@/components/icons/Icons'
 import { toast } from 'sonner'
 import { SubscriptionsPlan } from '@/lib/fakeData/subscriptionPlans'
 import { SubscriptionPlan } from '@/lib/types/type'
 import { usePaymentMutation } from '@/redux/features/payment/payMent'
 import { useRouter } from 'next/navigation'
-
+import { Icons } from '../icons/Icons'
 
 export function SubscriptionForm() {
   const stripe = useStripe()
   const elements = useElements()
   const [payment] = usePaymentMutation()
-  const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'yearly'>('monthly')
+  const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'yearly' | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [coupon, setCoupon] = useState('')
+  const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null)
+  const [couponError, setCouponError] = useState<string | null>(null)
   const selectPlan = localStorage.getItem("plan")
 
   const router = useRouter()
@@ -45,33 +48,44 @@ export function SubscriptionForm() {
       if (cardError) {
         throw new Error(cardError.message)
       }
-      console.log(paymentMethod.id);
+
       const data = {
-        // planType: "yearly",
         planType: localStorage.getItem("plan"),
         email: localStorage.getItem("verifyEmailByOTP"),
-        // email: "waveray575@bflcafe.com",
         paymentMethodId: paymentMethod.id,
+        coupon: appliedCoupon,
       }
+
       if (paymentMethod.id) {
         try {
           const res = await payment(data)
           if (res?.data) {
-            toast.success("Subscription successful");
+            toast.success("Subscription successful")
             router.push("/login")
           } else {
-            toast.error("Subscription failed");
+            toast.error("Subscription failed")
           }
         } catch (error) {
-          console.log(error);
-          toast.error("Subscription failed");
+          console.error(error)
+          toast.error("Subscription failed")
         }
       }
-
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unexpected error occurred')
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleApplyCoupon = () => {
+    // This is a mock function. In a real application, you would validate the coupon with your backend.
+    if (coupon.toLowerCase() === 'discount10') {
+      setAppliedCoupon(coupon)
+      setCouponError(null)
+      toast.success("Coupon applied successfully")
+    } else {
+      setAppliedCoupon(null)
+      setCouponError('Invalid coupon code')
     }
   }
 
@@ -84,44 +98,60 @@ export function SubscriptionForm() {
         </CardHeader>
         <CardContent className="space-y-6">
           <RadioGroup
-            value={selectedPlan}
+            value={selectPlan ?? ""}
             onValueChange={(value) => setSelectedPlan(value as 'monthly' | 'yearly')}
-            className="grid gap-4"
+            className="grid gap-4 md:grid-cols-2"
           >
-            {
-              SubscriptionsPlan?.map((plan: SubscriptionPlan, idx) => {
-                return (
-                  <div key={idx}>
-                    <RadioGroupItem
-                      value={plan.type}
-                      id={plan.type}
-                      className="peer sr-only"
-                      onChange={() => localStorage.setItem("plan", plan.type)}
-                    />
-                    <Label
-                      htmlFor={plan.type}
-                      className={`flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary ${selectPlan === plan.name ? "border-primary" : ""}`}
-                    >
-                      <div className="space-y-1">
-                        <p className="text-lg font-medium leading-none">{plan.name}</p>
-                        <p className="text-sm text-muted-foreground">
-                          {plan.price}/{plan.type}
-                        </p>
-                      </div>
-                    </Label>
+            {SubscriptionsPlan?.map((plan: SubscriptionPlan, idx) => (
+              <div key={idx}>
+                <RadioGroupItem
+                  value={plan.type}
+                  id={plan.type}
+                  className="peer sr-only"
+                  onChange={() => localStorage.setItem("plan", plan.type)}
+                />
+                <Label
+                  htmlFor={plan.type}
+                  className={cn(
+                    "flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary",
+                    selectPlan === plan.type && "border-primary"
+                  )}
+                >
+                  <div className="space-y-1 text-center">
+                    <p className="text-lg font-medium leading-none">{plan.name}</p>
+                    <p className="text-2xl font-bold">${plan.price}</p>
+                    <p className="text-sm text-muted-foreground">per {plan.type}</p>
                   </div>
-                )
-              })
-            }
+                </Label>
+              </div>
+            ))}
           </RadioGroup>
 
           <div className="space-y-2">
-            <Label>Card Details</Label>
+            <Label htmlFor="coupon">Coupon Code</Label>
+            <div className="flex space-x-2">
+              <Input
+                id="coupon"
+                value={coupon}
+                onChange={(e) => setCoupon(e.target.value)}
+                placeholder="Enter coupon code"
+              />
+              <Button type="button" onClick={handleApplyCoupon} disabled={!coupon}>
+                Apply
+              </Button>
+            </div>
+            {couponError && <p className="text-sm text-destructive">{couponError}</p>}
+            {appliedCoupon && <p className="text-sm text-green-600">Coupon applied: {appliedCoupon}</p>}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="card-element">Card Details</Label>
             <div className={cn(
               "rounded-md border border-input bg-background px-3 py-2",
               error && "border-destructive"
             )}>
               <CardElement
+                id="card-element"
                 options={{
                   style: {
                     base: {

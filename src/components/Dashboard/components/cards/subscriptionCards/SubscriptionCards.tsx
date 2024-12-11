@@ -1,18 +1,15 @@
-"use client";
 import { SubscriptionPlan } from "@/lib/types/type";
 import { Check } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 // import { useRouter } from "next/navigation";
-import React from "react";
+import { Dispatch, SetStateAction } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 
-const SubscriptionCards = ({ plan }: { plan: SubscriptionPlan }) => {
-    const router = useRouter()
+const SubscriptionCards = ({ plan, plansTypes, setPlansTypes }: { plan: SubscriptionPlan, plansTypes: string | null, setPlansTypes: Dispatch<SetStateAction<string | null>> }) => {
 
     return (
         <div
-            className={`border rounded-lg p-6 space-y-6 flex flex-col items-center `}
+            className={`${plansTypes === plan.type && "border-primary"} border rounded-lg p-6 space-y-6 flex flex-col items-center `}
         >
             <div className="flex items-center gap-4 flex-col">
                 <div className={` p-2 rounded-lg`}>
@@ -32,11 +29,12 @@ const SubscriptionCards = ({ plan }: { plan: SubscriptionPlan }) => {
                 // onClick={() => handleCheckout()}
                 onClick={() => {
                     localStorage.setItem("plan", plan.type)
-                    router.push("/payment")
+                    setPlansTypes(plan.type)
+                    // router.push("/payment")
                 }}
                 // onClick={() => router.push("https://buy.stripe.com/test_8wMdSB47a9l8cO4aEF")}
-                className={`p-3 border rounded-md text-[18px]  flex items-center justify-center gap-3`}>
-                Select
+                className={`p-3 border rounded-md text-[18px]  flex items-center justify-center gap-3 ${plansTypes === plan.type && "bg-primary text-white"}`}>
+                {plansTypes ? plansTypes === plan.type ? "Selected" : "Select" : "Select"}
                 <IoIosArrowForward />
             </button>
             <div className="space-y-4">
