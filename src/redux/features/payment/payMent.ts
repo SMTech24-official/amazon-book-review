@@ -14,11 +14,21 @@ const paymentApi = baseApi.injectEndpoints({
       invalidatesTags: ["subscribe"],
     }),
     unSubscribe: builder.mutation({
-      query: (body) => {
+      query: (data) => {
         return {
           url: `payment/cancel-subscription`,
           method: "POST",
-          body: body,
+          body: data,
+        };
+      },
+      invalidatesTags: ["subscribe"],
+    }),
+    updatePayment: builder.mutation({
+      query: (data) => {
+        return {
+          url: `payment/update-subscription`,
+          method: "PUT",
+          body: data,
         };
       },
       invalidatesTags: ["subscribe"],
@@ -26,4 +36,8 @@ const paymentApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { usePaymentMutation } = paymentApi;
+export const {
+  usePaymentMutation,
+  useUnSubscribeMutation,
+  useUpdatePaymentMutation,
+} = paymentApi;

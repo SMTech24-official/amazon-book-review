@@ -100,7 +100,7 @@ const General = ({ user }: { user: User }) => {
                         <DnDInput
                             setNew={setImage}
                             width='w-[256px]'
-                            initialFile={user.profileImage}
+                            initialFile={user?.profileImage}
                             id="profilePic"
                             label="profile Picture (Optional)"
                             acceptedTypes="image"

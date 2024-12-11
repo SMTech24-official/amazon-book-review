@@ -28,7 +28,7 @@ export default function Settings() {
             label: "Manage Plans",
             value: "manage-plans",
             icon: <FaClipboardList className="min-w-6 min-h-6 mr-2" />,
-            component: <ManagePlans subscriptionsPlan={SubscriptionsPlan} plans={UserData?.data.subscriptionPlane} />
+            component: <ManagePlans subscriptionsPlan={SubscriptionsPlan} plans={UserData?.data.subscriptionPlane} payId={UserData?.data.subscriptionId} />
         }
     ];
 
