@@ -8,17 +8,21 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { SubscriptionsPlan } from '@/lib/fakeData/subscriptionPlans'
 import { SubscriptionPlan } from '@/lib/types/type'
 import { cn } from '@/lib/utils'
-import { usePaymentMutation } from '@/redux/features/payment/payMent'
+import { usePaymentMutation, useUpdatePaymentMutation } from '@/redux/features/payment/payMent'
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { Icons } from '../icons/Icons'
+import { useUserDataQuery } from '@/redux/features/auth/authApi'
 
 export function SubscriptionForm() {
+  const { data: UserData } = useUserDataQuery(undefined)
+
   const stripe = useStripe()
   const elements = useElements()
   const [payment] = usePaymentMutation()
+  const [updatePayment] = useUpdatePaymentMutation()
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -56,12 +60,28 @@ export function SubscriptionForm() {
 
       if (paymentMethod.id) {
         try {
-          const res = await payment(data)
-          if (res?.data) {
-            toast.success("Subscription successful")
-            router.push("/login")
-          } else {
-            toast.error("Subscription failed")
+          if (UserData?.data.subscriptionId) {
+            const newData = {
+              planType: localStorage.getItem("plan"),
+              paymentMethodId: paymentMethod.id,
+            }
+
+            const res = await updatePayment({ data: newData })
+            if (res?.data) {
+              toast.success("Subscription successful")
+              router.push("/login")
+            } else {
+              toast.error("Subscription failed")
+            }
+          }
+          else {
+            const res = await payment(data)
+            if (res?.data) {
+              toast.success("Subscription successful")
+              router.push("/login")
+            } else {
+              toast.error("Subscription failed")
+            }
           }
         } catch (error) {
           console.error(error)

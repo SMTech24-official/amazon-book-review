@@ -24,7 +24,8 @@ const paymentApi = baseApi.injectEndpoints({
       invalidatesTags: ["subscribe"],
     }),
     updatePayment: builder.mutation({
-      query: (data) => {
+      query: ({ data }) => {
+        console.log(data);
         return {
           url: `payment/update-subscription`,
           method: "PUT",

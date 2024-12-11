@@ -34,7 +34,7 @@ const validationSchema = z.object({
 
 const LoginComponent = () => {
   const dispatch = useAppDispatch();
-  const [login] = useLoginMutation();
+  const [login, { error }] = useLoginMutation();
   const router = useRouter();
   // const handleSubmit = async (formData: FieldValues) => {
   //   try {
@@ -92,9 +92,13 @@ const LoginComponent = () => {
       true,
       dispatch
     );
-
+    console.log(res);
     if (res?.data?.success) {
       router.push("/");
+    }
+
+    if (res?.error?.status === 403) {
+      router.push("/plans");
     }
   };
 
