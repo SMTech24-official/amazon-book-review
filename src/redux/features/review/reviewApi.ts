@@ -24,7 +24,7 @@ const reviewApi = baseApi.injectEndpoints({
           // body: userInfo,
         };
       },
-      invalidatesTags: ["Book"],
+      invalidatesTags: ["Review"],
     }),
     rejectReview: builder.mutation({
       query: (id) => {
@@ -34,7 +34,7 @@ const reviewApi = baseApi.injectEndpoints({
           // body: userInfo,
         };
       },
-      invalidatesTags: ["Book"],
+      invalidatesTags: ["Review"],
     }),
   }),
 });
