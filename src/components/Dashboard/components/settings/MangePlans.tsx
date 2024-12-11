@@ -5,9 +5,9 @@ import SubscriptionCards from "../cards/subscriptionCards/SubscriptionCards";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function ManagePlans({ subscriptionsPlan }: { plans: string, subscriptionsPlan: SubscriptionPlan[] }) {
+export default function ManagePlans({ subscriptionsPlan, plans }: { plans?: string, subscriptionsPlan: SubscriptionPlan[] }) {
 
-    const [plansTypes, setPlansTypes] = useState<string | null>(null)
+    const [plansTypes, setPlansTypes] = useState<string | null>(plans ?? null)
     const router = useRouter()
 
     return (
@@ -19,16 +19,18 @@ export default function ManagePlans({ subscriptionsPlan }: { plans: string, subs
                 </div>
 
                 <div className="flex items-center justify-center gap-4 mt-6">
-                    <Button onClick={() => setPlansTypes(null)} variant="ghost" className="border">
-                        Discard
-                    </Button>
+                    {
+                        !plans && <Button onClick={() => setPlansTypes(null)} variant="ghost" className="border">
+                            Discard
+                        </Button>
+                    }
                     {
                         plansTypes && <Button
                             onClick={() => router.push("/payment")}
                             variant="ghost"
                             className="text-red-500 hover:text-red-600 border"
                         >
-                            Subscribe
+                            {plans ? "UnSubscribe" : "Subscribe"}
                         </Button>
                     }
                 </div>

@@ -4,7 +4,6 @@ import ManagePlans from "@/components/Dashboard/components/settings/MangePlans";
 import AuthLayout from "../AuthLayout";
 
 import { SubscriptionsPlan } from "@/lib/fakeData/subscriptionPlans";
-import { user } from "@/lib/fakeData/user";
 
 const PlansComponent = () => {
 
@@ -13,7 +12,7 @@ const PlansComponent = () => {
     <div>
       <AuthLayout backLink="/signup">
         <div className=" w-full mt-24">
-          <ManagePlans subscriptionsPlan={SubscriptionsPlan} plans={user.subscriptionPlane} />
+          <ManagePlans subscriptionsPlan={SubscriptionsPlan} />
         </div>
       </AuthLayout>
     </div>
