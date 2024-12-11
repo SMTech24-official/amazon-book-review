@@ -15,7 +15,7 @@ export default function Faq() {
         return <MyLoading />
     }
 
-    console.log(data);
+    // console.log(data);
     return (
         <div className="container mx-auto py-10 min-h-screen">
             <h1 className="text-3xl font-bold mb-8">FAQ Admin</h1>

@@ -13,35 +13,35 @@ import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
 import { useOtpMutation } from "@/redux/features/auth/authApi";
 
 const validationSchema = z.object({
-    // OTP field validation
-    otp: z
-      .string({
-        required_error: "OTP is required",
-      })
-      .length(4, "OTP must be exactly 4 digits")
-      .regex(/^\d{4}$/, "OTP must be a 4-digit number"), // Ensure it's exactly 4 digits
-  });
-  
+  // OTP field validation
+  otp: z
+    .string({
+      required_error: "OTP is required",
+    })
+    .length(4, "OTP must be exactly 4 digits")
+    .regex(/^\d{4}$/, "OTP must be a 4-digit number"), // Ensure it's exactly 4 digits
+});
+
 
 const OTPVerify = () => {
   const [OTP] = useOtpMutation();
-    const router = useRouter()
-    const handleSubmit = async (formData: any) => {
-      formData.otp = parseFloat(formData.otp)
-      formData.email = localStorage.getItem("verifyEmailByOTP");
-      console.log(formData);
-      const res = await handleAsyncWithToast(
-        async () => {
-          return OTP(formData); // Replace with your actual login function
-        },
-        "Checking OTP...",
-        "",
-        ""
-      );
-      if (res?.data?.success) {
-        router.push("/plans");
-      }
-    };
+  const router = useRouter()
+  const handleSubmit = async (formData: any) => {
+    formData.otp = parseFloat(formData.otp)
+    formData.email = localStorage.getItem("verifyEmailByOTP");
+    // console.log(formData);
+    const res = await handleAsyncWithToast(
+      async () => {
+        return OTP(formData); // Replace with your actual login function
+      },
+      "Checking OTP...",
+      "",
+      ""
+    );
+    if (res?.data?.success) {
+      router.push("/plans");
+    }
+  };
 
   return (
     <div>
@@ -78,7 +78,7 @@ const OTPVerify = () => {
               </div>
 
               <div className="flex items-center justify-center gap-2 text-xs font-medium mb-">
-              <p className="text-[#5F7992]">Didn&apos;t get the OTP?</p>
+                <p className="text-[#5F7992]">Didn&apos;t get the OTP?</p>
 
                 <Link href={"/login"}>
                   <p className="text-primary">Resend</p>

@@ -92,7 +92,7 @@ const LoginComponent = () => {
       true,
       dispatch
     );
-    console.log(res);
+    // console.log(res);
     if (res?.data?.success) {
       router.push("/");
     }

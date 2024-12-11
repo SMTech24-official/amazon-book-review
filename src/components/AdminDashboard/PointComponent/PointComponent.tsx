@@ -28,11 +28,11 @@ const validationSchema = z.object({
 });
 
 const BuzzPointComponent = () => {
-  const {data: buzzPointData, isLoading} = useGetAllPointsQuery(undefined)
+  const { data: buzzPointData, isLoading } = useGetAllPointsQuery(undefined)
   const [updatePointMutation] = useUpdatePointMutation()
 
   const handleSubmit = async (formData: BuzzPoint, id: string) => {
-    console.log(formData);
+    // console.log(formData);
     // Pass the ID of the BuzzPoint item to update the points
     await handleAsyncWithToast(
       async () => {
@@ -47,7 +47,7 @@ const BuzzPointComponent = () => {
   };
 
   if (isLoading) {
-    return <MyLoading/>
+    return <MyLoading />
   }
   return (
     <div>
@@ -63,7 +63,7 @@ const BuzzPointComponent = () => {
                 </tr>
               </thead>
               <tbody>
-                {isNonEmptyArray(buzzPointData?.data) &&  buzzPointData?.data?.map((item : BuzzPoint, index: number) => (
+                {isNonEmptyArray(buzzPointData?.data) && buzzPointData?.data?.map((item: BuzzPoint, index: number) => (
                   <tr key={index}>
                     <td className=" px-4 py-3 text-sm text-gray-700">
                       {item?.type}
@@ -97,7 +97,7 @@ const BuzzPointComponent = () => {
                               className={`w-fit mx-auto py-3 rounded-lg bg-primary text-white text-base font-normal leading-6 mb-5`}
                               type="submit"
                             >
-                          Update
+                              Update
                             </Button>
                           </Tooltip>
                         </div>
