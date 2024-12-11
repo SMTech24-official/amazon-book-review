@@ -8,13 +8,13 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { SubscriptionsPlan } from '@/lib/fakeData/subscriptionPlans'
 import { SubscriptionPlan } from '@/lib/types/type'
 import { cn } from '@/lib/utils'
+import { useUserDataQuery } from '@/redux/features/auth/authApi'
 import { usePaymentMutation, useUpdatePaymentMutation } from '@/redux/features/payment/payMent'
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { Icons } from '../icons/Icons'
-import { useUserDataQuery } from '@/redux/features/auth/authApi'
+import SubscriptionModal from './PaymentModal'
 
 export function SubscriptionForm() {
   const { data: UserData } = useUserDataQuery(undefined)
@@ -23,13 +23,15 @@ export function SubscriptionForm() {
   const elements = useElements()
   const [payment] = usePaymentMutation()
   const [updatePayment] = useUpdatePaymentMutation()
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [modalData, setModalData] = useState<any | null>(null)
+  const [isOpen, setIsOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [coupon, setCoupon] = useState('')
   const selectPlan = localStorage.getItem("plan")
 
-  const router = useRouter()
+
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
@@ -68,8 +70,10 @@ export function SubscriptionForm() {
 
             const res = await updatePayment({ data: newData })
             if (res?.data) {
+              setModalData(res?.data.data)
+              setIsOpen(true)
               toast.success("Subscription successful")
-              router.push("/login")
+              // router.push("/login")
             } else {
               toast.error("Subscription failed")
             }
@@ -77,8 +81,10 @@ export function SubscriptionForm() {
           else {
             const res = await payment(data)
             if (res?.data) {
+              setModalData(res?.data.data)
+              setIsOpen(true)
               toast.success("Subscription successful")
-              router.push("/login")
+              // router.push("/login")
             } else {
               toast.error("Subscription failed")
             }
@@ -187,6 +193,7 @@ export function SubscriptionForm() {
           </Button>
         </CardFooter>
       </form>
+      <SubscriptionModal subscriptionData={modalData} isOpen={isOpen} setIsOpen={setIsOpen} />
     </Card>
   )
 }

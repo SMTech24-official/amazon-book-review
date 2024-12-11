@@ -34,7 +34,7 @@ const validationSchema = z.object({
 
 const LoginComponent = () => {
   const dispatch = useAppDispatch();
-  const [login, { error }] = useLoginMutation();
+  const [login] = useLoginMutation();
   const router = useRouter();
   // const handleSubmit = async (formData: FieldValues) => {
   //   try {
@@ -121,7 +121,7 @@ const LoginComponent = () => {
                 labelClassName="mb-1 text-xs font-medium"
                 name={"email"}
                 placeHolder="Email"
-                value={"akonhasan6802@gmail.com"}
+              // value={"akonhasan6802@gmail.com"}
               />
             </div>
             <div className="w-full">
@@ -131,7 +131,7 @@ const LoginComponent = () => {
                 name={"password"}
                 isPassword={true}
                 placeHolder="Password"
-                value={"123456"}
+              // value={"123456"}
               />
             </div>
             <div className="flex items-center justify-end gap-2 text-xs font-medium">
