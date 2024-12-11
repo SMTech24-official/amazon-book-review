@@ -38,7 +38,7 @@ const othersApi = baseApi.injectEndpoints({
     }),
     deleteFAq: builder.mutation({
       query: (id) => {
-        console.log(id);
+        // console.log(id);
         return {
           url: `questions/${id}`,
           method: "DELETE",
@@ -49,7 +49,7 @@ const othersApi = baseApi.injectEndpoints({
     }),
     deleteCustomerReview: builder.mutation({
       query: (id) => {
-        console.log(id);
+        // console.log(id);
         return {
           url: `homeReview/${id}`,
           method: "DELETE",

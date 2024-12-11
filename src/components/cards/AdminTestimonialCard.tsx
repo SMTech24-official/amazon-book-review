@@ -16,7 +16,7 @@ const AdminTestimonialCard = ({ id, name, reviews }: { name: string, reviews: st
   const dispatch = useAppDispatch();
 
   const handleDelete = async (id: string) => {
-    console.log(id);
+    // console.log(id);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const finishRes = await handleAsyncWithToast(
       async () => {

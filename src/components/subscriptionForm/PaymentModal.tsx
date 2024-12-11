@@ -16,7 +16,7 @@ export default function SubscriptionModal({ subscriptionData, isOpen, setIsOpen 
     const formatCurrency = (amount: number, currency: string) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(amount / 100)
     }
-    console.log(subscriptionData);
+    // console.log(subscriptionData);
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>

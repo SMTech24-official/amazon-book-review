@@ -16,7 +16,7 @@ export default function ManagePlans({ subscriptionsPlan, plans, payId }: { plans
     const dispatch = useAppDispatch();
 
 
-    console.log(payId);
+    // console.log(payId);
     const [unSubscribe] = useUnSubscribeMutation()
 
 
@@ -35,7 +35,7 @@ export default function ManagePlans({ subscriptionsPlan, plans, payId }: { plans
             dispatch
         );
 
-        console.log(finishRes);
+        // console.log(finishRes);
         if (finishRes?.data.status) {
             dispatch(logout())
         }

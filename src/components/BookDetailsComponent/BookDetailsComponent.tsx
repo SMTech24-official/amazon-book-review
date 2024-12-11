@@ -104,7 +104,7 @@ const BookDetailsComponent = (
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const completeRes = await handleAsyncWithToast(
             async () => {
-              console.log(mainId)
+              // console.log(mainId)
               return completeReview(mainId); // Replace with your actual login function
             },
             "Submitting Review...", // Toast message for the start of the process
@@ -116,7 +116,7 @@ const BookDetailsComponent = (
           break;
 
         case "Verify Amazon Link":
-          console.log(amznLink);
+          // console.log(amznLink);
           if (amznLink) { router.push(amznLink) }
           else setBrokenLink(true)
           break;
@@ -187,19 +187,19 @@ const BookDetailsComponent = (
 
         case "Verify Review now on amazon":
           if (amznLink) {
-            console.log("Verifying the review on Amazon...");
+            // console.log("Verifying the review on Amazon...");
             window.open(
               amznLink,
               "_blank",
               "noopener,noreferrer"
             );
           } else {
-            console.error("Amazon review URL is not available.");
+            // console.error("Amazon review URL is not available.");
           }
           break;
 
         default:
-          console.log(`Unknown action for button: ${buttonText}`);
+        // console.log(`Unknown action for button: ${buttonText}`);
       }
     } catch (error) {
       console.error(

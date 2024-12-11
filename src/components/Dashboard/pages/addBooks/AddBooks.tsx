@@ -33,9 +33,9 @@ export default function AddBooksO() {
         const Alldata = new FormData(e.currentTarget);
 
         const data = Object.fromEntries(Alldata.entries());
-        console.log(data.bookCover, data.bookPdf);
+        // console.log(data.bookCover, data.bookPdf);
         if (bookCover && bookPdf) {
-            console.log(bookCover, bookPdf);
+            // console.log(bookCover, bookPdf);
             formData.append("bookCover", bookCover)
             formData.append("bookPdf", bookPdf)
 
@@ -47,7 +47,7 @@ export default function AddBooksO() {
                 genre: data.genre,
                 title: data.title,
             }
-            console.log(otherData);
+            // console.log(otherData);
             formData.append("data", JSON.stringify(otherData))
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const finishRes = await handleAsyncWithToast(

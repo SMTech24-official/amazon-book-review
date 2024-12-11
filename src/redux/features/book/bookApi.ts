@@ -65,8 +65,8 @@ const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["Book"],
     }),
     addBook: builder.mutation({
-      query: ( data ) => {
-        console.log(data);
+      query: (data) => {
+        // console.log(data);
         return {
           url: `book/add-book`,
           method: "POST",
@@ -85,8 +85,8 @@ const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["Book"],
     }),
     finishReading: builder.mutation({
-      query: ( id ) => {
-        console.log(id);
+      query: (id) => {
+        // console.log(id);
         return {
           url: `reading/finish-reading/${id}`,
           method: "PATCH",
@@ -95,8 +95,8 @@ const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["Book"],
     }),
     requestReview: builder.mutation({
-      query: ( id ) => {
-        console.log(id);
+      query: (id) => {
+        // console.log(id);
         return {
           url: `book/get-reviewed/${id}`,
           method: "PUT",
@@ -105,8 +105,8 @@ const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["Book"],
     }),
     completeReview: builder.mutation({
-      query: ( id ) => {
-        console.log(id);
+      query: (id) => {
+        // console.log(id);
         return {
           url: `reading/give-review/${id}`,
           method: "PATCH",
@@ -130,5 +130,5 @@ export const {
   useStartReadingMutation,
   useFinishReadingMutation,
   useCompleteReviewMutation,
-  useRequestReviewMutation
+  useRequestReviewMutation,
 } = authApi;

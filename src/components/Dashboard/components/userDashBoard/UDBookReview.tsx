@@ -30,8 +30,8 @@ const UDBookReview = () => {
             setData(ReadingBooksData?.data)
         }
     }
-    console.log(ReadingBooksData?.data);
-    console.log(BooksData?.data);
+    // console.log(ReadingBooksData?.data);
+    // console.log(BooksData?.data);
     return (
         <div>
             <div className='flex xl:flex-row gap-2 md:gap-3 flex-col items-start xl:items-center justify-between mb-4'>
@@ -51,7 +51,7 @@ const UDBookReview = () => {
                     {
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         data?.map((book: any) => {
-                            console.log(book?.points);
+                            // console.log(book?.points);
                             return (
                                 <BooksCards
                                     key={filter === "myBooks" ? book?._id : book?.bookId?._id}

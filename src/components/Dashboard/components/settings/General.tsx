@@ -39,7 +39,7 @@ const General = ({ user }: { user: User }) => {
                 amazonCountry: data.country,
                 reviewerName: data.reviewerName
             }
-            console.log(otherData);
+            // console.log(otherData);
             formData.append("data", JSON.stringify(otherData))
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const finishRes = await handleAsyncWithToast(
@@ -67,7 +67,7 @@ const General = ({ user }: { user: User }) => {
             return;
         }
 
-        console.log(getData);
+        // console.log(getData);
         const data = {
             oldPassword: getData["old-password"],
             newPassword: getData["confirm-password"]

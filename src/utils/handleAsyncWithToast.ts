@@ -19,7 +19,7 @@ export const handleAsyncWithToast = async (
 
   try {
     const res = await asyncCallback();
-    console.log(res?.data);
+    // console.log(res?.data);
 
     if (res?.data?.success) {
       toast.success(res.data.message || successMessage, {

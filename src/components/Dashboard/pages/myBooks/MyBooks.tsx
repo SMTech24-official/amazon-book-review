@@ -12,7 +12,7 @@ import { NoBooksFound } from '@/components/noBooksFound/NoFoundBooks';
 
 const MyBooks = () => {
     const { data: BooksData, isLoading } = useGetAllBooksQuery(undefined)
-    console.log(BooksData);
+    // console.log(BooksData);
     const [filter, setFilter] = useState('All'); // State to manage filter
 
     // Filter books based on the selected filter

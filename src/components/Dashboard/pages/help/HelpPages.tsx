@@ -45,12 +45,12 @@ export default function HelpPages() {
 
 
 
-  const userMessage = showMessage?.filter((msg: any) => msg.role == "user")
+  // const userMessage = showMessage?.filter((msg: any) => msg.role == "user")
 
-  const adminMessage = showMessage?.filter((msg: any) => msg.role === "admin")
+  // const adminMessage = showMessage?.filter((msg: any) => msg.role === "admin")
 
 
-  console.log(userMessage, adminMessage);
+  // console.log(userMessage, adminMessage);
 
   return (
 

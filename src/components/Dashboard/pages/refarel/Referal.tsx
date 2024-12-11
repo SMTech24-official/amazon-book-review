@@ -15,18 +15,18 @@ const Referral = () => {
     const { data: user } = useUserDataQuery(undefined)
     const { data, isLoading } = useGetInviteLinkQuery(undefined)
 
-    console.log(data?.data);
+    // console.log(data?.data);
     const [isCopied, setIsCopied] = useState(false);
 
     const handleCopyClick = async () => {
-      try {
-        await copy(data?.data);
-        setIsCopied(true);
-      } catch (error) {
-        console.error('Failed to copy text to clipboard', error);
-      }
+        try {
+            await copy(data?.data);
+            setIsCopied(true);
+        } catch (error) {
+            console.error('Failed to copy text to clipboard', error);
+        }
     };
-    
+
     return (
         <div>
             <p className="text-center text-2xl font-medium">
@@ -53,9 +53,9 @@ const Referral = () => {
                         />
                         Copy Referral Link
                         {
-                            isCopied ? <CheckCheck className='min-h-6 min-w-6'/> : <Copy className='min-h-6 min-w-6' />
+                            isCopied ? <CheckCheck className='min-h-6 min-w-6' /> : <Copy className='min-h-6 min-w-6' />
                         }
-                        
+
                     </Button>
                 </div>
             </GradCircleWrapper>

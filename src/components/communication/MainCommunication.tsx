@@ -60,11 +60,11 @@ export default function CommunicationComponent() {
     };
 
     socket.on("get_users", (data) => {
-        console.log("Users:", data);
+        // console.log("Users:", data);
         setAllUser(data);
 
     })
-    console.log(selectedUser);
+    // console.log(selectedUser);
 
 
     // start from herer 
