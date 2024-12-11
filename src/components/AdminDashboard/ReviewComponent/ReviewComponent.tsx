@@ -12,7 +12,7 @@ interface BookTableProps {
 }
 
 const ReviewComponent = ({ items, title, isLoading }: BookTableProps) => {
-  console.log(items);
+
 
   if (isLoading) {
     return <MyLoading />;
@@ -27,7 +27,7 @@ const ReviewComponent = ({ items, title, isLoading }: BookTableProps) => {
         </div>
         <div className=" ">
           <ReviewTable Items={items} />
-          <ReviewCards Items={items} className="grid-cols-1 xs:grid-cols-2 xl:grid-cols-3"/>
+          <ReviewCards Items={items} className="grid-cols-1 xs:grid-cols-2 xl:grid-cols-3" />
         </div>
       </div>
     </div>
