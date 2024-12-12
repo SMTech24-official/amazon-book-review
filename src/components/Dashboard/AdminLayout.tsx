@@ -10,6 +10,7 @@ import { IoLibrarySharp, IoSettingsSharp } from 'react-icons/io5';
 import { RiDashboardFill, RiFeedbackLine } from 'react-icons/ri';
 import { BsChatLeftTextFill } from "react-icons/bs";
 import SideBar from './components/navigationBar/SiderBar';
+import TopBar from './components/navigationBar/TopBar';
 
 
 
@@ -53,6 +54,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                 <SideBar additionalRoutes={additionalRoutes} navLink={navLink} isOpen={isOpen} user={user} navRef={navRef} />
             </div>
             <div className='w-full'>
+                <TopBar setIsOpen={setIsOpen} isOpen={isOpen} user={user} />
                 {children}
             </div>
         </div>

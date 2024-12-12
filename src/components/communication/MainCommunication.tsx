@@ -72,7 +72,7 @@ export default function CommunicationComponent() {
     const ConversationList = () => (
         <div className="w-full h-full">
             <div>
-                <p className="font-semibold text-center py-[22px] text-primary text-xl shadow-sm bg-section rounded-lr-md">Recent Chats</p>
+                <p className="font-semibold py-[22px] text-primary text-xl shadow-sm bg-section rounded-lr-md text-start">Recent Chats</p>
             </div>
             <ScrollArea className="md:h-[calc(79vh-8rem)] h-full">
                 {allUser.map((chat: any, index) => (

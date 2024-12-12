@@ -135,7 +135,7 @@ const LoginComponent = () => {
               />
             </div>
             <div className="flex items-center justify-end gap-2 text-xs font-medium">
-              <p className="text-[#5F7992]">Forgot Password?</p>
+              <Link href={"/forget-password"} className="text-[#5F7992]">Forgot Password?</Link>
               <p className="text-[#030B12]">Reset</p>
             </div>
             <Button

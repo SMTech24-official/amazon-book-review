@@ -149,9 +149,6 @@ export function SubscriptionForm() {
                 onChange={(e) => setCoupon(e.target.value)}
                 placeholder="Enter coupon code"
               />
-              <Button type="button" disabled={!coupon}>
-                Apply
-              </Button>
             </div>
           </div>
 
