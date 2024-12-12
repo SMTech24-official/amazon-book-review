@@ -23,7 +23,7 @@ const validationSchema = z.object({
 });
 
 
-const OTPVerify = () => {
+const OTPVerify = ({ forgetPassword }: { forgetPassword?: boolean }) => {
   const [OTP] = useOtpMutation();
   const router = useRouter()
   const handleSubmit = async (formData: any) => {
@@ -39,7 +39,15 @@ const OTPVerify = () => {
       ""
     );
     if (res?.data?.success) {
-      router.push("/plans");
+      if (forgetPassword) {
+        router.push("/reset-password");
+
+      }
+      else {
+        router.push("/plans");
+
+
+      }
     }
   };
 

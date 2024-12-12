@@ -12,7 +12,7 @@ import { io } from "socket.io-client"
 import BreadCrumb from '../common/breadCrumb/BreadCrumb'
 import { DialogTitle } from '@radix-ui/react-dialog'
 
-const socket = io("http://192.168.11.51:5005");
+const socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}:${process.env.NEXT_PUBLIC_PORT}`);
 
 export default function CommunicationComponent() {
     // const [messages, setMessages] = useState<Message[]>(conversations[0].messages)

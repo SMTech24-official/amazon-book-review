@@ -1,22 +1,15 @@
 "use client"
 
-import * as React from "react"
 import { Search, SlidersHorizontal, X } from 'lucide-react'
+import * as React from "react"
 
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
-import { Input } from "@/components/ui/input"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
 import { Dispatch, SetStateAction } from 'react'
 
 export default function FilterDropdown({ filter, setFilter, genres }: { filter: string, setFilter: Dispatch<SetStateAction<string>>, genres: string[] }) {
@@ -70,19 +63,6 @@ export default function FilterDropdown({ filter, setFilter, genres }: { filter: 
                                             {genre}
                                         </Button>
                                     ))}
-                                </div>
-                                <div className="space-y-2">
-                                    <h4 className="text-sm font-medium">Review type</h4>
-                                    <Select defaultValue="pdf" onValueChange={e => setFilter(e)}>
-                                        <SelectTrigger className="w-full">
-                                            <SelectValue placeholder="Select type" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="pdf">PDF Download</SelectItem>
-                                            <SelectItem value="epub">EPUB</SelectItem>
-                                            <SelectItem value="mobi">MOBI</SelectItem>
-                                        </SelectContent>
-                                    </Select>
                                 </div>
                             </div>
                         </PopoverContent>

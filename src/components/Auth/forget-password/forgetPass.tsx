@@ -1,60 +1,38 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+
 import MyFormInput from "@/components/ui/MyForm/MyFormInput/MyFormInput";
 import MyFormWrapper from "@/components/ui/MyForm/MyFormWrapper/MyFormWrapper";
-import { useLoginMutation } from "@/redux/features/auth/authApi";
+import { useForgetMutation } from "@/redux/features/auth/authApi";
 import { useAppDispatch } from "@/redux/hooks";
 import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
-import { z } from "zod";
 import AuthLayout from "../AuthLayout";
 
-const validationSchema = z.object({
-    email: z
-        .string({
-            required_error: "Email is required",
-        })
-        .email("Invalid email address"),
-    password: z.string({
-        required_error: "Password is required",
-    }),
-    // .min(8, "Password must be at least 8 characters long")
-    // .max(30, "Password cannot exceed 30 characters")
-    // .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-    // .regex(/[a-z]/, "Password must contain at least one lowercase letter")
-    // .regex(/\d/, "Password must contain at least one digit")
-    // .regex(
-    //   /[!@#$%^&*(),.?":{}|<>]/,
-    //   "Password must contain at least one special character"
-    // ),
-});
+
 
 const ForgetPassword = () => {
     const dispatch = useAppDispatch();
-    const [login] = useLoginMutation();
+    const [forget, { isLoading }] = useForgetMutation();
     const router = useRouter();
 
 
-    const handleSubmit = async (formData: any) => {
+    const handleSubmit = async (email: any) => {
+        console.log(email);
         const res = await handleAsyncWithToast(
             async () => {
-                return login(formData); // Replace with your actual login function
+                return forget({ email }); // Replace with your actual login function
             },
-            "Logging in...",
-            "Login successful!",
+            "Verifying...",
+            "Sending OTP successful!",
             "Login failed. Please try again.",
             true,
             dispatch
         );
         // console.log(res);
         if (res?.data?.success) {
-            router.push("/");
-        }
-        console.log(res.error);
-        if (res?.error?.status === 400) {
-            router.push("/plans");
+            router.push("/verify-otp");
         }
     };
 
@@ -69,7 +47,6 @@ const ForgetPassword = () => {
                     <MyFormWrapper
                         className={"flex flex-col gap-6 w-full"}
                         onSubmit={handleSubmit}
-                        resolver={zodResolver(validationSchema)}
                     >
                         <div className="w-full">
                             <MyFormInput
@@ -81,10 +58,11 @@ const ForgetPassword = () => {
                             />
                         </div>
                         <Button
+                            disabled={isLoading}
                             className="w-fit mx-auto py-3 rounded-lg bg-primary text-white text-base font-normal leading-6 mb-5"
                             type="submit"
                         >
-                            Login
+                            {isLoading ? "Sending..." : "Send OTP"}
                         </Button>
 
                     </MyFormWrapper>
