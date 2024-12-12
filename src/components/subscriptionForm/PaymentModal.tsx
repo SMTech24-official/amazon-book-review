@@ -1,7 +1,7 @@
 'use client'
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTrigger } from "@/components/ui/dialog"
 import { useRouter } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
 
@@ -13,7 +13,7 @@ export default function SubscriptionModal({ subscriptionData, isOpen, setIsOpen 
         return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(amount)
     }
 
-    console.log(subscriptionData);
+    // console.log(subscriptionData?.items.data[0].plan);
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
@@ -21,7 +21,7 @@ export default function SubscriptionModal({ subscriptionData, isOpen, setIsOpen 
             </DialogTrigger>
             <DialogContent className="sm:max-w-[475px]">
                 <DialogHeader>
-                    <DialogTitle>Subscription Details</DialogTitle>
+                    {/* <DialogTitle>Subscription Details</DialogTitle> */}
                 </DialogHeader>
                 <Card>
                     <CardHeader>
@@ -31,27 +31,27 @@ export default function SubscriptionModal({ subscriptionData, isOpen, setIsOpen 
                         {/* Plan */}
                         <div className="flex justify-between">
                             <span className="font-medium">Plan:</span>
-                            <span className="capitalize">{subscriptionData?.subscriptionPlane / 100}</span>
+                            <span className="capitalize">{subscriptionData?.subscriptionPlane || "Migrated"}</span>
                         </div>
                         {/* Subtotal */}
                         <div className="flex justify-between">
                             <span className="font-medium">Subtotal:</span>
-                            <span>{formatCurrency(subscriptionData?.subtotal / 100)}</span>
+                            <span>{formatCurrency(subscriptionData?.subtotal / 100 || subscriptionData?.items.data[0].plan.amount / 100)}</span>
                         </div>
                         {/* Discount */}
                         <div className="flex justify-between">
                             <span className="font-medium">Discount:</span>
-                            <span>-{formatCurrency(subscriptionData?.discount / 100)}</span>
+                            <span>-{formatCurrency(subscriptionData?.discount / 100 || 0)}</span>
                         </div>
                         {/* Discount Percent */}
                         <div className="flex justify-between">
                             <span className="font-medium">Discount Percent:</span>
-                            <span>{subscriptionData?.discountPercent}%</span>
+                            <span>{subscriptionData?.discountPercent || 0}%</span>
                         </div>
                         {/* Total */}
                         <div className="flex justify-between">
                             <span className="font-medium">Total:</span>
-                            <span>{formatCurrency(subscriptionData?.total / 100)}</span>
+                            <span>{formatCurrency(subscriptionData?.total / 100 || subscriptionData?.items.data[0].plan.amount / 100)}</span>
                         </div>
 
                         {/* Go to Login */}

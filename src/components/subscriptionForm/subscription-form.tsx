@@ -31,7 +31,7 @@ export function SubscriptionForm() {
   const [coupon, setCoupon] = useState('')
   const selectPlan = localStorage.getItem("plan")
 
-
+  console.log(UserData?.data);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()

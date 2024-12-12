@@ -17,7 +17,7 @@ const BookCards = ({ books, className }: BookTableProps) => {
   const router = useRouter()
   // State for handling fallback images
   const [imgSrcs, setImgSrcs] = useState(
-    books.map(
+    books?.map(
       (book) =>
         book?.bookCover ||
         "https://img.freepik.com/free-photo/yellow-book-cover_1101-1118.jpg?ga=GA1.1.1655684950.1728801784&semt=ais_hybrid%20"
@@ -41,7 +41,7 @@ const BookCards = ({ books, className }: BookTableProps) => {
   return (
     <div className={cn("grid gap-3 xl:hidden p-4", className)}>
       {isNonEmptyArray(books) &&
-        books.map((book, index) => (
+        books?.map((book, index) => (
           <div
             key={index}
             className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col"
@@ -50,7 +50,7 @@ const BookCards = ({ books, className }: BookTableProps) => {
             <div className="w-full max-w-56 mx-auto max-h-72">
               <Image
                 src={imgSrcs[index]} // Use the current image source from state
-                alt={book.title || "Default Book Cover"}
+                alt={book?.title || "Default Book Cover"}
                 width={100}
                 height={100}
                 className="rounded-t-lg h-full w-full object-fill"
