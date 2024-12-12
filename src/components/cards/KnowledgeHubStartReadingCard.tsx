@@ -14,7 +14,7 @@ const KnowledgeHubStartReadingCard = ({ item }: { item: any }) => {
     window.open(pdfUrl, '_blank', 'noopener,noreferrer');
   };
 
-  console.log(item.cover);
+  // console.log(item.cover);
   // Fallback image URL
 
   return (

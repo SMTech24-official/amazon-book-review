@@ -6,6 +6,7 @@ import { verifyToken } from '@/utils/verifyToken';
 import { useRouter } from 'next/navigation';
 import { ReactNode, useEffect } from 'react';
 import Swal from 'sweetalert2';
+import { toast } from 'sonner';
 
 type TProtectedRoute = {
   children: ReactNode;
@@ -20,8 +21,9 @@ const ProtectedRoute = ({ children, roles }: TProtectedRoute) => {
   if (token) {
     try {
       user = verifyToken(token);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      console.error('Token verification failed:', error);
+      toast.error('Token verification failed:');
       user = null; // handle invalid token scenario
     }
   }

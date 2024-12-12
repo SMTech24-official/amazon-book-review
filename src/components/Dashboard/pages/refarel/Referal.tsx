@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { useState } from "react";
 import ProgressBar from '../../components/progressBar/ProgressBar';
 import { useUserDataQuery } from "@/redux/features/auth/authApi";
+import { toast } from "sonner";
 const Referral = () => {
     const { data: user } = useUserDataQuery(undefined)
     const { data, isLoading } = useGetInviteLinkQuery(undefined)
@@ -22,8 +23,9 @@ const Referral = () => {
         try {
             await copy(data?.data);
             setIsCopied(true);
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
-            console.error('Failed to copy text to clipboard', error);
+            toast.error('Failed to copy text to clipboard');
         }
     };
 

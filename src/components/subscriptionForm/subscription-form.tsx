@@ -31,7 +31,7 @@ export function SubscriptionForm() {
   const [coupon, setCoupon] = useState('')
   const selectPlan = localStorage.getItem("plan")
 
-  console.log(UserData?.data);
+  // console.log(UserData?.data);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
@@ -90,8 +90,9 @@ export function SubscriptionForm() {
               toast.error("Subscription failed")
             }
           }
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
-          console.error(error)
+          // console.error(error)
           toast.error("Subscription failed")
         }
       }

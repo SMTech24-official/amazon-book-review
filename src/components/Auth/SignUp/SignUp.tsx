@@ -76,7 +76,7 @@ const SignUp = () => {
       "",
       ""
     );
-    console.log({ res });
+    // console.log({ res });
     if (res?.data?.success) {
       localStorage.setItem("verifyEmailByOTP", formData?.email);
       router.push("/otp-verify");

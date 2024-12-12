@@ -27,6 +27,7 @@ import MyFormInput from "../ui/MyForm/MyFormInput/MyFormInput";
 import MyFormWrapper from "../ui/MyForm/MyFormWrapper/MyFormWrapper";
 import MyLoading from "../ui/MyLoading";
 import MyFormPdfUpload from "../ui/MyForm/MyFormPdfUpload/MyFormPdfUpload";
+import { toast } from "sonner";
 
 const validationSchema = z.object({
   videoUrl: z
@@ -97,7 +98,7 @@ const KnowledgeHub = () => {
       }
     }
   };
-  
+
   const handleSubmitForModal = async (data: any, reset: () => void) => {
     // Create FormData to handle file uploads
     const formData = new FormData();
@@ -105,15 +106,15 @@ const KnowledgeHub = () => {
     // Append the file data (cover and pdfFile)
     formData.append("cover", data.cover);  // The cover image
     formData.append("pdfFile", data.pdfFile);  // The PDF file
-    
+
 
     const body = {
       title: data.title,
       addedBy: "Admin",
-  };
+    };
 
-  // Append the body object as a JSON string
-  formData.append('data', JSON.stringify(body));
+    // Append the body object as a JSON string
+    formData.append('data', JSON.stringify(body));
 
     // Assuming you have an API mutation or an API call to handle this
     try {
@@ -128,17 +129,18 @@ const KnowledgeHub = () => {
         false,
         null
       );
-  
+
       // Check if submission was successful
       if (res?.data?.success) {
         reset();  // Reset form if successful
-        onOpenChange();  
+        onOpenChange();
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      console.error("Error submitting form:", error);
+      toast.error("Error submitting form:");
     }
   };
-  
+
 
   if (isAllAuthorGuideLoading) {
     return <MyLoading />;

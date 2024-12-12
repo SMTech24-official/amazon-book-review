@@ -20,6 +20,7 @@ import {
 } from "next/navigation";
 import { useState } from "react";
 import BreadCrumb from "../common/breadCrumb/BreadCrumb";
+import { toast } from "sonner";
 
 interface ButtonConfig {
   text: string;
@@ -123,7 +124,7 @@ const BookDetailsComponent = (
 
         case "Approve":
           if (!mainId) {
-            console.error("Book ID is missing. Approval cannot proceed.");
+            // console.error("Book ID is missing. Approval cannot proceed.");
             return;
           }
 
@@ -155,7 +156,7 @@ const BookDetailsComponent = (
 
         case "Deny":
           if (!id) {
-            console.error("Book ID is missing. Denial cannot proceed.");
+            // console.error("Book ID is missing. Denial cannot proceed.");
             return;
           }
           if (pathName?.includes("review")) {
@@ -201,10 +202,10 @@ const BookDetailsComponent = (
         default:
         // console.log(`Unknown action for button: ${buttonText}`);
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      console.error(
-        `Error in handling action for button: ${buttonText}`,
-        error
+      toast.error(
+        `Error in handling action for button: ${buttonText}`
       );
     }
   };
