@@ -7,6 +7,7 @@ import {
 } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
+import { toast } from "sonner";
 
 const baseQuery = fetchBaseQuery({
   // baseUrl: "https://traceylongfield.vercel.app/api/",
@@ -34,7 +35,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   if (result.error?.status === 401) {
     try {
       const res = await fetch(
-        "http://192.168.11.51:5005/refresh-token",
+        "http://192.168.11.51:5005/api/auth/refresh-token",
         // "https://traceylongfield.vercel.app/refresh-token",
         // "https://api.booksy.buzz/api/auth/refresh-token",
         {
@@ -47,7 +48,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
       );
 
       const data = await res.json();
-
+      console.log(data);
       if (data?.data?.accessToken) {
         const user = (api.getState() as RootState).auth.user;
 
@@ -58,10 +59,10 @@ const baseQueryWithRefreshToken: BaseQueryFn<
         result = await baseQuery(args, api, extraOptions);
       } else {
         api.dispatch(logout());
-        console.error("Failed to obtain a new access token");
+        toast.error("Failed to obtain a new access token");
       }
     } catch (error) {
-      console.error("Error during token refresh:", error);
+      toast.error("Error during token refresh:", error ?? "");
     }
   }
 

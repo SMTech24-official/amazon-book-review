@@ -57,12 +57,13 @@ export function SubscriptionForm() {
         planType: localStorage.getItem("plan"),
         email: localStorage.getItem("verifyEmailByOTP"),
         paymentMethodId: paymentMethod.id,
-        coupon: coupon,
+        couponId: coupon,
       }
 
       if (paymentMethod.id) {
         try {
           if (UserData?.data.subscriptionId) {
+
             const newData = {
               planType: localStorage.getItem("plan"),
               paymentMethodId: paymentMethod.id,
