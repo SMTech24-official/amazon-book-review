@@ -5,16 +5,27 @@ import { Accordion, AccordionItem, Button } from "@nextui-org/react";
 import Image from "next/image";
 import { FaChevronDown } from "react-icons/fa";
 import MyLoading from "../ui/MyLoading";
+import { useRouter } from "next/navigation";
+import { useUserDataQuery } from "@/redux/features/auth/authApi";
 
 const FAQs = () => {
   const { data, isLoading } = useGetAllFaqQuery(undefined)
-
+  const { data: UserData } = useUserDataQuery(undefined)
+  const router = useRouter()
   if (isLoading) {
     return <MyLoading />
   }
   if (data?.data.length === 0) {
     return ""
   }
+
+  const handleChatNavigate = () => {
+    if (UserData?.data) {
+      router.push("/dashboard/help")
+    }
+    else router.push("/login")
+  }
+
   return (
     <div className="mb-10" id="faqs">
       <div className="container mb-10">
@@ -48,7 +59,7 @@ const FAQs = () => {
       </div>
       <div className="flex flex-col justify-center items-center">
         <h5 className="text-2xl mb-4">Have more questions?</h5>
-        <Button className="bg-primary">
+        <Button onClick={handleChatNavigate} className="bg-primary">
           <div className="flex">
             <span className="text-white">Chat with us</span>
             <span className="ml-2">

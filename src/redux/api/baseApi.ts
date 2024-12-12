@@ -1,13 +1,13 @@
 import {
-  createApi,
-  fetchBaseQuery,
   BaseQueryFn,
+  createApi,
   FetchArgs,
+  fetchBaseQuery,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
-import { RootState } from "../store";
-import { logout, setUser } from "../features/auth/authSlice";
 import { toast } from "sonner";
+import { setUser } from "../features/auth/authSlice";
+import { RootState } from "../store";
 
 const baseQuery = fetchBaseQuery({
   // baseUrl: "https://traceylongfield.vercel.app/api/",
@@ -57,9 +57,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 
         // Retry the original query with the new token
         result = await baseQuery(args, api, extraOptions);
-      } else {
-        api.dispatch(logout());
-        toast.error("Failed to obtain a new access token");
       }
     } catch (error) {
       toast.error("Error during token refresh:", error ?? "");
