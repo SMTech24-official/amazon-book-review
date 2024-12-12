@@ -1,15 +1,15 @@
 "use client"
 
-import React, { useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { User } from '@/lib/types/type';
+import { Button } from "@/components/ui/button";
 import DnDInput from '@/components/ui/DnDInput';
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { User } from '@/lib/types/type';
+import { useChangePasswordMutation, useUpdateUserMutation } from '@/redux/features/auth/authApi';
 import { useAppDispatch } from '@/redux/hooks';
 import { handleAsyncWithToast } from '@/utils/handleAsyncWithToast';
-import { useChangePasswordMutation, useUpdateUserMutation } from '@/redux/features/auth/authApi';
+import { Eye, EyeOff } from 'lucide-react';
+import React, { useState } from 'react';
 import { toast } from 'sonner';
 
 
@@ -25,13 +25,18 @@ const General = ({ user }: { user: User }) => {
     const [updateUser] = useUpdateUserMutation()
     const [ChangePass] = useChangePasswordMutation()
 
+
+
     const handlePersonalInfoSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const newFormData = new FormData(event.currentTarget);
         const data = Object.fromEntries(newFormData.entries());
         const formData = new FormData();
-        if (image) {
-            formData.append("image", image)
+        if (image || user?.profileImage) {
+            if (image) {
+
+                formData.append("image", image)
+            }
             const otherData = {
                 fullName: data.name,
                 amazonAuthorPageLink: data.authorLink,

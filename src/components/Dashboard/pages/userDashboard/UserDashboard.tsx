@@ -30,7 +30,7 @@ const UserDashboard = () => {
     return (
         <div>
             {
-                (UserData?.data.profileImage || UserData?.data.amazonAuthorPageLink) ? <div>
+                (UserData?.data.profileImage && UserData?.data.amazonAuthorPageLink) ? <div>
                     <div className='hidden sm:grid grid-cols-5 items-start justify-center'>
                         <div className='col-span-3 mr-10 '>
                             <UDBookReview />
