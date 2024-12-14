@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 
-const socket = io("http://192.168.11.51:5005"); // Replace with your server URL
+const socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}:${process.env.NEXT_PUBLIC_PORT}`); // Replace with your server URL
 
 export default function HelpPages() {
 
