@@ -8,6 +8,7 @@ import { io } from "socket.io-client";
 
 
 const socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}:${process.env.NEXT_PUBLIC_PORT}`); // Replace with your server URL
+// console.log(`${process.env.NEXT_PUBLIC_SOCKET_URL}:${process.env.NEXT_PUBLIC_PORT}`);
 
 export default function HelpPages() {
 

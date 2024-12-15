@@ -11,7 +11,7 @@ const PlansComponent = () => {
   return (
     <div>
       <AuthLayout backLink="/signup">
-        <div className=" w-full mt-24">
+        <div className=" w-full lg:mt-64 xl:mt-24">
           <ManagePlans subscriptionsPlan={SubscriptionsPlan} />
         </div>
       </AuthLayout>
