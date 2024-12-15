@@ -25,7 +25,9 @@ export default function CommunicationComponent() {
     const [id, setId] = useState("");
     const [showMessage, setShowMessage] = useState([]);
     const [selectedUser, setSelectedUser] = useState<any>(null);
+
     const handelSend = () => {
+        // console.log(message);
         if (message.trim()) {
             socket?.emit("send_message", {
                 senderId: id, // Add sender ID
@@ -64,10 +66,13 @@ export default function CommunicationComponent() {
         setAllUser(data);
 
     })
-    // console.log(selectedUser);
+
+    const userMessage = showMessage?.filter((msg: any) => msg.role == "user")
+
+    const adminMessage = showMessage?.filter((msg: any) => msg.role === "admin")
 
 
-    // start from herer 
+    console.log(userMessage, adminMessage);
 
     const ConversationList = () => (
         <div className="w-full h-full">

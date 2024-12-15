@@ -2,15 +2,14 @@
 "use client";
 import MyFormOTP from "@/components/ui/MyForm/MyFormOTP/MyFormOTP";
 import MyFormWrapper from "@/components/ui/MyForm/MyFormWrapper/MyFormWrapper";
+import { useOtpMutation } from "@/redux/features/auth/authApi";
+import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nextui-org/react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FaChevronRight } from "react-icons/fa";
 import { z } from "zod";
 import AuthLayout from "../AuthLayout";
-import { useRouter } from "next/navigation";
-import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
-import { useOtpMutation } from "@/redux/features/auth/authApi";
 
 const validationSchema = z.object({
   // OTP field validation
@@ -87,10 +86,6 @@ const OTPVerify = ({ forgetPassword }: { forgetPassword?: boolean }) => {
 
               <div className="flex items-center justify-center gap-2 text-xs font-medium mb-">
                 <p className="text-[#5F7992]">Didn&apos;t get the OTP?</p>
-
-                <Link href={"/login"}>
-                  <p className="text-primary">Resend</p>
-                </Link>
               </div>
               <Button
                 className="w-fit mx-auto py-3 rounded-lg bg-primary text-white text-base font-normal leading-6 md:mb-5"

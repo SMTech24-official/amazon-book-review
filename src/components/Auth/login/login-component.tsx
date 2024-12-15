@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
 import AuthLayout from "../AuthLayout";
-
+import Cookies from "js-cookie"
 const validationSchema = z.object({
   email: z
     .string({
@@ -94,9 +94,10 @@ const LoginComponent = () => {
     );
     // console.log(res);
     if (res?.data?.success) {
+      Cookies.set('token', res?.data.data.accessToken)
       router.push("/");
     }
-    console.log(res.error);
+    // console.log(res.error);
     if (res?.error?.status === 400) {
       router.push("/plans");
     }

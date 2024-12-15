@@ -22,16 +22,17 @@ export default function HelpPages() {
 
 
   const handelSend = () => {
+    // console.log(message);
     if (message.trim()) {
       socket.emit("send_message", {
         senderId: userData?.data?._id, // Add sender ID
         role: "user", // Specify role
         message, // Send the message
       });
-
     }
     setMessage('')
   };
+
 
   useEffect(() => {
     if (userData) {
