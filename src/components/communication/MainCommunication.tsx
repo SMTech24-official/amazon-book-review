@@ -12,7 +12,8 @@ import { io } from "socket.io-client"
 import BreadCrumb from '../common/breadCrumb/BreadCrumb'
 import { DialogTitle } from '@radix-ui/react-dialog'
 
-const socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}:${process.env.NEXT_PUBLIC_PORT}`);
+// const socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}:${process.env.NEXT_PUBLIC_PORT}`);
+const socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}`);
 export default function CommunicationComponent() {
     // const [messages, setMessages] = useState<Message[]>(conversations[0].messages)
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
