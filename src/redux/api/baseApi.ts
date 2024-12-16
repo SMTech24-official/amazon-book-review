@@ -53,7 +53,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
       // console.log(data);
       if (data?.data?.accessToken) {
         const user = (api.getState() as RootState).auth.user;
-        console.log(data.data.accessToken);
         // Dispatch new access token to update state
         api.dispatch(setUser({ user, token: data.data.accessToken }));
 

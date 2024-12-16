@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
   let userInfo: { role?: string };
   try {
     userInfo = jwtDecode(token as string) as { role?: string };
-    console.log(userInfo);
+    // console.log(userInfo);
   } catch (error) {
     if (error) {
       return NextResponse.redirect(new URL("/", request.url));
@@ -29,7 +29,6 @@ export function middleware(request: NextRequest) {
     currentPath.startsWith("/admin-dashboard") &&
     userInfo?.role !== "admin"
   ) {
-    console.log(currentPath.startsWith("/admin-dashboard"));
     return NextResponse.redirect(new URL("/", request.url));
   }
   if (currentPath.startsWith("/dashboard") && userInfo?.role !== "author") {

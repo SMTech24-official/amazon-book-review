@@ -19,7 +19,7 @@ const ForgetPassword = () => {
 
 
     const handleSubmit = async (email: any) => {
-        console.log(email);
+        // console.log(email);
         const res = await handleAsyncWithToast(
             async () => {
                 return forget({ email }); // Replace with your actual login function
