@@ -13,7 +13,7 @@ import BreadCrumb from '../common/breadCrumb/BreadCrumb'
 import { DialogTitle } from '@radix-ui/react-dialog'
 
 // const socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}:${process.env.NEXT_PUBLIC_PORT}`);
-const socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}`);
+const socket = io(`http://localhost:5005`);
 export default function CommunicationComponent() {
     // const [messages, setMessages] = useState<Message[]>(conversations[0].messages)
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
@@ -28,12 +28,13 @@ export default function CommunicationComponent() {
 
     const handelSend = () => {
         // console.log(message);
+        console.log(message.toString,id)
         if (message.trim()) {
             socket?.emit("send_message", {
                 senderId: id, // Add sender ID
                 role: "admin", // Specify role
                 message, // Send the message
-            });
+            }); 
         }
 
         setMessage("");

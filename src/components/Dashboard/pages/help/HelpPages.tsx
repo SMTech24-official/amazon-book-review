@@ -8,7 +8,7 @@ import { io } from "socket.io-client";
 
 
 // const socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}:${process.env.NEXT_PUBLIC_PORT}`); 
-const socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}`);
+const socket = io(`http://localhost:5005`);
 // console.log(`${process.env.NEXT_PUBLIC_SOCKET_URL}:${process.env.NEXT_PUBLIC_PORT}`);
 
 export default function HelpPages() {
@@ -23,7 +23,8 @@ export default function HelpPages() {
 
   const handelSend = () => {
     // console.log(message);
-    if (message.trim()) {
+    console.log(message)
+    if (message) {
       socket.emit("send_message", {
         senderId: userData?.data?._id, // Add sender ID
         role: "user", // Specify role
@@ -44,7 +45,7 @@ export default function HelpPages() {
     socket.on("receive_message", (data) => {
       setShowMessage(data);
     });
-  }, [userData]);
+  }, [userData,message]);
 
 
 

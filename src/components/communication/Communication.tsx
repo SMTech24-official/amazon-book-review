@@ -43,7 +43,7 @@ const Communication: React.FC<CommunicationProps> = ({
     <div className="flex flex-col ">
       <div className="h-full">
         <ScrollArea className="p-4 h-[65vh] md:h-[60vh] overflow-y-auto">
-          {messages.map((msg: any) => (
+          {messages?.map((msg: any) => (
             <MessageBubble
               key={msg._id}
               message={msg.message}
