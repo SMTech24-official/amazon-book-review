@@ -21,59 +21,67 @@ export default function CommunicationComponent() {
     // start from herer
 
     const [allUser, setAllUser] = useState([])
-    const [message, setMessage] = useState(""); // State for input value
+    const [message, setMessage] = useState<string>(""); // State for input value
     const [id, setId] = useState("");
-    const [showMessage, setShowMessage] = useState([]);
+    const [showMessage, setShowMessage] = useState<any[]>([]);
     const [selectedUser, setSelectedUser] = useState<any>(null);
 
-    const handelSend = () => {
-        // console.log(message);
-        console.log(message.toString,id)
-        if (message.trim()) {
-            socket?.emit("send_message", {
-                senderId: id, // Add sender ID
-                role: "admin", // Specify role
-                message, // Send the message
-            }); 
-        }
 
-        setMessage("");
-    };
+
 
     useEffect(() => {
+        // socket = io();
         if (id) {
             socket?.emit("join", { userId: id, role: "admin" }); // Join as admin
         }
 
         // Receive messages from the server
-
-        socket?.on("receive_message", (data) => {
-            setShowMessage(data);
+        socket?.on("receive_message", (msg) => {
+            // setShowMessage((prev: any) => [...prev, msg]);
+            setShowMessage(msg);
         });
-
-
         return () => {
             socket?.off("receive_message");
         };
-    }, [id]);
+    }, [id, message]);
+
 
     const handelUserId = (user: any) => {
         setId(user._id);
         setSelectedUser(user)
     };
 
-    socket.on("get_users", (data) => {
-        // console.log("Users:", data);
-        setAllUser(data);
 
-    })
+    useEffect(() => {
+        socket.on("get_users", (data) => {
+            // console.log("Users:", data);
+            setAllUser(data);
+        })
 
-    const userMessage = showMessage?.filter((msg: any) => msg.role == "user")
-
-    const adminMessage = showMessage?.filter((msg: any) => msg.role === "admin")
+    }, [])
 
 
-    console.log(userMessage, adminMessage);
+    const handelSend = () => {
+        // console.log(message);
+        if (message) {
+            socket?.emit("send_message", {
+                senderId: id, // Add sender ID
+                role: "admin", // Specify role
+                message, // Send the message
+            });
+        }
+        // setShowMessage((prev: any) => [...prev, message]);
+        setMessage("");
+    };
+
+
+    // const userMessage = showMessage?.filter((msg: any) => msg.role == "user")
+
+    // const adminMessage = showMessage?.filter((msg: any) => msg.role === "admin")
+
+
+    // console.log(userMessage, adminMessage);
+
 
     const ConversationList = () => (
         <div className="w-full h-full">
@@ -86,7 +94,7 @@ export default function CommunicationComponent() {
                         onClick={() => handelUserId(chat)}
                         key={index} className="flex items-center gap-4 p-4 hover:bg-gray-100 cursor-pointer border rounded-md mx-2 my-2">
                         <Avatar>
-                            <AvatarFallback>dds</AvatarFallback>
+                            <AvatarFallback>{chat.fullName.slice(0, 2)}</AvatarFallback>
                             {/* <AvatarFallback>{chat?.participants.sender.split(' ').map(n => n[0]).join('')}</AvatarFallback> */}
                         </Avatar>
                         <div className="flex-1 min-w-0">
